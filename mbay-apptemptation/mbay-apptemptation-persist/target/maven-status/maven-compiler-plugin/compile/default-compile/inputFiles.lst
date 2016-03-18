@@ -1,0 +1,15 @@
+/Users/creekhan/java/workspace/hey/mbay_saizhi/mbay-apptemptation/mbay-apptemptation-persist/src/main/java/org/sz/mbay/apptemptation/bean/AppTemptationStrategy.java
+/Users/creekhan/java/workspace/hey/mbay_saizhi/mbay-apptemptation/mbay-apptemptation-persist/src/main/java/org/sz/mbay/apptemptation/bean/AppTemptationOrderStatistics.java
+/Users/creekhan/java/workspace/hey/mbay_saizhi/mbay-apptemptation/mbay-apptemptation-persist/src/main/java/org/sz/mbay/apptemptation/dao/AppTemptationDao.java
+/Users/creekhan/java/workspace/hey/mbay_saizhi/mbay-apptemptation/mbay-apptemptation-persist/src/main/java/org/sz/mbay/apptemptation/dao/AppTemptationIpWhiteListDao.java
+/Users/creekhan/java/workspace/hey/mbay_saizhi/mbay-apptemptation/mbay-apptemptation-persist/src/main/java/org/sz/mbay/apptemptation/dao/impl/AppTemptationDaoImpl.java
+/Users/creekhan/java/workspace/hey/mbay_saizhi/mbay-apptemptation/mbay-apptemptation-persist/src/main/java/org/sz/mbay/apptemptation/bean/AppCampaignStatistics.java
+/Users/creekhan/java/workspace/hey/mbay_saizhi/mbay-apptemptation/mbay-apptemptation-persist/src/main/java/org/sz/mbay/apptemptation/form/AppTemptationTrafficStateForm.java
+/Users/creekhan/java/workspace/hey/mbay_saizhi/mbay-apptemptation/mbay-apptemptation-persist/src/main/java/org/sz/mbay/apptemptation/bean/AppTemptationIpWhiteList.java
+/Users/creekhan/java/workspace/hey/mbay_saizhi/mbay-apptemptation/mbay-apptemptation-persist/src/main/java/org/sz/mbay/apptemptation/dao/impl/AppTemptationIpWhiteListDaoImpl.java
+/Users/creekhan/java/workspace/hey/mbay_saizhi/mbay-apptemptation/mbay-apptemptation-persist/src/main/java/org/sz/mbay/apptemptation/bean/AppTemptation.java
+/Users/creekhan/java/workspace/hey/mbay_saizhi/mbay-apptemptation/mbay-apptemptation-persist/src/main/java/org/sz/mbay/apptemptation/bean/AppTemptationBindIp.java
+/Users/creekhan/java/workspace/hey/mbay_saizhi/mbay-apptemptation/mbay-apptemptation-persist/src/main/java/org/sz/mbay/apptemptation/form/AppTemptationForm.java
+/Users/creekhan/java/workspace/hey/mbay_saizhi/mbay-apptemptation/mbay-apptemptation-persist/src/main/java/org/sz/mbay/apptemptation/bean/AppTemptationAdvanced.java
+/Users/creekhan/java/workspace/hey/mbay_saizhi/mbay-apptemptation/mbay-apptemptation-persist/src/main/java/org/sz/mbay/apptemptation/dao/AppTemptationBindIpDao.java
+/Users/creekhan/java/workspace/hey/mbay_saizhi/mbay-apptemptation/mbay-apptemptation-persist/src/main/java/org/sz/mbay/apptemptation/dao/impl/AppTemptationBindIpDaoImpl.java

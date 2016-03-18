@@ -1,0 +1,668 @@
+.pt10 {
+	padding-top: 10px;
+}
+
+.pt21 {
+	padding-top: 20px;
+}
+
+.fl {
+	float: left;
+}
+
+.mr20 {
+	margin-right: 20px;
+}
+
+.form-group>* {
+	float: left;
+}
+
+.input-select>* {
+	display: block;
+	float: left;
+}
+
+* {
+	font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB',
+		'Microsoft Yahei', STHeiTi, Arial, sans-serif;
+}
+
+.clearfix {
+	content: ' ';
+	display: table;
+	clear: both;
+}
+
+#main-content {
+	width: 980px;
+	margin: 30px auto;
+	min-height: 600px;
+	background-color: #fff;
+	border-radius: 10px;
+	padding: 20px 20px 40px;
+	border: 1px solid #ebebeb;
+}
+
+.config_lottery h2 {
+	height: 38px;
+	line-height: 38px;
+	font-size: 24px;
+	border-bottom: 1px solid #e9e9e9;
+	color: #444;
+}
+
+.now-href {
+	font-size: 18px;
+	float: right;
+	color: #444;
+	font-weight: 400;
+	text-decoration: none;
+}
+
+.now-href span {
+	color: #fc9720;
+}
+
+.show-information {
+	color: #666;
+	padding-bottom: 20px;
+	border-bottom: 1px dashed #ccc;
+}
+
+.show-information h4 {
+	display: inline;
+	float: left;
+	line-height: 1px;
+	padding-right: 20px;
+}
+
+.form-control {
+	float: left;
+}
+
+.form-head {
+	margin-bottom: 20px;
+	padding-bottom: 48px;
+	padding-top: 10px;
+	border-bottom: dashed #e9e9e9 1px;
+}
+
+.form-head>h3 {
+	float: left;
+	padding-right: 24px;
+	line-height: 2;
+}
+
+.form-head .form-group {
+	float: left;
+	margin-left: 9px;
+}
+
+.form-group .form-combination {
+	position: relative;
+}
+
+.form-control {
+	font-size: 14px;
+	line-height: 1.428571429;
+	display: inline-block;
+	width: auto;
+	padding: 6px 12px;
+	-webkit-transition: border-color ease-in-out .15s;
+	transition: border-color ease-in-out .15s;
+	border: 1px solid #e9e9e9;
+	border-radius: 4px;
+	background-color: #fff;
+	background-image: none;
+}
+
+.form-group::after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.pt20 {
+	padding: 20px;
+}
+
+.pt20 dl {
+	position: relative;
+	padding-bottom: 20px;
+	font-size: 14px;
+	width: 100%;
+	display: block;
+	margin: 0;
+}
+
+.pt20 dl dt {
+	display: inline-block;
+	float: left;
+	margin-right: 16px;
+	line-height: 32px;
+	text-align: right;
+}
+
+.pt20 dl dd {
+	position: relative;
+	float: left;
+	line-height: 32px;
+	margin: 0;
+}
+
+input[type=text] {
+	width: 580px;
+	height: 32px;
+	line-height: 32px;
+	padding-left: 10px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #e5e5e5;
+	font-size: 14px;
+	transition: all .3s;
+	color: #444;
+}
+
+label.error {
+	color: #444;
+	background: url(http://yun.duiba.com.cn/developer/img/error_icon.png)
+		left center no-repeat;
+	padding-left: 25px;
+	line-height: 28px;
+	font-size: 14px;
+	display: block;
+	position: absolute;
+	top: 32px;
+	left: 0;
+}
+
+.gray8 {
+	color: #888;
+	line-height: 32px;
+	margin: 0;
+}
+
+.config_lottery dl {
+	display: table;
+	clear: both;
+}
+
+.upload-Tab {
+	width: 820px;
+}
+
+.upload-Tab ul {
+	width: 100%;
+	border-bottom: 1px solid #e9e9e9;
+	display: table;
+	clear: both;
+	padding: 0;
+}
+
+.upload-Tab ul li {
+	padding: 0 12px;
+	height: 36px;
+	line-height: 36px;
+	border: 1px solid #fff;
+	border-bottom: 1px solid #e9e9e9;
+	float: left;
+	margin: 0 10px -1px 0;
+	cursor: pointer;
+	list-style: none;
+}
+
+.upload-Tab ul li.active {
+	border: 1px solid #e9e9e9;
+	border-bottom: 1px solid #fff;
+	border-radius: 5px 5px 0 0;
+	color: #fc9720;
+	font-weight: 700;
+}
+
+.redec1d23 {
+	color: #ec1d23;
+}
+
+.upload-content {
+	line-height: 32px;
+	clear: both;
+}
+
+.upload-content .annotation {
+	padding: 6px 0;
+	color: #666;
+	width: 100%;
+	border-bottom: 1px dashed #e9e9e9;
+}
+
+.img-cont,.narrow_img {
+	float: left;
+	padding: 3px;
+	border: 1px solid #ebebeb;
+	position: relative;
+}
+
+.largeImg {
+	cursor: pointer;
+	vertical-align: middle;
+	border: 0;
+}
+
+input[type=file] {
+	display: none;
+}
+
+.button-upload {
+	height: 32px;
+	background: #fafafa;
+	float: left;
+	color: #444;
+	border-radius: 5px;
+	border: 1px solid #ececec;
+	padding: 0 12px;
+	text-decoration: none;
+}
+
+span.unit {
+	position: absolute;
+	border-left: solid #e5e5e5 1px;
+	line-height: 33px;
+	padding: 0 11px;
+	left: 551px;
+	top: 1px;
+	border-radius: 0 5px 5px 0;
+}
+
+.form-group .form-combination.input-select>* {
+	display: block;
+	float: left;
+}
+
+.form-control1 {
+	width: 85px;
+}
+
+.js_vipC {
+	display: inline-block;
+	font-style: normal;
+	float: left;
+}
+
+.switch_close {
+	width: 38px;
+	height: 20px;
+	background: #fff;
+	border-radius: 18px;
+	border: 1px solid #ebebeb;
+	margin-top: 5px;
+}
+
+.switch_close span {
+	background: #fff;
+	width: 20px;
+	height: 20px;
+	box-shadow: 0 0 1px rabg(0, 0, 0, .68);
+	display: inline-block;
+	border: 1px solid #dbd9d9;
+	border-radius: 50%;
+	transition: margin-left .5s;
+	-moz-transition: margin-left .5s;
+	-webkit-transition: margin-left .5s;
+	-o-transition: margin-left .5s;
+	float: left;
+	margin-top: -1px;
+}
+
+.switch-prompt {
+	float: right;
+	line-height: 30px;
+	margin: 0;
+	margin-left: 12px;
+	color: #888;
+}
+
+.switch_open {
+	width: 38px;
+	height: 20px;
+	background: #fff;
+	border-radius: 18px;
+	border: 1px solid #ccc;
+	margin-top: 5px;
+	margin-left: 0;
+}
+
+.switch_open span {
+	background: #fff;
+	width: 20px;
+	height: 20px;
+	box-shadow: 0 0 1px rabg(0, 0, 0, .68);
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 50%;
+	transition: margin-left .5s;
+	-moz-transition: margin-left .5s;
+	-webkit-transition: margin-left .5s;
+	-o-transition: margin-left .5s;
+	float: left;
+	margin-top: -1px;
+}
+
+.object_inside {
+	padding-top: 20px;
+	margin-top: -7px;
+	border-top: 1px solid #e9e9e9;
+}
+
+.inputlist {
+	position: relative;
+}
+
+.object_inside .data_select select {
+	width: 93px;
+	min-width: 93px;
+	height: 32px;
+	line-height: 32px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #e5e5e5;
+	font-size: 14px;
+	margin: 0 8px;
+}
+
+.object_inside span.arrow {
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	transform: rotateX(-45deg);
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	border-left: 1px solid #e9e9e9;
+	border-top: 1px solid #e9e9e9;
+	background: #fff;
+	position: absolute;
+	top: -5px;
+	left: 16px;
+}
+
+.button_sumbit {
+	background-color: #fc9720;
+	padding: 9px 13px;
+	color: #fff;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	font-size: 14px;
+	line-height: 14px;
+	display: inline-block;
+	border: 1px solid #ff6700;
+	text-decoration: none !important;
+}
+
+.but_top {
+	border-radius: 5px;
+	background: #fff;
+	width: 35px;
+	height: 35px;
+	left: 50%;
+	margin-left: 515px;
+	position: fixed;
+	bottom: 83px;
+	box-shadow: 0 0 3px 1px rgba(0, 0, 0, .1);
+	-webkit-transition: opacity .3s;
+	-moz-transition: opacity .3s;
+	-o-transition: opacity .3s;
+	transition: opacity .3s;
+}
+
+.but_top span {
+	width: 12px;
+	height: 12px;
+	display: block;
+	border: 1px solid #c3c3c3;
+	border-left: none;
+	border-bottom: none;
+	transform: rotateX(-45deg);
+	-moz-transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	margin: 14px auto 0;
+}
+
+.slider_left {
+	margin-left: -1px;
+}
+
+.slider_right {
+	margin-left: 18px;
+}
+
+.slide-bg1 {
+	background: #fc9720;
+}
+
+.inputlist .w463 {
+	width: 463px;
+}
+
+.lotter_info_content .ml69 {
+	margin-left: 69px;
+}
+
+.lotter_info_content .ml27 {
+	margin-left: -27px;
+}
+
+/*验证*/
+#exchangeItemForm .Validform_checktip {
+	text-align: left;
+	font-size: 1em;
+	color: #999;
+	width: 200px;
+}
+
+#exchangeItemForm .Validform_right {
+	font-size: 1em;
+	background: url(../../images/workimages/tb.png) no-repeat left;
+	padding-left: 20px;
+	background-position: 0 -29px;
+	color: #5BB53C
+}
+
+#exchangeItemForm .Validform_wrong {
+	font-size: 1em;
+	color: #ff5243;
+	background: url(../../images/workimages/tb.png) no-repeat left;
+	padding-left: 20px;
+	background-position: 0 -53px;
+}
+
+.text-area {
+	border: 1px solid rgb(233, 233, 233);
+	width: 580px;
+	height: 80px;
+	border-radius: 5px;
+	padding-left: 9px;
+	padding-top: 10px;
+}
+
+.colse-img {
+	position: relative;
+	z-index: 222;
+	width: 20px;
+	height: 20px;
+	top: -13px;
+	left: -8px;
+	cursor: pointer;
+	display: none;
+}
+
+.img-cotent {
+	float: left;
+	margin-left: -12px;
+	display: none;
+}
+
+.colse-img>img {
+	width: 15px;
+	height: 15px
+}
+
+.message-box {
+	display: inline-block;
+	width: 700px;
+	text-align: center;
+	font-weight: normal;
+	font-size: 16px;
+	color: #fc9720;
+}
+
+/*导入优惠券*/
+.ml15 {
+	margin-left: 15px;
+}
+
+table {
+	display: table;
+	border-collapse: separate;
+	border-spacing: 2px;
+	border-color: gray;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+table th {
+	display: table-cell;
+	vertical-align: inherit;
+}
+
+.w822 {
+	width: 822px;
+	important
+	!;
+}
+
+.w630 {
+	width: 630px;
+}
+
+.select-date-range  .start-day {
+	overflow: hidden;
+	-webkit-transition: border-color .15s;
+	transition: border-color .15s;
+	/* border: 1px solid #e9e9e9; */
+	border-right-color: transparent;
+	border-radius: 4px 0 0 4px;
+}
+
+input.form-control {
+	width: 105px;
+	height: 32px;
+	padding: 1px 12px;
+	border: none;
+	border-radius: 0;
+	border: 1px solid #c1c1c1;
+	float:left;
+}
+
+.add-on {
+	display: inline-block;
+	width: 16px;
+	height: 32px;
+	padding: 0 18px;
+	background-image: url(http://yun.duiba.com.cn/developer/img/icon.png);
+	background-repeat: no-repeat;
+	background-position: -127px -28px;
+	float:left;
+}
+
+.add-on i {
+	cursor: pointer;
+	width: 14px;
+	height: 14px;
+}
+
+.start-day>*,.form-group .form-combination.select-date-range>* {
+	display: block;
+}
+
+.select-date-range>span {
+	line-height: 32px;
+	padding: 1px 10px;
+	color: #ff6700;
+	border-top: solid #e9e9e9 1px;
+	border-bottom: solid #e9e9e9 1px;
+}
+
+.select-date-range .end-day {
+	margin-left: -1px;
+	-webkit-transition: border-color .15s;
+	transition: border-color .15s;
+	border: 1px solid #e9e9e9;
+	border-left-color: transparent;
+	border-radius: 0 4px 4px 0;
+}
+
+.add-on i,.input-group.date .input-group-addon span,.input-prepend.date .add-on i
+	{
+	cursor: pointer;
+	width: 14px;
+	height: 14px;
+}
+
+.port_input .coupon {
+	border: 1px solid #e5e5e5;
+}
+
+.port_input .coupon th {
+	line-height: 39px;
+	background: #f2f2f2;
+	font-size: 13px;
+	color: #666;
+	font-weight: 700;
+	text-align: left;
+	padding: 0;
+	padding-left: 15px;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.datetimepicker {
+	font-size: 13px;
+	padding: 9px;
+	margin-top: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	direction: ltr;
+	-webkit-user-select: none;
+}
+
+[class*=" datetimepicker-dropdown"]:before {
+	content: '';
+	display: inline-block;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: 4px solid #ebebeb;
+	position: absolute;
+}
+
+.datetimepicker-dropdown-bottom-left:before {
+	top: -4px;
+	right: 3px;
+}
+
+[class^=icon-] {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	margin-top: 1px;
+	line-height: 14px;
+	vertical-align: text-top;
+	background-image:
+		url(http://yun.duiba.com.cn/developer/img/glyphicons-halflings.png);
+	background-position: 14px 14px;
+	background-repeat: no-repeat;
+}
+
+.ticket_file {
+	float: left;
+	padding-top: 6px
+}

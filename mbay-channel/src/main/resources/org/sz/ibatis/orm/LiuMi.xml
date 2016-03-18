@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LiuMi">
+	<resultMap type="liuMiRecord" id="liuMiRecordMap">
+	  <result property="id" column="id"  />
+	  <result property="orderNo" column="orderno"  />
+	  <result property="extNo" column="extno"  />
+	  <result property="createtime" column="createtime"  />
+	  <result property="mobile" column="mobile" />
+	  <result property="traffic" column="traffic" />
+	  <result property="price" column="price" />
+	</resultMap>
+	<select id="findAllLiuMiRecord" resultMap="liuMiRecordMap">
+		select * from liumi_record
+	</select>
+	<select id="countLiuMiRecord" resultType="int">
+		SELECT COUNT(*) FROM liumi_record
+	</select>
+	
+	<resultMap type="liuMiTotalPrice" id="liuMiTotalPriceMap">
+	  <result property="id" column="id"  />
+	  <result property="price" column="price" />
+	</resultMap>
+	<select id="findLiuMiTotalPrice" resultMap="liuMiTotalPriceMap">
+		select * from liumi_total_price where id = 1
+	</select>
+	
+	<update id="updateLiuMiTotalPrice" parameterType="double">
+	   UPDATE liumi_total_price SET price=price+#{price} WHERE id=1
+	</update>
+</mapper>

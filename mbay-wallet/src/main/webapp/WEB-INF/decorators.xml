@@ -1,0 +1,8 @@
+<decorators>
+	<excludes>
+	</excludes>
+
+	<decorator name="simple" page="/common/decorator/web_decorator.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+</decorators>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>mbayChannel Framework JSP Page Tag Library</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>mb</short-name>
+	<uri>http://www.mbpartner.cn/jsp/tags</uri>
+	<tag>
+		<description>分页</description>
+		<name>page</name>
+		<tag-class>org.sz.mbay.base.web.servlet.tags.page.PageTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<description>所有提交的form id 若不填写则默认为documeng中第一个form</description>
+			<name>formid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>PageInfo,若不填写则从request中获取</description>
+			<name>pageinfo</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>org.sz.mbay.base.pagehelper.PageInfo</type>
+		</attribute>
+	</tag>
+	<tag>
+		<description>token</description>
+		<name>token</name>
+		<tag-class>org.sz.mbay.base.web.servlet.tags.token.TokenTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+</taglib>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RedeemCode">
+
+	<resultMap type="RedeemCode" id="redeemCodeListMap">
+		<result property="code" column="redeemCode" />
+		<result property="starttime" column="startTime" />
+		<result property="expiretime" column="expireTime" />
+		<result property="createtime" column="createTime" />
+		<result property="codeStatus" column="status" />
+		<result property="codeType" column="codeType" />
+		<result property="ordernumber" column="orderNumber" />
+		<result property="verificateCode" column="verificateCode" />
+		<result property="bindMobile" column="bindMobile" />
+		<result property="gettime" column="getTime" />
+		<result property="redeemtime" column="redeemTime" />
+	</resultMap>
+	
+	<insert id="createRedeemCode" parameterType="redeemCode">
+		INSERT INTO
+		redeem_code
+		(redeem_code,eventnumber,start_time,expire_time,status,code_type,ordernumber,involved_number,bind_mobile,create_time,verificate_code,get_time,method,mbayprice,send)
+		VALUES(#{code},#{eventnumber},#{starttime},#{expiretime},#{codeStatus},#{codeType},#{ordernumber},#{involvedNumber},#{bindMobile},#{createtime},#{verificateCode},#{gettime},#{method},#{mbayprice},#{send})
+	</insert>
+
+	<update id="updateCodeStatus" parameterType="Map">
+		UPDATE redeem_code set
+		status=#{status} where
+		redeem_code=#{code} and eventnumber=#{eventnumber}
+	</update>
+
+	<sql id="codeListQuerySql">
+		WHERE 1=1
+		<if test="eventNumber!=null and eventNumber!=''">
+			AND r.eventnumber=#{eventNumber}
+		</if>
+		<if test="code!=null and code!=''">
+			AND r.redeem_code like CONCAT('%','${code}','%' )
+		</if>
+		<if test="starttime!=null and starttime!=''">
+			AND r.create_time>= #{starttime}
+		</if>
+		<if test="endtime!=null and endtime!=''">
+	   <![CDATA[AND  r.create_time<= #{endtime} ]]>
+		</if>
+		<if test="codeStatus!=null">
+			AND r.status=#{codeStatus}
+		</if>
+		<if test="mobile!=null and mobile!=''">
+			AND r.bind_mobile=#{mobile}
+		</if>
+		<if test="verificateCode!=null and verificateCode!=''">
+			AND r.verificate_code like CONCAT('%','${verificateCode}','%' )
+		</if>
+		<if test="getStartTime!=null and getStartTime!=''">
+			AND r.get_time>= #{getStartTime}
+		</if>
+		<if test="getEndTime!=null and getEndTime!=''">
+	   <![CDATA[AND  r.get_time<= #{getEndTime} ]]>
+		</if>
+		<if test="redeemStartTime!=null and redeemStartTime!=''">
+			AND r.redeem_time>= #{redeemStartTime}
+		</if>
+		<if test="redeemEndTime!=null and redeemEndTime!=''">
+	   <![CDATA[AND  r.redeem_time<= #{redeemEndTime} ]]>
+		</if>
+	</sql>
+	<select id="findAllRedeemCodeByEventNumber" parameterType="redeemCodeForm"
+		resultMap="redeemCodeListMap">
+		SELECT
+		r.redeem_code redeemCode,r.start_time startTime,r.expire_time
+		expireTime,r.create_time createTime,r.status status,r.code_type 
+		codeType,r.ordernumber orderNumber,r.verificate_code verificateCode,r.bind_mobile
+		bindMobile,r.get_time getTime,r.redeem_time redeemTime
+		FROM redeem_code r
+		<include refid="codeListQuerySql" />
+		order by r.create_time,r.redeem_code DESC
+	</select>
+
+	<select id="countRedeemCodeByEventNumber" parameterType="redeemCodeForm"
+		resultType="int">
+		SELECT COUNT(*) FROM redeem_code r
+		<include refid="codeListQuerySql" />
+	</select>
+
+	<resultMap type="RedeemCode" id="codeInfoMap">
+		<result property="code" column="redeem_code" />
+		<result property="starttime" column="start_time" />
+		<result property="expiretime" column="expire_time" />
+		<result property="codeStatus" column="status" />
+		<result property="eventnumber" column="eventnumber" />
+		<result property="bindMobile" column="bind_mobile" />
+		<result property="codeType" column="code_type" />
+		<result property="verificateCode" column="verificate_code" />
+		<result property="send" column="send" />
+	</resultMap>
+
+	<select id="findRedeemCode" resultType="Map" resultMap="codeInfoMap">
+		SELECT redeem_code,
+		eventnumber,start_time,expire_time,status,bind_mobile,code_type,verificate_code,send FROM
+		redeem_code where redeem_code=#{code} 
+		<if test="campaignNumber!=null and campaignNumber!=''">
+			and eventnumber=#{campaignNumber}
+		</if>
+	</select>
+
+	<update id="setRedeemCodeChargeOrderNumber" parameterType="Map">
+		UPDATE redeem_code set
+		ordernumber=#{orderNumber},status=#{codeStatus} where
+		redeem_code=#{redeemCode} and eventnumber=#{campaignNumber}
+	</update>
+
+	<update id="updateOrderNumAndMobileAndStatusAndMbayPrice" parameterType="Map">
+		UPDATE redeem_code 
+		set ordernumber=#{orderNumber},bind_mobile=#{mobile},status=2,mbayprice=#{mbayprice}
+		where redeem_code=#{redeemCode} and eventnumber=#{campaignNumber}
+	</update>
+	
+	<update id="updateCodeVerificate" parameterType="Map">
+		UPDATE redeem_code 
+		set verificate_code=#{verificateCode} 
+		where redeem_code=#{code} and eventnumber=#{campaignNumber}
+	</update>
+	
+	<select id="getCountOfVerificateCode" parameterType="Map" resultType="int">
+		SELECT count(*) FROM redeem_code 
+		where eventnumber=#{eventnumber} and verificate_code=#{verificateCode}
+	</select>
+	
+	<update id="updateCodeGetTime" parameterType="Map">
+		UPDATE redeem_code 
+		set get_time=#{getTime} 
+		where redeem_code=#{code} and eventnumber=#{eventnumber}
+	</update>
+	
+	<update id="updateCodeRedeemTime" parameterType="Map">
+		UPDATE redeem_code 
+		set redeem_time=#{redeemTime} 
+		where redeem_code=#{code} and eventnumber=#{eventnumber}
+	</update>
+	
+	<resultMap type="redeemCode" id="codeStatusMap">
+		<result property="codeStatus" column="status" />
+	</resultMap>
+	
+	<select id="findStatusByCodeAndCampaignNumber" resultType="Map" resultMap="codeStatusMap">
+		SELECT 
+		status FROM
+		redeem_code 
+		where redeem_code=#{code} and eventnumber=#{campaignNumber}
+	</select>
+	
+	<update id="updateSended" parameterType="Map">
+		UPDATE redeem_code set send=1 where
+		redeem_code=#{code} and eventnumber=#{campaignNumber}
+	</update>
+</mapper>

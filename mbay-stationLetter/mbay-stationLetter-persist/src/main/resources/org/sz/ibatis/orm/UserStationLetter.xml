@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="UserStationLetter">
+
+	<resultMap type="userStationLetter" id="userhasmsgListMap">
+		<result property="id" column="id" />
+		<result property="senderUnumber" column="senderUnumber" />
+		<result property="receverUnumber" column="receverUnumber" />
+		<result property="readStatus" column="readStatus" />
+		<result property="receveStatus" column="receveStatus" />
+		<result property="sendStatus" column="sendStatus" />
+		<association property="message" javaType="stationLetter">
+			<result property="id" column="msg_id" />
+			<result property="sendTime" column="sendTime" />
+		</association>
+	</resultMap>
+
+	<resultMap type="userStationLetter" id="userhasmsgInfoMap">
+		<result property="id" column="id" />
+		<result property="senderUnumber" column="senderUnumber" />
+		<result property="receverUnumber" column="receverUnumber" />
+		<association property="message" javaType="stationLetter">
+			<result property="id" column="msg_id" />
+			<result property="title" column="title" />
+			<result property="content" column="content" />
+			<result property="sendTime" column="sendTime" />
+		</association>
+	</resultMap>
+
+	<insert id="createUserStationLetter" parameterType="userStationLetter">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT
+			IFNULL(MAX(id),0)+1 id FROM user_has_msg
+		</selectKey>
+		INSERT INTO
+		user_has_msg(id,senderUnumber,receverUnumber,msg_id,sendStatus,receveStatus,readStatus)
+		VALUES
+		(#{id},#{senderUnumber},#{receverUnumber},#{message.id},#{sendStatus},#{receveStatus},#{readStatus});
+	</insert>
+	
+	<!-- 查询所有收到的信息 -->
+	<select id="findAllUserStationLetter" parameterType="String" resultMap="userhasmsgListMap">
+		select h.id, h.senderUnumber,h.readStatus,h.msg_id,m.sendTime
+		from user_has_msg h
+		left join zcc_message m on h.msg_id=m.msg_id
+		where h.receveStatus =0 and h.receverUnumber=#{value} 
+		order by m.sendTime DESC
+	</select>
+	
+	<!-- 查询所有发出信息 -->
+	<select id="findAllUserHasOutMsg" parameterType="String" resultMap="userhasmsgListMap">
+		select h.id,h.receverUnumber,h.readStatus,h.msg_id,m.sendTime
+		from user_has_msg h
+		left join zcc_message m on h.msg_id=m.msg_id
+		where h.sendStatus =0 and h.senderUnumber=#{value} 
+		order by m.sendTime DESC
+	</select>
+
+
+	<!-- 根据id查询所有发出信息 -->
+	<select id="findHasMsgById" parameterType="Integer" resultMap="userhasmsgInfoMap">
+		select h.senderUnumber,m.title,m.content,h.msg_id,m.sendTime
+		from user_has_msg h
+		left join zcc_message m on h.msg_id=m.msg_id
+		where h.id=#{value} order by m.sendTime DESC
+	</select>
+
+	<!--查询收到信息数量 -->
+	<select id="countUserStationLetter" parameterType="String" resultType="int">
+		select count(*) from user_has_msg 
+		where receveStatus =0 and receverUnumber=#{value}
+	</select>
+
+	<!--查询发件箱信息数量 -->
+	<select id="countUserHasOutMsg" parameterType="String" resultType="int">
+		select count(*) from user_has_msg 
+		where sendStatus =0 and senderUnumber=#{value}
+	</select>
+
+	<!--查询未读信息数量 -->
+	<select id="countUnMsg" parameterType="String" resultType="int">
+		select count(*) from user_has_msg 
+		where receverUnumber=#{value} and readStatus=0
+	</select>
+	
+	<select id="countOutMsg" parameterType="String" resultType="int">
+		select count(*) from user_has_msg where senderUnumber=#{value}
+	</select>
+
+	<update id="updatereadStatus" parameterType="int">
+		UPDATE user_has_msg
+		SET readStatus=1 where msg_id=#{value}
+	</update>
+
+	<update id="updateReceiveStatus" parameterType="int">
+		UPDATE
+		user_has_msg SET receveStatus=1 where msg_id=#{value}
+	</update>
+
+	<update id="updateSendStatus" parameterType="int">
+		UPDATE user_has_msg
+		SET sendStatus=1 where msg_id=#{value}
+	</update>
+
+	<select id="getHasMsgReadStatusById" parameterType="int" resultType="int">
+		SELECT readStatus FROM user_has_msg WHERE id=#{value}
+	</select>
+
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DuiBaRelationShip">
+	<resultMap type="duiBaRelationShip" id="baseResultMap">
+		<result property="usernumber" column="usernumber" />
+		<result property="mall.id" column="id" />
+		<result property="mall.name" column="name" />
+	</resultMap>
+
+	<select id="findAllDuiBaRelationShip" parameterType="String" resultMap="baseResultMap">
+		SELECT r.usernumber,m.id,m.name FROM duiba_relationship r
+		LEFT JOIN duiba_mall m
+		ON r.mall_id = m.id
+		WHERE 1=1
+		and m.status=1
+		<if test="value != null and value != '' ">and r.usernumber=#{value}</if>
+		order by r.usernumber desc
+	</select>
+
+	<select id="countDuiBaRelationShip" parameterType="String" resultType="Integer">
+		SELECT count(*) FROM duiba_relationship r 
+		LEFT JOIN duiba_mall m
+		ON r.mall_id = m.id
+		WHERE 1=1
+		and m.status=1
+		<if test="value != null and value != '' ">and r.usernumber=#{value}</if>
+	</select>
+
+	<delete id="deleteDuiBaRelationShip" parameterType="duiBaRelationShip">
+		delete from duiba_relationship where 1=1
+		<if test="usernumber != null and usernumber != '' "> and usernumber=#{usernumber, jdbcType=VARCHAR}</if>
+		<if test="mall != null "> and mall_id=#{mall.id, jdbcType=INTEGER}</if>
+	</delete>
+
+	<insert id="createDuiBaRelationShip" parameterType="duiBaRelationShip">
+		insert into duiba_relationship (usernumber, mall_id)
+		values (#{usernumber,jdbcType=VARCHAR},#{mall.id, jdbcType=INTEGER})
+	</insert>
+</mapper>

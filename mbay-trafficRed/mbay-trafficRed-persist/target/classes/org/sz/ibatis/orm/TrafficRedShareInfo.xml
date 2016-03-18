@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="TrafficRedShareInfo">
+
+	<resultMap id="BaseResultMap" type="trafficRedShareInfo">
+		<id column="id" property="id" />
+		<result column="campaignId" property="campaignId" />
+		<result column="shareImg" property="shareImg" />
+		<result column="shareTimes" property="shareTimes" />
+		<result column="content" property="content" />
+		<result column="shareTitle" property="shareTitle" />
+		<result column="shareLink" property="shareLink" />
+		<result column="enableState" property="enableState" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id,campaignId,shareImg,shareTimes,content,shareTitle,shareLink,enableState
+	</sql>
+	
+	<insert id="insert" parameterType="trafficRedShareInfo">
+		insert into tr_shareinfo (<include refid="Base_Column_List" />)
+		values 
+		(
+			#{id}, #{campaignId}, #{shareImg}, #{shareTimes}, #{content}, 
+			#{shareTitle}, #{shareLink}, #{enableState}
+		)
+	</insert>
+	
+	<insert id="insertSelective" parameterType="trafficRedShareInfo">
+		insert into tr_shareinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>
+			<if test="campaignId != null">campaignId,</if>
+			<if test="shareImg != null">shareImg,</if>
+			<if test="shareTimes != null">shareTimes,</if>
+			<if test="content != null">content,</if>
+			<if test="shareTitle != null">shareTitle,</if>
+			<if test="shareLink != null">shareLink,</if>
+			<if test="enableState != null">enableState,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id},</if>
+			<if test="campaignId != null">#{campaignId},</if>
+			<if test="shareImg != null">#{shareImg},</if>
+			<if test="shareTimes != null">#{shareTimes},</if>
+			<if test="content != null">#{content},</if>
+			<if test="shareTitle != null">#{shareTitle},</if>
+			<if test="shareLink != null">#{shareLink},</if>
+			<if test="enableState != null">#{enableState},</if>
+		</trim>
+	</insert>
+	
+	<select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> 
+		from tr_shareinfo
+		where id = #{id}
+	</select>
+	
+	<update id="updateById" parameterType="trafficRedShareInfo">
+		update tr_shareinfo 
+		set 
+			campaignId = #{campaignId},
+			shareImg = #{shareImg},
+			shareTimes = #{shareTimes},
+			content = #{content},
+			shareTitle = #{shareTitle},
+			shareLink = #{shareLink},
+			enableState = #{enableState}
+		where id = #{id}
+	</update>
+	
+	<update id="updateByIdSelective" parameterType="trafficRedShareInfo">
+		update tr_shareinfo 
+		<set>
+			<if test="campaignId != null">campaignId = #{campaignId},</if>
+			<if test="shareImg != null">shareImg = #{shareImg},</if>
+			<if test="shareTimes != null">shareTimes = #{shareTimes},</if>
+			<if test="content != null">content = #{content},</if>
+			<if test="shareTitle != null">shareTitle = #{shareTitle},</if>
+			<if test="shareLink != null">shareLink = #{shareLink},</if>
+			<if test="enableState != null">enableState = #{enableState},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+</mapper>

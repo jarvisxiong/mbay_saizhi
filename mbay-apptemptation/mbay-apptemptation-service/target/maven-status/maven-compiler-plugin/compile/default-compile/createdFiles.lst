@@ -1,0 +1,8 @@
+org/sz/mbay/apptemptation/service/AppTemptationBindIpService.class
+org/sz/mbay/apptemptation/service/impl/AppTemptationBindIpServiceImpl.class
+org/sz/mbay/apptemptation/qo/AppTemptationIpWhiteListQO.class
+org/sz/mbay/apptemptation/service/impl/AppTemptationIpWhiteListServiceImpl.class
+org/sz/mbay/apptemptation/constant/error/AppTemptationError.class
+org/sz/mbay/apptemptation/service/AppTemptationIpWhiteListService.class
+org/sz/mbay/apptemptation/service/AppTemptationService.class
+org/sz/mbay/apptemptation/service/impl/AppTemptationServiceImpl.class

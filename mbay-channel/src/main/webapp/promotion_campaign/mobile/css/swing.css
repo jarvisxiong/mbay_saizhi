@@ -1,0 +1,685 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face {
+	font-family: "方正正中黑";
+	src: url(../font/fangzhengzhengzhonghei.ttf);
+}
+
+@font-face {
+	font-family: "華康彩帶體";
+	src: url(../font/huakangcaidaiti.ttf)
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+/*摇一摇输入手机号页面-start*/
+.shake-content {
+	height: 100%;
+	max-width: 640px !important;
+	margin: 0 auto;
+	background: #011644;
+	background: url(../image/packet-bg.png) center no-repeat;
+	background-size: cover;
+	position: absolute
+}
+/*摇一摇输入提交表单-*/
+.shake-forms {
+	background: url(../image/shake_bg2.png) center no-repeat;
+	background-size: contain;
+	width: 100%;
+	height: 12.2rem;
+}
+
+.shake-forms>.shake-forms-tel,.shake-forms-btn {
+	width: 10.2rem;
+	height: 1.6rem;
+	top: 40%;
+	border-radius: .16rem;
+	border: none;
+	background: #FFF;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+}
+
+.shake-forms-tel {
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	margin-top: 0.7rem;
+	font-size: .64rem;
+}
+
+.shake-forms-btn {
+	color: #FF4E4E;
+	font-weight: bold;
+	font-size: .6rem;
+	margin-top: 1rem;
+	background: #FF8A01;
+	color: #FFF;
+	border: none;
+}
+
+.tishi {
+	height: .8rem;
+	border-radius: .16rem;
+	display: inline-block;
+	font-size: .48rem;
+	color: #FFF;
+	line-height: .8rem;
+	position: absolute;
+	margin: 6.08rem 0 0 -6.4rem;
+}
+/*JQ-add-css*/
+.tel {
+	border: 1px solid green;
+}
+
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder {
+	font-size: .64rem;
+	padding: 0;
+	margin: 0;
+}
+
+input::-moz-placeholder,textarea:-moz-placeholder {
+	font-size: .64rem;
+	padding: 0;
+	margin: 0;
+}
+
+input::-ms-input-placeholder {
+	font-size: .64rem;
+	padding: 0;
+	margin: 0;
+}
+/*摇一摇分享*/
+.share_bg {
+	width: 27%;
+	height: 2.8rem;
+	display: block;
+	margin: 4rem .84rem 0;
+	background: url(../image/share.png) center no-repeat;
+	background-size: contain;
+}
+/*有惊喜按钮-start*/
+.surprised {
+	display: inline-block;
+	z-index: 999;
+	width: 2.4rem;
+	height: 2.4rem;
+	text-align: center;
+	border-radius: 1.2rem;
+	box-shadow: inset 0px 0px .8rem #FFF, 0px 0px .4rem #FFF;
+	-webkit-box-sizing: border-box;
+	position: absolute;
+	left: .5rem;
+	bottom: .5rem;
+}
+.surprised-ico {
+	display: block;
+	margin-top: .2rem;
+	margin-bottom: -0.45rem;
+}
+.surprised-ico>img {
+	width: 50%;
+}
+.surprised-txt {
+	font-style: inherit;
+	font-size: .32rem;
+	font-weight: normal;
+	color: #FFF;
+}
+.surprised-content {
+	width: 2.4rem;
+	height: 2.4rem;
+	display: inline-block;
+}
+.surprised:active {
+	width: 2.48rem;
+	height: 2.48rem;
+	box-shadow: inset 0px 0px .4rem #FFF, 0px 0px .8rem #FFF;
+}
+.surprised:after {
+	width: 2.48rem;
+	height: 2.48rem;
+	box-shadow: inset 0px 0px .4rem #FFF, 0px 0px .8rem #FFF;
+}
+.acquire-surprised {
+	bottom: 0;
+}
+/*有惊喜按钮-end*/
+
+/*摇一摇输入手机号页面-end*---------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*摇之前提示-start*--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.bg-style {
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	left: 50%;
+	position: relative;
+}
+/*摇之前提示背景层-start*/
+.shake-up-content {
+	background: url(../image/packet-bg.png) center no-repeat;
+	background-size: cover;
+	max-width: 640px;
+}
+/*摇之前提示背景层-end*/
+.packet-bg {
+	background: url(../image/shake_bg2.png) center no-repeat;
+	background-size: contain;
+	width: 100%;
+	height: 12.2rem;
+}
+.packet-up-tishi {
+	color: #FFF;
+	font-size: .88rem;
+	font-weight: bold; 
+	word-wrap: break-word;
+	font-family: "黑体";
+	font-weight: normal;
+	line-height: 1.2rem;
+	padding-top: 4.7rem;
+	margin: 0 auto;
+	width: 10rem;
+}
+/*进入MB钱包*/
+.shake-up-content .burse-btn {
+	display: inline-block;
+	width: 5.2rem;
+	position: absolute;
+	border-radius: .16rem;
+	bottom: 1.2rem;
+	height: 2.32rem;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	-o-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+.shake-up-content .burse-btn>img {
+	width: 100%;
+}
+/*立即分享*/
+
+/*摇之前提示-end*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*摇一摇内容-start*---------------------------------------------------------------------------------------------------------------------------------------------------------/
+/*摇一摇内容*/
+#music {
+	margin-top: 15%;
+}
+/*摇一摇图片*/
+.liuliang {
+	width: 8.6rem;
+	height: 8.8rem;
+	margin: 0 auto;
+	background: url(../image/shake-bg-2.png);
+}
+
+.liuliang>p {
+	width: 8.6rem;
+	height: 4.4rem;
+	position: relative;
+}
+
+.liuliang img {
+	width: 8.6rem;
+	float: left;
+}
+
+.welcome-return {
+	text-align: center;
+	color: #FFF;
+	/* margin-top: 20%; */
+	position: relative;
+	height: 1rem;
+	line-height: 1rem;
+}
+.shake-content-bg{position:relative;top:20%}
+.welcome-return>label {
+	color: #FFF;
+}
+
+.phone-number {
+	color: #FFF202;
+}
+
+.placard {
+	background: rgba(51, 51, 51, 0.6);
+	color: #FFF;
+	padding: .48rem .4rem;
+	width: 90%;
+	text-align: left;
+	border-radius: .16rem;
+	position: relative; 
+	z-index: 99;
+	line-height: .8rem;
+	margin: -6rem auto;
+	word-break: break-all;
+}
+/*摇一摇内容-end*/
+/*立即兑换-start*/
+* {
+	margin: 0;
+	padding: 0;
+}
+/*全局背景*/
+.get-packedt-content {
+	background: url(../image/packet-bg.png) center no-repeat;
+	background-size: cover;
+	height: 100%
+}
+.get-packedt-content .traffic-wrapper {
+	width: 100%;
+}
+/*流量红包数量*/
+.gain-packet-number {
+	width: 40%;
+	height: 12%;
+	margin-left: 30%;
+	position: absolute;
+	top: 45%;
+	text-align: center;
+}
+.gain-packet-number>span {
+	width: 14.5%;
+	height: 100%;
+	display: inline-block;
+	margin-left: -0.12rem;
+}
+
+.gain-packet-number>span>img {
+	width: 100%;
+	height: 100%;
+}
+.gain-packet-number>.num1 {
+	width: 10%;
+}
+
+.gain-packet-number>.num1>img {
+	width: 100%;
+}
+
+.gain-packet-number>.unit {
+	width: 40%; 
+}
+
+.gain-packet-number>.unit>img {
+	width: 100%;
+}
+/*流量红包*/
+.flow-packedt {
+	background: url(../image/yao_flow.png) center no-repeat;
+	background-size: contain;
+	width: 100%;
+	height: 12.2rem;
+	position: relative;
+}
+/*立即兑换*/
+.promptly-convert {
+	background: url(../image/flow-btn.png) center no-repeat;
+	background-size: contain;
+	width: 100%;
+	height: 2.2rem;
+}
+/*立即分享*/
+.promptly-share {
+	width: 70%;
+	margin: 0 auto;
+	margin-top: 2%
+}
+
+.promptly-share-btn>img {
+	width: 30%;
+}
+/*立即兑换-end*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------/
+/*活动结束-start*--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+html,body {
+	height: 100%;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+/*立即分享*/
+.promptly-share {
+	width: 70%;
+	margin: 0 auto;
+	margin-top: 35%;
+	margin-left: 2%;
+	position: fixed;
+	position: relative;
+}
+
+.promptly-share-btn>img {
+	width: 25%;
+	border-radius: 1.2rem;
+}
+/*活动结束-end*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------/
+/*获得红包-start*--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+html,body,.obtain-packet-content {
+	height: 100%;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+/*获得红包内容-start*/
+.obtain-packet-content {
+	background: url(../image/packet-bg.png) center no-repeat;
+	background-size: cover;
+	position: relative;
+	max-width: 640px;
+}
+/*获得红包内容-end*/
+/*获得红包-start*/
+.obtain-packet {
+	background: url(../image/packet.png) center no-repeat;
+	background-size: contain;
+	width: 100%;
+	height: 12.2rem;
+	top: 10%;
+	position: relative;
+}
+/*获得红包-end*/
+/*获得红包数量-start*/
+.obtain-packet-number {
+	width: 22%;
+	height: 10%;
+	position: absolute;
+	top: 52%;
+	left: 59%;
+}
+
+.obtain-packet-number>li {
+	float: left;
+	list-style: none;
+	width: 19%;
+	position: relative;
+	height: 100%;
+}
+
+.obtain-packet-number>li>img {
+	width: 100%;
+	height: 70%;
+}
+.obtain-packet-number>.unit {
+	width: 42%;
+}
+
+.obtain-packet-number>.unit>img {
+	width: 100%
+}
+/*获得红包数量-end*/
+/*文字说明-start
+.flow-explain{border:1px solid red; width:72%; margin:0 auto;}*/
+/*文字说明-end*/
+/*在摇一次-start*/
+.continue {
+	text-align: center;
+	padding-top: 9.4rem;
+}
+.continue>a {
+	background: #FF4E4E;
+	position: relative;
+	display: inline-block;
+	width: 5.04rem;
+	height: 2.32rem;
+	border-radius: .32rem;
+	line-height: 2.52rem;
+}
+.continue>a>span {
+	width: 4.32rem;
+	height: 1.72rem;
+	display: inline-block;
+	line-height: 1.84rem;
+	background: #FFD930;
+	color: #FD0000;
+	font-size: .84rem;
+	font-family: "黑体";
+	border-radius: .2rem;
+}
+.continue>a:active {
+	box-shadow: inset 0 0 .2rem #FFD930, 0 0 .6rem #FFF;
+	width: 5rem;
+	height: 2.28rem;
+}
+.continue>a>span:active {
+	width: 4.24rem;
+	height: 1.64rem;
+	font-size: .76rem;
+}
+/*在摇一次-end*/
+/*存钱挖宝-start*/
+.store-scoop-btn {
+	position: relative;
+	width: 65.5%;
+	margin: 20% auto;
+}
+
+.store-scoop-btn>a {
+	width: 48%;
+	height: 20%;
+	display: block;
+	position: relative;
+}
+
+.store-scoop-btn>a>img {
+	width: 100%;
+}
+
+.store {
+	float: left;
+}
+
+.scoop {
+	float: right;
+}
+/*存钱挖宝-end*/
+
+/**/
+.gain-packet-surprised {
+	margin-left: 1px;
+	margin-top: .4rem;
+}
+
+.gain-packet-surprised>b>i {
+	margin-bottom: -0.32rem;
+}
+
+/*手机按钮样式-end*--------------------------------------------------------------------------------------------------------------------------------------------------------------------------/	
+/*更多惊喜-start---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*位置居中全局样式-start*/
+.place {
+	position: relative;
+	width: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+}
+/*位置居中全局样式-end*/
+.flow-gain {
+	background: #951115;
+	max-width: 640px;
+	margin: 0 auto;
+	position: absolute;
+}
+/*流量红包*/
+.flow-red-packet {
+	background: url(../image/ok.png) center no-repeat;
+	background-size: contain;
+	height: 11.2rem;
+}
+
+.flow-num {
+	width: 35%;
+	position: relative;
+	top: 3.4rem;
+	height: 1.12rem;
+}
+
+.flow-num>span {
+	display: inline-block;
+	width: 15%;
+	height: 100%;
+	margin-left: -0.12rem;
+}
+
+.flow-num>span>img {
+	width: 100%;
+	height: 100%;
+}
+
+.flow-num>.unit {
+	width: 36%;
+}
+
+.flow-num>.unit>img {
+	width: 100%;
+}
+/*分享给小伙伴再抽一次文字样式*/
+.flow-red-packet-tishi {
+	margin-top: 6.9rem;
+	text-align: center;
+	color: #FFE400;
+	font-family: "方正正中黑";
+	font-size: 1rem;
+	position: relative;
+	font-weight: 600;
+}
+
+.flow-red-packet-tishi2 {
+	text-align: center;
+	color: #FFE400;
+	font-family: "方正正中黑";
+	font-weight: 600;
+	font-size: .7rem;
+}
+
+.flow-red-packet-tishi2>label {
+	font-size: .8rem;
+	font-family: "方正正中黑";
+}
+/*进入美贝钱包*/
+.go-packet-btn {
+	height: 2.32rem;
+	text-align: center;
+	position: relative
+}
+.go-packet-btn>.burse-btn {
+	display: inline-block;
+	width: 5.2rem;
+	position: relative;
+	margin-top: 5%;
+	border-radius: .16rem;
+}
+.go-packet-btn>.burse-btn>img {
+	width: 100%;
+}
+/*活动规则*/
+.activity-rule {
+	width: 90%;
+	position: relative;
+	color: #FFD930;
+	font-size: .48rem;
+	margin-top: 50%;
+	margin-bottom: .4rem;
+}
+
+.activity-rule>p {
+	line-height: .68rem;
+	margin: .08rem;
+}
+/*更多优惠惊喜字体*/
+.surprise-title {
+	font-family: "華康彩帶體";
+	color: #FFC000;
+	position: relative;
+	margin-left: 30%;
+	font-size: 1.2rem;
+}
+/*有惊喜标题栏*/
+.surprise {
+	width: 100%;
+	height: 42%;
+	margin-top: 10%;
+	position: relative;
+	text-align: center;
+}
+
+.surprise>a>.surprise-icon {
+	width: 15%;
+	float: left;
+}
+
+.surprise>.surprise-tit {
+	width: 45%;
+}
+
+.more-privilege {
+	top: 3%;
+}
+/*分割线*/
+.solid {
+	width: 90%;
+	top: 3%;
+}
+
+.solid>img {
+	width: 100%;
+}
+/*广告图片*/
+.advertisement {
+	width: 90%;
+	margin-top: 0%;
+	margin-bottom: 4%;
+	position: relative;
+	z-index: 2;
+}
+
+.ad-img {
+	width: 48%;
+	float: left;
+	display: block;
+	padding-bottom: .8rem;
+	position: relative;
+	z-index: 2;
+}
+
+.ad-img>img {
+	width: 100%;
+	position: relative;
+	z-index: 2;
+}
+
+.ad-img1 {
+	float: left;
+}
+
+.ad-img2 {
+	float: right;
+}
+.activity-page {
+	width: 70%;
+	float: right;
+	margin: -11% 0 0;
+	color: #FFF;
+	font-size: .48rem;
+	line-height: .8rem;
+}
+.activity-tit {
+	font-size: .56rem;
+	font-weight: bold;
+}

@@ -1,0 +1,90 @@
+@charset "utf-8";
+
+/*个人注册*/
+.zhaohui {
+	font-family: 'Microsoft YaHei';
+	width: 880px;
+	margin: 0px auto;
+	box-shadow: 0 0 5px #c7c5c5;
+	box-shadow: 0 0 5px #c7c5c5;
+	border: 1px solid #e7e7e7;
+	margin-bottom: 200px;
+	background: white;
+	height: 400px;
+	margin-top: 100px;
+	font-size: 14px;
+}
+
+.zh_tit {
+	height: 40px;
+	padding-right: 15px;
+	border-bottom: 1px solid #EEEEEE;
+	margin: auto 40px;
+	line-height: 40px;
+	font-size: 13px;
+	font-family: 'Microsoft YaHei';
+	letter-spacing: 1px
+}
+
+.zh_tit span {
+	padding-left: 20px
+}
+
+.tip {
+	background: url(../../images/icons/tb.png) no-repeat left;
+	background-position: 0 -4px;
+}
+
+span#sp_wz {
+	color: #FD7D23;
+	padding-left: 0px
+}
+
+.youjian {
+	height: 170px;
+	margin: auto 40px;
+	border-bottom: 2px dotted #e7e7e7;
+	padding-left: 90px;
+	padding-right: 90px;
+	overflow: hidden;
+}
+
+.yj {
+	margin-top: 40px;
+	padding-left: 35px;
+	background: url(../../images/icons/yj.png) no-repeat left
+}
+
+.yj span {
+	color: #F4A21C
+}
+
+.ts {
+	padding-left: 157px;
+	padding-right: 160px;
+	height: 160px
+}
+
+.ts_tit,.check,.xuan {
+	margin-top: 15px
+}
+
+.check,.xuan {
+	font-size: 0.8em
+}
+
+.ts_tit {
+	font-weight: bold
+}
+
+.an {
+	margin-top: 35px
+}
+
+.qt {
+	color: #F4A21C
+}
+
+.an a,.check a {
+	padding: 5px
+}

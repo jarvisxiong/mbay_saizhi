@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="TrafficOrder">
+
+	<insert id="createTrafficOrder" parameterType="trafficOrder">
+		insert into
+		traffic_charge_order(number,eventnumber,packageid,usernumber,mobile,status,name,createtime,
+		mbayprice,oper_r_status,order_type,route_packageid)
+		values
+		(#{number},#{relateNumber},#{trafficPackage.id},#{userNumber},#{mobile},#{status},#{orderName},
+		#{createTime},#{mbayPrice},#{ors},#{orderType},#{routePackageid}
+		);
+	</insert>
+
+	<resultMap type="trafficOrder" id="charegeOrderList">
+		<result property="number" column="number" />
+		<result property="relateNumber" column="eventnumber" />
+		<result property="userNumber" column="usernumber" />
+		<result property="mobile" column="mobile" />
+		<result property="status" column="status" />
+		<result property="mbayPrice" column="mbayprice" />
+		<result property="orderName" column="name" />
+		<result property="createTime" column="createtime" />
+		<result property="ors" column="oper_r_status" />
+		<result property="routePackageid" column="route_packageid" />
+		<result property="orderType" column="order_type" />
+		<result property="trafficPackage.traffic" column="traffic" />
+		
+	</resultMap>
+	
+	<resultMap type="trafficOrder" id="trafficOrderDetailMap" extends="charegeOrderList">
+	<result property="trafficPackage.trafficType" column="traffictype" />
+		<result property="trafficPackage.operator.area.value" column="area" />
+		<result property="trafficPackage.operator.type" column="operator_type" />
+	
+	</resultMap>
+
+	<sql id="trafficOrderQueryWhere">
+		<if test="userNumber != null and userNumber != '' ">
+			AND o.usernumber=#{userNumber}
+		</if>
+		<if test="relateNumber != null and relateNumber != '' ">
+			AND o.eventnumber=#{relateNumber}
+		</if>
+		<if test="orderNumber != null and orderNumber != '' ">
+			AND o.number=#{orderNumber}
+		</if>
+		<if test="mobile != null and mobile != '' ">
+			AND o.mobile=#{mobile}
+		</if>
+		<if test="startTime != null">
+			<![CDATA[AND o.createtime >= #{startTime}]]>
+		</if>
+		<if test="endTime != null">
+	   		<![CDATA[AND  o.createtime <= #{endTime} ]]>
+		</if>
+		<if test="orderType != null">
+			AND o.order_type = #{orderType}
+		</if>
+		<if test="ors != null">
+			AND o.oper_r_status = #{ors}
+		</if>
+		<if test="status != null">
+			AND o.status = #{status}
+		</if>
+	</sql>
+	
+	<!-- 营销明细 -->
+	<select id="findAllTrafficOrder" parameterType="trafficOrderQO"
+		resultMap="charegeOrderList">
+		SELECT o.number,o.usernumber,o.packageid,o.mobile,o.status,o.name,
+		o.createtime,o.mbayprice,o.eventnumber,o.oper_r_status,o.order_type,
+        o.route_packageid,p.traffic 
+        FROM traffic_charge_order  o
+        LEFT JOIN operator_traffic_package p ON o.packageid=p.id
+        WHERE 1=1
+        <include refid="trafficOrderQueryWhere" />
+	</select>
+	
+	<select id="countTrafficOrder" parameterType="trafficOrderQO"
+		resultType="int">
+		SELECT COUNT(*) FROM traffic_charge_order o
+		WHERE 1=1
+		<include refid="trafficOrderQueryWhere" />
+	</select>
+	
+	<select id="findOrderNumberByOperatorNumber" parameterType="String" resultType="String">
+	  SELECT number from traffic_charge_order where operator_number=#{value}
+	</select>
+	
+	<select id="findTrafficOrder" parameterType="String" resultMap="trafficOrderDetailMap">
+	SELECT o.number,o.usernumber,o.packageid,o.mobile,o.status,o.name,
+		o.createtime,o.mbayprice,o.eventnumber,o.oper_r_status,o.order_type,
+        o.route_packageid,p.traffic,p.traffictype,op.area,op.operator_type
+        FROM traffic_charge_order  o
+        LEFT JOIN operator_traffic_package p ON o.packageid=p.id
+        LEFT JOIN zcc_operator_info op on p.operatorid=op.operator_id
+        WHERE number=#{value}
+	</select>
+	
+	<update id="updateTrafficOrderStatus" parameterType="Map">
+		UPDATE traffic_charge_order
+		<set>
+			<if test="orderstatus!=null">
+				status=#{orderStatus},
+			</if>
+			<if test="ops!=null">
+				oper_r_status=#{ops},
+			</if>
+		</set>
+		WHERE number=#{orderNumber}
+	</update>
+	<update id="setOrderOperatorNumber" parameterType="Map">
+		UPDATE traffic_charge_order set operator_number=#{operatorNumber}
+		WHERE number=#{orderNumber}
+	</update>
+	
+	
+	
+
+</mapper>

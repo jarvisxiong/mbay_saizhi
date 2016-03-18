@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.sz.mbay</groupId>
+    <artifactId>mbay-promotion</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>mbay-promotion-service</artifactId>
+  <name>mbay-promotion-service</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    	<!-- mbay-promotion-persist -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-promotion-persist</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- mbay-sms-client -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-sms-client</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- mbay-campaign-common -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-campaign-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-remote-interfaces-wallet</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+  </dependencies>
+</project>

@@ -1,0 +1,4 @@
+org/sz/mbay/email/MbayEmailService.class
+org/sz/mbay/email/MbayMail.class
+org/sz/mbay/email/MbayEmailServiceImpl.class
+org/sz/mbay/email/exception/MbayEmailException.class

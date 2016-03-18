@@ -1,0 +1,184 @@
+@charset "utf-8";
+/*注册栏目*/
+.reg_s {
+	background: #F9F9F9;
+	overflow: hidden
+}
+/*进度栏*/
+.jindu {
+	margin-top: 70px;
+	height: 90px;
+	margin-bottom: 50px
+}
+
+.jd {
+	height: 90px;
+	position: relative
+}
+
+.jd_box {
+	height: 30px;
+	width: 60px;
+	margin-top: 30px
+}
+
+.jd_1 {
+	background: url(../../../images/enterprise/images/icons/mb_1.png) center
+		no-repeat;
+	margin-left: 45px;
+}
+
+.jd_2 {
+	background: url(../../../images/enterprise/images/icons/mb_2.png) center
+		no-repeat
+}
+
+.jd_3 {
+	background: url(../../../images/enterprise/images/icons/mb_3.png) center
+		no-repeat
+}
+
+.jd_4 {
+	background: url(../../../images/enterprise/images/icons/mb_4.png) center
+		no-repeat
+}
+
+.jd_5 {
+	background: url(../../../images/enterprise/images/icons/mb_5.png) center
+		no-repeat
+}
+
+.jd_b {
+	height: 90px;
+	width: 148px;
+	background: url(../../../images/enterprise/images/icons/jd_bar.jpg)
+		center no-repeat
+}
+/*进度条文字*/
+.wenzi_1 {
+	position: absolute;
+	bottom: 5px;
+	left: 52px;
+	color: #3b7cb8;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_2 {
+	position: absolute;
+	bottom: 5px;
+	left: 271px;
+	color: #b7b7b7;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_3 {
+	position: absolute;
+	bottom: 5px;
+	left: 465px;
+	color: #b7b7b7;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_4 {
+	position: absolute;
+	bottom: 5px;
+	left: 675px;
+	color: #b7b7b7;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_5 {
+	position: absolute;
+	bottom: 5px;
+	left: 895px;
+	color: #b7b7b7;
+	font-family: 'Microsoft YaHei';
+}
+/*企业账户*/
+.zhanghu {
+	width: 780px;
+	margin: 0px auto;
+	position: relative;
+	box-shadow: 0 0 5px #c7c5c5;
+	box-shadow: 0 0 5px #c7c5c5;
+	border: 1px solid #e7e7e7;
+	margin-bottom: 200px;
+	background: white;
+}
+
+a.hu {
+	display: block;
+	float: left;
+	height: 68px;
+	width: 390px
+}
+
+.sj {
+	width: 26px;
+	height: 12px;
+	position: absolute;
+	background: url(../../../images/enterprise/images/icons/qy_sj.png)
+		center no-repeat;
+	right: 180px;
+	top: 68px
+}
+
+.zh_con {
+	height: 320px;
+	clear: left;
+	font-family: 'Microsoft YaHei';
+	overflow: hidden
+}
+
+.zcsm {
+	width: 600px;
+	height: 140px;
+	margin: 0px auto;
+	margin-top: 60px;
+}
+
+.zcsm textarea {
+	padding: 20px 0px 0px 80px;
+	font-family: 'Microsoft YaHei';
+	background: #FCFCFC;
+	width: 520px;
+	height: 120px;
+	display: block;
+	border: 3px solid #F7F7F7;
+}
+
+.yd {
+	height: 20px;
+	margin-top: 20px;
+	margin-left: 90px;
+}
+
+.yd span {
+	margin-left: 5px;
+}
+/* .yd .cb{vertical-align:middle} */
+/* .btnq{display:none;width:83px; border-radius: 4px; height:37px;background:url(../../../images/enterprise/images/icons/btn.jpg) center no-repeat;margin-left:350px;font-size:14px;font-family:'Microsoft YaHei';color:#FFF;letter-spacing: 2px;letter-spacing: 2px;cursor: pointer;margin-top:10px}
+ */
+.btn_con {
+	text-align: center
+}
+
+.btnq {
+	border-radius: 4px;
+	height: 37px;
+	background: #4577AB;
+	font-size: 14px;
+	font-family: 'Microsoft YaHei';
+	color: #FFF;
+	letter-spacing: 2px;
+	letter-spacing: 2px;
+	cursor: pointer;
+	margin-top: 45px;
+	margin-left: 20px;
+	padding: 0px 5px;
+	width: 150px;
+}
+
+.btn_con .btn_reset {
+	height: 37px
+}

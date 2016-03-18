@@ -1,0 +1,114 @@
+@charset "utf-8";
+/*通用*/
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	font-size: 12px;
+	min-width: 1115px;
+	font-family: 'Microsoft YaHei';
+	background: #C6C7C9
+}
+
+img {
+	border: none;
+}
+
+input,select,textarea {
+	outline: none;
+}
+
+textarea {
+	resize: none
+}
+
+a {
+	text-decoration: none;
+}
+
+.fl {
+	float: left
+}
+
+.fr {
+	float: right
+}
+
+.com_width {
+	width: 990px;
+	margin: 0px auto
+}
+
+.con {
+	width: 100%;
+	margin: 0px auto
+}
+/*清除浮动*/
+.clearfix:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.clearfix {
+	zoom: 1
+}
+/*身体*/
+.body {
+	overflow: hidden;
+	width: 700px;
+	height: 480px;
+	background: #FFF;
+	margin: 0px auto;
+	margin-top: 250px;
+	border-radius: 4px;
+	box-shadow: 0 0 5px #74746C;
+}
+
+.error_tip {
+	margin-top: 80px;
+	height: 100px;
+	border-bottom: 2px dashed #C6C7C9;
+}
+
+.error_tip img {
+	margin: 0px auto;
+	display: block
+}
+
+.sec_404 {
+	margin-top: 50px;
+	font-size: 14px;
+	color: #929292
+}
+
+.wz_404,.an_404 {
+	display: inline-block
+}
+
+.wz_404 {
+	width: 300px;
+	margin-left: 130px;
+	line-height: 27px;
+	letter-spacing: 1px;
+	margin-right: 30px
+}
+
+.an_404 {
+	vertical-align: super;
+	width: 200px
+}
+
+.an_404 button {
+	background: #EFB988;
+	color: #FFF;
+	width: 80px;
+	height: 30px;
+	border-radius: 4px;
+	font-size: 14px;
+	font-family: 'Microsoft YaHei';
+	margin-right: 15px
+}

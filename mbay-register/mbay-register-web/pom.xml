@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.sz.mbay</groupId>
+		<artifactId>mbay-register</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>mbay-register-web</artifactId>
+	<packaging>war</packaging>
+	<name>mbay-register-web Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<!-- mbay-base -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-base</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- mbay-filesystem -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-filesystem</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- mbay-channel-user-service -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-channel-user-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>mbay-register-web</finalName>
+	</build>
+</project>

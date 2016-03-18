@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ChannelCampaign">
+	<resultMap type="channelCampaign" id="baseResultMap">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="name" column="name" />
+		<result property="link" column="link" />
+		<result property="image" column="image" />
+	</resultMap>
+
+	<select id="findAllChannelCampaign" resultMap="baseResultMap">
+		SELECT * FROM
+		channel_campaign
+		order by create_time desc
+	</select>
+
+	<select id="countChannelCampaign" resultType="Integer">
+		SELECT count(*)
+		FROM channel_campaign
+	</select>
+
+	<select id="findChannelCampaignById" parameterType="Integer"
+		resultMap="baseResultMap">
+		SELECT * FROM channel_campaign where id=#{value}
+	</select>
+</mapper>

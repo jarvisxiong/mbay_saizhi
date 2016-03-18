@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MallPicture">
+	
+	<resultMap type="mallPicture" id="baseResultMap">
+		<result property="id" column="id" />
+		<result property="itemNumber" column="item_number" />
+		<result property="type" column="type" />
+		<result property="picture" column="picture" />
+	</resultMap>
+	
+	<select id="findAllMallPicture" parameterType="Map" resultMap="baseResultMap">
+		select * from mall_picture where item_number=#{itemNumber}
+		<if test="type != null">and type=#{type}</if>
+		order by create_time DESC
+	</select>
+	
+	<insert id="createMallPicture" parameterType="mallPicture">
+		<selectKey keyProperty="id" order="BEFORE" resultType="int">
+			SELECT IFNULL(MAX(id),0)+1 id FROM mall_picture
+		</selectKey>
+		insert into mall_picture (id,item_number,type,picture,create_time)
+		values (#{id},#{itemNumber},#{type},#{picture},#{createTime});
+	</insert>
+	
+	<update id="updateMallPicture" parameterType="mallPicture">
+		update mall_picture
+		<trim prefix="set" suffixOverrides=",">
+			<if test="itemNumber != null and itemNumber != '' ">item_number=#{itemNumber},</if>
+			<if test="type != null ">type=#{type},</if>
+			<if test="picture != null and picture != '' ">picture=#{picture}</if>
+		</trim>
+		WHERE id=#{id}
+	</update>
+	
+	<delete id="deleteMallPictureByItemNumber" parameterType="String">
+		delete from mall_picture where item_number = #{value}
+	</delete>
+	
+	<delete id="deleteMallPicture" parameterType="int">
+		delete from mall_picture where id = #{value}
+	</delete>
+	
+</mapper>

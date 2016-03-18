@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DuiBa">
+	
+	<sql id="base_column_list">
+		id, order_number, serial_number, state, createtime, mallId
+	</sql>
+	
+	<resultMap type="duiBa" id="base_result_map">
+		<result property="id" column="id" />
+		<result property="orderNumber" column="order_number" />
+		<result property="serialNumber" column="serial_number" />
+		<result property="state" column="state" />
+		<result property="createTime" column="createtime" />
+		<result property="mallId" column="mall_id" />
+	</resultMap>
+
+	<select id="getState" parameterType="java.lang.String" resultType="org.sz.mbay.wallet.enums.DuiBaState">
+		select state from wl_duiba where order_number = #{value}
+	</select>
+	
+	<insert id="createBySelective" parameterType="duiBa" useGeneratedKeys="true" keyProperty="id">
+		insert into wl_duiba
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orderNumber != null">order_number,</if>
+			<if test="serialNumber != null">serial_number,</if>
+			<if test="state != null">state,</if>
+			<if test="createTime != null">createtime,</if>
+			<if test="mallId != null">mall_id,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orderNumber != null">#{orderNumber},</if>
+			<if test="serialNumber != null">#{serialNumber},</if>
+			<if test="state != null">#{state},</if>
+			<if test="createTime != null">#{createTime},</if>
+			<if test="mallId != null">#{mallId}</if>
+		</trim>
+	</insert>
+	
+	<update id="updateState" parameterType="java.util.Map">
+		update wl_duiba set state = #{state} where order_number = #{orderNumber}
+	</update>
+	
+	<select id="findByOrderNumber" parameterType="java.lang.String" resultMap="base_result_map">
+		SELECT 
+		<include refid="base_column_list" />
+		from wl_duiba where order_number = #{value}
+	</select>
+	
+	<select id="findBySerialNumber" parameterType="java.lang.String" resultMap="base_result_map">
+		SELECT 
+		<include refid="base_column_list" />
+		from wl_duiba where serial_number = #{value}
+	</select>
+	
+</mapper>

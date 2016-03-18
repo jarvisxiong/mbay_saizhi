@@ -1,0 +1,319 @@
+@charset "utf-8";
+/*身体*/
+.body {
+	margin-bottom: 30px;
+	font-family: 'Microsoft YaHei'
+}
+
+.b_con {
+	height: 590px;
+	border: 1px solid #356190;
+	border-radius: 4px
+}
+/*邮件内容*/
+.email_index {
+	width: 154px;
+	height: 590px;
+	border-right: 1px solid #356190;
+	color: #35618F
+}
+
+.email_index a {
+	color: #35618F
+}
+
+.email_con {
+	width: 810px;
+	height: 540px;
+	padding-top: 25px;
+	padding-bottom: 30px;
+	font-size: 15px;
+	color: #35618F;
+	padding-right: 25px
+}
+/*邮箱左边*/
+.mbyx_0,.mbyx_1 {
+	padding-left: 14px;
+	padding-right: 14px;
+	height: 36px;
+	border-bottom: 1px solid #356190;
+	line-height: 36px
+}
+
+.mbyx_0,.mbyx_1 {
+	color: #35618F;
+	font-size: 15px
+}
+
+.mbyx_tit {
+	vertical-align: top
+}
+
+.mbyx_0 a {
+	line-height: 12px;
+	margin-top: 11px;
+	margin-left: 45px;
+}
+
+.mbyx_0 a,.sx_0 {
+	display: inline-block;
+	width: 15px;
+	height: 15px
+}
+
+.mbyx_1 {
+	cursor: pointer;
+}
+
+.mbyx_1 a,.sx_1 {
+	display: inline-block;
+	margin-left: 32px;
+}
+
+.mbyx_sec_1 {
+	padding-left: 14px;
+	padding-right: 14px;
+	height: 130px;
+	border-bottom: 1px solid #356190;
+	color: #35618F;
+	font-size: 13px;
+	line-height: 30px
+}
+
+.sp div {
+	display: none
+}
+
+.xx {
+	padding-left: 20px;
+	background: url(../../images/workimages/xx_0.jpg) no-repeat left;
+}
+
+.sjx {
+	padding-left: 20px;
+	background: url(../../images/workimages/sjx_0.jpg) no-repeat left;
+}
+
+.fjx {
+	padding-left: 20px;
+	background: url(../../images/workimages/fjx_0.jpg) no-repeat left;
+	clear: left
+}
+
+.ysc {
+	padding-left: 20px;
+	background: url(../../images/workimages/ysc_0.jpg) no-repeat left;
+	clear: left
+}
+
+.wmm {
+	padding-left: 20px;
+	background: url(../../images/workimages/wmm.jpg) no-repeat left;
+	clear: left
+}
+
+.sl_1 {
+	border-radius: 10px;
+	background: #35618F;
+	color: white;
+	height: 18px;
+	line-height: 18px;
+	margin-top: 6px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.sp {
+	border-bottom: 0px;
+	height: 300px
+}
+
+.index_zt {
+	height: 85px;
+	background: #356190
+}
+
+.xx_1 {
+	background: url(../../images/workimages/xx_1.jpg) no-repeat left
+}
+
+.sjx_1 {
+	background: url(../../images/workimages/sjx_1.jpg) no-repeat left
+}
+
+.fjx_1 {
+	background: url(../../images/workimages/fjx_1.jpg) no-repeat left
+}
+
+.ysc_1 {
+	background: url(../../images/workimages/ysc_1.jpg) no-repeat left
+}
+
+.wmm_1 {
+	background: url(../../images/workimages/wmm_1.jpg) no-repeat left
+}
+/*邮箱右边*/
+.xx_box_1 span,.xx_box span {
+	width: 85px;
+	text-align: right;
+	display: inline-block;
+	margin-right: 10px
+}
+
+.xx_box_1 {
+	margin-top: 20px
+}
+
+.xx_text {
+	width: 408px;
+	height: 22px;
+	border: 1px solid #356190
+}
+
+.title_text {
+	width: 708px;
+	height: 22px;
+	border: 1px solid #356190
+}
+
+.an_tc {
+	overflow: auto;
+	display: none;
+	position: absolute;
+	width: 210px;
+	height: 320px;
+	background: #FFF;
+	border: 1px solid #356190;
+	padding-left: 10px;
+	padding-right: 10px
+}
+
+.an_tc i {
+	width: 0;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+	position: absolute;
+	left: 50%;
+	top: -10px;
+	margin-left: -2px;
+	border-width: 5px;
+	border-style: dashed dashed solid;
+	border-color: transparent transparent #356190
+}
+
+.zw_text {
+	width: 708px;
+	height: 300px;
+	border: 1px solid #356190;
+	vertical-align: top;
+}
+
+.email_an {
+	margin-left: 550px;
+	margin-top: -25px;
+	margin-bottom: 15px;
+	position: relative
+}
+
+.email_an input {
+	width: 83px;
+	height: 24px;
+	letter-spacing: -1px;
+	padding: 0px 5px 0px 20px;
+	color: #fff;
+	font-family: 'Microsoft YaHei';
+	line-height: 18px;
+	font-size: 12px;
+}
+
+.email_sc {
+	background: url(../../images/workimages/email_sc.jpg) no-repeat
+}
+
+.email_txl {
+	background: url(../../images/workimages/email_txl.jpg) no-repeat
+}
+
+.email_fs {
+	background: url(../../images/workimages/email_fs.jpg) no-repeat;
+	margin-top: 30px;
+	margin-left: 100px;
+	height: 24px;
+	width: 82px;
+}
+
+.tc_tj span {
+	display: inline-block;
+	float: left;
+}
+
+.tc_tj a {
+	display: inline-block;
+	float: right;
+}
+/*身体左边*/
+.ddqr {
+	padding-left: 40px;
+	background: url(../../images/workimages/llcz.jpg) no-repeat left;
+	color: #35618F;
+	font-size: 18px;
+	height: 36px;
+	line-height: 35px;
+	line-height: 45px;
+	margin-bottom: 15px;
+	font-family: 'Microsoft YaHei'
+}
+
+.dd {
+	border: 1px solid #C2C2C2;
+	font-size: 15px;
+	margin-bottom: 10px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	border-radius: 4px;
+	font-family: 'Microsoft YaHei';
+	padding-left: 40px;
+}
+
+.dd div {
+	height: 40px;
+	line-height: 40px
+}
+
+.mc {
+	width: 135px;
+	text-align: right;
+	display: inline-block;
+	color: #5D5C5C;
+	margin-right: 20px
+}
+
+.shu {
+	color: #454545
+}
+
+.dd .an {
+	height: 35px;
+	line-height: 35px;
+	margin-top: 25px;
+}
+
+.dd_con {
+	padding-left: 28px;
+	background: url(../../images/workimages/cjz.jpg) left no-repeat;
+	color: #FDAB1B;
+	font-size: 15px
+}
+
+.an_btn {
+	width: 150px;
+	height: 35px;
+	line-height: 35px;
+	letter-spacing: 1px;
+	border-radius: 4px;
+	color: #FFF;
+	font-family: 'Microsoft YaHei';
+	background: #FDAC1C;
+	margin-left: 155px;
+}

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+	http://www.springframework.org/schema/beans/spring-beans.xsd  
+	http://www.springframework.org/schema/context   
+	http://www.springframework.org/schema/context/spring-context.xsd  
+	http://www.springframework.org/schema/tx   
+	http://www.springframework.org/schema/tx/spring-tx.xsd  
+	http://www.springframework.org/schema/aop   
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<bean
+		class="cn.mbpartner.mbay.activity.check.context.SpringApplicationContext"></bean>
+
+	<context:component-scan base-package="cn.mbpartner..mbay.**.task" />
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<!-- 是否忽略不可解析的Placeholder,如配置了多个PropertyPlaceholderConfigurer，则需设置为true,应为 
+			可能还要依赖base模块 -->
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations">
+			<list>
+				<value>/WEB-INF/config/db/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<!--Driver class that will be used to connect to database. -->
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<!-- jdbc url defining the database connection string. -->
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<!-- username of the database user -->
+		<property name="user" value="${jdbc.username}" />
+		<!-- password of the database user. -->
+		<property name="password" value="${jdbc.password}" />
+		<!-- -->
+		<property name="initialPoolSize" value="${pool.initialPoolSize}" />
+		<!-- Minimum number of connections to be created. -->
+		<property name="minPoolSize" value="${pool.minPoolSize}" />
+		<!-- Max number of connections that can be created. -->
+		<property name="maxPoolSize" value="${pool.maxPoolSize}" />
+		<property name="maxIdleTime" value="${pool.maxIdleTime}" />
+		<property name="acquireIncrement" value="${pool.acquireIncrement}" />
+		<property name="checkoutTimeout" value="${pool.checkoutTimeout}" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 开启事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatisV3-config.xml" />
+	</bean>
+
+	<bean id="template" class="org.mybatis.spring.SqlSessionTemplate"
+		scope="prototype">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<!-- 配置线程池 -->
+
+
+	<bean id="taskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<!-- 最小的线程数 -->
+		<property name="corePoolSize" value="5" />
+		<!-- 如果线程空闲时间超过此值，这关闭 -->
+		<property name="keepAliveSeconds" value="300" />
+		<!-- 最大的线程池 -->
+		<property name="maxPoolSize" value="20" />
+		<!-- 队列最大长度，一般需要设置值 -->
+		<property name="queueCapacity" value="100" />
+	</bean>
+</beans> 

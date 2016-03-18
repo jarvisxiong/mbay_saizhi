@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AssetBank">
+	<resultMap type="assetBank" id="baseResultMap">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="createTime" column="create_time" />
+		<result property="bankName" column="bank_name" />
+		<result property="companyName" column="company_name" />
+		<result property="account" column="account" />
+		<result property="description" column="description" />
+	</resultMap>
+
+	<select id="findAssetBankById" parameterType="Integer" resultMap="baseResultMap">
+		SELECT * FROM asset_bank WHERE id = #{id, jdbcType=INTEGER}
+	</select>
+
+	<select id="findAllAssetBank" resultMap="baseResultMap">
+		SELECT * FROM asset_bank order by create_time desc
+	</select>
+</mapper>

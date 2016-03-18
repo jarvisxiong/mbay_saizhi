@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Store">
+	<resultMap type="store" id="storeResult">
+		<id property="id" column="id" />
+		<result property="number" column="number" />
+		<result property="name" column="name" />
+		<result property="authCode" column="authCode" />
+		<result property="enable" column="enable" />
+		<result property="active" column="active" />
+		<result property="qrCodeId" column="qrCodeId" />
+		<result property="operatorNum" column="operatorNum" />
+		<collection property="activityRecords" javaType="ArrayList"
+			column="id" ofType="storeCampaignRecord" select="findRecords" />
+	</resultMap>
+
+	<resultMap type="storeCampaignRecord" id="recordResult">
+		<result property="deliverNum" column="deliverNum" />
+		<result property="redeemNum" column="redeemNum" />
+		<result property="exited" column="exited" />
+		<result property="storeCampaign.number" column="campaign_id" />
+		<association property="storeCampaign" javaType="storeCampaign"
+			foreignColumn="campaign_id">
+			<id property="id" column="campaign_id" />
+			<result property="number" column="number" />
+			<result property="name" column="name" />
+			<result property="dateCreated" column="dateCreated" />
+			<result property="startTime" column="startTime" />
+			<result property="endTime" column="endTime" />
+			<result property="validity" column="validity" />
+			<result property="status" column="status" />
+		</association>
+	</resultMap>
+
+
+	<!-- 用到了子查询，感觉应该在数据量大的时候才能更好的发挥作用,数据量小的时候直接查询速度较快 -->
+	<select id="findRecords" parameterType="long" resultMap="recordResult">
+		select
+		scr.store_id,scr.campaign_id,scr.exited,scr.deliverNum,scr.redeemNum,
+		oc.number,oc.name
+		,oc.startTime,oc.endTime,oc.validity
+		,oc.quantity,oc.repeatGet,oc.deductSend,oc.deductReedem,
+		oc.link,oc.logoId,oc.mbayPlatSend,oc.lockMbay,oc.describtion,oc.status,oc.dateCreated
+		from
+		(select * from store_campaign_record WHERE store_id=#{id} )
+		scr
+		left
+		join
+		(select * from o2o_campaign WHERE id in (select campaign_id
+		from
+		store_campaign_record WHERE store_id=#{id}))
+		oc on
+		scr.campaign_id=oc.id
+		where
+		store_id=#{id}
+	</select>
+
+	<sql id="findAllStoreByUser">
+		SELECT
+		id,number,name,authCode,enable,active,qrCodeId,operatorNum
+		FROM
+		store
+		where
+		userNumber=#{userNumber} and deleted=0
+	</sql>
+
+	<select id="findAllStore" resultType="store" parameterType="store">
+		SELECT
+		id,number,name,authCode,enable,active,qrCodeId,operatorNum
+		FROM
+		store
+		where
+		userNumber=#{userNumber} and deleted=0
+	</select>
+	<select id="findAll" resultType="store" parameterType="String">
+		<include refid="findAllStoreByUser" />
+	</select>
+
+	<select id="findStoreByIdAndUser" resultMap="storeResult"
+		parameterType="map">
+		SELECT
+		id,number,name,authCode,enable,active,qrCodeId,operatorNum FROM store
+		where id=#{id} and userNumber=#{userNumber} and deleted=0
+	</select>
+
+	<!-- <select id="findStoreById2" resultMap="storeResult" parameterType="long"> 
+		SELECT id,number,name,authCode,enable,active,qrCodeId,operatorNum FROM store 
+		where id=#{id} and deleted=0 </select> -->
+	<select id="findStoreById" resultType="store" parameterType="long">
+		SELECT
+		id,number,name,authCode,enable,active,qrCodeId,operatorNum FROM
+		store
+		where id=#{id} and deleted=0
+	</select>
+	<select id="findSimpleStoreInfo" resultType='store'
+		parameterType="long">
+		SELECT
+		id,number,userNumber,name,authCode,enable,active,qrCodeId,operatorNum
+		FROM store
+		where id=#{id} and deleted=0
+	</select>
+	<select id="findStoreByAuthCode" resultType='store'
+		parameterType="string">
+		SELECT
+		id,number,userNumber,name,authCode,enable,active,qrCodeId,operatorNum
+		FROM store
+		where authCode=#{authCode} and deleted=0
+	</select>
+	<select id="findValidActivity" resultType='storeCampaign'
+		parameterType="map">
+		SELECT
+		oc.id,
+		oc.number,oc.name,oc.quantity,oc.deliverNum,oc.endTime,oc.status,oc.link,oc.describtion,oc.price
+		from
+		(select * from store_campaign_record where store_id=#{storeId})
+		scr
+		LEFT JOIN
+		o2o_campaign oc on
+		oc.id=scr.campaign_id
+		where
+		scr.exited=false
+		and oc.status=2 and
+		oc.deleted=false and
+		oc.userNumber=#{userNumber}
+		and
+		oc.endTime>NOW()
+	</select>
+	<select id="countStore" resultType="int" parameterType="store">
+		SELECT
+		count(id) FROM store where userNumber=#{userNumber} and deleted=0
+	</select>
+
+	<select id="findMaxStoreId" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select MAX(number) from store where
+		userNumber=#{userNumber}
+	</select>
+
+	<insert id="batchCreateStore" parameterType="java.util.List">
+		insert into store
+		(id,number,name,authCode,deleted,userNumber,enable,active,qrCodeId,operatorNum,dateCreated,dateModified)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.number},#{item.name},#{item.authCode},#{item.deleted},#{item.userNumber},#{item.enable},#{item.active},#{item.qrCodeId},#{item.operatorNum},#{item.dateCreated},#{item.dateModified})
+		</foreach>
+	</insert>
+
+	<update id="deleteStore" parameterType="long">
+		update store set
+		deleted=true where id=#{id}
+	</update>
+	<update id="updateStore" parameterType="store">
+		update store set
+		enable=#{enable},name=#{name} where id=#{id} and
+		userNumber=#{userNumber} and deleted=0
+	</update>
+	<update id="batchRemoveStore" parameterType="map">
+		update store set
+		deleted=true where userNumber=#{userNumber} and
+		id
+		in(
+		<foreach collection="ids" item="item" index="index" separator=",">
+			#{item}
+		</foreach>
+		)
+	</update>
+	<update id="updateActivityRecord" parameterType="map">
+		update
+		store_campaign_record set exited=#{exited} where
+		store_id=#{storeId}
+		and
+		campaign_id=#{campaignId}
+	</update>
+
+	<insert id="createActivityRecord" parameterType="storeCampaignRecord">
+		insert into
+		store_campaign_record(store_id,campaign_id,exited,deliverNum,redeemNum,dateCreated,dateModified)values
+		(#{store.id},#{storeCampaign.id},#{exited},#{deliverNum},#{redeemNum},#{dateCreated},#{dateModified});
+	</insert>
+	<select id="findUserNumber" parameterType="long" resultType="string">
+		select userNumber from
+		store where id=#{storeId}
+	</select>
+
+	<select id="findAllJoinedCampaignsByStatusAndTime"
+		parameterType="long" resultType="storeCampaign">
+		SELECT *FROM(
+		SELECT
+		oc.id,
+		oc.number,oc.name,oc.quantity,oc.deliverNum,oc.redeemNum,oc.startTime,oc.endTime,oc.status,oc.validity,scr.dateCreated
+		from
+		(select * from store_campaign_record where store_id=#{_paramter}
+		and
+		exited=false)
+		scr
+		LEFT
+		JOIN
+		o2o_campaign oc on
+		oc.id=scr.campaign_id
+		where
+		oc.deleted=false)t GROUP BY STATUS,dateCreated DESC ORDER BY
+		STATUS
+		ASC
+	</select>
+
+	<select id="findAllNotJoinedCampaignsByStatusAndTime"
+		parameterType="map" resultType="storeCampaign">
+		SELECT id,
+		number,name,quantity,deliverNum,redeemNum,startTime,endTime,status,validity,dateCreated
+		from o2o_campaign oc where userNumber =#{userNumber} and STATUS=2 and
+		id NOT
+		IN(SELECT campaign_id from store_campaign_record where
+		store_id=#{id}
+		and exited =false) ORDER BY dateCreated DESC
+	</select>
+
+	<select id="countJoinedCampaignsByStatusAndTime" parameterType="long"
+		resultType="int">
+		SELECT
+		count(*)
+		from
+		(select * from
+		store_campaign_record where
+		store_id=#{_parameter}
+		AND
+		exited=false)
+		scr
+		LEFT
+		JOIN
+		o2o_campaign oc on
+		oc.id=scr.campaign_id
+		where
+		oc.deleted=false
+	</select>
+	<select id="countNotJoinedCampaignsByStatusAndTime"
+		parameterType="map" resultType="int">
+		SELECT count(id)
+		from o2o_campaign oc
+		where userNumber
+		=#{userNumber} and STATUS=2 and
+		id NOT
+		IN(SELECT
+		campaign_id from
+		store_campaign_record where
+		store_id=#{id}
+		and exited
+		=false)
+	</select>
+
+	<select id="chexkIsJoined" parameterType="map" resultType="long">
+		SELECT campaign_id from store_campaign_record where
+		store_id=#{storeId}
+		and
+		campaign_id=#{campaignId};
+	</select>
+
+	<update id="updateStoreIsActive" parameterType="map">
+		update store set
+		active=#{active} where id=#{id} and
+		deleted=0
+	</update>
+	
+	<select id="countNotJoinedStores" parameterType="map"
+		resultType="int">
+		SELECT count(id) from store where id not IN(SELECT store_id
+		from
+		store_campaign_record where campaign_id=#{campaignId}) and
+		deleted=0 and enable=true
+		and userNumber=#{userNumber};
+	</select>
+
+	<select id="findAllNotJoinedStores" parameterType="map"
+		resultType="store">
+		SELECT * from store where id not IN(SELECT store_id from
+		store_campaign_record where campaign_id=#{campaignId}) and
+		deleted=0
+		and enable=true
+		and userNumber=#{userNumber};
+	</select>
+
+
+</mapper>

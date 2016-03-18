@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PingAnRecord">
+
+	<resultMap type="pingAnRecord" id="baseListMap">
+		<result property="id" column="id" />
+		<result property="mobile" column="mobile" />
+		<result property="pingAnStatus" column="pingan_status" />
+		<result property="mbayStatus" column="mbay_status" />
+		<result property="createTime" column="create_time" />
+	</resultMap>
+
+	<sql id="baseQueryWhere">
+		<if test="mobile !=null and mobile!=''">
+			AND mobile=#{mobile}
+		</if>
+		<if test="mbayStatus !=null">
+			AND mbay_status=#{mbayStatus}
+		</if>
+	</sql>
+
+	<select id="findAllPingAnRecord" parameterType="pingAnRecordForm" resultMap="baseListMap">
+		SELECT id,mobile,pingan_status,mbay_status,create_time
+		FROM pingan_record
+		WHERE 1=1
+		<include refid="baseQueryWhere" />
+		ORDER BY create_time DESC
+	</select>
+
+	<select id="countPingAnRecord" parameterType="pingAnRecordForm"
+		resultType="int">
+		SELECT COUNT(*) FROM pingan_record WHERE 1=1
+		<include refid="baseQueryWhere" />
+	</select>
+
+	<insert id="createPingAnRecord" parameterType="pingAnRecord">
+		<selectKey keyProperty="id"  resultType="int" order="BEFORE">		
+			SELECT IFNULL(MAX(id),0)+1 id FROM pingan_record
+		</selectKey>
+		INSERT INTO
+		pingan_record
+		(id,mobile,pingan_status,mbay_status,create_time)
+		VALUES(#{id},#{mobile},#{pingAnStatus},#{mbayStatus},#{createTime});
+	</insert>
+
+	<update id="updateMbayStatus" parameterType="Map">
+		UPDATE
+		pingan_record
+		SET mbay_status=#{mbayStatus}
+		where id=#{id}
+	</update>
+</mapper>

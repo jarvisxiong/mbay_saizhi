@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TrafficRedMbay">
+
+	<resultMap type="trafficRedMbay" id="base_result_map">
+		<result property="id" column="id" />
+		<result property="mbay" column="mbay" />
+	</resultMap>
+	
+	<sql id="base_column_list">
+		id, mbay
+	</sql>
+	
+	<select id="findAll" resultMap="base_result_map">
+		SELECT <include refid="base_column_list" />
+		FROM tr_mbay ORDER BY mbay
+	</select>
+	
+	<delete id="deleteById" parameterType="Long">
+		DELETE FROM tr_mbay WHERE id = #{value} 
+	</delete>
+
+	<insert id="createSelective" parameterType="trafficRedMbay" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tr_mbay
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="mbay != null">mbay,</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="mbay != null">#{mbay},</if>
+		</trim>
+	</insert>
+	
+	<update id="updateByIdSelective" parameterType="trafficRedMbay">
+		UPDATE tr_mbay
+		<set>
+			<if test="mbay != null">mbay = #{mbay},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+</mapper>

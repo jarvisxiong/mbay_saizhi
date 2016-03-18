@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PromotionCampaignMbay">
+
+	<resultMap type="promotionCampaignMbay" id="BaseResultMap">
+		<result column="id" property="id" />
+		<result column="campaignNumber" property="campaignNumber" />
+		<result column="ratio" property="ratio" />
+		<association column="mbayId" property="mbay" javaType="trafficRedMbay">
+			<id column="mbayId" property="id" />
+			<result column="mbay" property="mbay" />
+		</association>
+	</resultMap>
+	
+	<select id="findPromotionCampaignMbayByCampaignNumber" resultMap="BaseResultMap" parameterType="String">
+		select c.id, c.campaignNumber, c.mbayId, c.ratio, t.mbay
+		from promotion_campaign_mbay c
+		inner join tr_mbay t on c.mbayId = t.id
+		where campaignNumber = #{value}
+	</select>
+	
+	<delete id="deletePromotionCampaignMbayProduct" parameterType="Map">
+		DELETE FROM
+		promotion_campaign_mbay WHERE campaignNumber=#{campaignNumber} AND
+		mbayId=#{mbayId}
+	</delete>
+	
+	<insert id="createPromotionCampaignMbay" parameterType="promotionCampaignMbay">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(id),0)+1 id FROM promotion_campaign_mbay
+		</selectKey>
+		insert into promotion_campaign_mbay (id, campaignNumber, mbayId, ratio)
+		values (#{id},#{campaignNumber},#{mbay.id},#{ratio})
+	</insert>
+	
+	<select id="findPromotionCampaignMbayValidMin" parameterType="String" resultMap="BaseResultMap">
+		SELECT c.campaignNumber, c.mbayId, c.ratio, p.mbay 
+		FROM promotion_campaign_mbay c
+		INNER JOIN tr_mbay p ON c.mbayId = p.id
+		WHERE c.campaignNumber = #{value} AND c.ratio >= 1
+			AND p.mbay = 
+			(
+				select MIN(p.mbay) from promotion_campaign_mbay c 
+				INNER JOIN tr_mbay p ON c.mbayId = p.id 
+				WHERE c.campaignNumber = #{value} AND c.ratio >= 1
+			)
+	</select>
+</mapper>

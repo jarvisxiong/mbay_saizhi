@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UsserAccount">
+	<resultMap id="userAccountInfo" type="userAccount">
+		<result column="wallet_id" property="id" />
+		<result column="remained_meicoin" property="amount" />
+		<result column="lockedamount" property="lockedamount" />
+		<result column="accountnumber" property="accountnumber" />
+		<result column="creditlimit" property="creditLimit" />
+	</resultMap>
+	<update id="channeldeposit" parameterType="Map">
+		UPDATE
+		zcc_data_traffic_wallet SET remained_meicoin=remained_meicoin+#{mbay}
+		WHERE usernumber=#{usernumber}
+	</update>
+	<select id="findAccountAmount" parameterType="String"
+		resultType="double">
+		SELECT remained_meicoin amount FROM zcc_data_traffic_wallet WHERE
+		usernumber=#{usernumber}
+	</select>
+	<!-- 美贝余额-锁定的美贝数量 -->
+	<select id="findAvailableAmount" parameterType="String"
+		resultType="double">
+		SELECT (remained_meicoin-lockedamount) amount FROM zcc_data_traffic_wallet
+		WHERE usernumber=#{usernumber}
+	</select>
+
+	<select id="findUserAccount" parameterType="String" resultMap="userAccountInfo">
+		select
+		wallet_id,remained_meicoin,lockedamount,accountnumber,creditlimit from
+		zcc_data_traffic_wallet WHERE usernumber=#{value}
+	</select>
+	
+	<select id="findUserAccountWithLocked" parameterType="String" resultMap="userAccountInfo">
+		select
+		wallet_id,remained_meicoin,lockedamount,accountnumber,creditlimit from
+		zcc_data_traffic_wallet WHERE usernumber=#{value} FOR UPDATE;
+	</select>
+	
+	<insert id="createUserAccount" parameterType="userAccount">
+		insert into
+		zcc_data_traffic_wallet(usernumber,remained_meicoin,lockedamount,accountnumber,creditlimit)
+		values(#{userNumber},0,0,0,#{creditLimit})
+	</insert>
+	<update id="reduceAccountMbay" parameterType="Map">
+		UPDATE zcc_data_traffic_wallet SET remained_meicoin=remained_meicoin-#{mbay}
+		WHERE usernumber=#{userNumber} AND remained_meicoin-#{mbay} >=0
+	</update>
+	<update id="increaseAccountMbay" parameterType="Map">
+		UPDATE zcc_data_traffic_wallet SET remained_meicoin=remained_meicoin+#{mbay}
+		WHERE usernumber=#{userNumber}
+	</update>
+	
+	<update id="increaseLockedMbay" parameterType="Map">
+		UPDATE zcc_data_traffic_wallet SET lockedamount=lockedamount+#{mbay}
+		WHERE usernumber=#{userNumber} AND remained_meicoin >= lockedamount+#{mbay}
+	</update>
+	
+
+
+	<insert id="createMbayTradeRecord" parameterType="mbayTradeRecord">
+		INSERT INTO mbay_trade_record
+		(trade_number,create_time,trade_name,amount,trade_type,relate_number)
+		VALUES
+		(#{tradeNumber},#{createTime},#{tradeName},#{amount},#{tradeType},#{relateNumber})
+	</insert>
+
+	<insert id="createUserMbayTrade" parameterType="userMbayTrade">
+		INSERT INTO user_mbay_trade(usernumber,tradenumber,payment_type,balance)
+		VALUES
+		(#{userNumber},#{tradeRecord.tradeNumber},#{paymentType},#{balance})
+	</insert>
+	
+		<resultMap type="userMbayTrade" id="mbayTradeDetailListMap"  >
+		<result property="userNumber" column="usernumber" />
+		<result property="paymentType" column="payment_type" />
+		<result property="balance" column="balance" />
+	
+			<result property="tradeRecord.tradeNumber" column="trade_number" />
+			<result property="tradeRecord.createTime" column="create_time" />
+			<result property="tradeRecord.tradeName" column="trade_name" />
+			<result property="tradeRecord.amount" column="amount" />
+			<result property="tradeRecord.tradeType" column="trade_type" />
+			<result property="tradeRecord.relateNumber" column="relate_number" />
+		
+	</resultMap>
+
+	<sql id="mbayTradeDetailQueryWhere">
+		WHERE usernumber=#{userNumber}
+		<if test="tradeNumber!=null and  tradeNumber !=''">
+			AND u.tradenumber=#{tradeNumber}
+		</if>
+		<if test="startTime !=null and endTime !=null ">
+			AND t.create_time BETWEEN #{startTime} AND #{endTime}
+		</if>
+	</sql>
+
+
+	<select id="findAllUserMbayTrade" resultMap="mbayTradeDetailListMap"
+		parameterType="userMbayTradeQO">
+		SELECT
+		u.usernumber,u.payment_type,u.balance,t.trade_number,t.create_time,t.trade_name,t.amount,t.trade_type,t.relate_number
+		FROM user_mbay_trade u
+		LEFT JOIN mbay_trade_record t ON
+		u.tradenumber=t.trade_number
+		<include refid="mbayTradeDetailQueryWhere"></include>
+		ORDER BY t.create_time DESC
+	</select>
+
+	<select id="countUserMbayTrade" resultType="int">
+		SELECT COUNT(*)
+		FROM user_mbay_trade u
+		LEFT JOIN mbay_trade_record t ON
+		u.tradenumber=t.trade_number
+		<include refid="mbayTradeDetailQueryWhere"></include>
+	</select>
+	
+
+	
+	<update id="reduceLockedMbay" parameterType="Map">
+		UPDATE zcc_data_traffic_wallet SET lockedamount=lockedamount-#{mbay}
+		WHERE usernumber=#{userNumber}  AND lockedamount-#{mbay}>=0
+	</update>
+	
+
+</mapper>

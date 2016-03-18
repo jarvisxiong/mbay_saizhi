@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="WalletUser">
+	
+	<resultMap type="WalletUser" id="Base_Result_Map">
+	    <result property="userNumber" column="user_number" />
+		<result property="telephone" column="telephone" />
+		<result property="password" column="password" />
+		<result property="payPassword" column="pay_password" />
+		<result property="nickName" column="nickname" />
+		<result property="gender" column="gender" />
+		<result property="portrait" column="portrait" />
+		<result property="likeNum" column="like_num" />
+		<result property="address" column="address" />
+		<result property="regSource" column="reg_source" />
+		<result property="createTime" column="createtime" />
+		<association property="mbayAccount" javaType="mbayAccount">
+		    <result property="telephone" column="telephone" />
+		    <result property="balance" column="mb_balance" />
+		</association>
+	</resultMap>
+	
+	<sql id="base_column_list">
+		user_number, telephone, password, pay_password, nickname, gender, portrait, like_num,
+		address, reg_source, createtime
+	</sql>
+	
+	<select id="findByTelephone" parameterType="String" resultMap="Base_Result_Map">
+		SELECT u.user_number, u.telephone, u.password, u.pay_password, u.nickname, u.gender, u.portrait, 
+			u.like_num, u.address, u.reg_source, u.createtime, 
+			mb.balance mb_balance
+		FROM wl_user u
+		LEFT JOIN wl_mbay_account mb on mb.telephone = u.telephone
+		WHERE u.telephone = #{value}
+	</select>
+	
+	<insert id="insert" parameterType="WalletUser">
+	    INSERT INTO wl_user 
+	    (<include refid="base_column_list" />)
+	    VALUES 
+	    (
+	    	#{userNumber}, #{telephone}, #{password}, #{payPassword}, #{nickName},
+	    	#{gender}, #{portrait}, #{likeNum}, #{address}, #{regSource}, #{createTime}
+	    )
+	</insert>
+	
+	<select id="getPasswordByTelephone" parameterType="String" resultType="String">
+	    SELECT password FROM wl_user WHERE telephone = #{value}
+	</select>
+	
+	<update id="updateByTelephoneSelective" parameterType="WalletUser">
+	    UPDATE wl_user  
+	    <trim prefix="SET" suffixOverrides=",">
+			<if test="password != null and password != ''">password = #{password},</if>
+			<if test="nickName != null and nickName != ''">nickname = #{nickName},</if>
+			<if test="portrait != null and portrait != ''">portrait = #{portrait},</if>
+			<if test="payPassword != null">pay_password = #{payPassword},</if>
+			<if test="gender != null">gender = #{gender},</if>
+			<if test="address != null and address != ''">address = #{address},</if>
+		</trim>
+	    WHERE telephone = #{telephone}
+	</update>
+	
+	<select id="checkUserActiveByTelephone" parameterType="String" resultType="Boolean">
+		SELECT case when password IS NULL then 0 when password = '' then 0 else 1 end
+		FROM  wl_user WHERE telephone = #{value}
+	</select>
+	
+	<select id="checkUserExsitByTelephone" parameterType="String" resultType="Boolean">
+		SELECT count(*) > 0 from wl_user where telephone = #{value}
+	</select>
+
+	
+</mapper>

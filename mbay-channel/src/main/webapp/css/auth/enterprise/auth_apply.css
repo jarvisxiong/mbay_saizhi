@@ -1,0 +1,390 @@
+@charset "utf-8";
+/*注册栏目*/
+.reg_s {
+	background: #F9F9F9;
+	overflow: hidden
+}
+/*进度栏*/
+.jindu {
+	margin-top: 70px;
+	height: 90px;
+	margin-bottom: 50px
+}
+
+.jd {
+	height: 90px;
+	position: relative
+}
+
+.jd_box {
+	height: 30px;
+	width: 60px;
+	margin-top: 30px
+}
+
+.jd_1 {
+	background: url(../../../images/enterprise/images/icons/mb_1.png) center
+		no-repeat;
+	margin-left: 100px
+}
+
+.jd_2 {
+	background: url(../../../images/enterprise/images/icons/mb_6.png) center
+		no-repeat
+}
+
+.jd_3 {
+	background: url(../../../images/enterprise/images/icons/mb_7.png) center
+		no-repeat
+}
+
+.jd_4 {
+	background: url(../../../images/enterprise/images/icons/mb_8.png) center
+		no-repeat
+}
+
+.jd_5 {
+	background: url(../../../images/enterprise/images/icons/mb_5.png) center
+		no-repeat
+}
+
+.jd_b {
+	height: 90px;
+	width: 148px;
+	background: url(../../../images/enterprise/images/icons/jd_bar.jpg)
+		center no-repeat
+}
+
+.sp {
+	background: url(../../../images/enterprise/images/icons/jd_bar_1.jpg)
+		center no-repeat
+}
+/*进度栏文字*/
+.wenzi_1 {
+	position: absolute;
+	bottom: 5px;
+	left: 95px;
+	color: #3b7cb8;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_2 {
+	position: absolute;
+	bottom: 5px;
+	left: 226px;
+	color: #3b7cb8;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_3 {
+	position: absolute;
+	bottom: 5px;
+	left: 420px;
+	color: #3b7cb8;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_4 {
+	position: absolute;
+	bottom: 5px;
+	left: 463px;
+	color: #3b7cb8;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_5 {
+	position: absolute;
+	bottom: 5px;
+	left: 808px;
+	color: #b7b7b7;
+	font-family: 'Microsoft YaHei';
+}
+/*企业人信息完善*/
+.lianxiren {
+	font-family: 'Microsoft YaHei';
+	width: 880px;
+	margin: 0px auto;
+	box-shadow: 0 0 5px #c7c5c5;
+	box-shadow: 0 0 5px #c7c5c5;
+	border: 1px solid #e7e7e7;
+	margin-bottom: 200px;
+	background: white;
+}
+
+.lianxiren h1 {
+	text-align: center;
+	color: #1573AF;
+	margin-top: 50px;
+	letter-spacing: 2px;
+}
+
+.lianxiren h2 {
+	text-align: center;
+	color: #1573AF;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	letter-spacing: 2px;
+}
+
+.jtdz label,.lxr_name label,.szbm label,.zwtx label,.gddh label,.lxryx label,.lxrsj label,.yzsj label,.sex
+	{
+	display: inline-block;
+	width: 300px;
+	text-align: right;
+	color: #4c4c4c;
+	font-size: 14px;
+	margin-right: 30px
+}
+
+#use,#zwtx,#email,#telephone {
+	width: 220px;
+	height: 20px;
+	border: 1px solid #c1c1c1
+}
+
+select {
+	width: 222px;
+	height: 34px;
+	border: 1px solid #c1c1c1;
+	padding: 5px 0px
+}
+
+#use,#zwtx,#email,#telephone,#dhhm {
+	padding: 5px 0px 5px 5px;
+	width: 215px
+}
+
+.lxr_con div {
+	margin-bottom: 15px;
+}
+
+.lxr_con b {
+	vertical-align: middle;
+	color: #F00
+}
+
+#yzm {
+	width: 80px;
+	height: 20px;
+	border: 1px solid #c1c1c1;
+	text-align: center;
+	padding: 5px 0px
+}
+
+.hqyma {
+	width: 80px;
+	height: 30px;
+	margin-left: 10px;
+	background: url(../../../images/enterprise/images/icons/btn_1.jpg)
+		repeat-x center;
+	color: #FFF;
+	font-family: 'Microsoft YaHei';
+	border-radius: 4px;
+}
+
+.grayhqyma {
+	width: 80px;
+	height: 30px;
+	margin-left: 10px;
+	background: url(../../../images/person/images/icons/grayback.png)
+		repeat-x center;
+	color: #FFF;
+	font-family: 'Microsoft YaHei';
+	border-radius: 4px;
+}
+
+#female {
+	margin-left: 25px
+}
+
+#qh {
+	width: 54px;
+	height: 30px;
+	border: 1px solid #c1c1c1
+}
+
+#fj {
+	width: 69px;
+	height: 30px;
+	border: 1px solid #c1c1c1
+}
+
+#dhhm {
+	border: 1px solid #c1c1c1;
+	height: 22px
+}
+
+.qiye {
+	font-family: 'Microsoft YaHei';
+	width: 880px;
+	margin: 0px auto;
+	box-shadow: 0 0 5px #c7c5c5;
+	box-shadow: 0 0 5px #c7c5c5;
+	border: 1px solid #e7e7e7;
+	margin-bottom: 200px;
+	background: white;
+	height: 850px
+}
+
+.qiye label {
+	display: inline-block;
+	width: 300px;
+	text-align: right;
+	color: #4c4c4c;
+	font-size: 14px;
+	margin-right: 30px;
+}
+
+#cname,#addr,#rs,#fl,#xz,#wz {
+	width: 220px;
+	height: 20px;
+	border: 1px solid #c1c1c1;
+}
+
+#szd_1 {
+	width: 84px;
+	height: 30px;
+	border: 1px solid #c1c1c1;
+}
+
+#szd_2,#szd_3 {
+	width: 98px;
+	height: 30px;
+	border: 1px solid #c1c1c1;
+}
+
+#cname,#addr,#wz {
+	padding: 5px 0px 5px 5px;
+	width: 215px
+}
+
+.qy_con b {
+	vertical-align: middle;
+	color: #F00
+}
+
+.qy_con label {
+	display: inline-block;
+	width: 300px;
+	text-align: right;
+	color: #4c4c4c;
+	font-size: 14px;
+	margin-right: 30px;
+}
+
+.qy_con div {
+	margin-bottom: 15px;
+	line-height: 32px;
+}
+
+#zz,#dbr,#zb,#rq,#dm,#dj {
+	width: 210px;
+	height: 30px;
+	border: 1px solid #c1c1c1;
+	padding-left: 8px
+}
+
+.btn {
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 70px;
+	clear: left;
+}
+
+#btn_1,#btn_2 {
+	letter-spacing: 2px;
+	text-align: center;
+	cursor: pointer;
+	display: inline-block;
+	width: 120px;
+	height: 37px;
+	color: #FFFFFF;
+	font-family: 'Microsoft YaHei';
+	font-size: 14px;
+	background: #4577AB;
+	border-radius: 4px;
+}
+
+#btn_1 {
+	margin-right: 60px
+}
+
+.fddbr span {
+	color: #FF2626;
+	width: 500px;
+	display: inline-block;
+	line-height: 20px;
+	vertical-align: top;
+}
+
+.zczb span {
+	color: #F00
+}
+
+#yyfb,#swfb,#zzfb {
+	width: 220px
+}
+/*验证*/
+.lianxiren label.error {
+	width: 260px;
+	text-align: left;
+	margin-left: 10px;
+	font-size: 1em;
+	vertical-align: bottom;
+	color: rgb(240, 23, 23);
+	height: 32px;
+	line-height: 32px;
+	padding-left: 16px;
+	background: url(../../../images/error.png) no-repeat left
+}
+
+.lxrsj label.error {
+	width: 100px;
+	position: absolute;
+	right: 75px;
+	top: 272px;
+}
+
+.lxr_con {
+	position: relative
+}
+
+.qiye label.error {
+	width: 260px;
+	text-align: left;
+	margin-left: 10px;
+	font-size: 1em;
+	vertical-align: bottom;
+	color: rgb(240, 23, 23);
+	height: 32px;
+	line-height: 32px;
+	padding-left: 16px;
+	background: url(../../../images/error.png) no-repeat left
+}
+
+select.valid {
+	background: none
+}
+
+.qiye2 label.error {
+	width: 260px;
+	text-align: left;
+	margin-left: 10px;
+	font-size: 1em;
+	vertical-align: bottom;
+	color: rgb(240, 23, 23);
+	height: 32px;
+	line-height: 32px;
+	padding-left: 16px;
+	background: url(../../../images/error.png) no-repeat left
+}
+
+.valid {
+	background: url(../../../images/enterprise/images/reg_succ.png)
+		no-repeat right;
+}
+
+.btn_con {
+	text-align: center;
+	margin-bottom: 40px
+}

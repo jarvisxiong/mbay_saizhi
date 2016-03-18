@@ -1,0 +1,260 @@
+@charset "utf-8";
+
+/*身体左边*/
+.ddqr {
+	padding-left: 40px;
+	background: url(../../images/workimages/mbzz.jpg) no-repeat left;
+	color: #35618F;
+	font-size: 18px;
+	height: 36px;
+	margin-bottom: 15px;
+	font-family: 'Microsoft YaHei';
+	line-height:36px;
+    margin:4px 0 10px 0;
+}
+
+.dd {
+	width: 788px;
+	border: 1px solid #C2C2C2;
+	font-size: 15px;
+	margin-bottom: 10px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	border-radius: 4px;
+	font-family: 'Microsoft YaHei';
+	padding-left: 40px;
+	position: relative
+}
+
+.dd b,.ssm {
+	vertical-align: middle;
+	color: #F00;
+}
+
+.zz_tip {
+	text-align: center
+}
+
+.czll {
+	vertical-align: bottom;
+	width: 150px;
+	text-align: right;
+	display: inline-block;
+	margin-right: 15px
+}
+
+.sl_1 {
+	border: 1px solid #94ABC4;
+	width: 240px;
+	line-height: 20px;
+	padding: 5px 5px;
+}
+
+.dd div {
+	line-height: 40px
+}
+
+.dd .sm {
+	height: 80px;
+	line-height:89px;
+	/* line-height:90px */
+}
+
+textarea {
+	width: 300px;
+	height: 78px;
+	border: 1px solid #94ABC4;
+	vertical-align: middle
+}
+
+.mc {
+	width: 135px;
+	text-align: right;
+	display: inline-block;
+	color: #5D5C5C;
+	margin-right: 20px
+}
+
+.shu {
+	color: #454545
+}
+
+.je {
+	color: #FC8301;
+	margin-left: 10px
+}
+
+.dd .an {
+	height: 35px;
+	line-height: 35px;
+	margin-top: 25px;
+}
+
+.dd_con {
+	padding-left: 28px;
+	background: url(../../images/workimages/cjz.jpg) left no-repeat;
+	color: #FDAB1B;
+	font-size: 15px
+}
+
+.an_btn {
+	width: 150px;
+	height: 35px;
+	line-height: 35px;
+	letter-spacing: 1px;
+	border-radius: 4px;
+	color: #FFF;
+	font-family: 'Microsoft YaHei';
+	background: #FDAC1C;
+	margin-left: 165px;
+}
+/*验证*/
+#mbzz .rq .Validform_checktip {
+	margin-left: 0px
+}
+
+#mbzz .Validform_checktip {
+	text-align: left;
+	font-size: 1em;
+	color: #999;
+	width: 200px;
+	margin-left: 34px;
+}
+
+#mbzz .Validform_right {
+	font-size: 1em;
+	background: url(../../images/workimages/tb.png) no-repeat left;
+	padding-left: 20px;
+	background-position: 0 -29px;
+	color: #5BB53C
+}
+
+#mbzz .Validform_wrong {
+	font-size: 1em;
+	color: #ff5243;
+	background: url(../../images/workimages/tb.png) no-repeat left;
+	padding-left: 20px;
+	background-position: 0 -53px;
+}
+
+.mb_exchange {
+	padding-bottom: 10px;
+	border-bottom: 1px dotted #ccc;
+	margin-right: 40px;
+}
+/*账号显示*/
+.an_tc {
+	overflow: auto;
+	display: none;
+	right: 100px;
+	position: absolute;
+	width: 160px;
+	height: 320px;
+	background: #FFF;
+/* 	box-shadow: 0 0 5px #aaa; */
+	padding-left: 10px;
+	padding-right: 10px;
+	top: 115px;
+}
+
+.an_tc .tc_tj {
+	line-height: 30px;
+	height: auto;
+	margin-bottom:5px;
+	border-bottom:1px solid #d1d1d1
+}
+
+.tc_tj span {
+	display: inline-block;
+	float: left
+}
+
+.tc_tj a {
+	display: inline-block;
+	float: right;
+}
+/*20150717-update-@dong
+*美贝转账图标
+*/
+.clear-icon {
+    background-image: url("../../images/workimages/ico150717.png");
+    background-position: -166px -238px;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-repeat: no-repeat;
+    border-color: #94abc4 #94abc4 #94abc4 -moz-use-text-color;
+    border-image: none;
+    border-style: solid solid solid none;
+    border-width: 1px 1px 1px 0;
+    cursor: pointer;
+    display: inline-block;
+    height: 30px;
+    width: 32px;
+}
+/*弹窗圆角*/
+.arrow {
+	background-image: url("../../images/workimages/ico150717.png");
+
+}
+.je {
+    color: #fc8301;
+    margin-left: 0;
+}
+/*气泡圆角 */
+.arrow {
+    background-position: -184px -278px;
+    background-repeat: no-repeat;
+    height: 8px;
+    /* left: 470px; */
+    left:437px;
+    position: absolute;
+    top: 122px;
+    width: 14px;
+    z-index:99;
+}
+/*账户列表弹窗*/
+.an_tc {
+    background: #F8F8F8 none repeat scroll 0 0;
+    /* box-shadow: 0 0 5px #aaa; */
+    display: none;
+    height: 320px;
+    overflow: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: absolute;
+    top: 129px;
+    width: 160px;
+    height: 320px;
+    right: 317px;
+    width: 280px;
+    border:1px solid #94ABC4;
+}
+
+.clear-icon{
+border:1px solid #94ABC4;
+vertical-align: middle;
+margin: -8px 0 -8px -5px;
+}
+/*火狐兼容专项START*/
+:root .clear-icon{}
+
+/*火狐兼容性END*/
+#mbzz .Validform_wrong{margin-left:39px;}
+/* #mbzz>div{width:90%;border:1px solid #CCC} */
+
+.czll_a{text-decoration: underline;color:#136ec2;}
+.sl_111{width:207px;}  
+.an_tc>a{text-decoration:none;}
+.an_tc .tc_tj:hover{border-bottom:1px solid #136ec2; margin:0 -10px 5px -10px; padding:0 10px; background:#FFF;}
+/**/
+.czll_a{text-decoration:underline; color:#136ec2;}
+/*2015072201update@sunny*/
+input[type="text"]{border:1px solid #C1C1C1;}
+.clear-icon{margin:0 0 0 -5px;border:1px solid #c1c1c1;}
+@-moz-document url-prefix() {.clear-icon{margin:-2px 0 0 -5px;}}
+input[type="text"]:focus{border:1px solid #356391;}
+textarea[class="czll_msg"]{border:1px solid #c1c1c1;width:250px;}
+textarea[class="czll_msg"]:focus{border:1px solid #81A5E5;}
+.czll_a{text-decoration:none;border-radius:4px;padding:4px 8px;color:#FFF; background:#fdac1c;font-size:12px;}

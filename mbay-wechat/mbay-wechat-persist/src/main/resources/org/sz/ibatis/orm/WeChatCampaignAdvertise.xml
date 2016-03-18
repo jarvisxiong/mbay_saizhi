@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="WeChatCampaignAdvertise">
+	<resultMap type="weChatCampaignAdvertise" id="baseResultMap">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="picture" column="picture" />
+		<result property="name" column="name" />
+		<result property="status" column="status" />
+		<result property="createtime" column="createtime" />
+		<result property="username" column="username" />
+	</resultMap>
+	
+	<select id="findAllEventAdvertise" parameterType="String" resultMap="baseResultMap">
+		SELECT * FROM event_advertise 
+		<if test="value != null and value != ''">where username = #{value}</if>
+		order by createtime desc
+	</select>
+
+	<select id="countEventAdvertise" parameterType="String" resultType="Integer">
+		SELECT count(*) FROM event_advertise
+		<if test="value != null and value != ''">where username = #{value}</if>
+	</select>
+	
+	<select id="findEventAdvertiseById" parameterType="Integer" resultMap="baseResultMap">
+		SELECT * FROM event_advertise WHERE id = #{id, jdbcType=INTEGER}
+	</select>
+	
+	<insert id="createWeChatCampaignAdvertise" parameterType="weChatCampaignAdvertise">
+		<selectKey keyProperty="id" order="BEFORE" resultType="int">
+			SELECT IFNULL(MAX(id),0)+1 id FROM event_advertise
+		</selectKey>
+		INSERT INTO
+		event_advertise(id,picture,name,status,createtime,username)
+		VALUES(#{id},#{picture},#{name},#{status},#{createtime},#{username});
+	</insert>
+	
+	<update id="updateWeChatCampaignAdvertise" parameterType="weChatCampaignAdvertise">
+		UPDATE event_advertise
+		<trim prefix="set" prefixOverrides=",">
+			<if test="picture != null and picture != ''">picture=#{picture},</if>
+			<if test="name != null and name != ''">name=#{name},</if>
+			<if test="username != null and username != ''">username=#{username},</if>
+			<if test="status != null">status=#{status}</if>
+		</trim>
+		WHERE id=#{id}
+	</update>
+	
+	<delete id="deleteWeChatCampaignAdvertise" parameterType="long">
+		delete from event_advertise where id = #{value}
+	</delete>
+</mapper>

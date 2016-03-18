@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RemittanceRecord">
+	<resultMap type="remittanceRecord" id="baseResultMap">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="usernumber" column="usernumber" />
+		<result property="price" column="price" />
+		<result property="time" column="time" />
+		<result property="description" column="description" />
+		<result property="bank.id" column="bank" />
+		<result property="status" column="status" />
+	</resultMap>
+
+	<resultMap type="remittanceRecord" id="linkResultMap">  
+		<result property="status" column="status" />
+        <association property="bank.bankName" select="findAssetBankByBankId" column="bank" javaType="AssetBank"/>  
+    </resultMap>  
+
+	<sql id="remittanceRecordQueryWhere">
+	  <if test="usernumber!=null and usernumber !='' ">
+	    AND usernumber=#{usernumber}
+	  </if>
+	  <if test="status!=null">
+	    AND status=#{status}
+	  </if>
+	  <if test="starttime!=null and starttime!=''">
+	    AND  time>= #{starttime} 
+	  </if>
+	  <if test="endtime!=null and endtime!=''">
+	    <![CDATA[AND  time<= #{endtime} ]]>
+	  </if> 
+	</sql>
+
+	<select id="findAssetBankByBankId" parameterType="int" resultType="String">  
+        select bank_name from asset_bank where id = #{id}  
+    </select>  
+
+	<select id="findRemittanceRecordById" parameterType="Integer" resultMap="baseResultMap">
+		SELECT * FROM remittance_record WHERE id = #{id, jdbcType=INTEGER}
+	</select>
+
+	<select id="findAllRemittanceRecord" parameterType="Map" resultMap="linkResultMap">
+		SELECT * FROM remittance_record WHERE 1=1
+		<include refid="remittanceRecordQueryWhere"/>
+		order by time desc
+	</select>
+
+	<select id="countRemittanceRecord" parameterType="Map" resultType="Integer">
+		SELECT count(*) FROM remittance_record WHERE 1=1
+		<include refid="remittanceRecordQueryWhere"/>
+	</select>
+
+	<insert id="createRemittanceRecord" useGeneratedKeys="true" keyProperty="id"
+		parameterType="org.sz.mbay.channel.bean.RemittanceRecord">
+		insert into remittance_record (usernumber, price, time, description, bank, status)
+		values (#{usernumber, jdbcType=VARCHAR},#{price,jdbcType=VARCHAR},#{time,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{bank.id,jdbcType=INTEGER},#{status,jdbcType=INTEGER})
+	</insert>
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!-- 
+module：错误码所属模块。必须，当值为global时，为全局错误码；当未设置值时，默认值为global
+
+value：错误码值；必填
+
+desc：错误描述
+
+success：码对应的状态是否是成功的；默认值为false
+-->
+<error-codes>
+	<module>global</module>
+	<code>
+		<value>0</value>
+		<desc>成功</desc>	
+		<success>true</success>
+	</code>
+</error-codes>

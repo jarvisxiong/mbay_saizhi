@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.sz.mbay</groupId>
+		<artifactId>mbay_saizhi</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>mbay-promotion</artifactId>
+	<packaging>pom</packaging>
+	<name>mbay-promotion</name>
+	<description>mbay-promotion</description>
+	<modules>
+		<module>mbay-promotion-persist</module>
+		<module>mbay-promotion-service</module>
+    	<module>mbay-Promotion-dailyMonitor</module>
+  </modules>
+</project>

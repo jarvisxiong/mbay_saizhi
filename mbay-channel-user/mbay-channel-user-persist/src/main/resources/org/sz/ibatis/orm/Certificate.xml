@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Certificate">
+
+	<insert id="createCertificate" parameterType="certificate">
+		INSERT INTO
+		personal_certificate(userid,identityNo,true_name,frontimgurl,backimgurl,createtime,gender,address,email,telephone,province,city,area)
+		VALUES(#{userid},#{identityNo},#{true_name},#{frontimgurl},#{backimgurl},#{createtime},#{gender},#{address},#{email},#{telephone},#{province},#{city},#{area});
+	</insert>
+
+	<resultMap type="certificate" id="certificateInfo">
+		<result property="userid" column="userid" />
+		<result property="identityNo" column="identityNo" />
+		<result property="true_name" column="true_name" />
+		<result property="frontimgurl" column="frontimgurl" />
+		<result property="backimgurl" column="backimgurl" />
+		<result property="gender" column="gender"></result>
+		<result property="authinfo" column="authinfo" />
+		<result property="address" column="address"></result>
+		<result property="email" column="email"></result>
+		<result property="telephone" column="telephone"></result>
+		<result property="province" column="province"></result>
+	</resultMap>
+	<select id="findCertificate" parameterType="long" resultMap="certificateInfo">
+		SELECT userid, identityNo, true_name, frontimgurl, backimgurl, gender,
+		authinfo, address, email, telephone, province
+		FROM personal_certificate
+		WHERE userid=#{value}
+	</select>
+	<update id="deleteCertiticateByUid" parameterType="certificate">
+		delete from
+		personal_certificate where userid = #{value, jdbcType=INTEGER}
+	</update>
+	<select id="findCertificateByName" parameterType="String"
+		resultMap="certificateInfo">
+		SELECT userid, identityNo, true_name, frontimgurl,
+		backimgurl, gender,
+		authinfo, address, email, telephone, province
+		FROM
+		personal_certificate WHERE true_name=#{userName}
+	</select>
+	<select id="findPhoneOfChannel" parameterType="String"
+		resultType="String">
+		select contactsphone from channelinfo WHERE userid=(SELECT
+		user_info_id FROM zcc_user_info WHERE usernumber=#{value})
+	</select>
+	<select id="findPhoneOfPersonal" parameterType="String"
+		resultType="String">
+		select telephone from personal_certificate where
+		userid=(SELECT
+		user_info_id FROM zcc_user_info WHERE
+		usernumber=#{value})
+	</select>
+	<select id="findEmailOfChannel" parameterType="String"
+		resultType="String">
+		select contactsEmail from channelinfo WHERE userid=(SELECT
+		user_info_id FROM
+		zcc_user_info WHERE usernumber=#{value})
+	</select>
+	<select id="findEmailOfPersonal" parameterType="String"
+		resultType="String">
+		select email from personal_certificate where userid=(SELECT
+		user_info_id FROM
+		zcc_user_info WHERE usernumber=#{value})
+	</select>
+	<update id="updateCertificate" parameterType="authStateQO" statementType="CALLABLE"> 
+      {call proc_update_certificate(
+        #{userId, jdbcType=VARCHAR, mode=IN},
+        #{property, jdbcType=INTEGER, mode=IN},
+        #{authState, jdbcType=INTEGER, mode=IN},
+        #{authInfo, jdbcType=VARCHAR, mode=IN},
+        #{rowc, jdbcType=INTEGER, mode=OUT}
+      )} 
+    </update>
+</mapper>

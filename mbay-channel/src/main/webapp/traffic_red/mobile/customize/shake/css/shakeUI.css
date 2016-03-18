@@ -1,0 +1,60 @@
+/*标题:
+**描述:摇一摇
+**类型:局部
+**版本:v=1.0
+* 版权:MB·Aik
+***用途:摇一摇
+*/
+@charset "UTF-8";
+*{margin:0; padding:0;}
+body{max-width:640px; margin:0 auto; font-family: "微软雅黑";}
+html,body,.shake_import_bg{height:100%;}
+*{margin:0; padding:0;}
+/*摇一摇输入手机号页面-start*/
+/*背景
+/*摇一摇可替换背景层-start*/
+.shake_bg{background-size:100% 100%;height:100%;}
+/*倒计时*/
+#time{text-align: center; position: relative;top:5%;}
+#time{height:1.2rem;width:80%; margin: 0 auto;color:red; line-height: 1.2rem;font-weight: bold;font-size:1.8rem;
+	  font-family:"经典圆体繁", "microsoft yahei", "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+	  text-shadow: 0 8px 9px #c4b59d, 0px -2px 1px #fff;
+}
+.mess{text-align: center; position: relative;top:60%; font-size:1.2rem;height:1.2rem; line-height: 1.2rem;width: 80%; 
+	margin: 0 auto;text-shadow: 0 8px 9px #c4b59d, 0px -2px 1px #fff;}
+/*摇动*/
+.jiggle{text-align: center; position: absolute; bottom: .04rem; text-align:center; margin: 0 auto;width: 100%;}
+.jiggle>img{}
+.shake_img{display:inline-block;-webkit-transform-origin: 0% 100%;}
+.shake_img{-webkit-animation:yaoyiyao 0.2s linear infinite alternate;}
+
+/**/
+#time{text-align: center; position: relative;top:40%; font-size:4rem;height:1.2rem; line-height: 1.2rem;width: 80%;display:none;}
+
+.mess{display:none;}
+.mess>span{display: inline-block;padding:.12rem;}
+.mess1{}
+/**/
+* {
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
+.access-burse {
+	text-align: center;
+	padding: .04rem 0 .2rem 0;
+}
+.access-burse > a {
+	width: 4rem;
+	height: 1.6rem;
+	display: inline-block;
+	background-color: #FDD514;
+	border-radius: .16rem;
+	line-height: 1.6rem;
+	box-shadow: 1px 1px  2px 1px #666;
+	color: #E3641A !important;
+	font-weight: 700;
+	margin: 0 .16rem;
+}
+.tip-text {
+	padding: 0 .3rem .3rem;
+}

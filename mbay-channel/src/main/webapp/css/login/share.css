@@ -1,0 +1,82 @@
+@charset "utf-8";
+
+/* public */
+body,h1,h2,h3,h4,dl,dt,dd,ul,ol,li,a,div,em,span,img,form,input,p,i {
+	padding: 0;
+	margin: 0;
+	border: none;
+}
+
+body {
+	color: #333333;
+	font-weight: 400;
+	text-rendering: optimizelegibility;
+	font-family: Helvetica, "Microsoft YaHei UI", "Microsoft YaHei",
+		"WenQuanYi Micro Hei", sans-serif;
+	font-size: 14px;
+}
+
+em,i {
+	word-wrap: break-word;
+	font-style: normal;
+}
+
+a {
+	color: #333333;
+	text-decoration: none;
+}
+
+a:link,a:visited,a:active {
+	color: #3F3F3F;
+	text-decoration: none;
+}
+
+a,button,span,i,div,h2,aside {
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+input,button,textarea,select {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+input:focus::-webkit-input-placeholder {
+	color: #D8D8D8;
+}
+
+input::-webkit-input-placeholder {
+	color: #D8D8D8;
+}
+
+ul,li {
+	list-style: none;
+}
+
+article,aside,details,figcaption,figure,footer,header,menu,nav,section {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+img {
+	border: none;
+	max-width: 100%;
+	vertical-align: middle;
+}
+
+html,body {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	background: #FFF;
+}
+
+.clearfix:after {
+	content: "";
+	display: block;
+	height: 0;
+	overflow: hidden;
+	clear: both;
+	visibility: hidden;
+}

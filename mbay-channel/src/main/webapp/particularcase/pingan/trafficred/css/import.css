@@ -1,0 +1,63 @@
+/*标题:
+**描述:输入手机号
+**类型:局部
+**版本:v=1.0
+* 版权:MB·Aik
+***用途:平安好房-输入手机号 
+*/
+@charset "UTF-8";
+*{margin:0; padding:0;}
+body{max-width:640px; margin:0 auto; font-family: "宋体"; font-size: 12px;}
+html,body,.import_bg{height:100%;}
+*{margin:0; padding:0;}
+
+/*手机号背景层-start(640 X 1366px)*/
+.import_bg{background:url(../img/bg.jpg)center no-repeat;background-size:100% 100%;height:100%;}
+.bg_logo{text-align: center; position: relative;top:5%;}
+.bg_logo>img{width:35%;}
+/*文字说明*/
+.text1{text-align: center;color:#F25822; position: relative; top:8%;}
+.txt1{font-size: 14px;font-weight: bold;line-height:35px;}
+.imgtxt{position:relative;top:5px;}
+.imgtxt>img{width:80%;}
+/*输入*/
+.import_form{position: relative; top:10%;text-align: center;}
+input[type='tel'],
+input[type='button']{border:none; width:80%;height: 2.5rem;border-radius:.1rem; text-align: center;}
+p[class='message']{width:80%;text-align: left; margin: 0 auto; color: #FFF;font-size: .5rem;height:1rem; line-height: 1rem;}
+input[class='next_step']{background: #FF6700;color: #FFF;font-size: .8rem;box-shadow:0 0 2rem rgba(255,234,112,0.9);}
+@media only screen and (min-width: 320px) and (max-width: 320px) {
+input[type='tel'],
+input[type='button']{border:none; width:80%;height:1.8rem;border-radius:.1rem; text-align: center;}	
+}
+/*下部分文字*/
+.txt2{font-size: 13px;font-weight: bold; line-height:25px;}
+.text2{width:80%; margin:0 auto; position: relative;top:15%;}
+.text2{padding-left:11px; text-indent:-12px; font-weight: bold;color: #FFF;}
+.txt_tit{font-size:16px;}
+@media only screen and (min-width: 320px) and (max-width: 360px) {
+	.bg_logo{top:3%;}
+	.bg_logo>img{width:35%;}
+	.text1{top:4%;}
+	.text1>p {line-height:30px;}
+	.import_form{top: 7%;}
+	.text2{top:10%;}
+	.txt2{font-size:10px;font-weight:normal;line-height:19px;}
+	.txt_tit{font-size:10px;}
+}
+@media only screen and (min-width:500px) and (max-width:1400px) {
+	.bg_logo>img{width:25%;}
+}
+@media only screen and (min-width:213px) and (max-width:300px) {
+	.bg_logo{top:2%;}
+	.bg_logo>img{width:20%;}
+	.txt1{font-size:12px; line-height: 19px;top: 1%;}
+	.import_form{top: 0;}
+	p[class='message']{height: 0;}
+	input[type='tel'], input[type='button']{height:1.5rem;}
+	.text1{top:1%;}
+	.txt2,
+	.txt_tit{font-size:10px;font-weight:normal;}
+	.txt2{line-height:15px;}
+	.text2{top:0;}
+}

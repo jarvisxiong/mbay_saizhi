@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MbayAccount">
+
+	<resultMap type="mbayAccount" id="Base_Result_Map">
+        <result property="telephone" column="telephone" />
+        <result property="balance" column="balance" />
+    </resultMap>
+    
+    <sql id="base_column_list">
+    	telephone, balance
+    </sql>
+
+	<insert id="insert" parameterType="mbayAccount">
+	    INSERT INTO wl_mbay_account (<include refid="base_column_list" />)
+	    VALUES (#{telephone}, #{balance})
+	</insert>
+	
+	<select id="findByTelephone" parameterType="java.lang.String" resultMap="Base_Result_Map">
+	    SELECT <include refid="base_column_list" /> 
+	    FROM wl_mbay_account 
+	    WHERE telephone = #{value}
+	</select>
+	
+	<select id="getBalanceByTelephone" parameterType="java.lang.String" resultType="java.lang.Double">
+	    SELECT balance FROM wl_mbay_account WHERE telephone = #{value}
+	</select>
+	
+	<update id="addBalance" parameterType="java.util.Map">
+	    UPDATE wl_mbay_account SET balance = balance + #{balance} WHERE telephone = #{telephone}
+	</update>
+	
+	<update id="reduceBalance" parameterType="java.util.Map">
+	    UPDATE wl_mbay_account SET balance = balance - #{balance} 
+	    WHERE telephone = #{telephone} AND balance - #{balance} >= 0
+	</update>
+	
+</mapper>

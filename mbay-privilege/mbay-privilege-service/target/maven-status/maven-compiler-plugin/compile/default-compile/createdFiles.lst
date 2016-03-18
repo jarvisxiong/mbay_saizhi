@@ -1,0 +1,11 @@
+org/sz/mbay/privilege/service/impl/BuserRoleServiceImpl.class
+org/sz/mbay/privilege/service/impl/RoleServiceImpl.class
+org/sz/mbay/privilege/service/PrivilegeService.class
+org/sz/mbay/privilege/service/RolePrivilegeService.class
+org/sz/mbay/privilege/service/RoleService.class
+org/sz/mbay/privilege/service/BuserService.class
+org/sz/mbay/privilege/service/BuserRoleService.class
+org/sz/mbay/privilege/service/impl/BuserServiceImpl.class
+org/sz/mbay/privilege/service/impl/PrivilegeServiceImpl.class
+org/sz/mbay/privilege/service/impl/RolePrivilegeServiceImpl.class
+org/sz/mbay/privilege/common/MbayPrivilege.class

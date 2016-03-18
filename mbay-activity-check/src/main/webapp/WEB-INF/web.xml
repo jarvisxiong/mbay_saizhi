@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>mbay 定时任务</display-name>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/config/spring/applicationContext-resources.xml,/WEB-INF/config/spring/mbay-activity-schedule.xml,classpath:applicationContext-dao.xml,classpath:applicationContext-service.xml
+		</param-value>
+		<!-- ,classpath:applicationContext-ehcache.xml --><!-- ,classpath:net/bull/javamelody/monitoring-spring.xml --><!--和spring集成时添加 -->
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<welcome-file-list>
+		<welcome-file>/index.html</welcome-file>
+	</welcome-file-list>
+</web-app>

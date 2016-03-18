@@ -1,0 +1,14 @@
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-wechat/mbay-wechat-persist/src/main/java/org/sz/mbay/wechat/dao/WeChatCampaignDao.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-wechat/mbay-wechat-persist/src/main/java/org/sz/mbay/wechat/dao/impl/WeChatCampaignDaoImpl.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-wechat/mbay-wechat-persist/src/main/java/org/sz/mbay/wechat/dao/impl/WeChatCampaignAdvertiseDaoImpl.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-wechat/mbay-wechat-persist/src/main/java/org/sz/mbay/wechat/bean/WeChatCampaign.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-wechat/mbay-wechat-persist/src/main/java/org/sz/mbay/wechat/dao/WeChatCampaignDefaultTemplateDao.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-wechat/mbay-wechat-persist/src/main/java/org/sz/mbay/wechat/bean/WeChatCampaignStrategy.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-wechat/mbay-wechat-persist/src/main/java/org/sz/mbay/wechat/dao/WeChatCampaignAdvertiseDao.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-wechat/mbay-wechat-persist/src/main/java/org/sz/mbay/wechat/bean/WeChatCampaignAdvertise.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-wechat/mbay-wechat-persist/src/main/java/org/sz/mbay/wechat/bean/WeChatCampaignStatistics.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-wechat/mbay-wechat-persist/src/main/java/org/sz/mbay/wechat/bean/WeChatCampaignAdvanced.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-wechat/mbay-wechat-persist/src/main/java/org/sz/mbay/wechat/bean/WeChatCampaignDefaultTemplate.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-wechat/mbay-wechat-persist/src/main/java/org/sz/mbay/wechat/dao/impl/WeChatCampaignDefaultTemplateDaoImpl.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-wechat/mbay-wechat-persist/src/main/java/org/sz/mbay/wechat/bean/WeChatCampaignTemplate.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-wechat/mbay-wechat-persist/src/main/java/org/sz/mbay/wechat/qo/WeChatCampaignForm.java

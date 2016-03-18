@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PromotionCampaignAdvanced">
+	<resultMap type="promotionCampaignAdvanced" id="promotionCampaignAdvancedInfoMap">
+		<result property="id" column="id" />
+		<result property="campaignNumber" column="campaign_number" />
+		<result property="status" column="status" />
+		<result property="token" column="token" />
+	</resultMap>
+	
+	<select id="findPromotionCampaignAdvanced" parameterType="int" resultMap="promotionCampaignAdvancedInfoMap">
+		SELECT id,campaign_number,status,token
+		FROM  promotion_campaign_advanced
+		WHERE id=#{value}
+	</select>
+	
+
+	<!-- 查询活动模板信息 -->
+	<select id="findPromotionCampaignAdvancedByCampaignNumber" parameterType="String"
+		resultMap="promotionCampaignAdvancedInfoMap">
+		SELECT id,campaign_number,status,token
+		FROM  promotion_campaign_advanced
+		WHERE campaign_number=#{value}
+	</select>
+	
+	<insert id="createPromotionCampaignAdvanced" parameterType="promotionCampaignAdvanced">
+		INSERT INTO promotion_campaign_advanced (id,campaign_number,status,token)
+		VALUES
+		(#{id},#{campaignNumber},#{status},#{token});
+	</insert>
+
+	<update id="updatePromotionCampaignAdvanced" parameterType="Map">
+	  UPDATE promotion_campaign_advanced SET token=#{token}
+	  WHERE id=#{id}
+	</update>
+</mapper>

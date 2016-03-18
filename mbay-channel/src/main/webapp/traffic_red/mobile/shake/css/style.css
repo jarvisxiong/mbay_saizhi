@@ -1,0 +1,512 @@
+/* shake_1 */
+body {
+	max-width: 640px;
+	position: relative;
+	margin: 0 auto;
+}
+/*背景层全局*/
+.content {
+	background-size: cover;
+}
+/*红包层全局*/
+.red-packet {
+	position: absolute;
+	left: 50%;
+	top: 58px;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	width: 80%;
+	height: 280px;
+}
+/*红包输入信息全局*/
+.packet-from {
+	height: 170px;
+	position: relative;
+	margin-top: 140px;
+	width: 260px;
+	margin: 0 auto;
+	margin-top: 120px;
+}
+
+.packet-from>input {
+	height: 40px;
+	background: #FFF;
+	border-radius: 5px;
+	overflow: hidden;
+	border: none;
+	padding: 8px !important;
+	width: 92%;
+	margin-left: 8px;
+}
+
+.packet-from>.button {
+	border: none;
+	height: 40px;
+	font-size: 18px;
+	color: #FFF;
+	background: #FF312F;
+	border-radius: 3px;
+	border: none;
+	border: 1px solid #FDD72F;
+}
+/*.packet-from2{height:170px; position:absolute;width:260px; margin:333px 195px 0;}
+.packet-from2>input{height:40px;background:#FFF;border-radius:5px;overflow: hidden;border:none; text-indent:10px;width:92%; margin-left:8px;}
+.packet-from2>.button{border:none;height:40px;font-size:18px;color:#FFF;background: #FF312F;border-radius:3px;border:none;border:1px solid #FFF;}*/
+/*有惊喜全局*/
+.jinxi {
+	width: 27%;
+	height: 57px;
+	float: left;
+	left: 0;
+	position: absolute;
+	background: url(../image/share/share.png) 50% 50% no-repeat;
+	background-size: contain;
+}
+/*手机适配全局*/
+@media screen and (max-width : 414px) {
+	.shake-jinxi {
+		margin: 0px 22px;
+	}
+}
+
+@media screen and (max-height : 480px) {
+}
+
+@media screen and (max-width : 375px) {
+	.shake-import>.shake-packet {
+		top: 100px;
+	}
+	.shake-jinxi {
+		margin: 0px 0px;
+	}
+}
+
+@media screen and (max-width : 320px) {
+	.shake-import>.shake-packet {
+		top: 50px;
+	}
+	.shake-jinxi {
+		margin: 0px -10px;
+	}
+}
+
+/*输入手机号*/
+.shake-import {
+	background: url(../image/packet-bg.png) 50% 50% no-repeat;
+	position: relative;
+}
+
+.shake-import>.shake-packet {
+	background: url(../image/shake_bg2.png) 50% 50% no-repeat;
+	background-size: contain;
+	position: fixed;
+	_position: absolute;
+}
+/*.shake-packet2{}
+/*消息提示*/
+.tishi {
+	display: block;
+	margin-left: 10px;
+	color: #FFF;
+	font-size: 12px;
+	height: 25px;
+	line-height: 25px;
+}
+/*错误提示*/
+.up-hint {
+	
+}
+
+.down-hint {
+	
+}
+/*有惊喜*/
+/*摇一摇page*/
+.shake-shake {
+	/* background: url(../image/yao_lie_2.png) center no-repeat; */
+	position: relative
+}
+
+.shake-shake-bottom {
+	position: absolute;
+}
+
+.shake-shake-bottom>div {
+	position: relative;
+	overflow: hidden;
+	max-width: 640px;
+	height: 504px;
+	z-index: 0;
+}
+
+/**/
+#headads {
+	background: url(../image/yao_up.png) center no-repeat;
+	background-size: cover;
+}
+
+#headads2 {
+	/* background: url(../image/original/yao_down_2.png) center no-repeat; */
+	background-size: cover;
+}
+/*-----摇一摇次数用光弹窗-----*/
+.popup {
+	width: 260px;
+	height: 70px;
+	position: absolute;
+	z-index: 9999;
+	margin: -565px 198px;
+	border-radius: 4px;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.popup>p {
+	color: #FFF;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: left;
+	width: 174px;
+	margin: 0px auto;
+	line-height: 20px;
+}
+
+.popup>.popup-text {
+	margin-top: 15px;
+}
+/*-----用户二次摇奖出现欢迎回来*/
+.welcome {
+	position: absolute;
+	z-index: 8;
+	height: 20px;
+	margin-top: 100px;
+	margin-left: 250px;
+	color: #FFF;
+	font-weight: bold;
+}
+
+.welcome>label {
+	margin-left: 5px;
+}
+/*恭喜你获得红包*/
+.shake-gain {
+	background: url(../image/packet-bg.png) center no-repeat;
+}
+
+.shake-gain-packet {
+	background: url(../image/packet.png) center no-repeat;
+	background-size: contain;
+}
+
+.packet-num {
+	width: 90px;
+	height: 22px;
+	margin: 150px 285px;
+}
+
+.shake-gain-packet>ul>li {
+	float: left;
+	list-style: none;
+	width: 18%;
+	height: 22px;
+}
+
+.shake-gain-packet>ul>li>img {
+	width: 16px;
+	height: 20px;
+}
+
+.shake-gain-packet>ul>.unit {
+	width: 34%;
+	height: 22px;
+}
+
+.shake-gain-packet>ul>.unit>img {
+	width: 100%;
+	margin-left: 2px;
+}
+/*@media screen and (max-width : 960px){.packet-num{margin:130px 140px;}}*/
+.shake-packet-btn {
+	background-size: contain;
+	position: absolute;
+	left: 50%;
+	top: 285px;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	width: 51%;
+}
+/*获得红包信息提示*/
+.message {
+	position: relative;
+	margin: -106px auto 0;
+	width: 240px;
+	display: none;
+}
+
+.packet-transpond {
+	color: #FFF;
+	font-weight: bold;
+	font-size: 13px;
+	text-align: center;
+}
+
+.packet-state {
+	font-size: 8px;
+	margin: 10px auto 0;
+}
+
+.packet-state>.state {
+	display: block;
+	text-align: center;
+	font-size: 8px;
+}
+
+/*在来一次*/
+.again {
+	margin: -113px auto 0;
+	width: 240px;
+	height: 58px;
+	position: relative;
+}
+
+.again>a {
+	background: url(../image/wabao.png) center no-repeat;
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+	background-size: contain;
+}
+/*兑换红包*/
+.convent-packet {
+	background: url(../image/yao_flow.png) center no-repeat;
+	background-size: contain;
+}
+
+.shake-flow-number {
+	width: 156px;
+	height: 33px;
+	margin: 130px 170px;
+}
+
+.shake-flow-number>ul {
+	margin: 0 0;
+}
+
+.shake-flow-number>ul>li {
+	float: left;
+	list-style: none;
+	width: 16%;
+	height: 33px;
+}
+
+.shake-flow-number>ul>li>img {
+	height: 26px;
+	margin-left: 2px;
+}
+
+.shake-flow-number>ul>.unit {
+	width: 50px;
+}
+
+.shake-flow-number>ul>.unit>img {
+	width: 50px;
+	height: 26px;
+}
+
+.shake-flow-btn {
+	background-size: contain;
+	position: absolute;
+	left: 50%;
+	top: 280px;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	width: 100%;
+}
+
+.shake-flow-btn>a {
+	display: block;
+	background: url(../image/flow-btn.png) 50% 50% no-repeat;
+	background-size: contain;
+	width: 100%;
+	height: 50px;
+}
+
+.convent-jinxi {
+	margin: 40px 87px 0;
+}
+/*更多优惠更多惊喜*/
+.shake-packet-ok-bg {
+	/*background:url(../img/ok-bg.png) 50% 50% no-repeat; background-size:cover;*/
+	background: #951115;
+}
+
+.shake-packet-ok-bg>.shake-flow-ok {
+	background: url(../image/ok.png) 50% 50% no-repeat;
+	background-size: contain;
+	position: absolute;
+	left: 50%;
+	top: 30px;
+	width: 99%;
+	height: 242px;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+}
+
+.flow-ok {
+	width: 30%;
+	height: 45px;
+	margin: 69px 255px;
+}
+
+.flow-ok>ul {
+	margin: 0 0;
+}
+
+.flow-ok>ul>li {
+	float: left;
+	list-style: none;
+}
+
+.flow-ok>ul>li>img {
+	width: 19px;
+	height: 26px;
+}
+
+.flow-ok>ul>.unit>img {
+	width: 34px;
+	height: 23px;
+	margin-top: 6px;
+}
+
+.flow-ok>ul>.num1>img {
+	margin-top: 8px;
+}
+
+.flow-ok>ul>.num2>img {
+	margin-top: 6px;
+}
+
+.flow-ok>ul>.num3>img {
+	margin-top: 4px;
+}
+
+.flow-ok>ul>.num4>img {
+	margin-top: 2px;
+}
+
+.folw-text {
+	width: 80%;
+	height: 110px;
+	position: absolute;
+	left: 50%;
+	top: 275px;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	color: #FFD930;
+	font-size: 12px;
+}
+
+.folw-text>p {
+	line-height: 18px;
+}
+
+.flow-surprised {
+	position: absolute;
+	left: 50%;
+	top: 450px;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	width: 95%;
+	height: 200px;
+}
+
+.flow-surprised-header {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	width: 100%;
+	height: 50px;
+}
+
+.flow-surprised-btn {
+	background: url(../image/jingxi.png) 50% 50% no-repeat;
+	background-size: contain;
+	position: absolute;
+	left: 8%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	width: 50%;
+	height: 60px;
+	display: block;
+}
+
+.flow-surprised-title {
+	background: url(../image/move-jinxi.png) 50% 50% no-repeat;
+	background-size: contain;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	width: 45%;
+	height: 60px;
+	display: block;
+	top: -5px;
+}
+
+.flow-surprised-solid {
+	position: absolute;
+	top: 50px;
+}
+
+.flow-surprised-img {
+	position: absolute;
+	top: 80px;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	width: 100%;
+	left: 50%;
+}
+
+.flow-surprised-img2>img {
+	float: right;
+}
+
+.flow-surprised-img>span {
+	display: block;
+	float: left;
+	width: 50%;
+}
+/*活动结束*/
+.shake-packet-over {
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	color: #FFF;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 120px;
+}
+
+.shake-packet-btn>a {
+	display: block;
+	width: 50%;
+	height: 60px;
+	border-radius: 4px;
+}
+
+.shake-packet-btn-cun {
+	float: left;
+	background: url(../image/yao_save.png) 50% 50% no-repeat;
+	background-size: 99%;
+}
+
+.shake-packet-btn-wabao {
+	float: right;
+	background: url(../image/yao_wabao.png) 50% 50% no-repeat;
+	background-size: 99%;
+}
+
+.packet-jingxi {
+	margin: 73px 83px;
+}

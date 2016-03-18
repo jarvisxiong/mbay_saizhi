@@ -1,0 +1,215 @@
+@charset "utf-8";
+/*右侧内容*/
+.tip_setting {
+	width: 828px;
+	border: 1px solid #BFBFBF;
+	border-radius: 4px;
+	font-family: 'Microsoft YaHei';
+	font-size: 15px;
+}
+
+.tip_setting_con {
+	padding-top: 50px;
+	padding-bottom: 30px;
+}
+
+.tit_mb {
+	width: 200px;
+	display: inline-block;
+	text-align: right;
+	margin-right: 10px;
+}
+
+.sl_mb {
+	color: #FC8301;
+	margin-left: 10px
+}
+
+.sl_1 {
+	font-size: 20px;
+	border: 1px solid #94ABC4;
+	width: 300px;
+	height: 24px;
+	padding: 5px;
+}
+
+.form_block {
+	margin-bottom: 20px
+}
+
+.an {
+	margin-top: 60px
+}
+
+.an_btn {
+	width: 150px;
+	height: 35px;
+	line-height: 35px;
+	letter-spacing: 1px;
+	border-radius: 4px;
+	color: #FFF;
+	font-family: 'Microsoft YaHei';
+	background: #FDAC1C;
+	margin-left: 165px;
+	cursor: pointer
+}
+/*提示*/
+.tip_i {
+	display: inline-block;
+	border: 1px solid #ddd;
+	background: #F5F5F5;
+	padding: 4px 0px 0px;
+	-webkit-border-radius: 130px;
+	-moz-border-radius: 130px;
+	border-radius: 130px;
+	cursor: pointer;
+	font-size: 12px;
+	font-style: normal;
+	height: 16px;
+	width: 20px;
+	text-align: center;
+	color: #888;
+	margin-left: 5px;
+	margin-top: 6px;
+	position: relative;
+	line-height: 16px;
+	vertical-align: sub;
+}
+
+.mb_tip {
+	position: absolute;
+	bottom: 25px;
+	right: -140px;
+	border: 1px solid #dbdbdb;
+	padding: 5px;
+	background: #f2f3f5;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	cursor: default;
+	font-style: normal;
+	color: #666;
+	font-size: 12px;
+	font-weight: normal;
+	z-index: 999;
+	width: 300px;
+	text-align: left;
+}
+
+.mb_tip em {
+	height: 20px;
+	width: 20px;
+	position: absolute;
+	right: 220px;
+	padding: 0px;
+	background: url(../images/icon-item.png) no-repeat -30px -463px;
+	bottom: -20px;
+}
+
+.mbtx,.mbtx a {
+	cursor: pointer;
+	color: #FDAC1C;
+	position: relative
+}
+
+.mbtx a {
+	color: #ccc
+}
+
+.tip_i:hover {
+	background: #eee;
+	border: 1px solid #ccc;
+}
+
+.tip_i div.tooltip {
+	float: none;
+	position: absolute;
+	top: -38px;
+	right: -120px;
+	text-align: right;
+	white-space: nowrap;
+	border: 1px solid #dbdbdb;
+	padding: 5px;
+	background: #f2f3f5;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	cursor: default;
+	font-style: normal;
+	color: #666;
+	font-size: 12px;
+	font-weight: normal;
+	z-index: 999;
+}
+
+.tip_i div.tooltip em {
+	height: 20px;
+	width: 20px;
+	position: absolute;
+	right: 120px;
+	bottom: -20px;
+	padding: 0px;
+	background: url(../images/icon-item.png) no-repeat -30px -463px;
+}
+
+/*启用开关*/
+.slider-box {
+	background: #629FCE;
+	width: 100px;
+	height: 30px;
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	margin-bottom: 0px;
+	cursor: pointer;
+	margin: 5px 0px
+}
+
+.slider-box .slider {
+	cursor: pointer;
+	background: #F6F6F6;
+	width: 50px;
+	height: 30px;
+	position: absolute;
+	transition: left 0.5s;
+	-moz-transition: left 0.5s;
+	-webkit-transition: left 0.5s;
+	left: 0
+}
+
+.slider-box.on .slider {
+	left: 50px;
+}
+
+.slider-box.off .slider {
+	left: 0px;
+}
+
+.slider-box.on {
+	background: #629FCE;
+}
+
+.slider-box.off {
+	background: #E0E0E0;
+}
+
+.slider-box span {
+	height: 30px;
+	line-height: 30px;
+	color: #F6F6F6;
+	font-weight: 800;
+}
+
+.slider-box .m {
+	float: left;
+	margin-left: 25px
+}
+
+.slider-box .w {
+	float: right;
+	margin-right: 25px
+}
+
+.slider-box input {
+	display: none;
+}

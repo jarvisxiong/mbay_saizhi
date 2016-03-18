@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PromotionCampaign">
+
+	<resultMap type="promotionCampaign" id="promotionCampaignListMap">
+		<result property="eventnumber" column="eventnumber" />
+		<result property="eventname" column="eventname" />
+		<result property="createtime" column="createtime" />
+		<result property="starttime" column="starttime" />
+		<result property="endingtime" column="endingtime" />
+		<result property="validityday" column="validityday" />
+		<result property="sendednum" column="sendednum" />
+		<result property="gotnum" column="gotnum" />
+		<result property="state" column="state" />
+		<result property="sendsms" column="send_sms" />
+		<result property="verificate" column="verificate" />
+		<result property="continuable" column="continuable" />
+		<result property="trafficRate" column="trafficRate" />
+		<result property="share" column="share" />
+		<result property="model" column="model" />
+		<result property="sendMB" column="sendMB" />
+	</resultMap>
+
+	<sql id="promotionCampaignListQueryWhere">
+		<if test="usernumber!=null and usernumber!=''">
+			AND usernumber=#{usernumber}
+		</if>
+		<if test="eventnumber!=null and eventnumber!=''">
+			AND eventnumber=#{eventnumber}
+		</if>
+		<if test="eventstate!=null">
+			AND state=#{eventstate}
+		</if>
+		<if test="starttime!=null and starttime!=''">
+			AND createtime>= #{starttime}
+		</if>
+		<if test="endtime!=null and endtime!=''">
+	   <![CDATA[AND  createtime<= #{endtime} ]]>
+		</if>
+	</sql>
+
+	<select id="findAllPromotionCampaign" parameterType="campaignForm"
+		resultMap="promotionCampaignListMap">
+		SELECT eventnumber,eventname,createtime,starttime,
+		endingtime,validityday,sendednum,gotnum,state,send_sms
+		FROM promotion_campaign
+		WHERE 1=1
+		<include refid="promotionCampaignListQueryWhere" />
+		ORDER BY createtime DESC
+	</select>
+
+	<select id="countPromotionCampaign" parameterType="campaignForm"
+		resultType="int">
+		SELECT COUNT(*) FROM promotion_campaign WHERE 1=1
+		<include refid="promotionCampaignListQueryWhere" />
+	</select>
+
+	<!-- 根据活动号查看活动详情 -->
+	<select id="findPromotionCampaign" parameterType="String"
+		resultMap="promotionCampaignListMap">
+		SELECT eventnumber,eventname,createtime,starttime,
+		endingtime,validityday,sendednum,gotnum,state,
+		continuable,verificate,trafficRate,share,model,sendMB
+		FROM promotion_campaign
+		WHERE
+		eventnumber=#{eventnumber} and usernumber=#{usernumber}
+	</select>
+
+	<resultMap type="promotionCampaign" id="campaignBaseInfo">
+		<result property="eventnumber" column="eventnumber" />
+		<result property="eventname" column="eventname" />
+		<result property="usernumber" column="usernumber" />
+		<result property="createtime" column="createtime" />
+		<result property="starttime" column="starttime" />
+		<result property="endingtime" column="endingtime" />
+		<result property="validityday" column="validityday" />
+		<result property="state" column="state" />
+		<result property="sendednum" column="sendednum" />
+		<result property="gotnum" column="gotnum" />
+		<result property="sendsms" column="send_sms" />
+		<result property="campaignLimitValue" column="campaign_limit_value" />
+		<result property="campaignLimitType" column="campaign_limit_type" />
+		<result property="mobileLimitValue" column="mobile_limit_value" />
+		<result property="mobileLimitType" column="mobile_limit_type" />
+		<result property="trafficRate" column="trafficRate" />
+		<result property="continuable" column="continuable" />
+		<result property="verificate" column="verificate" />
+		<result property="mall.id" column="mallId" />
+		<result property="share" column="share" />
+		<result property="model" column="model" />
+		<result property="sendMB" column="sendMB" />
+	</resultMap>
+
+	<!-- 根据活动编号和用户编号查询活动基本信息，以用于生成兑换码 -->
+	<select id="findPromotionCampaignBaseInfo" parameterType="String"
+		resultMap="campaignBaseInfo">
+		SELECT
+		e.eventnumber,e.eventname,e.usernumber,e.createtime,e.starttime,
+		e.endingtime,e.validityday,e.state,e.sendednum,e.gotnum,e.send_sms,
+		e.campaign_limit_value,e.campaign_limit_type,e.mobile_limit_value,e.mobile_limit_type,
+		e.trafficRate,e.continuable,e.verificate,e.mallId,e.share,e.model,e.sendMB
+		FROM promotion_campaign e
+		WHERE e.eventnumber=#{eventnumber}
+	</select>
+
+	<resultMap type="promotionCampaign" id="promotionCampaignSendInfoMap">
+		<result property="usernumber" column="usernumber" />
+		<result property="eventname" column="eventname" />
+		<result property="starttime" column="starttime" />
+		<result property="endingtime" column="endingtime" />
+		<result property="sendednum" column="sendednum" />
+		<result property="gotnum" column="gotnum" />
+		<result property="state" column="state" />
+		<result property="continuable" column="continuable" />
+		<result property="sendsms" column="send_sms" />
+	</resultMap>
+
+	<!--根据活动编号查询活动赠送信息 -->
+	<select id="findPromotionCampaignSendInfo" parameterType="String"
+		resultMap="promotionCampaignSendInfoMap">
+		SELECT e.usernumber,e.eventname,e.starttime,
+		e.endingtime,e.sendednum,e.gotnum,e.state,e.continuable,e.send_sms
+		FROM promotion_campaign e
+		WHERE e.eventnumber=#{value}
+	</select>
+
+	<!-- 活动状态Map -->
+	<resultMap type="promotionCampaign" id="promotionCampaignStateMap">
+		<result property="state" column="state" />
+	</resultMap>
+
+	<!-- 根据活动标号获取活动状态 -->
+	<select id="getPromotionCampaignState" parameterType="Map"
+		resultMap="promotionCampaignStateMap">
+		SELECT e.state FROM promotion_campaign e
+		WHERE
+		e.eventnumber=#{eventnumber}
+		AND usernumber=#{usernumber}
+	</select>
+
+	<!-- 查询活动开始时间，以便在创建活动后修改活动状态 -->
+	<select id="selectPromotionCampaignStartTime" parameterType="String"
+		resultType="java.sql.Timestamp">
+		SELECT starttime FROM promotion_campaign
+		WHERE eventnumber=#{value}
+	</select>
+
+	<!-- 查询活动步骤 -->
+	<select id="findPromotionCampaignStep" parameterType="Map"
+		resultType="int">
+		SELECT step FROM promotion_campaign
+		WHERE eventnumber=#{eventnumber}
+		AND usernumber=#{usernumber}
+	</select>
+
+	<!-- 查询活动已送出数量 -->
+	<select id="findPromotionCampaignSendedQuantity" parameterType="String"
+		resultType="int">
+		SELECT sendednum FROM promotion_campaign
+		WHERE eventnumber=#{value}
+	</select>
+	
+	<!-- 查询活动已发放数量 -->
+	<select id="findPromotionCampaignGotQuantity" parameterType="String"
+		resultType="int">
+		SELECT gotnum FROM promotion_campaign
+		WHERE eventnumber=#{value}
+	</select>
+
+	<select id="getCountOfPromotionCampaign" parameterType="Map"
+		resultType="int">
+		SELECT COUNT(*) FROM promotion_campaign
+		WHERE eventnumber=#{eventNumber}
+		AND usernumber=#{userNumber}
+	</select>
+
+	<!-- 根据活动编号返回用户编号 -->
+	<select id="findUserNumberByPromotionCampaignNumber"
+		parameterType="String" resultType="String">
+		SELECT usernumber FROM
+		promotion_campaign
+		WHERE eventnumber=#{value}
+	</select>
+
+	<insert id="createPromotionCampaign" parameterType="promotionCampaign">
+		INSERT INTO
+		promotion_campaign
+		(usernumber,eventnumber,eventname,createtime,starttime,
+		endingtime,validityday,sendednum,gotnum,state,step,continuable,send_sms,verificate,
+		campaign_limit_value,campaign_limit_type,mobile_limit_value,mobile_limit_type,
+		trafficRate,query_title,query_content,threshold_mobile,mallId,share,model,sendMB)
+		VALUES(#{usernumber},#{eventnumber},#{eventname},#{createtime},#{starttime},#{endingtime},#{validityday},
+		#{sendednum},#{gotnum},#{state},#{step},#{continuable,jdbcType=BOOLEAN},#{sendsms,jdbcType=BOOLEAN},#{verificate,jdbcType=BOOLEAN},
+		#{campaignLimitValue},#{campaignLimitType},#{mobileLimitValue},#{mobileLimitType},
+		#{trafficRate},#{queryTitle},#{queryContent},#{thresholdMobile},#{mall.id},#{share},#{model},#{sendMB});
+	</insert>
+
+	<!--修改活动创建步骤，记录活动创建情况 -->
+	<update id="updatePromotionCampaignStep" parameterType="Map">
+		UPDATE
+		promotion_campaign
+		SET step=#{step}
+		where eventnumber=#{eventnumber}
+	</update>
+
+	<!-- 修改活动状态 -->
+	<update id="updatePromotionCampaignState" parameterType="Map">
+		UPDATE
+		promotion_campaign
+		SET state=${state}
+		where eventnumber=#{eventnumber}
+	</update>
+
+	<!--修改活动日期 -->
+	<update id="updatePromotionCampaignDate" parameterType="Map">
+		UPDATE promotion_campaign
+		SET
+		<if test="eventstarttime!=null and eventstarttime!=''">
+			starttime=#{eventstarttime},
+		</if>
+		endingtime=#{eventendtime}
+		where eventnumber=#{eventnumber}
+	</update>
+	
+	<!--修改活动概率 -->
+	<update id="updatePromotionCampaignRate" parameterType="Map">
+		UPDATE promotion_campaign
+		SET
+		trafficRate=#{rate}
+		where eventnumber=#{eventnumber}
+	</update>
+	
+	<!-- 修改是否开启核销码 -->
+	<update id="updatePromotionCampaignVerificate" parameterType="Map">
+		UPDATE
+		promotion_campaign
+		SET verificate=${verificate}
+		where eventnumber=#{eventnumber}
+	</update>
+	
+	<!-- 修改是否超出发放兑换码 -->
+	<update id="updatePromotionCampaignContinuable" parameterType="Map">
+		UPDATE
+		promotion_campaign
+		SET continuable=${continuable}
+		where eventnumber=#{eventnumber}
+	</update>
+	
+	<!-- 修改是否分享-->
+	<update id="updatePromotionCampaignShare" parameterType="Map">
+		UPDATE
+		promotion_campaign
+		SET share=${share}
+		where eventnumber=#{eventnumber}
+	</update>
+
+	<!--修改活动赠送MB -->
+	<update id="updateCampaignSendMB" parameterType="Map">
+		UPDATE promotion_campaign
+		SET
+		sendMB=#{sendMB}
+		where eventnumber=#{campaignNumber}
+	</update>
+
+	<update id="increaseRcodeSentNum" parameterType="String">
+		UPDATE promotion_campaign SET sendednum=sendednum+1 WHERE
+		eventnumber=#{value}
+	</update>
+	
+	<update id="increaseRcodeGotNum" parameterType="String">
+		UPDATE promotion_campaign SET gotnum=gotnum+1 WHERE
+		eventnumber=#{value}
+	</update>
+
+	<!-- 查询所有不同状态统计 -->
+	<select id="statisticCampaign" parameterType="String"
+		resultType="campaignStatistics">
+		select
+		(select count(*) from promotion_campaign where state=0 and
+		usernumber=#{value}) as noneFinish,
+		(select count(*) from
+		promotion_campaign where state=1 and usernumber=#{value}) as
+		notStarted,
+		(select count(*) from promotion_campaign where state=2 and
+		usernumber=#{value}) as inActive
+	</select>
+	
+	<select id="findAllPromotionCampaignNumberStartToday" parameterType="Map"
+		resultType="String">
+		SELECT eventnumber
+		FROM promotion_campaign
+		WHERE 
+		<![CDATA[starttime<=#{currentTime} and endingtime>=#{currentTime}]]>
+		and state=#{state}
+	</select>
+	
+	<select id="findAllPromotionCampaignNumberOverToday" parameterType="Map"
+		resultType="String">
+		SELECT eventnumber
+		FROM promotion_campaign
+		WHERE 
+		<![CDATA[endingtime<=#{currentTime}]]>
+		and state=#{state}
+	</select>
+	
+	<resultMap type="promotionCampaign" id="queryInfomationMap">
+		<result property="queryTitle" column="query_title" />
+		<result property="queryContent" column="query_content" />
+	</resultMap>
+
+	<!-- 根据活动标号获取活动状态 -->
+	<select id="findQueryInfomation" parameterType="String"
+		resultMap="queryInfomationMap">
+		SELECT query_title,query_content 
+		FROM promotion_campaign
+		WHERE
+		eventnumber=#{value}
+	</select>
+</mapper>

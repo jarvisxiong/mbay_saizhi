@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Channel">
+	<resultMap type="user" id="loginChannelInfoMap">
+		<result property="id" column="id" />
+		<result property="usernumber" column="usernumber" />
+		<result property="property" column="property" />
+		<result property="certStatus" column="certify"  />
+		<result property="password" column="passwd" />
+	</resultMap>
+
+	<!-- 查询用户是否已登录（进行登录验证） -->
+	<select id="findChannelByUname" parameterType="user"
+		resultMap="loginChannelInfoMap">
+		SELECT user_info_id id, usernumber,property,certify,passwd
+		FROM
+		zcc_user_info WHERE user_name=#{username};
+	</select>
+	<resultMap type="user" id="userCertifyAuthState">
+		<result property="certStatus" column="certify"  />
+	</resultMap>
+	
+	<resultMap type="user" id="usershortinfo" extends="userCertifyAuthState">
+		<result property="username" column="user_name" />
+		<result property="property" column="property"  />
+		<result property="usernumber" column="usernumber" />
+		<result property="supnumber" column="supnumber" />
+		<result property="createtime" column="createtime" />
+	</resultMap>
+
+	<resultMap type="user" id="subAgentsInfoMap">
+		<result property="username" column="user_name" />
+		<result property="usernumber" column="usernumber" />
+		<result property="supnumber" column="supnumber" />
+		<result property="name" column="real_name" />
+		<association property="account" javaType="userAccount">
+			<result property="userNumber" column="usernumber" />
+			<result property="amount" column="remained_meicoin" />
+		</association>
+	</resultMap>
+	<!-- 查询已登录的用户的详细信息 -->
+	<select id="findUser" parameterType="String" resultMap="usershortinfo">
+		SELECT
+		user_info_id id, certify,property,
+		user_name,usernumber,supnumber,createtime FROM zcc_user_info WHERE
+		usernumber=#{usernumber}
+	</select>
+	<!-- -->
+	<select id="findUserByID" parameterType="int" resultMap="usershortinfo">
+		SELECT
+		certify,property, user_name,usernumber,supnumber,createtime
+		FROM
+		zcc_user_info WHERE user_info_id=#{value}
+	</select>
+
+	<select id="findUserByUNumber" parameterType="String" resultMap="usershortinfo">
+		SELECT user_info_id id, certify,property,
+		user_name,usernumber,supnumber,createtime FROM zcc_user_info WHERE
+		usernumber=#{value}
+	</select>
+
+	<select id="getUserCertStatus" parameterType="String"
+		resultType="org.sz.mbay.channel.user.enums.CertStatus">
+		SELECT certify FROM zcc_user_info WHERE usernumber=#{value}
+	</select>
+
+	<select id="findPrivatekeyByUid" parameterType="int" resultType="String">
+		SELECT privatekey FROM zcc_user_info WHERE user_info_id=#{id}
+	</select>
+	<insert id="createUser" parameterType="user">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT
+			IFNULL(MAX(user_info_id),0)+1 id FROM zcc_user_info
+		</selectKey>
+		INSERT INTO zcc_user_info(user_info_id,user_name,property,
+		privatekey,passwd,supnumber,usernumber,certify,data_traffic_wallet_id,createtime)
+		VALUES
+		(#{id},#{username},#{property},#{privatekey},#{password},#{supnumber},#{usernumber},#{certStatus},#{accountid},now());
+	</insert>
+
+	<update id="reduceSubAgent" parameterType="String">
+		update usercontext set
+		subagent=subagent-1 where usernumber=#{value}
+	</update>
+
+	<select id="authRegUserName" parameterType="String" resultType="int">
+		SELECT count(user_name) FROM zcc_user_info where user_name=#{username}
+	</select>
+
+	<resultMap type="user" id="channelAuthAndPropertyMap">
+		<result property="id" column="user_info_id" />
+		<result property="usernumber" column="usernumber" />
+		<result property="property" column="property" />
+		<result property="certStatus" column="certify" />
+	</resultMap>
+	<!--根据用户名获取用户id -->
+	<select id="findUserAuthAndPropertyByName" parameterType="String"
+		resultMap="channelAuthAndPropertyMap">
+		SELECT user_info_id,usernumber,property,certify FROM
+		zcc_user_info
+		where
+		user_name=#{value}
+	</select>
+
+	<update id="increaseSubAgent" parameterType="String">
+		update usercontext
+		set subagent=subagent+1 where usernumber=#{value}
+	</update>
+
+	<update id="updateUserSupnumber" parameterType="int">
+		update
+		zcc_user_info set supnumber=#{supnumber} where
+		usernumber=#{userNumber}
+	</update>
+	<!-- 检查这个是否可以删除 -->
+	<update id="updateUsertoAuthed" parameterType="Map">
+		update
+		zcc_user_info set certify=#{certStatus} where user_info_id=#{userid}
+	</update>
+
+	<select id="getSupUserByID" parameterType="int" resultMap="usershortinfo">
+		SELECT user_info_id id, certify,property,
+		user_name,usernumber,supnumber,createtime
+		FROM zcc_user_info WHERE
+		usernumber=(SELECT supnumber FROM zcc_user_info
+		WHERE
+		user_info_id=#{value} );
+	</select>
+
+	<!--重置用户登录密码 -->
+	<update id="updateUserPassword" parameterType="Map">
+		update
+		zcc_user_info set passwd=#{passwd} where usernumber=#{userNumber}
+	</update>
+	<!--查找所有下级 站内信通讯录使用 -->
+	<!-- <select id="findAllAgents" parameterType="String" resultType="String"> 
+		select u.user_name,u.usernumber from zcc_user_info u where u.supnumber=#{value} 
+		</select> -->
+	<select id="findAllAgents" parameterType="String" resultType="Map">
+		select z.usernumber, c.enterpriseName from zcc_user_info z join
+		channelinfo c on c.userid=z.user_info_id
+		where z.supnumber=#{value}
+	</select>
+
+	<!--查找所有下级 代理商 -->
+	<select id="findSubAgents" parameterType="String" resultMap="subAgentsInfoMap">
+		select
+		u.user_name,u.usernumber,w.remained_meicoin,w.creditlimit,u.real_name
+		from
+		zcc_user_info u
+		LEFT JOIN zcc_data_traffic_wallet w on
+		u.usernumber=w.usernumber
+		where u.supnumber=#{value}
+	</select>
+
+
+
+
+	<!--查找单个下级 代理商信息 -->
+	<select id="findChannelCertRealName" parameterType="String"
+		resultType="String">
+		select real_name
+		from
+		zcc_user_info u
+		where
+		usernumber=#{usernumber}
+	</select>
+	<!--查找单个代理商信息 -->
+	<select id="findChannelCompanyName" parameterType="String"
+		resultType="String">
+		select c.enterpriseName
+		from
+		zcc_user_info u
+		join channelinfo
+		c on c.userid=u.user_info_id
+		where usernumber=#{inputusernumber}
+	</select>
+	<select id="getIDByUserName" parameterType="String" resultType="Integer">
+		SELECT user_info_id id FROM zcc_user_info WHERE user_name=#{value}
+	</select>
+
+	<select id="getIDByUserNumber" parameterType="String"
+		resultType="Integer">
+		SELECT user_info_id id FROM zcc_user_info WHERE
+		usernumber=#{value}
+	</select>
+
+	<!--判断修改时的原始密码是否正确使用 -->
+	<select id="getUserPassword" parameterType="String" resultType="String">
+		SELECT passwd FROM zcc_user_info WHERE usernumber=#{value}
+	</select>
+
+	<resultMap type="user" id="encryptionMap">
+		<result property="id" column="user_info_id" />
+		<result property="password" column="passwd" />
+	</resultMap>
+
+	<select id="findAllChannel" resultMap="encryptionMap">
+		SELECT user_info_id,passwd
+		FROM zcc_user_info
+	</select>
+
+	<!-- 根据用户编号查询用户数量，用于验证用户是否存在 -->
+	<select id="findUserCountByNumber" resultType="int"
+		parameterType="String">
+		SELECT COUNT(*) FROM zcc_user_info where
+		usernumber=#{value}
+	</select>
+
+	<resultMap type="user" id="channelPropertyMap" autoMapping="true">
+		<result property="property" column="property" />
+	</resultMap>
+
+	<!-- 根据用户编号查询用户所属渠道类别 -->
+	<select id="findUserPropertyByUserNumber" resultMap="channelPropertyMap"
+		parameterType="java.lang.String">
+		SELECT property FROM zcc_user_info where
+		usernumber=#{usernumber}
+	</select>
+
+	<select id="findUserCertStatus" parameterType="String"
+		resultType="org.sz.mbay.channel.user.enums.CertStatus">
+		SELECT certify FROM zcc_user_info WHERE
+		usernumber=#{usernumber}
+	</select>
+
+	<!-- onembay -->
+	<resultMap type="user" id="channellist">
+	  <result property="id" column="user_info_id"/>
+	  <result property="usernumber" column="usernumber"/>
+	  <result property="username" column="user_name"/>
+	  <result property="property" column="property" />
+	  <result property="certStatus" column="certify" />
+	  <result property="createtime" column="createtime" />
+	  <result property="account.amount" column="amount" />
+	  <result property="account.creditLimit" column="creditlimit" />
+	</resultMap>	
+	
+	<select id="findAllUser" parameterType="user" resultMap="channellist">		
+		SELECT u.user_info_id,u.user_name,u.usernumber,u.property,u.certify,u.createtime,
+		w.remained_meicoin amount,w.creditlimit creditlimit
+		FROM  zcc_user_info  u
+		LEFT JOIN zcc_data_traffic_wallet w ON u.usernumber=w.usernumber
+		<where>
+           <if test="usernumber != null and usernumber != ''">
+             u.usernumber = #{usernumber}
+           </if>
+           <if test="username != null and username != ''">
+             and user_name = #{username}
+           </if>
+           <if test="property != null and property != ''">
+             and property = #{property}
+           </if>
+        </where>
+        ORDER BY u.createtime DESC
+	</select>
+	<select id="countUser" parameterType="user" resultType="Integer" >
+	   SELECT count(*) FROM  zcc_user_info
+        <where>
+          <if test="usernumber != null and usernumber != ''">
+            usernumber = #{usernumber}
+          </if>
+          <if test="username != null and username != ''">
+            and user_name = #{username}
+          </if>
+          <if test="property != null and property != ''">
+            and property = #{property}
+          </if>
+        </where>
+	</select>	
+	
+	<resultMap type="user" id="channelAuthApplylist">
+	  <result property="id" column="user_info_id"/>
+	  <result property="usernumber" column="usernumber"/>
+	  <result property="username" column="user_name"/>
+	  <result property="property" column="property" />
+	  <result property="certStatus" column="certify" />
+	  <result property="createtime" column="createtime" /> 
+	</resultMap>	
+	<select id="findAllAuthApply" parameterType="user" resultMap="channelAuthApplylist">
+	    SELECT u.user_info_id,u.user_name,u.usernumber,u.property,u.certify,u.createtime
+		FROM zcc_user_info u WHERE u.certify=1
+         <if test="userNumber != null and userNumber != ''">
+           and u.usernumber = #{userNumber}
+         </if>
+         <if test="userName != null and userName != ''">
+           and user_name = #{userName}
+         </if>
+         <if test="property != null and property != ''">
+           and property = #{property}
+         </if>
+	</select>
+	<select id="countAuthApply" parameterType="user" resultType="Integer" >
+	    SELECT count(*)
+		FROM  zcc_user_info u  WHERE u.certify=1
+         <if test="userNumber != null and userNumber != ''">
+           and u.usernumber = #{userNumber}
+         </if>
+         <if test="userName != null and userName != ''">
+           and user_name = #{userName}
+         </if>
+         <if test="property != null and property != ''">
+           and property = #{property}
+         </if>
+	</select>
+	<resultMap type="user" id="userProperty">
+	 <result property="property" column="property" />
+	</resultMap>
+	<select id="findUserPropertyByUid" parameterType="int" resultMap="userProperty" >
+	    SELECT u.property FROM  zcc_user_info u  WHERE u.user_info_id=#{value}
+	</select>
+	<select id="findUserByUserId" parameterType="int" resultMap="channellist" >
+        SELECT u.user_info_id,u.user_name,u.usernumber,u.property,u.certify,u.createtime ,
+        w.remained_meicoin amount,w.creditlimit creditlimit
+        FROM  zcc_user_info  u
+        LEFT JOIN zcc_data_traffic_wallet w ON u.usernumber=w.usernumber where user_info_id = #{userId}
+    </select>
+		
+	<update id="updateUserAuthState" parameterType="Map" >
+	    update zcc_user_info set certify=#{authstate} where user_info_id=#{userid}
+	</update>
+	
+	<!-- 查询头像图片地址 -->
+	<select id="findPortraitByUserNumber" parameterType="String" resultType="String">
+		SELECT portrait
+		FROM
+		zcc_user_info WHERE usernumber=#{value};
+	</select>
+	
+	<!--上传头像 -->
+	<update id="uploadPortrait" parameterType="Map">
+		update
+		zcc_user_info set portrait=#{portrait} where usernumber=#{userNumber}
+	</update>
+</mapper>

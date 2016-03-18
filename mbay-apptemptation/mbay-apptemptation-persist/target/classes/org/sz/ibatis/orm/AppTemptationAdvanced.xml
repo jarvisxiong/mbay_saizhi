@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AppTemptationAdvanced">
+	<resultMap type="appTemptationAdvanced" id="appTemptationAdvancedInfoMap">
+		<result property="id" column="id" />
+		<result property="campaignNumber" column="campaign_number" />
+		<result property="status" column="status" />
+		<result property="token" column="token" />
+	</resultMap>
+	
+	<select id="findAppTemptationAdvanced" parameterType="int" resultMap="appTemptationAdvancedInfoMap">
+		SELECT id,campaign_number,status,token
+		FROM  app_temptation_advanced
+		WHERE id=#{value}
+	</select>
+	
+
+	<!-- 查询活动模板信息 -->
+	<select id="findAppTemptationAdvancedByCampaignNumber" parameterType="String"
+		resultMap="appTemptationAdvancedInfoMap">
+		SELECT id,campaign_number,status,token
+		FROM  app_temptation_advanced
+		WHERE campaign_number=#{value}
+	</select>
+	
+	<insert id="createAppTemptationAdvanced" parameterType="appTemptationAdvanced">
+		INSERT INTO app_temptation_advanced (id,campaign_number,status,token)
+		VALUES
+		(#{id},#{campaignNumber},#{status},#{token});
+	</insert>
+
+	<update id="updateAppTemptationAdvanced" parameterType="Map">
+	  UPDATE app_temptation_advanced SET token=#{token}
+	  WHERE id=#{id}
+	</update>
+</mapper>

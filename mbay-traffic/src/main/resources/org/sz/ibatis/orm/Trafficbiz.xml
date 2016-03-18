@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Trafficbiz">
+	
+	
+	<select id="findTraffiUnitPriceByChargeInfo"  parameterType="Map"  resultType="trafficbiz">
+		SELECT unit_price unitprice,exchange_unit leasttraffic FROM zcc_operator_biz  WHERE biz_type=#{traffficetype} and 
+		operator_id=(select operator_id from zcc_operator_info where area=#{area} and operator_type=#{opercode});
+	</select>
+
+	
+</mapper>

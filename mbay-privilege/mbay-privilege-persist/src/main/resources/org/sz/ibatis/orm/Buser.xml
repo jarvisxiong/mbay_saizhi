@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Buser">
+
+	<resultMap type="Buser" id="baseListMap">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="nick" column="nick" />
+		<result property="createTime" column="create_time" />
+		<result property="password" column="password" />
+	</resultMap>
+	
+	<insert id="createBuser" parameterType="buser">
+		<selectKey keyProperty="id"  resultType="int" order="BEFORE">		
+			SELECT IFNULL(MAX(id),0)+1 id FROM buser
+		</selectKey>
+		insert into
+		buser
+		(id,name,nick,create_time,password)
+		VALUES(#{id},#{name},#{nick},#{createTime},#{password})
+	</insert>
+
+	<update id="updateBuser" parameterType="Map">
+		update 
+		buser 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="name != null and name != ''">name=#{name},</if>
+			<if test="nick != null and nick != ''">nick=#{nick},</if>
+			<if test="password != null and password != ''">password=#{password}</if>
+		</trim>
+		where id=#{id}
+	</update>
+
+	<select id="findAllBuser" parameterType="String" resultMap="baseListMap">
+		select
+		*
+		from 
+		buser
+		where 1=1
+		<if test="value != null and value != ''">
+			and name like CONCAT('%','${value}','%' )
+		</if>
+		order by create_time DESC
+	</select>
+
+	<select id="countBuser" parameterType="String" resultType="int">
+		select count(*) from buser
+		where 1=1 
+		<if test="value != null and value != ''">
+			and name like CONCAT('%','${value}','%' )
+		</if>
+	</select>
+	
+	<select id="findBuser" parameterType="int" resultMap="baseListMap">
+		select
+		*
+		from 
+		buser
+		where 
+		id=#{value}
+	</select>
+	
+	<select id="findBuserByName" parameterType="String" resultMap="baseListMap">
+		select
+		*
+		from 
+		buser
+		where 
+		name=#{value}
+	</select>
+	
+	<delete id="deleteBuser" parameterType="int">
+		delete from 
+		buser 
+		where 
+		id=#{value}
+	</delete>
+</mapper>

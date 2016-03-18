@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="StoreOperator">
+	<select id="findOperatorsByStoreId" resultType="storeOperator"
+		parameterType="long">
+		SELECT id,store_id as storeId ,authCode,cellphone,status
+		FROM store_operator
+		where store_id=#{storeId}
+		and deleted=0
+	</select>
+	<update id="deleteStoreOperator" parameterType="long">
+		update
+		store_operator set deleted=true,dateModified=now() where id=#{id}
+	</update>
+
+	<select id="findOperatorByCellPhone" parameterType="map"
+		resultType="storeOperator">
+		select * from
+		store_operator where authCode=#{authCode} and
+		cellphone=#{cellphone} and deleted=0
+	</select>
+
+	<update id="updateStoreOperator" parameterType="storeOperator">
+		update
+		store_operator set
+		cellphone=#{storeOperator.cellphone},password=#{storeOperator.password},dateModified=now()
+		where deleted=0 and authCode=#{storeOperator.authCode}
+	</update>
+	<insert id="createStoreOperator" parameterType="storeOperator">
+		insert
+		store_operator
+		(id,store_id,authCode,cellphone,password,status,deleted,dateCreated,dateModified)
+		values
+		(#{id},#{storeId},#{authCode},#{cellphone},#{password},#{status},#{deleted},#{dateCreated},#{dateModified})
+	</insert>
+
+
+	<select id="countOperator" parameterType="long" resultType="int">
+		select count(store_id) from store_operator where store_id=#{storeId}
+		and deleted=0
+	</select>
+
+</mapper>

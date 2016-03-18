@@ -1,0 +1,328 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.sz.mbay</groupId>
+		<artifactId>mbay_saizhi</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>mbay-channel</artifactId>
+	<packaging>war</packaging>
+	<name>mbay-channel Maven Webapp</name>
+	<url>http://www.mbpartner.com</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${javax.servlet.jstl.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>${dom4j.version}</version>
+		</dependency>
+		
+		<!--文件上传支持 Apache Commons IO -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>${commons.fileupload.version}</version>
+		</dependency>
+		<!-- Apache commons-codec -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commons.codec.version}</version>
+		</dependency>
+
+		<!-- 邮件发送依赖 -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>${javax.mail.version}</version>
+		</dependency>
+		
+		<!-- 验证码依赖 -->
+		
+		<!-- apchae poi for Excel -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi-ooxml.version}</version>
+		</dependency>
+
+		<!-- hibernate-validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+		<!--twofish cipher -->
+		<dependency>
+			<groupId>org.gnu</groupId>
+			<artifactId>gnu-crypto</artifactId>
+			<version>${gnu-crypto.version}</version>
+		</dependency>
+		<!-- sitemesh dependency -->
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>${sitemesh.version}</version>
+		</dependency>
+
+		<!--static js dependency -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>${webjars.jquery.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery-cookie</artifactId>
+			<version>${webjars.jquery-cookie.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery.fileDownload</artifactId>
+			<version>${webjars.jquery.fileDownload.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>${webjars.bootstrap.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery-ui</artifactId>
+			<version>${webjars.jquery-ui.version}</version>
+		</dependency>
+
+		<!-- wro4j 配置 -->
+		<dependency>
+			<groupId>ro.isdc.wro4j</groupId>
+			<artifactId>wro4j-core</artifactId>
+			<version>${wro4j.version}</version>
+		</dependency>
+		<!--google zxing 二维码配置 -->
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>${com.google.zxing.javase.version}</version>
+		</dependency>
+		<!-- guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${com.google.guava.version}</version>
+		</dependency>
+
+		<!-- fastdfs -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-filesystem</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-email</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- mbay-base -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-base</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- mbay-hcode -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-hcode</artifactId>
+			<version>${project.version}</version>
+			<exclusions>
+				<!-- 排除依赖 -->
+				<exclusion>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- mbay-channel-user-service -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-channel-user-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- mbay-promotion-service -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-promotion-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- mbay-operator-service -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-operator-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- mbay-customer-service -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-customer-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- mbay-wechat-service -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-wechat-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- mbay-apptemptation-service -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-apptemptation-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+
+		<!-- traffic order -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-trafficOrder-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- captcha -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-captcha-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- traffic red -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-trafficRed-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- mbay-mall-service -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-mall-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- mbay-stationLetter-service -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-stationLetter-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- mbay-weixin-client -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-weixin-client</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- mbay-particularCase -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-particularCase</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- mbay-trafficSign-service -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-trafficSign-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+			<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+	</dependencies>
+
+
+
+	<build>
+		<finalName>mbaychannel</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>native2ascii-maven-plugin</artifactId>
+				<version>1.0-beta-1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>dbunit-maven-plugin</artifactId>
+				<version>1.0-beta-3</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<!-- 什么阶段打包源码 -->
+						<phase>package</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- 文件输出位置 -->
+					<!-- <outputDirectory>C:\Users\Fenlon\Desktop</outputDirectory> -->
+					<finalName>mbaychanbel</finalName>
+					<attach>false</attach>
+				</configuration>
+			</plugin>
+
+		</plugins>
+		<!-- added by fenlon, make jdk-envirment 1.7; this can extends by child 
+			module,so use pluginManagement -->
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
+<!-- mvn手动安装jar命令：mvn install:install-file -Dfile=D:\mvn\aa.jar -DgroupId=org.a 
+	-DartifactId=a -Dversion=3.1.0.RELEASE -Dpackaging=jar -->

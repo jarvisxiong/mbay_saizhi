@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AppTemptationBindIp">
+	
+	<insert id="createAppTemptationBindIp" parameterType="appTemptationBindIp" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO app_temptation_bind_ip (campaign_number, ip) VALUES (#{campaignNumber}, #{ip})
+	</insert>
+	
+	<resultMap type="appTemptationBindIp" id="appTemptationBindIpMap"> 
+		<result property="id" column="id" />
+		<result property="campaignNumber" column="campaign_number" /> 
+		<result property="ip" column="ip" />  
+	</resultMap>
+	<select id="findAppTemptationBindIpsByCampaignNumber" parameterType="String" resultMap="appTemptationBindIpMap">
+		SELECT id, campaign_number, ip 
+		FROM app_temptation_bind_ip 
+		WHERE campaign_number = #{campaignNumber}
+	</select>
+	
+	<delete id="deleteAppTemptationBindIpById" parameterType="int">
+		DELETE FROM app_temptation_bind_ip WHERE id = #{value}
+	</delete>
+	
+</mapper>

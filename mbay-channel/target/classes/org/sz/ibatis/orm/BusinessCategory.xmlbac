@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BusinessCategory">
+    <resultMap type="businessCategory" id="baseResultMap">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result property="enterpriseTypeCode" column="enterprise_type_code" />
+        <result property="enterpriseTypeName" column="enterprise_type_name" />
+    </resultMap>
+
+    <select id="findBusinessCategory" parameterType="int" resultMap="baseResultMap">
+        select id, enterprise_type_code, enterprise_type_name from business_category where enterprise_type_code = #{value}
+    </select>
+
+    <select id="findAllBusinessCategory" resultMap="baseResultMap">
+        select id, enterprise_type_code, enterprise_type_name from business_category
+    </select>
+</mapper>

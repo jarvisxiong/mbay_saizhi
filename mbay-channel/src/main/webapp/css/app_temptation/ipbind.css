@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+/* ip table */
+.activ_detail {
+	margin-top: 20px;
+}
+
+.btn_m_l {
+	margin-left: 20px;
+	width: 50px
+}
+
+.ip_tip {
+	color: #FDAC1C;
+}
+
+.ip_txt {
+	ime-mode: disabled;
+}
+
+.ipbind_txt {
+	margin: 15px 0px
+}
+
+.activ_detail div.table table td {
+	padding: 5px 0px
+}

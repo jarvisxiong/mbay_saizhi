@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+.tip {
+	height: 40px;
+	padding-right: 15px;
+	border-bottom: 1px solid #EEEEEE;
+	margin: auto 40px;
+	line-height: 40px;
+	font-size: 13px;
+	font-family: 'Microsoft YaHei';
+	margin-bottom: 80px;
+	letter-spacing: 1px;
+	font-weight: normal;
+	padding-left: 20px;
+	background: url(../../images/workimages/tip.png) no-repeat left
+}
+
+.tip_text {
+	margin-left: 300px;
+	margin-top: 30px;
+	font-size: 12px;
+	font-weight: normal
+}
+
+.reg_s {
+	background: #F9F9F9;
+	overflow: hidden;
+}

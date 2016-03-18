@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SMSPackage">
+    <resultMap type="sMSPackage" id="baseResultMap">
+      <id property="id" column="id" jdbcType="INTEGER"/>
+      <result property="mbayAmount" column="mbay_amount" />
+      <result property="smsAmount" column="sms_amount" />
+    </resultMap>
+
+    <select id="findAllSMSPackage" resultMap="baseResultMap">
+      SELECT id, mbay_amount, sms_amount FROM sms_package
+    </select>
+    <select id="findSMSPackage" resultMap="baseResultMap">
+      SELECT id, mbay_amount, sms_amount  FROM sms_package  WHERE id=#{value}
+    </select>
+</mapper>

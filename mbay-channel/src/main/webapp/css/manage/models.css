@@ -1,0 +1,66 @@
+@charset "utf-8";
+/*身体*/
+#temform {
+	width: 828px
+}
+
+.body {
+	margin-bottom: 30px;
+}
+
+.b_con {
+	padding-bottom: 50px
+}
+
+.b_con a {
+	display: inline-block;
+	margin-right: 20px;
+	margin-bottom: 30px
+}
+
+.ddqr {
+	padding-left: 40px;
+	background: url(../../images/workimages/tjcl.jpg) no-repeat left;
+	color: #35618F;
+	font-size: 18px;
+	height: 36px;
+	line-height: 35px;
+	line-height: 45px;
+	margin-bottom: 15px;
+	font-family: 'Microsoft YaHei'
+}
+
+.sec {
+	width: 150px;
+	height: 300px;
+	background: url(../../images/workimages/sec_3.jpg) no-repeat center;
+	overflow: hidden
+}
+
+.sec_1 {
+	background: url(../../images/workimages/sec_4.jpg)
+}
+
+.b_con img {
+	width: 132px;
+	height: 220px;
+	display: block;
+	margin-top: 40px;
+	margin-left: 9px;
+}
+
+.tjcl:hover {
+	opacity: 0.8
+}
+
+.tjcl {
+	width: 148px;
+	height: 33px;
+	background: #FDAC1C;
+	border-radius: 4px;
+	color: #FFF;
+	font-family: 'Microsoft YaHei';
+	letter-spacing: 1px;
+	cursor: pointer
+}
+/*身体左边*/

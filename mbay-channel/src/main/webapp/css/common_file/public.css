@@ -1,0 +1,21 @@
+@charset "utf-8";
+/*
+*@sunny
+*Describe:全局样式表Public.css
+*/
+*:root{margin:0; padding:0} 
+/*
+*input边框
+*input获取焦点之后
+*input失去焦点之后
+*/
+input[type="text"]{border:1px solid #C1C1C1;}
+textarea{border:1px solid #C1C1C1;}
+
+
+/*
+*页面小按钮
+*/
+.btn{border:1px solid #C1C1C1;border-radius:4px;padding:4px 8px;}
+/*大按钮*/
+.btn_2{text-decoration:none;border-radius:4px;padding:4px 8px;color:#FFF; background:#fdac1c;}

@@ -1,0 +1,8 @@
+org/sz/mbay/particularcase/pingan/trafficred/bean/PingAnRecord.class
+org/sz/mbay/particularcase/pingan/trafficred/enums/MbayStatus.class
+org/sz/mbay/particularcase/pingan/trafficred/service/PingAnRecordService.class
+org/sz/mbay/particularcase/pingan/trafficred/dao/impl/PingAnRecordDaoImpl.class
+org/sz/mbay/particularcase/pingan/trafficred/enums/PingAnStatus.class
+org/sz/mbay/particularcase/pingan/trafficred/qo/PingAnRecordForm.class
+org/sz/mbay/particularcase/pingan/trafficred/dao/PingAnRecordDao.class
+org/sz/mbay/particularcase/pingan/trafficred/service/impl/PingAnRecordServiceImpl.class

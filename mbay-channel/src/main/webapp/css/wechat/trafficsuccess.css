@@ -1,0 +1,103 @@
+/* @charset "utf-8";
+ͨ��
+*{margin:0; padding:0;border:0;}
+body{font-size:12px;margin:0px auto;position:static;min-height: 100%}
+img{border:none;}
+input,select,textarea{outline:none;}
+textarea{resize:none}
+a{text-decoration:none;}
+.fl{float:left}
+.fr{float:right}
+ͷ��
+.con{width:100%;max-width: 400px;min-width:320px;margin:0px auto;font-family:'Microsoft YaHei';background:#FEFAE1}
+.hr_220{height:140px;width:100%}
+.logo{width:100%}
+div{text-align:center;width:100%}
+img{display:block;margin:0px auto;}
+.wz{font-size:20px;color:#FD7E01;margin-bottom:25px;text-align:center;width:95%;margin:0px auto;margin-top:35px}
+input{margin-top:25px;padding: 0 5%;height:40px;background:#FFFFFF;color:#FD7E01;letter-spacing:1px;font-size:24px;line-height:36px;font-family:'Microsoft YaHei';cursor:pointer;border:2px dashed #EC6941}
+input:hover{opacity:0.8}
+
+ */
+@charset "utf-8";
+/*ͨ��*/
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	font-size: 12px;
+	margin: 0px auto;
+	position: static;
+	min-height: 100%
+}
+
+img {
+	border: none;
+}
+
+input,select,textarea {
+	outline: none;
+}
+
+textarea {
+	resize: none
+}
+
+a {
+	text-decoration: none;
+}
+
+.fl {
+	float: left
+}
+
+.fr {
+	float: right
+}
+/*ͷ��*/
+.con {
+	width: 100%;
+	max-width: 350px;
+	min-width: 320px;
+	margin: 0px auto;
+	font-family: 'Microsoft YaHei';
+}
+
+.wx_con {
+	background: url(../../images/wechat/weixin_suc.jpg) no-repeat center;
+	height: 555px;
+	width: 100%
+}
+
+.wz_empty {
+	height: 465px;
+	width: 100%
+}
+
+.wz_txt {
+	height: 90px;;
+	text-align: center;
+	font-size: 15px;
+	color: #FFFFFF;
+	letter-spacing: 1px
+}
+
+.dhsm {
+	position: absolute;
+	width: 70px;
+	height: 22px;
+	bottom: 4.7%;
+	right: 10%;
+}
+
+.bold {
+	font-weight: bold;
+	color: #FEDD69
+}
+
+.sp_wz {
+	margin-top: 5px
+}

@@ -1,0 +1,29 @@
+* {
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
+body {
+	background: #011644;
+}
+.access-burse {
+	text-align: center;
+	padding: 1px 0 5px 0;
+}
+.access-burse > a {
+	width: 100px;
+	height: 40px;
+	display: inline-block;
+	background-color: #FDD514;
+	border-radius: 4px;
+	line-height: 40px;
+	box-shadow: 1px 1px  2px 1px #666;
+	color: #E3641A !important;
+	font-weight: 700;
+	margin: 0 4px;
+}
+.tip-text {
+	padding: 0 .3rem .3rem;
+}
+.welcome-return p {
+	font-size: .7rem;
+}

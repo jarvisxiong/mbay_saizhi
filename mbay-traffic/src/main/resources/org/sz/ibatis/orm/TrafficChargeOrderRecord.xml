@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TrafficChargeOrderRecord">
+
+	
+
+	<insert id="createTrafficChargeOrderRecord" parameterType="trafficChargeOrderRecord">
+		INSERT INTO traffic_charge_order_record
+		(ordernumber,userid,ip,createtime,content,orderstatus)
+		VALUES(#{ordernumber},#{userid},#{ip},#{createtime},#{content},#{orderstatus.value});
+	</insert>
+
+	
+</mapper>

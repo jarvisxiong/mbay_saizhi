@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Trafficcard">
+	
+	<resultMap type="trafficcard" id="trafficcardlist">
+		<result property="id" column="card_id" />
+		<result property="status" column="used" />
+		<result property="cardnum" column="card_number" />
+		<result property="expiretime" column="expire_dt" />
+		<result property="traffic" column="flow" />
+		<result property="money" column="money" />
+		<result property="password" column="pass_code" />
+		<result property="trafficbizid" column="operator_biz_id" />
+	</resultMap>
+	
+	<select id="findTrafficcardsByTraffic"  resultMap="trafficcardlist">
+		SELECT
+		card_id,card_number,expire_dt,flow,money,pass_code,used,operator_biz_id
+		FROM zcc_operator_biz_card  WHERE  used=1
+		ORDER BY used
+	</select>
+	
+	<update id="updateTrafficcard" parameterType="trafficcard" >
+	  update zcc_operator_biz_card set used=#{status} 
+	  <choose>
+	  <when test="remark!=null" >
+	  , remark=#{remark}  
+	  </when>
+	  </choose>
+	  where card_id=#{id}
+	</update>
+	
+</mapper>

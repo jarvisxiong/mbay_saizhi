@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="WeChatCampaignDefaultTemplate">
+	<resultMap type="weChatCampaignDefaultTemplate" id="baseResultMap">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="backPicture" column="back_picture" />
+		<result property="createtime" column="createtime" />
+		<result property="username" column="username" />
+	</resultMap>
+	
+	<select id="findAllEventDefaultTemplate" parameterType="String" resultMap="baseResultMap">
+		SELECT * FROM event_default_template 
+		<if test="value != null and value != ''">where username = #{value}</if>
+		order by createtime desc
+	</select>
+
+	<select id="countEventDefaultTemplate" parameterType="String" resultType="Integer">
+		SELECT count(*) FROM event_default_template
+		<if test="value != null and value != ''">where username = #{value}</if>
+	</select>
+	
+	<select id="findEventDefaultTemplateById" parameterType="Integer" resultMap="baseResultMap">
+		SELECT * FROM event_default_template WHERE id = #{id, jdbcType=INTEGER}
+	</select>
+	
+	<insert id="createWeChatCampaignDefaultTemplate" parameterType="weChatCampaignDefaultTemplate">
+		<selectKey keyProperty="id" order="BEFORE" resultType="int">
+			SELECT IFNULL(MAX(id),0)+1 id FROM event_default_template
+		</selectKey>
+		INSERT INTO
+		event_default_template(id,back_picture,createtime,username)
+		VALUES(#{id},#{backPicture},#{createtime},#{username});
+	</insert>
+	
+	<update id="updateWeChatCampaignDefaultTemplate" parameterType="weChatCampaignDefaultTemplate">
+		UPDATE event_default_template
+		<trim prefix="set" prefixOverrides=",">
+			<if test="backPicture != null and backPicture != ''">back_picture=#{backPicture},</if>
+			<if test="username != null and username != ''">username=#{username}</if>
+		</trim>
+		WHERE id=#{id}
+	</update>
+	
+	<delete id="deleteWeChatCampaignDefaultTemplate" parameterType="long">
+		delete from event_default_template where id = #{value}
+	</delete>
+</mapper>

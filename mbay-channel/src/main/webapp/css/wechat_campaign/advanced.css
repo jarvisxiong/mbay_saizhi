@@ -1,0 +1,142 @@
+@charset "utf-8";
+/*通用*/
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	font-size: 12px;
+	min-width: 1115px;
+	font-family: 'Microsoft Yahei'
+}
+
+img {
+	border: none;
+}
+
+input,select,textarea {
+	outline: none;
+}
+
+textarea {
+	resize: none
+}
+
+a {
+	text-decoration: none;
+}
+
+.fl {
+	float: left
+}
+
+.fr {
+	float: right
+}
+/*清除浮动*/
+.clearfix:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.clearfix {
+	zoom: 1
+}
+
+.option_box {
+	width: 470px;
+}
+
+.option_box h3 {
+	font-size: 16px
+}
+
+#share_one,#share_many {
+	vertical-align: middle;
+}
+
+.share_checkbox {
+	margin-bottom: 5px;
+	margin-top: 5px
+}
+
+.upload_pic {
+	vertical-align: middle;
+	width: 60px;
+	height: 60px
+}
+
+.share_sl {
+	width: 48px;
+	height: 23px;
+	text-align: center;
+	border: 1px solid #FDAC1C
+}
+
+.share_con_op_r,.share_link_op_r {
+	margin-left: 30px
+}
+
+.headline,.link {
+	width: 227px;
+	height: 28px;
+	border: 1px solid #FDAC1C;
+	border-radius: 4px;
+	padding-left: 5px
+}
+
+.size_tip {
+	color: #FDB73A;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.share_con_op_r div {
+	margin-bottom: 15px
+}
+
+.share_con_op_r textarea {
+	width: 227px;
+	height: 112px;
+	border: 1px dotted #FDAC1C;
+	border-radius: 8px;
+	padding: 3px
+}
+
+.op_btn {
+	margin-top: 15px;
+	text-align: center;
+}
+
+#count {
+	font-size: 14px;
+}
+
+.share_img {
+	width: 50px;
+	height: 75px;
+	display: none
+}
+
+.share_info {
+	display: none
+}
+
+.share_content {
+	background: #aebece;
+	color: #fff;
+	border-radius: 3px;
+	text-align: center;
+	line-height: 21px;
+	width: 225px;
+	font-size: 13px;
+	margin: 0 auto;
+	margin-bottom: 6px;
+}
+
+#dialog .no_margin {
+	margin-left: -20px
+}

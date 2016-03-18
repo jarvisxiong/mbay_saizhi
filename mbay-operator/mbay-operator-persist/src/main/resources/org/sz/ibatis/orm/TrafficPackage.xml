@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TrafficPackage">
+	<resultMap type="trafficPackage" id="packageInfoMap">
+		<result property="id" column="id" />
+		<result property="operatorid" column="operatorid" />
+		<result property="traffic" column="traffic" />
+		<result property="mbayprice" column="mbayprice" />
+		<result property="trafficType" column="traffictype" />
+		<result property="isopen" column="isopen" />
+		<result property="operatorPackageCode" column="operator_package_code" />
+		<association property="operator" javaType="operator">
+			<result property="area.value" column="area" />
+			<result property="type" column="operator_type" />
+		</association>
+	</resultMap>
+
+	<resultMap type="trafficPackage" id="operatorPackagesMap">
+		<result property="id" column="id" />
+		<result property="traffic" column="traffic" />
+		<result property="mbayprice" column="mbayprice" />
+		<result property="trafficType" column="traffictype" />
+		<association property="operator" javaType="operator">
+			<result property="type" column="operator_type" />
+		</association>
+	</resultMap>
+
+	<select id="findTrafficPackage" parameterType="int" resultMap="packageInfoMap">
+		SELECT
+		pac.id,pac.operatorid,pac.traffic,pac.mbayprice,pac.traffictype,pac.isopen,pac.operator_package_code,
+		ope.area,ope.operator_type
+		FROM operator_traffic_package pac
+		LEFT JOIN
+		zcc_operator_info ope ON ope.operator_id=pac.operatorid
+		WHERE
+		id=#{value}
+	</select>
+	
+	<select id="findAllTrafficPackage" parameterType="Map"
+		resultMap="operatorPackagesMap">
+		SELECT
+		pac.id,pac.traffic,pac.mbayprice,pac.traffictype,pac.operator_package_code,ope.operator_type
+		FROM operator_traffic_package pac
+		LEFT JOIN zcc_operator_info ope ON
+		ope.operator_id=pac.operatorid
+		WHERE ope.operator_type=#{operator} AND
+		ope.area=#{area.value} and pac.traffictype=#{trafficType} and isopen=1;
+	</select>
+
+	<select id="getMaxPackagePrice" resultType="double">
+		SELECT MAX(mbayprice) FROM operator_traffic_package
+		WHERE ID IN
+		<foreach collection="array" item="item" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<select id="getPackagePrice" resultType="double" parameterType="INTEGER">
+		SELECT mbayprice FROM operator_traffic_package WHERE ID =#{value}
+	</select>
+	
+	
+	<select id="findAllTrafficPackageByOperator" resultMap="packageInfoMap" parameterType="INTEGER">
+		 SELECT 
+		pac.id,pac.traffic,pac.mbayprice,pac.operator_package_code,pac.traffictype,ope.area,ope.operator_type
+		FROM operator_traffic_package pac
+		LEFT JOIN zcc_operator_info ope ON
+		ope.operator_id=pac.operatorid
+	    where pac.operatorid=#{value} ORDER BY  pac.traffictype DESC
+	</select>
+	
+	
+	<select id="getBestTrafficPackage" parameterType="Map"
+		resultMap="packageInfoMap">
+		SELECT 
+		pac.id,pac.traffic,pac.mbayprice,pac.operator_package_code,pac.traffictype,ope.area,ope.operator_type
+		FROM operator_traffic_package pac
+		LEFT JOIN zcc_operator_info ope ON
+		ope.operator_id=pac.operatorid
+		WHERE ope.operator_type=#{operator} AND
+		ope.area IN  (0,#{area.value}) and pac.traffic=#{traffic}  and isopen=1 ORDER BY  pac.traffictype DESC limit 1
+	</select>
+	
+	
+	<!-- onembay -->
+	<resultMap type="trafficPackage" id="BaseResultMap">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="traffictype" property="trafficType" jdbcType="INTEGER" />
+		<result column="traffic" property="traffic" jdbcType="INTEGER" />
+		<result column="mbayprice" property="mbayprice" jdbcType="DOUBLE" />
+		<result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="cost" property="cost" jdbcType="DOUBLE" />
+		<result column="isopen" property="isopen" jdbcType="INTEGER" />
+		<result column="package_code" property="packageCode" jdbcType="CHAR" />
+		<result column="operator_package_code" property="operatorPackageCode" jdbcType="CHAR" />
+		<association column="operatorid" property="operator"
+			javaType="org.sz.mbay.operator.bean.Operator">
+			<id column="operatorid" property="id" />
+			<result column="operator_name" property="name" />
+			<result column="operator_type" property="type" />
+		</association>
+	</resultMap>
+
+	<insert id="createTrafficPackage" parameterType="trafficPackage">
+		<selectKey keyProperty="id" order="BEFORE" resultType="int">
+			SELECT IFNULL(MAX(id),0)+1 id FROM operator_traffic_package
+		</selectKey>
+		INSERT INTO
+		operator_traffic_package(id,operatorid,traffictype,traffic,mbayprice,cost,isopen,createtime,package_code,operator_package_code)
+		VALUES(#{id},#{operatorid},#{trafficType},#{traffic},#{mbayprice},#{cost},#{isopen},now(),#{packageCode},#{operatorPackageCode});
+	</insert>
+	<!--启用 -->
+	<update id="updateEnabled" parameterType="int">
+		UPDATE
+		operator_traffic_package SET isopen=1 WHERE id=#{value}
+	</update>
+	<!--禁用 -->
+	<update id="updatedisable" parameterType="int">
+		UPDATE
+		operator_traffic_package SET isopen=0 WHERE id=#{value}
+	</update>
+	<!--根据运营商id批量启用 -->
+	<update id="updateEnabledByOperatorId" parameterType="int">
+		UPDATE
+		operator_traffic_package SET isopen=1 WHERE operatorid=#{value}
+	</update>
+	<!--根据运营商id批量禁用 -->
+	<update id="updatedisableByOperatorId" parameterType="int">
+		UPDATE
+		operator_traffic_package SET isopen=0 WHERE operatorid=#{value}
+	</update>
+
+	<!-- 获取流水 -->
+	<select id="getSerialNumber" parameterType="map" resultType="Integer">
+		SELECT count(*)+1 FROM operator_traffic_package WHERE operatorid =
+		#{operatorid}
+		and traffictype = #{traffictype} and traffic = #{traffic}
+	</select>
+
+	<resultMap type="trafficPackage" id="packageBaseMap">
+		<result property="id" column="id" />
+		<result property="operatorid" column="operatorid" />
+		<result property="trafficType" column="traffictype" />
+		<result property="traffic" column="traffic" />
+	</resultMap>
+
+	<select id="findAllTrafficPackageInfomation" resultMap="packageBaseMap">
+		select
+		id,operatorid,traffictype,traffic from operator_traffic_package
+	</select>
+
+	<select id="findAllByAreaAndOpetor" parameterType="map"
+		resultMap="BaseResultMap">
+		select a.*,b.operator_name,b.operator_type
+		from ((SELECT *
+		from
+		operator_traffic_package
+		WHERE
+		traffictype=#{trafficType}
+		and isopen
+		!=0)a left join
+		zcc_operator_info b
+		on a.operatorid =
+		b.operator_id)where
+		operator_type=#{operatorType}
+		ORDER BY traffic
+	</select>
+</mapper>

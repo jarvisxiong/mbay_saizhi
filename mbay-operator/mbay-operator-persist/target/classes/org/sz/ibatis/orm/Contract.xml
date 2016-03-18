@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Contract">
+	<insert id="createContract" parameterType="contract">
+		<selectKey keyProperty="id"  resultType="int" order="BEFORE">		
+			SELECT IFNULL(MAX(id),0)+1 id FROM zcc_contract
+		</selectKey>
+		INSERT INTO
+		zcc_contract(id,contract_id,start_date,end_date,contract_copy,operator_id)
+		VALUES(#{id},#{contractid},#{starttime},#{endtime},#{contractCopy},#{operatorid});
+	</insert>	
+</mapper>

@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AppTemptation">
+
+	<resultMap type="appTemptation" id="appTemptationListMap">
+		<result property="eventnumber" column="eventnumber" />
+		<result property="eventname" column="eventname" />
+		<result property="createtime" column="createtime" />
+		<result property="starttime" column="starttime" />
+		<result property="endingtime" column="endingtime" />
+		<result property="sendway" column="sendway" />
+		<result property="quantity" column="quantity" />
+		<result property="sendednum" column="sendednum" />
+		<result property="amount" column="amount" />
+		<result property="costamount" column="costamount" />
+		<result property="state" column="state" />
+		<result property="sendsms" column="send_sms" />
+	</resultMap>
+
+	<sql id="campaignListQueryWhere">
+		<if test="usernumber!=null and usernumber!=''">
+			AND usernumber=#{usernumber}
+		</if>
+		<if test="eventnumber!=null and eventnumber!=''">
+			AND eventnumber=#{eventnumber}
+		</if>
+		<if test="eventstate!=null">
+			AND state=#{eventstate}
+		</if>
+		<if test="starttime!=null and starttime!=''">
+			AND createtime>= #{starttime}
+		</if>
+		<if test="endtime!=null and endtime!=''">
+	   		<![CDATA[AND  createtime<= #{endtime} ]]>
+		</if>
+	</sql>
+
+	<select id="findAllAppTemptation" parameterType="appTemptationForm"
+		resultMap="appTemptationListMap">
+		SELECT eventnumber,eventname,createtime,starttime,
+		endingtime,sendway,quantity,sendednum,amount,costamount,state
+		FROM app_temptation
+		WHERE 1=1
+		<include refid="campaignListQueryWhere" />
+		ORDER BY createtime DESC
+	</select>
+
+	<select id="countAppTemptation" parameterType="appTemptationForm" resultType="int">
+		SELECT COUNT(*) FROM app_temptation WHERE 1=1
+		<include refid="campaignListQueryWhere" />
+	</select> 
+
+	<resultMap type="appTemptation" id="appTemptationInfoMap" extends="appTemptationListMap">
+		<result property="repeatEnable" column="repeat_enable" />
+		<result property="continuable" column="continuable" />
+		<result property="sendsms" column="send_sms" />
+		<result property="usernumber" column="usernumber" />
+		<collection property="stratetgylist" javaType="ArrayList"
+			ofType="appTemptationStrategy" column="eventnumber" select="selectAppTemptationStrategyByEventNumber" />
+		<collection property="ipList" javaType="ArrayList" ofType="appTemptationBindIp" column="campaign_number">
+			<id property="id" column="bid" />
+			<result property="campaignNumber" column="campaign_number" /> 
+			<result property="ip" column="ip" />  
+		</collection> 
+	</resultMap>
+
+	<!-- 根据活动号查看活动详情 -->
+	<select id="findAppTemptationByNumber" parameterType="String" resultMap="appTemptationInfoMap">
+		SELECT t.eventnumber,t.eventname,t.createtime,t.starttime,t.usernumber,
+			t.endingtime,t.sendway,t.quantity,t.sendednum,t.amount,t.costamount,t.state,
+			t.repeat_enable,t.continuable,t.send_sms,
+			b.id bid, b.campaign_number, b.ip
+		FROM app_temptation t
+		LEFT JOIN app_temptation_bind_ip b
+		ON t.eventnumber = b.campaign_number
+		WHERE t.eventnumber=#{eventnumber}
+	</select>
+
+	<resultMap type="appTemptationStrategy" id="appTemptationStrategyInfoMap">
+		<result property="sendednum" column="strategysendednum" />
+		<result property="state" column="strategystate" />
+		<result property="trafficPackage.id" column="packageid" />
+		<association property="trafficPackage" javaType="trafficPackage">
+			<result property="id" column="packageid" />
+			<result property="traffic" column="traffic" />
+			<result property="mbayprice" column="mbayprice" />
+			<result property="trafficType" column="traffictype" />
+			<association property="operator" javaType="operator">
+				<result property="area.value" column="area" />
+				<result property="type" column="teltype" />
+			</association>
+		</association>
+	</resultMap>
+
+	<select id="selectAppTemptationStrategyByEventNumber" parameterType="String"
+		resultMap="appTemptationStrategyInfoMap">
+		SELECT s.sendednum strategysendednum,s.state
+		strategystate,s.packageid,
+		p.traffic,p.mbayprice,p.traffictype,o.area,o.operator_type teltype
+		FROM app_temptation_strategy s
+		LEFT JOIN operator_traffic_package p 
+		on p.id=s.packageid
+		LEFT JOIN zcc_operator_info o 
+		on o.operator_id=p.operatorid
+		WHERE s.eventnumber=#{value}
+	</select>
+
+	<resultMap type="appTemptation" id="appTemptationBaseInfo">
+		<result property="eventnumber" column="eventnumber" />
+		<result property="createtime" column="createtime" />
+		<result property="starttime" column="starttime" />
+		<result property="endingtime" column="endingtime" />
+		<result property="sendway" column="sendway" />
+		<result property="state" column="state" />
+		<result property="usernumber" column="usernumber" />
+		<result property="amount" column="amount" />
+	</resultMap>
+
+	<!-- 根据活动编号和用户编号查询活动基本信息，以用于生成兑换码 -->
+	<select id="findAppTemptationBaseInfo" parameterType="Map" resultMap="appTemptationBaseInfo">
+		SELECT eventnumber,createtime,starttime,endingtime,sendway,state,usernumber,amount
+		FROM app_temptation 
+		WHERE eventnumber=#{eventnumber}
+	</select>
+
+	<resultMap type="appTemptation" id="appTemptationSendInfoMap">
+		<result property="usernumber" column="usernumber" />
+		<result property="eventname" column="eventname" />
+		<result property="starttime" column="starttime" />
+		<result property="endingtime" column="endingtime" />
+		<result property="sendway" column="sendway" />
+		<result property="quantity" column="quantity" />
+		<result property="sendednum" column="sendednum" />
+		<result property="state" column="state" />
+		<result property="continuable" column="continuable" />
+		<result property="sendsms" column="send_sms" />
+	</resultMap>
+
+	<!--根据活动编号查询活动赠送信息 -->
+	<select id="findAppTemptationSendInfo" parameterType="String"
+		resultMap="appTemptationSendInfoMap">
+		SELECT e.usernumber, e.eventname,e.starttime,
+		e.endingtime,e.sendway,e.quantity,e.sendednum,e.state,e.continuable,e.send_sms
+		FROM app_temptation e
+		WHERE e.eventnumber=#{value}
+	</select>
+                                                
+	<resultMap type="appTemptationStrategy" id="appTemptationStrategyInfo">
+		<result property="strategynumber" column="strategynumber" />
+		<result property="eventnumber" column="eventnumber" />
+		<association property="trafficPackage" javaType="trafficPackage">
+			<result property="id" column="packageid" />
+			<result property="traffic" column="traffic" />
+			<result property="mbayprice" column="mbayprice" />
+			<result property="trafficType" column="traffictype" />
+			<association property="operator" javaType="operator">
+				<result property="area.value" column="area" />
+				<result property="type" column="operator_type" />
+			</association>
+		</association>
+	</resultMap> 
+
+	<!-- 根据活动编号和号码归属地信息查询对应的流量包 -->
+	<select id="findAppTemptationStrategyInfo" parameterType="Map"
+		resultMap="appTemptationStrategyInfo">
+		SELECT E.eventnumber, S.strategynumber,
+		O.area,O.operator_type,P.id packageid,
+		P.traffic,P.traffictype,P.mbayprice FROM app_temptation E
+		LEFT JOIN
+		app_temptation_strategy S ON E.eventnumber=S.eventnumber
+		LEFT JOIN
+		operator_traffic_package P ON P.id=S.packageid
+		LEFT JOIN
+		zcc_operator_info O ON O.operator_id=P.operatorid
+		WHERE (O.area=#{area} or O.area=0) 
+		AND O.operator_type=#{operator} 
+		AND E.eventnumber=#{eventnumber}
+	</select> 
+
+	<!-- 查询活动赠送份数 -->
+	<select id="getAppTemptationSendQuantity" parameterType="String"
+		resultType="int">
+		SELECT quantity FROM app_temptation 
+		WHERE eventnumber=#{eventnumber}
+	</select>
+
+	<!-- 活动状态Map -->
+	<resultMap type="appTemptation" id="appTemptationStateMap">
+		<result property="state" column="state" />
+	</resultMap>
+
+	<!-- 根据活动标号获取活动状态 -->
+	<select id="getAppTemptationState" parameterType="Map" resultMap="appTemptationStateMap">
+		SELECT e.state FROM app_temptation e
+		WHERE e.eventnumber=#{eventnumber} 
+		AND usernumber=#{usernumber}
+	</select>
+
+	<!-- 查询活动步骤 -->
+	<select id="findAppTemptationStep" parameterType="Map" resultType="int">
+		SELECT step FROM app_temptation 
+		WHERE eventnumber=#{eventnumber} 
+		AND usernumber=#{usernumber}
+	</select>
+	
+	<!-- 查询活动已送出数量 -->
+	<select id="findAppTemptationSendedQuantity" parameterType="String"
+		resultType="int">
+		SELECT sendednum FROM app_temptation 
+		WHERE eventnumber=#{value}
+	</select>
+
+	<select id="getCountOfAppTemptation" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM app_temptation 
+		WHERE eventnumber=#{eventNumber}
+		AND usernumber=#{userNumber}
+	</select>
+	
+	<resultMap type="appCampaignStatistics" id="appTemptationStatisticsMap">
+		<result property="noneFinish" column="r0" />
+		<result property="notStarted" column="r1" />
+		<result property="inActive" column="r2" />
+		<result property="over" column="r3" />
+		<result property="cancled" column="r4" />
+	</resultMap>
+	
+	<!-- 查询所有不同状态统计 -->
+	<select id="appStatisticAppTemptation" parameterType="String" resultMap="appTemptationStatisticsMap">
+		select 
+		(select count(*) from app_temptation where state=0 and usernumber=#{value}) as r0,
+		(select count(*) from app_temptation where state=1 and usernumber=#{value}) as r1,
+		(select count(*) from app_temptation where state=2 and usernumber=#{value}) as r2,
+		(select count(*) from app_temptation where state=3 and usernumber=#{value}) as r3,
+		(select count(*) from app_temptation where state=4 and usernumber=#{value}) as r4
+	</select>
+
+	<insert id="createAppTemptation" parameterType="appTemptation">
+		INSERT INTO
+		app_temptation
+		(usernumber,eventnumber,eventname,createtime,starttime,
+		endingtime,sendway,quantity,sendednum,amount,costamount,state,step,repeat_enable,continuable,send_sms)
+		VALUES(#{usernumber},#{eventnumber},#{eventname},#{createtime},#{starttime},#{endingtime},#{sendway},
+		#{quantity},#{sendednum},#{amount},#{costamount},#{state},#{step},#{repeatEnable,jdbcType=BOOLEAN},
+		#{continuable,jdbcType=BOOLEAN},#{sendsms,jdbcType=BOOLEAN});
+	</insert> 
+
+	<insert id="createAppTemptationStrategy" parameterType="appTemptationStrategy">
+		INSERT INTO
+		app_temptation_strategy(strategynumber,eventnumber,area,operator,packageid,sendednum,state)
+		VALUES
+		(#{strategynumber},#{eventnumber},#{supportArea.value},#{supportOperator},#{trafficPackage.id},#{sendednum},#{state})
+	</insert>
+
+	<!-- 设置活动锁定美贝 -->
+	<update id="setAppTemptationLockedMbay" parameterType="Map">
+		UPDATE app_temptation 
+		SET amount=(quantity*#{maxpackageprice}) 
+		WHERE eventnumber=#{eventnumber}
+	</update>
+
+	<!--修改活动创建步骤，记录活动创建情况 -->
+	<update id="updateAppTemptationStep" parameterType="Map">
+		UPDATE app_temptation 
+		SET step=#{step} 
+		where eventnumber=#{eventnumber}
+	</update>
+
+	<!-- 修改活动状态 -->
+	<update id="updateAppTemptationState" parameterType="Map">
+		UPDATE app_temptation 
+		SET state=${state} 
+		where eventnumber=#{eventnumber}
+	</update>
+
+	<!-- 修改活动单个号码是否可多次参与 -->
+	<update id="updateAppTemptationRepeatEnable" parameterType="Map">
+		UPDATE app_temptation 
+		SET repeat_enable = ${repeat_enable} 
+		where eventnumber=#{eventnumber}
+	</update>
+
+	<!-- 修改活动超出数量是否可继续兑换 -->
+	<update id="updateAppTemptationContinuable" parameterType="Map">
+		UPDATE app_temptation 
+		SET continuable = ${continuable} 
+		where eventnumber=#{eventnumber}
+	</update>
+	
+	<!-- 修改活动短息提醒 -->
+	<update id="updateAppTemptationSendSms" parameterType="Map">
+		UPDATE app_temptation 
+		SET send_sms = ${sendsms} 
+		where eventnumber = #{eventnumber}
+	</update>
+	
+	<!--修改活动日期 -->
+	<update id="updateAppTemptationDate" parameterType="Map">
+		UPDATE app_temptation 
+		SET
+		<if test="eventstarttime!=null and eventstarttime!=''">
+			starttime=#{eventstarttime},
+		</if>
+		endingtime=#{eventendtime} 
+		where eventnumber=#{eventnumber}
+	</update>
+	
+	<select id="isExistingAppTemptation" parameterType="java.lang.String" resultType="boolean">
+	 	SELECT COUNT(*)>0 FROM  app_temptation  WHERE eventnumber=#{campaignNumber} AND usernumber=#{userNumber}
+	</select>
+	
+	<!-- 判断手机号是否可以参与当前活动 -->
+	<parameterMap type="map" id="appTemptationJudgeMap">
+		<parameter property="event_number" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="r_mobile" jdbcType="CHAR" mode="IN" />
+		<parameter property="renable" jdbcType="INTEGER" mode="OUT" />
+		<parameter property="message" jdbcType="VARCHAR" mode="OUT" />
+	</parameterMap>
+
+	<update id="appTemptationJudgeMobileReceiveEnable" parameterMap="appTemptationJudgeMap"
+		statementType="CALLABLE">
+		{call APP_TEMPTATION_JUDGE_MOBILE_RECEIVE_ENABLE (?,?,?,?)}
+	</update>
+
+	<!-- 完成活动调用存储过程 -->
+	<parameterMap type="map" id="appTemptationCampaignSendMap">
+		<parameter property="event_strategy_number" jdbcType="VARCHAR"
+			mode="IN" />
+		<parameter property="rowc" jdbcType="INTEGER" mode="OUT" />
+	</parameterMap>
+	<update id="appTemptationCampaignSend" parameterMap="appTemptationCampaignSendMap"
+		statementType="CALLABLE">
+		{call APP_TEMPTATION_SENT (?,?)}
+	</update>
+    
+    <resultMap type="appTemptationOrderStatistics" id="getAppTemptationOrderStatisticsMap">
+    	<result property="successNums" column="successNums" />
+    	<result property="failNums" column="failNums" />
+    	<result property="rechargingNums" column="rechargingNums" />
+    	<result property="unknownNums" column="unknownNums" />
+    </resultMap>
+    <select id="getAppTemptationOrderStatistics" parameterType="trafficOrderQO" 
+    		resultMap="getAppTemptationOrderStatisticsMap">
+    	SELECT
+    	(<include refid="getAppTemptationOrderStatisticsSQL" /> AND oper_r_status = 2) AS rechargingNums,
+    	(<include refid="getAppTemptationOrderStatisticsSQL" /> AND oper_r_status = 3) AS successNums,
+    	(<include refid="getAppTemptationOrderStatisticsSQL" /> AND oper_r_status = 4) AS failNums,
+    	(<include refid="getAppTemptationOrderStatisticsSQL" /> AND oper_r_status IS NULL) AS unknownNums
+    </select>
+    <sql id="getAppTemptationOrderStatisticsSQL">
+    	SELECT COUNT(*) FROM traffic_charge_order
+    	WHERE eventnumber = #{relateNumber}
+    	<if test="startTime != null">
+  			<![CDATA[
+    		AND createtime >= #{startTime}
+    		]]>
+    	</if>
+    	<if test="endTime != null">
+    		<![CDATA[
+    		AND createtime <= #{endTime}
+    		]]>
+    	</if>
+    </sql>
+	
+	<select id="findAllCampaignNumberOverToday" parameterType="java.util.Map" resultType="java.lang.String">
+		<![CDATA[ 
+		select eventnumber from app_temptation
+		where state = #{status} and endingtime < #{now}
+		]]>
+	</select>
+	
+	<select id="findAllCampaignNumberStartToday" parameterType="java.util.Map" resultType="java.lang.String">
+		<![CDATA[ 
+		select eventnumber from app_temptation
+		where state = #{status} and starttime <= #{now} and endingtime >= #{now}
+		]]>
+	</select>
+	
+	<update id="updateState" parameterType="java.util.Map">
+		update app_temptation set state = #{state} where eventnumber = #{number}
+	</update>
+	
+	<select id="getUserNumberByEventNumber" parameterType="java.lang.String" resultType="java.lang.String">
+		select usernumber from app_temptation where eventnumber = #{value}
+	</select>
+	
+	<select id="clearLocked" parameterType="java.lang.String">
+		update app_temptation set amount = 0 where eventnumber = #{value}
+	</select>
+	
+</mapper>

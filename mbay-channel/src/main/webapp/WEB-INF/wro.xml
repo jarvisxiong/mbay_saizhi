@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groups xmlns="http://www.isdc.ro/wro">
+	<!-- 前台页面 js 与 css -->
+	<!--登录之前页面布局公共样式 -->
+	<group name="portal-common">
+		<css>/css/common_file/portal-common.css</css>
+	</group>
+	<!-- 登录前，微信伴侣营销操作流程 -->
+	<group name="wxbldescription">
+		<js>/js/lib/back-to-top.js</js>
+		<css>/css/login/static/body.css</css>
+		<css>/css/login/static/back-to-top.css</css>
+	</group>
+
+	<group name="advert_in">
+		<css>/css/common_file/advert_in.css</css>
+	</group>
+	<group name="advert_out">
+		<css>/css/common_file/advert_out.css</css>
+		<css>/css/findpwd/findpwd-common.css</css>
+		<js>/js/btnshow.js</js>
+	</group>
+	<group name="header_in">
+		<css>/css/common_file/head.css</css>
+	</group>
+	<group name="leftcon">
+		<css>/css/common_file/left_nav.css</css>
+	</group>
+
+	<!-- account/findpwd 忘记密码 -->
+	<group name="manual-common">
+		<css>/css/findpwd/manual-common.css</css>
+	</group>
+	<group name="emailfind">
+		<css>/css/findpwd/email.css</css>
+	</group>
+	<group name="failed">
+		<css>/css/findpwd/find.css</css>
+	</group>
+	<!-- 手机找回密码页样式 -->
+	<group name="phonefind">
+		<css>/css/findpwd/phone.css</css>
+	</group>
+	<!-- 手工找回样式 -->
+	<group name="manual">
+		<css>/css/findpwd/manual.css</css>
+		<group-ref>manual-common</group-ref>
+	</group>
+	<group name="resetpwd">
+		<css>/css/findpwd/reset.css</css>
+		<js>/js/findpwd/resetpwd.js</js>
+
+	</group>
+	<group name="resetsuc">
+		<css>/css/findpwd/reset.css</css>
+
+	</group>
+	<!-- account/identify/enterprise 账户 认证 -->
+	<group name="auth_apply">
+		<js>/js/enterprise/auth_apply/checkimgfile.js</js>
+		<css>/css/auth/enterprise/auth_apply.css</css>
+
+	</group>
+	<group name="apply_success">
+		<css>/css/auth/enterprise/apply_success.css</css>
+
+	</group>
+	<!-- signup 账户注册 -->
+	<group name="enterprise_signup">
+		<css>/css/signup/enterprise/signup.css</css>
+
+	</group>
+	<!-- 注册提示 -->
+	<group name="enterprise_read_tips">
+		<css>/css/signup/enterprise/signup_intro.css</css>
+
+	</group>
+	<group name="enterprise_signup_success">
+		<css>/css/signup/enterprise/signup_success.css</css>
+
+	</group>
+	<!-- 工作台 -->
+	<group name="workbench">
+		<css>/css/work.css</css>
+		<js>/js/portal/work.js</js>
+	</group>
+	<!--global -->
+	<group name="prompt">
+		<css>/css/prompt/404.css</css>
+	</group>
+
+	<!-- 此css为右侧通用css -->
+	<group name="base">
+		<css>/css/base.css</css>
+	</group>
+	<!-- 此css为右侧通用css -->
+	<group name="web_common">
+		<css>/css/web_common.css</css>
+	</group>
+
+	<!-- 收支明细 -->
+	<group name="account_detail">
+		<css>/css/account/accountdetail.css</css>
+	</group>
+	<!-- 公告列表 -->
+	<group name="announce_list">
+		<css>/css/announcement/announce_list.css</css>
+	</group>
+
+	<group name="outboxmessage">
+		<css>/css/emailMessage/receivemessage.css</css>
+		<css>/css/emailMessage/page.css</css>
+		<js>/js/emailMessage/receivemessage.js</js>
+	</group>
+
+	<group name="writemessage">
+		<css>/css/manage/writemessage.css</css>
+		<css>/css/emailMessage/style.css</css>
+		<css>/css/emailMessage/demo.css</css>
+		<js>/js/emailMessage/writemessage.js</js>
+		<js>/js/findagents.js</js>
+	</group>
+
+	<!--客户关怀添加 -->
+	<group name="customerServerAdd">
+		<css>/css/customercare/batch_recharge_fill.css</css>
+		<js>/js/customercare/batch_recharge_fill.js</js>
+	</group>
+
+	<!--客户关怀批充记录表 -->
+	<group name="batch_charge_items">
+		<css>/css/customercare/recharge_mobiles_info.css</css>
+	</group>
+
+	<group name="batch_mobile_info">
+		<group-ref>batch_charge_items</group-ref>
+
+		<!--<js>/js/inside_right_part/common_js.js</js> -->
+	</group>
+	<group name="servermanager">
+		<css>/css/customercare/batch_charge_list.css</css>
+		<js>/js/customercare/batch_charge_list.js</js>
+	</group>
+
+	<!-- account -->
+	<group name="account_recharge_pay">
+		<css>/css/account/online.css</css>
+		<css>/css/lib/easydialog.css</css>
+		<js>/js/account/online.js</js>
+	</group>
+	<!-- 账户管理 -->
+	<group name="accountmanager">
+		<css>/css/account/accountmanager.css</css>
+	</group>
+	
+	<!-- 美贝充值 -->
+	<group name="depositPreprocess">
+		<css>/css/account/depositPreprocess.css</css>
+	</group>
+	<!-- 汇款记录 -->
+	<group name="table_list">
+		<css>/css/lib/right_part/table_list.css</css>
+	</group>
+	<!-- 设置美贝阀值 -->
+	<group name="set_remind">
+		<css>/css/user_remind/set_remind.css</css>
+		<js>/js/account/user_remind/set_remind.js</js>
+	</group>
+	<!--错误 消息提示页面 -->
+	<group name="message_notice">
+		<css>/css/message_notice.css</css>
+	</group>
+	<!-- 活动统计 -->
+	<group name="campaign_statistics">
+		<group-ref>table_list</group-ref>
+		<css>/css/campaignStatistics/statistics.css</css>
+	</group>
+	<!-- o2o_activity -->
+	<group name="store_detail">
+		<js>/js/o2oactivity/activity/activity.js</js>
+	</group>
+	
+	<group name="wechat_campaign_add">
+		<css>/css/wechat_campaign/event_add.css</css>
+		<css>/css/switch.css</css>
+		<css>/css/wechat_campaign/eventstrategy.css</css>
+		<js>/js/wechat_campaign/addevent.js</js>
+		<js>/js/campaign_common/select_strategy.js</js>
+		<js>/js/lib/switch.js</js>
+	</group>
+	<!--促销神器活动详情 -->
+	<group name="campaign_infoes">
+		<css>/css/manage/strategyinfo.css</css>
+		<css>/css/promotion_campaign/promotion_event_info.css</css>
+		<css>/css/promotion_campaign/switch.css</css>
+		<js>/js/wechat_campaign/strategyinfo.js</js>
+		<js>/js/lib/switch.js</js>
+	</group>
+	
+	<group name="code_list">
+		<css>/css/promotion_campaign/code_list.css</css>
+	</group>
+	
+	<group name="wechat_campaign_selectpattern">
+		<css>/css/wechat_campaign/choosePattern.css</css>
+	</group>
+	
+	<group name="set_template_successes">
+		<css>/css/wechat_campaign/developmodel.css</css>
+		<js>/js/lib/banbackbrowser.js</js>
+	</group>
+	<group name="set_template">
+		<css>/css/wechat_campaign/advanced.css</css>
+		<css>/css/promotion_campaign/promotion_edit.css</css>
+		<js>/js/lib/banbackbrowser.js</js>
+		<js>/js/lib/uploadimg.js</js>
+	</group>
+	<!-- trade/record -->
+	<group name="transfer_detail">
+		<css>/css/trade_detail/transfer_detail.css</css>
+	</group>
+	<!-- traffic -->
+	<group name="redeemtraffic">
+		<css>/css/traffic/redeemtraffic.css</css>
+	</group>
+	<!-- transfer -->
+	<group name="error">
+		<css>/css/error.css</css>
+	</group>
+	<group name="confirm">
+		<css>/css/transfer/confirm.css</css>
+	</group>
+	<!-- transfer/payment -->
+	<group name="fill">
+		<css>/css/transfer/fill.css</css>
+		<js>/js/findagents.js</js>
+	</group>
+	<group name="transfer_success" >
+	<css>/css/transfer/transfer_success.css</css>
+	</group>
+	<!-- wechat/template -->
+	<group name="promotion_1">
+		<css>/css/wechat/promotion_template.css</css>
+		<js>/js/promotion_campaign/redeemPromotion.js</js>
+	</group>
+	<group name="redeem_1">
+		<css>/wechat/template/temp/share.css</css>
+	</group>
+	<group name="wechat_1">
+		<css>/css/mobile/share.css</css>
+		<css>/css/mobile/mbayui.css</css>
+	</group>
+	<!-- wechat -->
+	<group name="trafficQuery">
+		<css>/css/wechat/share.css</css>
+	</group>
+	<group name="trafficsuccess">
+		<css>/css/wechat/trafficsuccess.css</css>
+	</group>
+
+<!-- 促销神器 -->
+	<group name="promotion_campaign_add">
+		<css>/css/promotion_event/event_add.css</css>
+		<css>/css/switch.css</css>
+		<css>/css/promotion_event/eventstrategy.css</css>
+		<js>/js/wechat_campaign/addevent.js</js>
+		<js>/js/campaign_common/select_strategy.js</js>
+		<js>/js/lib/switch.js</js>
+	</group>
+	
+	<group name="campaign_info">
+		<css>/css/manage/strategyinfo.css</css>
+		<css>/css/promotion_campaign/switch.css</css>
+		<js>/js/wechat_campaign/strategyinfo.js</js>
+		<!--<js>/js/inside_right_part/common_js.js</js> -->
+		<js>/js/lib/switch.js</js>
+	</group>
+	<group name="review_template">
+		<css>/css/wechat_campaign/editmodel_review.css</css>
+		<js>/js/lib/uploadimg.js</js>
+		<js>/js/lib/banbackbrowser.js</js>
+	</group>
+	<group name="set_template_success">
+		<css>/css/wechat_campaign/developmodel.css</css>
+		<js>/js/lib/banbackbrowser.js</js>
+	</group>
+	<group name="set_templatees">
+		<css>/css/wechat_campaign/set_template.css</css>
+		<css>/css/wechat_campaign/advanced.css</css>
+		<js>/js/lib/banbackbrowser.js</js>
+		<js>/js/lib/uploadimg.js</js>
+		<js>/js/wechat_campaign/set_template.js</js>
+		<js>/js/edit_model_share.js</js>
+	</group>
+	<group name="workbenches">
+		<group-ref>table_list</group-ref>
+		<css>/css/wechat_campaign/workbench.css</css>
+	</group>
+	
+	<!-- mall_list -->
+	<group name="mall_list">
+		<css>/css/mall/exchange_item_list.css</css>
+		<js>/js/mall/mall_list.js</js>
+	</group>
+	
+	<!-- mall_add -->
+	<group name="mall_add">
+		<css>/css/switch.css</css>
+		<css>/css/mall/add_exchange_item.css</css>
+		<js>/js/mall/mall_add.js</js>
+		<js>/js/lib/switch.js</js>
+	</group>
+</groups>

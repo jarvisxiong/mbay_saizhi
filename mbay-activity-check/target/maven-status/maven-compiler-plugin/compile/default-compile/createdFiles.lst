@@ -1,0 +1,13 @@
+cn/mbpartner/mbay/activity/check/service/impl/EventServiceImpl.class
+cn/mbpartner/mbay/activity/check/service/UserService.class
+cn/mbpartner/mbay/activity/check/task/ActivityExpiredCheck.class
+cn/mbpartner/mbay/activity/check/dao/EventDao.class
+cn/mbpartner/mbay/activity/check/task/Task.class
+cn/mbpartner/mbay/activity/check/dao/impl/EventDaoImpl.class
+cn/mbpartner/mbay/activity/check/dao/UserDao.class
+cn/mbpartner/mbay/activity/check/task/ActivityExperdCheckThread.class
+cn/mbpartner/mbay/activity/check/service/impl/UserServiceImpl.class
+cn/mbpartner/mbay/activity/check/dao/impl/UserDaoImpl.class
+cn/mbpartner/mbay/activity/check/service/EventService.class
+cn/mbpartner/mbay/activity/check/task/TaskList.class
+cn/mbpartner/mbay/activity/check/context/SpringApplicationContext.class

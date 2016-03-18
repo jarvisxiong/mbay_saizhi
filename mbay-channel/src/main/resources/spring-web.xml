@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd   
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd 
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://www.springframework.org/schema/aop  
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	
+	<context:component-scan base-package="org.sz.mbay.channel.api.**" />
+	<context:component-scan base-package="org.sz.mbay.channel.exception" />
+
+	<!-- 指定视图解析器，springmvc内部定义了很多视图解析器，此处引入根据实体名称解析视图，并将其优先级设置为最高,（主要是根据bean名称来数据表现为其他数据表现像是，如excel，pdf等视图） -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
+		p:order="0" />
+	<bean id="storeListExcel" class="org.sz.mbay.channel.web.spring.dataView.StoreExcelView" />
+	<bean id="campaignListExcel"
+		class="org.sz.mbay.channel.web.spring.dataView.CampaignExcelView" />
+	<bean id="appTemptationResultListExcel"
+		class="org.sz.mbay.channel.web.spring.dataView.AppTemptationResultListExcel" />
+	<bean id="appTemptationRecordExcel"
+		class="org.sz.mbay.channel.web.spring.dataView.AppTemptationRecordExcel" />
+	<bean id="trafficRecordDownload"
+		class="org.sz.mbay.channel.web.spring.dataView.TrafficOrderCSVDownlaod" />
+		
+
+	<!--//h/：指定ViewResolver 为InternalResourceViewResolver -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<bean id="conversionService"
+		class="org.springframework.context.support.ConversionServiceFactoryBean" />
+		
+	<mvc:interceptors>
+
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<!--异常页面  -->
+			<mvc:exclude-mapping path="/exception/**" />
+			<mvc:exclude-mapping path="/promotion/generate_code.mbay" /><!-- 
+				生成兑换码 -->
+			<mvc:exclude-mapping path="/notify/**" />
+			<mvc:exclude-mapping path="/authcode/*.mbay" />
+			<mvc:exclude-mapping path="/channel/index.mbay" />
+			<mvc:exclude-mapping path="/channel/toLogin.mbay" />
+			<mvc:exclude-mapping path="/resetpwd/findpwd/**" />
+			<mvc:exclude-mapping path="/channel/lginout.mbay" />
+			<mvc:exclude-mapping path="/channel/login.mbay" />
+			<mvc:exclude-mapping path="/channel/getcertimg.mbay" />
+			<mvc:exclude-mapping path="/channel/encryption/*.mbay" />
+			<mvc:exclude-mapping path="/channel/ajax/*.mbay" />
+			<mvc:exclude-mapping path="/redeemcode/get.mbay" />
+			<mvc:exclude-mapping path="/signup/**" />
+			<mvc:exclude-mapping path="/template/**" />
+			<mvc:exclude-mapping path="/eventtraffic/**" />
+			<mvc:exclude-mapping path="/api/**" />
+			<mvc:exclude-mapping path="/certificate/auth/**" />
+			<mvc:exclude-mapping path="/wechat/template/*.jsp" />
+			<mvc:exclude-mapping path="/eopi/**" />
+			<mvc:exclude-mapping path="/advanced/**" />
+			<!-- 兑换码兑换流量 -->
+			<mvc:exclude-mapping path="/redeemcode/**" />
+			<!-- 兑换码兑换流量 -->
+			<mvc:exclude-mapping path="/promotionCampaign/redeem_code/**" />
+			<!-- 请求二维码 -->
+			<mvc:exclude-mapping path="/qrcode/**" />
+			<!-- 根据Id查找店面活动 -->
+			<mvc:exclude-mapping path="/store/{sid}/listCampaign.mbay" />
+			<!-- 兑换页面 -->
+			<mvc:exclude-mapping path="/store/redeemUI.mbay" />
+			<!-- o2o门店互动有关普通客户C来请求兑换 -->
+			<mvc:exclude-mapping path="/campaign/join/**" />
+			<!-- o2o操作员有关页面 -->
+			<mvc:exclude-mapping path="/store_ope/*" />
+			<mvc:exclude-mapping path="/wechat/*" />
+			<!-- 获取图片 -->
+			<mvc:exclude-mapping path="/images/**" />
+			<!-- 流米 -->
+			<mvc:exclude-mapping path="/liumi/**" />
+			<!-- 流量红包 -->
+			<mvc:exclude-mapping path="/tr_mobile/**" />
+			<!-- 平安 -->
+			<mvc:exclude-mapping path="/pingan/**" />
+			
+			<bean class="org.sz.mbay.channel.intercept.AuthIntercept" />
+		</mvc:interceptor>
+
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="org.sz.mbay.base.intercept.CacheControlHandlerInterceptor"></bean>
+		</mvc:interceptor>
+
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="org.sz.mbay.base.intercept.TokenIntercept"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- 上传接收100M的总文件大小 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="maxUploadSize" value="104857600" />
+	</bean>
+
+</beans>

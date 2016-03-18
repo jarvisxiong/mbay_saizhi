@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Hcode">
+	<select id="findHcodeInfoBycode" parameterType="String"	resultType="hcodeinfo">		
+		 SELECT prov_code provcode,operator FROM hcode where hcode=#{value}
+	</select>
+	
+	<select id="findHcodeattribution" parameterType="String"
+		resultType="hcodeinfo">		
+		 SELECT province attribution,operator,prov_code provcode FROM hcode where hcode=#{value}
+	</select>
+
+</mapper>

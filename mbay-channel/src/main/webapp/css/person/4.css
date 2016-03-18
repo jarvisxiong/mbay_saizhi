@@ -1,0 +1,266 @@
+@charset "utf-8";
+/*总体*/
+.reg_s {
+	background: #F9F9F9;
+	overflow: hidden
+}
+/*进度条*/
+.jindu {
+	margin-top: 70px;
+	height: 90px;
+	margin-bottom: 50px
+}
+
+.jd {
+	height: 90px;
+	position: relative
+}
+
+.jd_box {
+	height: 30px;
+	width: 60px;
+	margin-top: 30px
+}
+
+.jd_1 {
+	background: url(../../images/person/images/icons/mb_1.png) center
+		no-repeat;
+	margin-left: 95px
+}
+
+.jd_2 {
+	background: url(../../images/person/images/icons/mb_6.png) center
+		no-repeat
+}
+
+.jd_3 {
+	background: url(../../images/person/images/icons/mb_7.png) center
+		no-repeat
+}
+
+.jd_4 {
+	background: url(../../images/person/images/icons/mb_8.png) center
+		no-repeat
+}
+
+.jd_5 {
+	background: url(../../images/person/images/icons/mb_5.png) center
+		no-repeat
+}
+
+.jd_b {
+	height: 90px;
+	width: 148px;
+	background: url(../../images/person/images/icons/jd_bar.jpg) center
+		no-repeat
+}
+
+.sp {
+	background: url(../../images/person/images/icons/jd_bar_2.jpg) center
+		no-repeat
+}
+/*进度条文字*/
+.wenzi_1 {
+	position: absolute;
+	bottom: 5px;
+	left: 107px;
+	color: #f16f20;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_2 {
+	position: absolute;
+	bottom: 5px;
+	left: 326px;
+	color: #f16f20;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_3 {
+	position: absolute;
+	bottom: 5px;
+	left: 462px;
+	color: #f16f20;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_4 {
+	position: absolute;
+	bottom: 5px;
+	left: 730px;
+	color: #f16f20;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_5 {
+	position: absolute;
+	bottom: 5px;
+	left: 810px;
+	color: #b7b7b7;
+	font-family: 'Microsoft YaHei';
+}
+
+.findback {
+	font-family: 'Microsoft YaHei';
+	width: 880px;
+	margin: 0px auto;
+	box-shadow: 0 0 5px #c7c5c5;
+	box-shadow: 0 0 5px #c7c5c5;
+	border: 1px solid #e7e7e7;
+	margin-bottom: 200px;
+	background: white
+}
+/*个人信息完善*/
+.person {
+	font-family: 'Microsoft YaHei';
+	width: 880px;
+	margin: 0px auto;
+	box-shadow: 0 0 5px #c7c5c5;
+	box-shadow: 0 0 5px #c7c5c5;
+	border: 1px solid #e7e7e7;
+	margin-bottom: 200px;
+	background: white;
+	height: 100%
+}
+
+.qy_con b {
+	vertical-align: middle;
+	color: #F00
+}
+
+.person h1 {
+	text-align: center;
+	color: #f16f20;
+	margin-top: 50px;
+	letter-spacing: 2px;
+}
+
+.person h2 {
+	text-align: center;
+	color: #f16f20;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	letter-spacing: 2px;
+}
+
+.person label {
+	display: inline-block;
+	width: 300px;
+	text-align: right;
+	color: #4c4c4c;
+	font-size: 14px;
+	margin-right: 30px;
+	line-height: 34px;
+}
+
+.qy_con div {
+	margin-bottom: 15px;
+}
+
+#identityNo,#email,#telephone,#yzm,#true_name,#address {
+	padding-left: 8px;
+	width: 210px;
+	height: 30px;
+	border: 1px solid #c1c1c1;
+}
+
+.hkszd select {
+	width: 100px;
+	height: 30px;
+	border: 1px solid #c1c1c1;
+}
+
+.zjlx select {
+	width: 220px;
+	height: 30px;
+	border: 1px solid #c1c1c1;
+}
+
+.person .gender {
+	width: 30px
+}
+
+.hqyma {
+	width: 100px;
+	height: 25px;
+	background: url(../../images/person/images/icons/btn_1.jpg);
+	letter-spacing: 2px;
+	color: #FFF;
+	border-radius: 4px;
+	font-family: 'Microsoft YaHei'
+}
+
+.grayhqyma {
+	width: 100px;
+	height: 25px;
+	background: url(../../images/person/images/icons/grayback.png);
+	letter-spacing: 2px;
+	color: #FFF;
+	border-radius: 4px;
+	font-family: 'Microsoft YaHei'
+}
+
+.btn {
+	text-align: center;
+	margin-top: 60px;
+	clear: left;
+}
+
+#btn_1,#btn_2 {
+	text-align: center;
+	cursor: pointer;
+	display: inline-block;
+	width: 120px;
+	height: 37px;
+	color: #FFFFFF;
+	font-family: 'Microsoft YaHei';
+	font-size: 14px;
+	background: url(../../images/person/images/icons/btn_1.jpg) center
+		repeat-x;
+	border-radius: 4px;
+}
+
+#btn_1 {
+	margin-right: 60px
+}
+
+.fddbr span {
+	color: #FF2626
+}
+
+/*验证*/
+.person label.error {
+	width: 220px;
+	text-align: left;
+	margin-left: 10px;
+	font-size: 1em;
+	vertical-align: bottom;
+	color: rgb(240, 23, 23);
+	height: 32px;
+	line-height: 32px;
+	padding-left: 16px;
+	background: url(../../images/error.png) no-repeat left
+}
+
+.valid {
+	background: url(../../images/reg_succ.png) no-repeat right;
+}
+
+select.valid {
+	background: none
+}
+
+.lxsj label.error {
+	width: 100px;
+	position: absolute;
+	right: 60px;
+	top: 360px;
+}
+
+.qy_con {
+	position: relative
+}
+
+.zjzm input,.zjfm input {
+	width: 220px
+}

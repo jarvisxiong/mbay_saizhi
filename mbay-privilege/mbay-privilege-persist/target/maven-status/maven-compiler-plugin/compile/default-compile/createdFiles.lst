@@ -1,0 +1,15 @@
+org/sz/mbay/privilege/dao/impl/PrivilegeDaoImpl.class
+org/sz/mbay/privilege/bean/RolePrivilege.class
+org/sz/mbay/privilege/dao/PrivilegeDao.class
+org/sz/mbay/privilege/dao/BuserDao.class
+org/sz/mbay/privilege/bean/BuserRole.class
+org/sz/mbay/privilege/dao/impl/BuserDaoImpl.class
+org/sz/mbay/privilege/dao/impl/RoleDaoImpl.class
+org/sz/mbay/privilege/bean/Privilege.class
+org/sz/mbay/privilege/dao/BuserRoleDao.class
+org/sz/mbay/privilege/bean/Role.class
+org/sz/mbay/privilege/dao/RoleDao.class
+org/sz/mbay/privilege/bean/Buser.class
+org/sz/mbay/privilege/dao/impl/RolePrivilegeDaoImpl.class
+org/sz/mbay/privilege/dao/RolePrivilegeDao.class
+org/sz/mbay/privilege/dao/impl/BuserRoleDaoImpl.class

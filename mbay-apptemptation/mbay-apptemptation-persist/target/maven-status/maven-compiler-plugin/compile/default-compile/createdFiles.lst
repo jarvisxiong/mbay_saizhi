@@ -1,0 +1,14 @@
+org/sz/mbay/apptemptation/bean/AppTemptationAdvanced.class
+org/sz/mbay/apptemptation/dao/impl/AppTemptationDaoImpl.class
+org/sz/mbay/apptemptation/bean/AppCampaignStatistics.class
+org/sz/mbay/apptemptation/form/AppTemptationForm.class
+org/sz/mbay/apptemptation/bean/AppTemptationOrderStatistics.class
+org/sz/mbay/apptemptation/dao/AppTemptationIpWhiteListDao.class
+org/sz/mbay/apptemptation/dao/impl/AppTemptationBindIpDaoImpl.class
+org/sz/mbay/apptemptation/bean/AppTemptationIpWhiteList.class
+org/sz/mbay/apptemptation/bean/AppTemptationBindIp.class
+org/sz/mbay/apptemptation/dao/AppTemptationDao.class
+org/sz/mbay/apptemptation/bean/AppTemptation.class
+org/sz/mbay/apptemptation/dao/AppTemptationBindIpDao.class
+org/sz/mbay/apptemptation/dao/impl/AppTemptationIpWhiteListDaoImpl.class
+org/sz/mbay/apptemptation/bean/AppTemptationStrategy.class

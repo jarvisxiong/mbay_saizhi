@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TrafficRedAdvancedConfig">
+
+	<resultMap type="trafficRedAdvancedConfig" id="findTrafficRedadvancedConfigMap">
+		<result property="campaignId" column="campaign_id" />
+		<result property="key" column="key" />
+		<result property="enabled" column="enabled" />
+	</resultMap>
+	<select id="findTrafficRedAdvancedConfig" resultMap="findTrafficRedadvancedConfigMap">
+		SELECT campaign_id, `key`,enabled
+		FROM tr_advanced_config  where campaign_id=#{value}
+	</select>
+	<insert id="createTrafficRedAdvancedConfig" parameterType="trafficRedAdvancedConfig" >
+	 INSERT INTO tr_advanced_config (campaign_id,`key`,enabled) values (#{campaignId},#{key},#{enabled});
+	</insert>
+	
+	<update id="updateAdvanceedConfigKey" parameterType="Map">
+	  update tr_advanced_config SET `key`=#{key} WHERE campaign_id=#{campaignId}
+	</update>
+	
+	<update id="updateConfigEnableStatus" parameterType="Map">
+	  update tr_advanced_config SET enabled=#{enabled} WHERE campaign_id=#{campaignId}	
+	</update>
+	
+
+</mapper>

@@ -1,0 +1,6 @@
+org/sz/mbay/stationLetter/bean/UserStationLetter.class
+org/sz/mbay/stationLetter/dao/UserStationLetterDao.class
+org/sz/mbay/stationLetter/bean/StationLetter.class
+org/sz/mbay/stationLetter/dao/impl/UserStationLetterDaoImpl.class
+org/sz/mbay/stationLetter/dao/StationLetterDao.class
+org/sz/mbay/stationLetter/dao/impl/StationLetterDaoImpl.class

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="MbayDepositOrder">
+    <resultMap type="mbayDepositOrder" id="mbayDepositOrderInfoMap">
+      <result property="depositNumber" column="depositnumber" />
+      <result property="usernumber" column="usernumber" />
+      <result property="mbayQuantity" column="mbayquantity" />
+      <result property="price" column="price" />
+      <result property="createtime" column="createtime" />
+      <result property="state" column="state" />
+    </resultMap>
+    <insert id="createMbayDepositOrder" parameterType="mbayDepositOrder">
+        INSERT INTO mbay_deposit_order(depositnumber, usernumber, mbayquantity, price, createtime, state)
+        VALUES(#{depositNumber}, #{usernumber}, #{mbayQuantity}, #{price}, #{createtime}, #{state})
+    </insert>
+
+    <select id="findMbayDepositOrder" parameterType="Map" resultMap="mbayDepositOrderInfoMap">
+      SELECT depositnumber, usernumber, mbayquantity, price, createtime, state FROM mbay_deposit_order WHERE 
+      depositnumber = #{depositnumber} AND usernumber = #{usernumber}
+    </select>
+
+    <select id="findAllMbayDepositOrder" parameterType="Map" resultMap="mbayDepositOrderInfoMap">
+      SELECT depositnumber, usernumber, mbayquantity, price, createtime, state FROM mbay_deposit_order WHERE 
+      usernumber = #{userNumber}
+      <if test="depositNumber != null and depositNumber != ''">
+        and depositNumber = #{depositNumber}
+      </if>
+      <choose>
+          <when test="starttime != null and endtime == null and depositNumber != ''">
+            and createtime &gt; #{starttime}
+          </when>
+          <when test="starttime == null and endtime != null ">
+            and createtime  &lt; #{endtime}
+          </when>
+          <when test="starttime != null and endtime != null ">
+            and createtime between #{starttime} and #{endtime}
+          </when>
+      </choose>
+      order by createtime desc
+    </select>
+
+    <select id="countMbayDepositOrder" parameterType="Map" resultType="java.lang.Integer">
+      SELECT count(*) FROM mbay_deposit_order WHERE 
+      usernumber = #{userNumber}
+      <if test="depositNumber != null">
+        and depositNumber = #{depositNumber}
+      </if>
+      <choose>
+          <when test="starttime != null and endtime == null">
+            and createtime &gt; #{starttime}
+          </when>
+          <when test="starttime == null and endtime != null ">
+            and createtime &lt; #{endtime}
+          </when>
+          <when test="starttime != null and endtime != null ">
+            and createtime between #{starttime} and #{endtime}
+          </when>
+      </choose>
+    </select>
+</mapper>

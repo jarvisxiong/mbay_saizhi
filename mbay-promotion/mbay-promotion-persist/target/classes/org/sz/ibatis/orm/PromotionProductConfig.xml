@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PromotionProductConfig">
+
+	<resultMap type="promotionProductConfig" id="base_result_map">
+		<result property="id" column="id" />
+		<result property="campaignNumber" column="campaign_number" />
+		<result property="productType" column="product_type" />
+		<result property="poolSize" column="pool_size" />
+		<result property="poolRemain" column="pool_remain" />
+		<result property="dailyLimit" column="daily_limit" />
+		<result property="dailyRemain" column="daily_remain" />
+		<result property="threshold" column="threshold" />
+		<result property="thresholdWarned" column="threshold_warned" />
+	</resultMap>
+
+	<sql id="base_column_list">
+		id,campaign_number,product_type,pool_size,pool_remain,daily_limit,daily_remain,
+		threshold,threshold_warned
+	</sql>
+	
+	<select id="findPromotionProductConfigByCampaignNumberAndProductType" resultMap="base_result_map" parameterType="Map">
+		SELECT
+		<include refid="base_column_list" />
+		FROM promotion_product_config
+		WHERE campaign_number=#{campaignNumber} AND
+		product_type=#{type}
+	</select>
+	
+	<insert id="createPromotionProductConfig" parameterType="promotionProductConfig">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(id),0)+1 id FROM promotion_product_config
+		</selectKey>
+		INSERT INTO promotion_product_config (<include refid="base_column_list" />)
+		VALUES(#{id},#{campaignNumber},#{productType},#{poolSize},#{poolRemain},#{dailyLimit},#{dailyRemain},#{threshold},#{thresholdWarned})
+	</insert>
+	
+	<parameterMap type="map" id="highlineMap">
+		<parameter property="campaignNumber" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="productType" jdbcType="INTEGER" mode="IN" />
+		<parameter property="dailyLimit" jdbcType="DOUBLE" mode="IN" />
+		<parameter property="rowcount" jdbcType="INTEGER" mode="OUT" />
+	</parameterMap>
+	<update id="updatePromotionProductDailyLimit" parameterMap="highlineMap"
+		statementType="CALLABLE">
+		{call UPDATE_PROMOTION_CAMPAIGN_PRODUCT_HIGHLINE (?,?,?,?)}
+	</update>
+	
+	<select id="isSelectedPromotionProduct" parameterType="Map" resultType="boolean">
+		SELECT COUNT(*)=1 FROM promotion_product_config WHERE
+		campaign_number=#{campaignNumber} AND product_type=#{productType}
+	</select>	
+	
+	<update id="increasePromotionProductPoolSize" parameterType="Map">
+		UPDATE promotion_product_config SET
+		pool_size=pool_size+#{mbay},pool_remain=pool_remain+#{mbay}
+		WHERE
+		campaign_number=#{campaignNumber} AND product_type=#{productType}
+	</update>
+	
+	<select id="isPromotionProductPoolRemainLessThanThreshold" parameterType="Map" resultType="boolean">
+		<![CDATA[ 
+		SELECT 
+		   CASE 
+		      WHEN threshold = -1 THEN 0 
+		      WHEN pool_remain > threshold THEN  0
+		      WHEN pool_remain <= threshold THEN 1
+		   END 
+		FROM promotion_product_config WHERE campaign_number=#{campaignNumber} AND product_type=#{productType};
+		]]>
+	</select>
+	
+	<update id="updatePromotionProductThresholdStatus" parameterType="Map">
+		UPDATE promotion_product_config SET threshold_warned=#{warnStatus} WHERE
+		campaign_number=#{campaignNumber} AND
+		product_type=#{productType} AND
+		threshold_warned !=#{warnStatus}
+	</update>
+	
+	<update id="updatePromotionProductThreshold" parameterType="Map">
+		UPDATE
+		promotion_product_config SET threshold=#{threshold} WHERE
+		campaign_number=#{campaignNumber} AND product_type=#{productType};
+	</update>
+	
+	<update id="clearPromotionConfig" parameterType="String">
+		update promotion_product_config
+		set pool_remain = 0, daily_remain = 0
+		where campaign_number = #{value}
+	</update>
+	
+	<select id="reducePromotionProductPoolRemain" parameterType="Map"
+		resultType="int">
+		UPDATE promotion_product_config SET
+		pool_remain=pool_remain-#{mbay} WHERE
+		campaign_number=#{campaignNumber} AND
+		product_type=#{productType}
+		AND pool_remain-#{mbay}>=0
+	</select>
+	
+	<select id="reducePromotionProductDailyRemain" parameterType="Map"
+		resultType="int">
+		UPDATE promotion_product_config SET
+		daily_remain=daily_remain-#{mbay} WHERE
+		campaign_number=#{campaignNumber} AND
+		product_type=#{productType}
+		AND daily_remain-#{mbay}>=0
+	</select>
+	
+	<select id="findPromotionProductDailyLimit" parameterType="Map"
+		resultType="double">
+		SELECT daily_limit FROM promotion_product_config WHERE
+		campaign_number=#{campaignNumber}
+		and product_type=#{productType}
+	</select>
+	
+	<resultMap type="thresholdWarnInfo" id="thresholdWarnInfoMap">
+		<result property="campaignName" column="eventname" />
+		<result property="warningMobile" column="threshold_mobile" />
+		<result property="threshold" column="threshold" />
+		<result property="isWarned" column="threshold_warned" />
+	</resultMap>
+	<select id="findPromotionThresholdWarnInfo" parameterType="Map" resultMap="thresholdWarnInfoMap">
+		SELECT c.eventname,c.threshold_mobile,pc.threshold,pc.threshold_warned FROM
+		promotion_product_config pc
+		LEFT JOIN promotion_campaign c ON pc.campaign_number=c.eventnumber
+		WHERE pc.campaign_number=#{campaignNumber} AND product_type=#{productType};
+	</select>
+	
+	<update id="resetDailyRemain" statementType="CALLABLE">
+		{call promotion_resetDailyRemain()}
+	</update>
+</mapper>

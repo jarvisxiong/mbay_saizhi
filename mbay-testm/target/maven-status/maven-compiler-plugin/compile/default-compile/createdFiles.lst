@@ -1,0 +1,6 @@
+org/sz/mbay/testm/service/UserServiceImpl.class
+org/sz/mbay/testm/dao/UserDao.class
+org/sz/mbay/testm/dao/UserDaoImpl.class
+org/sz/mbay/testm/service/UserService.class
+org/sz/mbay/testm/bean/User.class
+org/sz/mbay/testm/controller/TestmController.class

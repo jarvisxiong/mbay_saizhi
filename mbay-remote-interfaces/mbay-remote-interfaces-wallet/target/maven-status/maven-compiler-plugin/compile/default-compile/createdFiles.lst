@@ -1,0 +1,6 @@
+org/sz/mbay/remote/interfaces/wallet/RITradeRecordUtil.class
+org/sz/mbay/remote/interfaces/wallet/base/RIUtil.class
+org/sz/mbay/remote/interfaces/wallet/base/RIResponse.class
+org/sz/mbay/remote/interfaces/wallet/RIUserUtil.class
+org/sz/mbay/remote/interfaces/wallet/config/Config.class
+org/sz/mbay/remote/interfaces/wallet/RIMBAccountUtil.class

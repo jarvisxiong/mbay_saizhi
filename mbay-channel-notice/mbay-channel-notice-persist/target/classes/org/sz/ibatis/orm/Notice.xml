@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Notice">
+    <resultMap type="notice" id="noticeInfo">
+      <result property="title" column="title" />
+      <result property="noticedate" column="noticedate" />
+      <result property="content" column="content" />
+    </resultMap>
+  <!--   
+	<sql id="accountNoticeWhere">
+	 <if test="title!=null and title!=''">
+	      AND  title like  '#{title}'
+	   </if> 
+	</sql>
+	 -->
+	<!-- <sql id="accountNoticeWhere">	  
+	   <if test="starttime!=null and starttime!=''">
+	      AND  time>= #{starttime} 
+	   </if>
+	 	<if test="endtime!=null and endtime!=''">
+	   <![CDATA[AND  time<= #{endtime} ]]>
+	   </if> 
+	</sql>	  -->
+	
+	<insert id="createNotice" parameterType="notice">
+	   <selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(id),0)+1 id FROM zcc_notice
+		</selectKey>
+	 INSERT INTO zcc_notice(id,title,content,flag,noticedate) 
+	 VALUES (#{id},#{title},#{content},#{flag},now());
+	</insert>
+
+	<select id="findAllNotice" resultMap="noticeInfo">
+		select * from zcc_notice where  flag=0  
+		 ORDER  BY noticedate DESC			
+	</select>
+	
+	<select id="findNotice" resultMap="noticeInfo" parameterType="int">
+		select * from zcc_notice where id=#{value}
+	</select>
+	
+	<select id="countNotice" resultType="int">
+		select count(*) from zcc_notice where flag=0
+	</select>
+	
+	<update id="updateNoticeflag" parameterType="int">
+       UPDATE zcc_notice SET flag=1  WHERE id=#{value} 
+	</update>
+	
+	
+</mapper>

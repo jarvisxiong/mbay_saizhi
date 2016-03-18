@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:ws="http://jax-ws.dev.java.net/spring/core"
+    xmlns:wss="http://jax-ws.dev.java.net/spring/servlet"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd   
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://jax-ws.dev.java.net/spring/core http://jax-ws.dev.java.net/spring/core.xsd
+    http://jax-ws.dev.java.net/spring/servlet http://jax-ws.dev.java.net/spring/servlet.xsd"
+	>
+   <context:component-scan base-package="org.sz.mbay.traffic.controller" />
+   
+   <context:component-scan base-package="org.sz.mbay.traffic.operators.callback" />
+   
+   
+	     <!--此处需设置  lazy-init="true"
+    <bean id="CSB_Through_ServiceEndpoint" class="org.sz.mbay.traffic.operators.callback.telecom.sh.CSB_Through_ServicePortImpl" />
+    <bean class="org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter" >
+        <property name="baseAddress" value="http://192.168.21.165:9003/shtelecom/services/?wsdl"/>
+    </bean>
+ 
+   -->
+</beans>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TrafficOrderRecord">
+
+	<resultMap type="trafficOrderRecord" id="base_result_map">
+		<result column="ordernumber" property="orderNumber" />
+		<result column="ip" property="IP" />
+		<result column="createtime" property="createTime" />
+		<result column="content" property="content" />
+		<result column="orderstatus" property="status" />
+		<result column="operator_status" property="ors" />
+		<result column="userid" property="userId" />
+	</resultMap>
+
+	<sql id="base_column_list"> 
+		ordernumber, ip, createtime, content, orderstatus, operator_status, userid
+	</sql>
+
+	<insert id="insert" parameterType="trafficOrderRecord">
+		INSERT INTO traffic_charge_order_record
+		(<include refid="base_column_list" />)
+		VALUES(#{orderNumber},#{IP},#{createTime},#{content},#{status},#{ors},#{userId});
+	</insert>
+	
+	<select id="findListByOrderNumber" parameterType="java.lang.String" resultMap="base_result_map">
+		select <include refid="base_column_list" />
+		from traffic_charge_order_record
+		where ordernumber = #{value}
+	</select>
+	
+</mapper>

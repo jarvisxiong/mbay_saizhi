@@ -1,0 +1,28 @@
+@charset "utf-8";
+/*logo图标部分*/
+.lg {
+	height: 88px
+}
+
+.logo {
+	width: 199px;
+	height: 88px;
+}
+
+.logo img {
+	display: block;
+	width: 199px;
+	height: 88px;
+}
+
+.tongyong {
+	width: 513px;
+	height: 87px;
+}
+
+.tongyong img {
+	width: 513px;
+	height: 87px;
+	display: block;
+	margin-left: 50px
+}

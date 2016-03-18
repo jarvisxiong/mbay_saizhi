@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RolePrivilege">
+
+	<resultMap type="RolePrivilege" id="baseListMap">
+		<result property="id" column="id" />
+		<result property="roleId" column="role_id" />
+		<result property="privilegeId" column="privilege_id" />
+		<result property="createTime" column="create_time" />
+	</resultMap>
+	
+	<insert id="createRolePrivilege" parameterType="rolePrivilege">
+		<selectKey keyProperty="id"  resultType="int" order="BEFORE">		
+			SELECT IFNULL(MAX(id),0)+1 id FROM role_privilege
+		</selectKey>
+		insert into
+		role_privilege
+		(id,role_id,privilege_id,create_time)
+		VALUES(#{id},#{roleId},#{privilegeId},#{createTime})
+	</insert>
+
+	<update id="updateRolePrivilege" parameterType="Map">
+		update 
+		role_privilege 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="roleId != 0">role_id=#{roleId},</if>
+			<if test="privilegeId != 0">privilege_id=#{privilegeId}</if>
+		</trim>
+		where id=#{id}
+	</update>
+
+	<select id="findAllRolePrivilege" parameterType="Map" resultMap="baseListMap">
+		select
+		*
+		from 
+		role_privilege rp
+		left join role r
+		on rp.role_id = r.id
+		left join privilege p
+		on rp.privilege_id = p.id
+		where 1=1
+		<if test="roleName != null and roleName != ''">
+			and r.name like CONCAT('%','${roleName}','%' )
+		</if>
+		<if test="privilegeName != null and privilegeName != ''">
+			and p.name like CONCAT('%','${privilegeName}','%' )
+		</if>
+		order by rp.create_time DESC
+	</select>
+
+	<select id="countRolePrivilege" parameterType="Map" resultType="int">
+		select count(*) from role_privilege rp
+		left join role r
+		on rp.role_id = r.id
+		left join privilege p
+		on rp.privilege_id = p.id
+		where 1=1 
+		<if test="roleName != null and roleName != ''">
+			and r.name like CONCAT('%','${roleName}','%' )
+		</if>
+		<if test="privilegeName != null and privilegeName != ''">
+			and p.name like CONCAT('%','${privilegeName}','%' )
+		</if>
+	</select>
+	
+	<select id="countRolePrivilegeSize" parameterType="Map" resultType="int">
+		select count(*) from role_privilege
+		where 1=1 
+		<if test="roleId != 0">
+			and role_id = #{roleId}
+		</if>
+		<if test="privilegeId != 0">
+			and privilege_id = #{privilegeId}
+		</if>
+	</select>
+	
+	<select id="findRolePrivilege" parameterType="int" resultMap="baseListMap">
+		select
+		*
+		from 
+		role_privilege
+		where 
+		id=#{value}
+	</select>
+	
+	<select id="findAllRolePrivilegeByRoleId" parameterType="int" resultMap="baseListMap">
+		select
+		*
+		from 
+		role_privilege
+		where 
+		role_id=#{value}
+	</select>
+	
+	<delete id="deleteRolePrivilege" parameterType="int">
+		delete from 
+		role_privilege
+		where 
+		id=#{value}
+	</delete>
+</mapper>

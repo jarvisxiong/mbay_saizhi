@@ -1,0 +1,121 @@
+@charset "utf-8";
+/**包含顶部和底部样式v1.0**/
+/*通用清零样式*/
+*{margin:0;padding:0;border:0}
+body{font-size:14px;min-width:1115px;margin:0;
+  font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft Yahei",STHeiTi,Arial,sans-serif;color:#444;
+}
+img {border: none;}
+input[type=text],select,textarea {outline: none;text-indent: 0.2em;}
+textarea {resize: none}
+a {text-decoration: none;}
+/*表格清零*/
+table,caption,tbody,tfoot,thead,tr,th,td {font-size: 14px;color: #444;font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft Yahei",STHeiTi,Arial,sans-serif;}
+/**/
+.tdn{padding-left: 8px;}
+.fl {	float: left}
+.fr {float: right}
+.com_width {width: 990px;margin: 0 auto}
+.con {width: 100%;margin: 0 auto}
+.hr_6 {height: 6px}
+.hr_30 {height: 30px}
+.hr_40 {height: 40px}
+.mr_30 {margin-top: 30px}
+#sp_1 {margin-right: 0}
+#sp_2 {margin-right: 0}
+.sp_1 {color: #FDB567}
+/*清除浮动*/
+.clearfix:after {content: "";display: block;clear: both;}
+.clearfix {zoom: 1}
+
+/*按钮等其他公共样式*/
+.button{padding:0 5px;background:#f2f2f2;color:#000;border:1px solid #d1d1d1;font-family:'Microsoft YaHei';cursor:pointer}
+
+/**飘出层提示****/
+.float_tip{position:fixed;margin:0 auto;width:400px;height:40px;text-align:center;line-height:40px;color:#FFF;left:0;right:0;top:0;border-radius:4px}
+.green_skin {background: #339933;}
+.yellow_skin {background: #e4b600;}
+/*头部*/
+.head {height: 38px;background: url(../images/workimages/bg_1.jpg) center repeat-x;font-family: 'Microsoft YaHei';}
+.header {height: 38px;}
+.dianhua {width: 292px;height: 37px;}
+.mb {float: left;background: url(../images/workimages/mb.jpg) bottom no-repeat;width: 73px;height: 35px}
+.dh {float: left;height: 35px;line-height: 40px;color: #6E716D;font-size: 14px;font-family: 'Microsoft YaHei';letter-spacing: 2px;}
+.reg {line-height: 42px}
+.nh {margin-left: 25px}
+.user {color: #FDAB1B;}
+
+spqn.user {color: #FDAB1B;width: 160px;display: inline-block;overflow: hidden;text-overflow: ellipsis;vertical-align: bottom;}
+.reg {font-size: 12px;color: #6E716D}
+.reg a {font-size: 12px;color: #6E716D;font-family: 'Microsoft YaHei';margin-left: 10px}
+.wx {cursor: pointer;padding-left: 12px;background: url(../images/workimages/phone.png) no-repeat left;}
+.wx_1 {background: url(../images/workimages/phone_1.png) no-repeat left}
+.znx {padding-left: 20px;background: url(../images/workimages/email.png) no-repeat left}
+.znx_1 {background: url(../images/workimages/email_1.png) no-repeat left}
+.sl {color: #F6A300;font-weight: bold}
+.zz {padding-left: 18px;background: url(../images/workimages/zz%20.png) no-repeat left}
+.zz_1 {background: url(../images/workimages/zz_1.png) no-repeat left}
+.tip {padding-left: 18px;background: url(../images/workimages/tip.png) no-repeat left}
+.tip_1 {background: url(../images/workimages/tip_1.png) no-repeat left}
+.wx_con {position: relative;margin-left: 20px;}
+.wx_s {display: none;position: absolute;width: 168px;height: 178px;background: #fff;left: -68px;top: 20px;box-shadow: 0 0 5px #aaa;}
+.wx_s b {width: 0;height: 0;line-height: 0;font-size: 0;position: absolute;left: 50%;top: -10px;margin-left: -2px;border-width: 5px;border-style: dashed dashed solid;border-color: transparent transparent #fff;}
+
+.wx_b img {display: block;width: 150px;height: 150px;margin: 16px auto;background-position: 0 -73px;}
+/*头部结束*/ /*尾部*/
+
+.ztc {margin-top: 12px}
+.ztc_b {width: 126px;height: 52px;background: url(../images/workimages/foot.png) center no-repeat}
+.copy {color: #757678;font-size: 1em;line-height: 1em}
+.info {font-size: 1em;margin-top: 10px;line-height: 22px;margin-left: 10px;margin-bottom: 8px;color: #757678}
+.info a {color: #757678;}
+
+/*分页*/
+div.meneame a:active,div.meneame a:hover{background-color:#4577AB;background-image:none}
+div.meneame{padding:3px;font-size:1em;margin:3px;color:#4577AB;text-align:center;line-height:34px}
+div.meneame a,div.meneame span.current,div.meneame span.disabled{border:1px solid #4577AB;padding:5px 7px;margin:0 3px 0 0}
+div.meneame a{background-position:50% bottom;text-decoration:none}
+div.meneame a:hover{border:1px solid #4577AB;color:#fff}
+div.meneame a:active{border:1px solid #4577AB;color:#ff6500}
+div.meneame span.current{font-weight:700;color:#fff;background-color:#4577AB}div.meneame span{color:#3B699A}
+
+/*通用*/
+/*通用字体颜色*/
+.font {color: #838383;font-size: 14px;}
+
+/*通用隐藏*/
+.hidden {display: none}
+
+/*通用文本框*/
+.input_txt {border: 1px solid #94ABC4;line-height: 20px;padding: 5px 5px;border-radius: 4px}
+
+/*通用按钮*/
+.btn_confirm,.btn_reset{font-size:12px;padding:0 20px;height:30px;line-height:26px;letter-spacing:1px;border-radius:4px;color:#FFF;font-family:'Microsoft YaHei';cursor:pointer}
+
+/*按钮确定*/
+.btn_confirm {background: #FDAC1C;}
+
+/*按钮取消*/
+.btn_reset {background: #ccc}
+.btn_service {border: 1px solid #D7D7D7;padding: 5px 20px;margin-left: 5px;border-radius: 4px;background-color: #fff;font-size: 12px;color: #656565;cursor: pointer;}
+
+/*通用文本域*/
+.textarea {width: 300px;height: 78px;border: 1px solid #94ABC4;vertical-align: middle;resize: none;padding: 5px}
+
+/*通用下拉框*/
+.select {border: 1px solid #94ABC4;width: 352px;height: 32px;}
+
+/**通用居左**/
+.left {text-align: left;padding-left: 3px;}
+
+/**通用长度中等文本框**/
+.input_shorttxt {border: 1px solid #94ABC4;padding: 5px 5px;color: #5D5C5C;height: 20px;line-height: 20px;}
+
+/*通用表格，只需引入class叫table的div*/
+div.table table {border: 1px solid #C2C2C2;border-collapse: collapse;}
+div.table table td {text-align: center;padding: 15px 10px}
+div.table table td,div.table table th {border: 1px solid #C2C2C2;}
+div.table table th {color: #5D5C5C;padding: 5px 0px;background: #f3f3f3;}
+
+/**页面上块状错误提示****/
+.qs_alert{background:#fff1f0;padding:10px;color:#2d7091;border:1px solid rgba(45,112,145,.3);border-radius:4px;text-shadow:0 1px 0 #fff;width:600px;height:20px;margin:20px auto 0}.qs_alert p{margin:0;line-height:20px}

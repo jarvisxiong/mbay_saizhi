@@ -1,0 +1,49 @@
+<decorators>
+	<!-- Any urls that are excluded will never be decorated by Sitemesh -->
+	<excludes>
+		<pattern>/login/*</pattern>
+		<pattern>/findpwd/*</pattern>
+		<pattern>/account/identify/enterprise/*</pattern>
+		<pattern>/findpwd/*</pattern>
+		<pattern>/mbaychannel/certificate/auth/id_auth_apply.mbay</pattern>
+		<pattern>/channel/index.mbay</pattern>
+		<pattern>/channel/toLogin.mbay</pattern>
+		<pattern>/account/unable_to_recharge.jsp</pattern>
+		<pattern>/authfail.jsp</pattern>
+		<pattern>/error_page.jsp</pattern><!-- 错误提示页面 -->
+		<pattern>/msgnote.jsp</pattern>
+		<pattern>/signup/*</pattern>
+		<pattern>/error_page.jsp</pattern>
+		<!-- <pattern>/certificate/auth/id_auth_apply.mbay</pattern> <pattern>/certificate/auth/apply_erp_success.mbay</pattern> -->
+		<!-- <pattern>/certificate/auth_result.mbay</pattern> --><!-- 账户已认证 -->
+		<pattern>/certificate/auth/*</pattern>
+		<pattern>/channel/signup/authRegUserName.mbay</pattern>
+		<pattern>/resetpwd/findpwd/*</pattern>
+		<pattern>/exception/*</pattern>
+		<pattern>/template/*</pattern>
+		<pattern>/promotionCampaign/redeem_code/*</pattern><!-- 兑换码发放和领取 -->
+		<pattern>*/wechat/*</pattern><!-- 手机端下的所有页面 -->
+		<pattern>*/mobile/*</pattern><!-- 手机端下的所有页面 -->
+		<pattern>/test.jsp</pattern>
+		<pattern>/store/*/listCampaign.mbay</pattern><!-- 参与门店活动页面 -->
+		<pattern>/campaign/${sid}/{aid}/detail.mbay</pattern><!-- 参与门店活动页面 -->
+		<pattern>/store/redeemUI.mbay?*</pattern><!-- 活动兑换页面 -->
+		<pattern>/campaign/join.mbay</pattern><!-- 参与门店活动页面 -->
+		<!--活动用户信息 -->
+		<pattern>/campaign/join/*</pattern>
+		<!--操作员相关网页 -->
+		<pattern>/store_ope/*</pattern>
+		<!-- 流米 -->
+		<pattern>/liumi/*</pattern>
+		<!-- 流量红包手机端 -->
+		<pattern>/tr_mobile/**</pattern>
+		<!-- 平安 -->
+		<pattern>/pingan/**</pattern>
+		<!-- 商城-手机预览 -->
+		<pattern>/mall/exchangeItem/preview.mbay?*</pattern>
+	</excludes>
+
+	<decorator name="simple" page="/decorators/web_decorator.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+</decorators>

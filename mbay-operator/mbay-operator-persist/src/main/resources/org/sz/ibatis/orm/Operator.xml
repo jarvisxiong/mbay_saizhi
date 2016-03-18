@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Operator">	
+	<resultMap type="operator" id="operatoroftypelist">
+		<result property="id" column="operator_id" />
+		<result property="type" column="operator_type" />		
+	</resultMap>
+	
+	<select id="findAllOperatorByArea" resultMap="operatoroftypelist">
+		SELECT operator_id,operator_type FROM zcc_operator_info  WHERE area=#{value} AND enable=0 ORDER BY operator_type
+	</select>
+
+	<!-- onembay -->
+	<resultMap type="operator" id="operatorlist">
+		<result property="id" column="operator_id" />
+		<result property="serialnumber" column="serialnumber" />
+		<result property="name" column="operator_name" />
+		<result property="type" column="operator_type" />
+		<result property="enable" column="enable" />
+		<result property="signtime" column="createtime" />
+		<result property="contacts" column="bizcontact" />
+		<result property="contactnumber" column="bizcontactphone" />
+		<!-- <result property="technicist" column="technicist" />
+		<result property="technicistphone" column="technicistphone" /> -->
+		<result property="area.value" column="area" />
+	</resultMap>
+
+	<!-- 合同对应的map -->
+	<resultMap type="contract" id="contractMap">
+		<result property="id" column="id" />
+		<result property="contractid" column="contract_id" />
+		<result property="starttime" column="start_date" />
+		<result property="endtime" column="end_date" />
+		<result property="contractCopy" column="contract_copy" />
+		<result property="operatorid" column="operator_id" />
+	</resultMap>	
+
+	<!-- 查询运营商对应合同信息 -->
+     <select id="findContractByOperatorid" parameterType="int"	resultMap="contractMap">
+     	SELECT
+		contract_id,start_date,end_date,contract_copy FROM
+		zcc_contract WHERE operator_id=#{value}
+     </select>
+
+	<resultMap type="operator" id="operatorofidandnamelist">
+		<result property="id" column="operator_id" />
+		<result property="name" column="operator_name" />
+	</resultMap>
+	
+	<resultMap type="operator" id="operatorInfo" extends="operatorlist">
+		<collection property="packages" column="operator_id"	select="findPackagesByOperatrId"></collection>
+		<collection property="contracts" column="operator_id"	select="findContractByOperatorid"></collection>
+	</resultMap>
+
+	<resultMap type="trafficPackage" id="packageMap">
+		<result property="id" column="id" />
+		<result property="trafficType" column="traffictype" />
+		<result property="traffic" column="traffic" />
+		<result property="mbayprice" column="mbayprice" />
+		<result property="isopen" column="isopen" />
+		<result property="packageCode" column="package_code" />
+		<result property="operatorPackageCode" column="operator_package_code" />
+	</resultMap>
+
+	<insert id="createOperator" parameterType="operator">
+		<selectKey keyProperty="id" order="BEFORE" resultType="int">
+			SELECT IFNULL(MAX(operator_id),0)+1 id FROM zcc_operator_info
+		</selectKey>
+		INSERT INTO
+		zcc_operator_info(operator_id,serialnumber,operator_name,operator_type,enable,area,bizcontact,bizcontactphone,technicist,technicistphone,createtime)
+		VALUES(#{id},#{serialnumber},#{name},#{type},#{enable},#{area.value},#{contacts},#{contactnumber},#{technicist},#{technicistphone},now());
+	</insert>
+	<select id="findAllOperator" parameterType="operator" resultMap="operatorlist">
+		SELECT
+		operator_id,serialnumber,operator_name,operator_type,enable,area,createtime,bizcontact,bizcontactphone,technicist,technicistphone
+		FROM zcc_operator_info
+		where 1=1 
+		<if test="area!=null and area!=''">
+		  and area=#{area.value}
+		</if>
+		ORDER BY createtime DESC
+	</select>
+
+	<select id="findOperator" parameterType="int" resultMap="operatorInfo">
+		SELECT
+		operator_id,serialnumber,operator_name,operator_type,enable,area,createtime,bizcontact,bizcontactphone,technicist,technicistphone
+		FROM zcc_operator_info 
+		WHERE operator_id=#{value};
+	</select>
+	<select id="findPackagesByOperatrId" parameterType="int"	resultMap="packageMap">
+		SELECT
+		id,operatorid,traffictype,traffic,mbayprice,createtime,isopen,package_code,operator_package_code FROM
+		operator_traffic_package WHERE operatorid=#{value}
+	</select>
+	<select id="findOperatorName" resultType="operator"
+		parameterType="int">
+		SELECT operator_name name FROM zcc_operator_info WHERE
+		operator_id=#{value}
+	</select>
+	<select id="findAllOperatorOfIDAndName" resultMap="operatorofidandnamelist">
+		SELECT
+		operator_id,operator_name FROM zcc_operator_info ORDER BY area
+	</select>
+	<select id="countOperator" parameterType="operator" resultType="Integer">
+		SELECT count(*) FROM zcc_operator_info
+		<if test="area!=null and area!=''">
+          where area=#{area.value}
+        </if>
+	</select>
+	<select id="findCountOperator" parameterType="Map" resultType="Integer">
+		SELECT count(*) FROM zcc_operator_info
+		<if test="area!=null and area!=''">
+          where area=#{area}
+        </if>
+		<if test="type!=null and type!=''">
+          and operator_type=#{type}
+        </if>
+	</select>
+	
+	<update id="updatePackageCode" parameterType="map">
+       UPDATE operator_traffic_package SET package_code=#{packageCode}  WHERE id=#{id} 
+	</update>
+	
+	<!--启用  -->
+	<update id="updateOperatorEnabled" parameterType="int">
+       UPDATE zcc_operator_info SET enable=1  WHERE operator_id=#{value} 
+	</update>
+	<!--禁用  -->
+	<update id="updateOperatorDisable" parameterType="int">
+       UPDATE zcc_operator_info SET enable=0  WHERE operator_id=#{value} 
+	</update>
+</mapper>

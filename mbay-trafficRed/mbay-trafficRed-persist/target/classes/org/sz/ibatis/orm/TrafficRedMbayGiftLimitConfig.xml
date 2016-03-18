@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TrafficRedMbayGiftLimitConfig">
+
+	<resultMap id="BaseResultMap" type="trafficRedMbayGiftLimitConfig">
+		<id column="id" property="id" />
+		<result column="is_limit" property="limit" />
+		<result column="month_limit" property="monthLimit" />
+		<result column="week_limit" property="weekLimit" />
+		<result column="day_limit" property="dayLimit" />
+		<result column="validity" property="validity" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, is_limit, month_limit, week_limit, day_limit, validity
+	</sql>
+	
+	<select id="select" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" />
+		from tr_mbay_gift_limit_config
+		limit 0,1
+	</select>
+	
+	<update id="updateById" parameterType="trafficRedMbayGiftLimitConfig">
+		update tr_mbay_gift_limit_config
+		set 
+			is_limit = #{limit}, 
+			month_limit = #{monthLimit}, 
+			week_limit = #{weekLimit},
+			day_limit = #{dayLimit},
+			validity = #{validity}
+		where id = #{id}
+	</update>
+	
+	<update id="updateByIdSelective" parameterType="trafficRedMbayGiftLimitConfig">
+		update tr_mbay_gift_limit_config
+		<set>
+			<if test="limit != null">is_limit = #{limit},</if>
+			<if test="monthLimit != null">month_limit = #{monthLimit},</if>
+			<if test="weekLimit != null">week_limit = #{weekLimit},</if>
+			<if test="dayLimit != null">day_limit = #{dayLimit},</if>
+			<if test="validity != null">validity = #{validity},</if>
+		</set>
+		where id = #{id}
+	</update>
+
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TrafficRedRaffle">
+
+	<resultMap id="BaseResultMap" type="trafficRedRaffle">
+		<id column="id" property="id" />
+		<result column="ip" property="ip" />
+		<result column="valid_time" property="validTime"  />
+		<result column="mobile" property="mobile" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, ip, valid_time, mobile
+	</sql>
+	
+	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from tr_raffle
+		where id = #{value}
+	</select>
+	
+	<select id="selectByMobile" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from tr_raffle
+		where mobile = #{value}
+	</select>
+	
+	<insert id="insert" parameterType="trafficRedRaffle">
+		insert into tr_raffle (<include refid="Base_Column_List" />)
+		values
+		(#{id}, #{ip}, #{validTime}, #{mobile})
+	</insert>
+	
+	<update id="updateByIdSelective" parameterType="trafficRedRaffle">
+		update tr_raffle
+		<set>
+			<if test="ip != null">
+				ip = #{ip},
+			</if>
+			<if test="validTime != null">
+				valid_time = #{validTime},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+</mapper>

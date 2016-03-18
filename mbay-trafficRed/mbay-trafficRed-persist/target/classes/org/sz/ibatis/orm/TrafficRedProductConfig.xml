@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TrafficRedProductConfig">
+
+	<sql id="base_column_list">
+		campaign_id,product_type,pool_size,pool_remain,daily_limit,daily_remain,
+		threshold,threshold_warned
+	</sql>
+	
+	<resultMap type="trafficRedProductConfig" id="base_result_map">
+		<result property="campaignId" column="campaign_id" />
+		<result property="productType" column="product_type" />
+		<result property="poolSize" column="pool_size" />
+		<result property="poolRemain" column="pool_remain" />
+		<result property="dailyLimit" column="daily_limit" />
+		<result property="dailyRemain" column="daily_remain" />
+		<result property="threshold" column="threshold" />
+		<result property="thresholdWarned" column="threshold_warned" />
+	</resultMap>
+
+	<insert id="create" parameterType="trafficRedProductConfig">
+		INSERT INTO tr_product_config (<include refid="base_column_list" />)
+		VALUES
+		(
+			#{campaignId},#{productType},#{poolSize},#{poolRemain},#{dailyLimit},
+			#{dailyRemain},#{threshold},#{thresholdWarned}
+		)
+	</insert>
+	
+	<update id="resetDailyRemain" statementType="CALLABLE">
+		{call resetDailyRemain()}
+	</update>
+
+	<select id="isSelectedProduct" parameterType="Map" resultType="boolean">
+		SELECT COUNT(*)=1 FROM tr_product_config WHERE
+		campaign_id=#{campaignId} AND product_type=#{productType}
+	</select>	
+	
+	<update id="increaseProductPoolSize" parameterType="Map">
+		UPDATE tr_product_config SET
+		pool_size=pool_size+#{mbay},pool_remain=pool_remain+#{mbay}
+		WHERE
+		campaign_id=#{campaignId} AND product_type=#{productType}
+	</update>
+	
+	<select id="isProductPoolRemainLessThanThreshold" resultType="boolean">
+		<![CDATA[ 
+		SELECT 
+		   CASE 
+		      WHEN threshold = -1 THEN 0 
+		      WHEN pool_remain >threshold THEN  0
+		      WHEN pool_remain <=threshold THEN 1
+		   END 
+		FROM tr_product_config WHERE campaign_id=#{campaignId} AND product_type=#{productType};
+		]]>
+	</select>
+	
+	<update id="updateProductThresholdStatus" parameterType="Map">
+		UPDATE tr_product_config SET threshold_warned=#{warnStatus} WHERE
+		campaign_id=#{campaignId} AND
+		product_type=#{productType} AND
+		threshold_warned !=#{warnStatus}
+	</update>
+	
+	<update id="updateProductThreshold" parameterType="Map">
+		UPDATE
+		tr_product_config SET threshold=#{threshold} WHERE
+		campaign_id=#{campaignId} AND product_type=#{productType};
+	</update>
+	
+	<select id="reduceProductPoolRemain" parameterType="Map"
+		resultType="int">
+		UPDATE tr_product_config SET
+		pool_remain=pool_remain-#{mbay} WHERE
+		campaign_id=#{campaignId} AND
+		product_type=#{productType}
+		AND pool_remain-#{mbay}>=0
+	</select>
+	
+	<select id="findProductDailyLimit" parameterType="Map"
+		resultType="double">
+		SELECT daily_limit FROM tr_product_config WHERE
+		campaign_id=#{campaignId}
+		and product_type=#{productType}
+	</select>
+	
+	<select id="reduceProductDailyRemain" parameterType="Map"
+		resultType="int">
+		UPDATE tr_product_config SET
+		daily_remain=daily_remain-#{mbay} WHERE
+		campaign_id=#{campaignId} AND
+		product_type=#{productType}
+		AND daily_remain-#{mbay}>=0
+	</select>
+	
+	<!-- 判断手机号是否可以参与当前活动 -->
+	<parameterMap type="map" id="highlineMap">
+		<parameter property="campaignId" jdbcType="BIGINT" mode="IN" />
+		<parameter property="productType" jdbcType="INTEGER" mode="IN" />
+		<parameter property="dailyLimit" jdbcType="DOUBLE" mode="IN" />
+		<parameter property="rowcount" jdbcType="INTEGER" mode="OUT" />
+	</parameterMap>
+	<update id="updateProductDailyLimit" parameterMap="highlineMap"
+		statementType="CALLABLE">
+		{call UPDATE_TRCAMPAIGN_PRODUCT_HIGHLINE (?,?,?,?)}
+	</update>
+	
+	<select id="findTrafficRedProductConfig" parameterType="Map" resultMap="base_result_map">
+		SELECT
+		campaign_id,product_type,pool_size,pool_remain,daily_limit,daily_remain,threshold,threshold_warned
+		FROM tr_product_config
+		WHERE campaign_id=#{campaignId} AND
+		product_type=#{productType}
+	</select>
+	
+	<resultMap type="thresholdWarnInfo" id="thresholdWarnInfoMap">
+		<result property="campaignName" column="name" />
+		<result property="threshold" column="threshold" />
+		<result property="warningMobile" column="threshold_mobile" />
+		<result property="isWarned" column="threshold_warned" />
+	</resultMap>
+	<select id="findThresholdWarnInfo" parameterType="long" resultMap="thresholdWarnInfoMap">
+		SELECT c.`name`,c.threshold_mobile,pc.threshold,pc.threshold_warned FROM
+		tr_product_config pc
+		LEFT JOIN tr_campaign c ON pc.campaign_id=c.id
+		WHERE pc.campaign_id=#{campaignId} AND product_type=#{productType};
+	</select>
+	
+	<update id="clearConfig" parameterType="java.lang.Long">
+		update tr_product_config
+		set pool_remain = 0, daily_remain = 0
+		where campaign_id = #{value}
+	</update>
+	
+</mapper>

@@ -1,0 +1,6 @@
+org/sz/mbay/duiba/bean/DuiBaRelationShip.class
+org/sz/mbay/duiba/bean/DuiBaMall.class
+org/sz/mbay/duiba/dao/impl/DuiBaMallDaoImpl.class
+org/sz/mbay/duiba/dao/DuiBaMallDao.class
+org/sz/mbay/duiba/dao/impl/DuiBaRelationShipDaoImpl.class
+org/sz/mbay/duiba/dao/DuiBaRelationShipDao.class

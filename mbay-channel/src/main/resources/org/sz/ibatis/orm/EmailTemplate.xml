@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EmailTemplate">
+
+	<resultMap type="emailTemplate" id="emailTemplateInfo">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="createTime" column="create_time" />
+		<result property="name" column="name" />
+		<result property="content" column="content" />
+		<result property="status" column="status" />
+	</resultMap>
+	
+	<select id="findAllEmailTemplate" parameterType="Map" resultMap="emailTemplateInfo">
+		SELECT * FROM email_template 
+		<if test="name != null and name != ''">WHERE name like CONCAT('%','${name}','%')</if>
+		order by create_time desc
+	</select>
+	
+	<select id="findEmailTemplateById" parameterType="Integer" resultMap="emailTemplateInfo">
+		SELECT * FROM email_template WHERE id = #{id}
+	</select>
+	
+	<update id="updateEmailTemplate" parameterType="emailTemplate">
+		UPDATE email_template
+		<trim prefix="set" prefixOverrides=",">
+			<if test="content != null and content != ''">content=#{content},</if>
+			<if test="status != null ">status=#{status}</if>
+		</trim>
+		WHERE id=#{id}
+	</update>
+	
+	<select id="findEmailTemplateByType" resultMap="emailTemplateInfo">
+		SELECT * from email_template where id=#{value} and status=1
+	</select>
+</mapper>

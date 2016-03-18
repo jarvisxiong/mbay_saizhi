@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TrafficRedExchangeRecord">
+
+	<resultMap id="BaseResultMap" type="trafficRedExchangeRecord">
+		<id column="id" property="id" />
+		<result column="campaign_number" property="campaignNumber" />
+		<result column="mobile" property="mobile" />
+		<result column="packageid" property="packageId" />
+		<result column="time" property="time" />
+		<result column="redeem_type" property="redeemType" />
+		<result column="content" property="content" />
+		<result column="package_state" property="packageState" />
+		<result column="size" property="size" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, campaign_number, mobile, packageid, time, redeem_type,
+		content, package_state, size
+	</sql>
+	
+	<select id="getParticipatedTimes" parameterType="java.util.Map" resultType="int">
+		<if test="type.name() == 'TOTAL'">
+			SELECT COUNT(*)
+			FROM tr_exchange_record
+			WHERE
+			campaign_number = #{campaignNumber} AND mobile = #{mobile}
+		</if>
+		<if test="type.name() == 'DAY'">
+			SELECT COUNT(*)
+			FROM tr_exchange_record 
+			WHERE campaign_number = #{campaignNumber} AND mobile = #{mobile} 
+				AND DATE(time) = curdate()
+		</if>
+		<if test="type.name() == 'WEEK'">
+			<![CDATA[
+			SELECT COUNT(*)
+			FROM tr_exchange_record 
+			WHERE campaign_number = #{campaignNumber} AND mobile = #{mobile} 
+				AND DATE(time) >= DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) day)
+				AND DATE(time) <= DATE_ADD(CURDATE(), INTERVAL (6 - WEEKDAY(CURDATE())) day)
+			]]>
+		</if>
+		<if test="type.name() == 'MONTH'">
+			<![CDATA[
+			SELECT COUNT(*)
+			FROM tr_exchange_record 
+			WHERE campaign_number = #{campaignNumber} AND mobile = #{mobile} 
+				AND DATE(time) >= SUBDATE(CURDATE(), DATE_FORMAT(CURDATE(), '%d') - 1)
+				AND DATE(time) <= LAST_DAY(CURDATE())
+			]]>
+		</if>
+	</select>
+
+	<select id="checkMobileEnterable" resultType="java.lang.Boolean" parameterType="java.util.Map">
+		<if test="type.name() == 'NO_LIMITED'">
+			SELECT 1
+		</if>
+		<if test="type.name() == 'TOTAL'">
+			<![CDATA[
+			SELECT COUNT(*) < #{times}
+			FROM tr_exchange_record
+			WHERE
+			campaign_number = #{campaignNumber} AND mobile = #{mobile}
+			]]>
+		</if>
+		<if test="type.name() == 'DAY'">
+			<![CDATA[
+			SELECT COUNT(*) < #{times} 
+			FROM tr_exchange_record 
+			WHERE campaign_number = #{campaignNumber} AND mobile = #{mobile} 
+				AND DATE(time) = curdate()
+			]]>
+		</if>
+		<if test="type.name() == 'WEEK'">
+			<![CDATA[
+			SELECT COUNT(*) < #{times} 
+			FROM tr_exchange_record 
+			WHERE campaign_number = #{campaignNumber} AND mobile = #{mobile} 
+				AND DATE(time) >= DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) day)
+				AND DATE(time) <= DATE_ADD(CURDATE(), INTERVAL (6 - WEEKDAY(CURDATE())) day)
+			]]>
+		</if>
+		<if test="type.name() == 'MONTH'">
+			<![CDATA[
+			SELECT COUNT(*) < #{times} 
+			FROM tr_exchange_record 
+			WHERE campaign_number = #{campaignNumber} AND mobile = #{mobile} 
+				AND DATE(time) >= SUBDATE(CURDATE(), DATE_FORMAT(CURDATE(), '%d') - 1)
+				AND DATE(time) <= LAST_DAY(CURDATE())
+			]]>
+		</if>
+	</select>
+
+	<insert id="createTrafficRedExchangeRecord" parameterType="trafficRedExchangeRecord"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tr_exchange_record
+		(
+			id, campaign_number, mobile, packageid, time, redeem_type, content,
+			package_state, size
+		)
+		VALUES
+		(
+			#{id},
+			#{campaignNumber},
+			#{mobile},
+			#{packageId},
+			#{time},
+			#{redeemType},
+			#{content},
+			#{packageState},
+			#{size}
+		)
+	</insert>
+
+	<update id="updateTrafficRedExchangeRecord" parameterType="trafficRedExchangeRecord">
+		UPDATE tr_exchange_record
+		<set>
+			<if test="packageState != null">
+				package_state = #{packageState},
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<select id="findAllByCNumber" parameterType="String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tr_exchange_record
+		where campaign_number =
+		#{cnumber,jdbcType=VARCHAR}
+	</select>
+
+	<select id="countByCNumber" parameterType="String" resultType="java.lang.Integer">
+		select
+		count(*)
+		from tr_exchange_record
+		where campaign_number =
+		#{cnumber,jdbcType=VARCHAR}
+	</select>
+	<select id="findAllByCondition" parameterType="map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tr_exchange_record
+		<trim prefix="where" prefixOverrides="AND |OR ">
+			<if test="cnumber !=null">
+				AND campaign_number=#{cnumber}
+			</if>
+			<if test="mobile !=null">
+				AND mobile=#{mobile}
+			</if>
+			<if test="start!=null">
+				AND time>= #{start}
+			</if>
+			<if test="end!=null">
+	   			<![CDATA[AND  time<= #{end} ]]>
+			</if>
+		</trim>
+		ORDER BY time DESC;
+	</select>
+
+	<select id="countByCondition" parameterType="map" resultType="java.lang.Integer">
+		select
+		count(*)
+		from tr_exchange_record
+		<trim prefix="where" prefixOverrides="AND |OR ">
+			<if test="cnumber !=null">
+				AND campaign_number=#{cnumber}
+			</if>
+			<if test="mobile !=null">
+				AND mobile=#{mobile}
+			</if>
+			<if test="start!=null">
+				AND time>= #{start}
+			</if>
+			<if test="end!=null">
+	   			<![CDATA[AND  time<= #{end} ]]>
+			</if>
+		</trim>
+		ORDER BY time DESC;
+	</select>
+
+	<select id="selectById" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tr_exchange_record
+		where id = #{value}
+	</select>
+</mapper>

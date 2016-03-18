@@ -1,0 +1,104 @@
+@charset "utf-8";
+
+.modal-succeed{
+	height:100%;
+	position:fixed;
+	width:100%;
+	max-width:640px;
+	z-index:200;
+	background:rgba(0,0,0,0.3);
+}
+.modal-succeed .modal-succeed-head{
+	position: absolute;
+	right:1.1rem;
+	top: 0.75rem;
+}
+.modal-succeed .modal-succeed-head img{
+	width:6rem;
+}
+.modal-succeed .modal-succeed-content{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-moz-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	position: relative;
+	width: 70%;
+}
+.modal-succeed header{
+	text-align:center;
+	position:absolute;
+	left:0;
+	width:100%;
+	height:6rem;
+	top:-4.5rem;
+}
+.modal-succeed header img{
+	height: 100%;
+}
+.modal-succeed .modal-succeed-content .modal-content{
+	text-align:center;
+	padding-top: 2rem;
+	background: #ECECEC;
+	border:1px solid #FC9820;
+	border-radius: 1px;
+}
+.modal-succeed .modal-content p{
+	font-size: .7rem;
+	color: #333;
+	padding: 0 .8rem .4rem .8rem;
+}
+.modal-succeed .modal-content a{
+	display: block;
+	height:1.8rem;
+	line-height:1.8rem; 
+	text-align:center;
+	-webkit-box-flex:1;
+	-moz-box-flex:1;
+	box-flex:1;
+	background:#ff6700;
+	color: #fff;
+    border-radius: 1px;
+    width:5rem;
+    margin:.3rem auto .5rem auto;
+} 
+.button-imgbtn{
+	position:relative;
+	margin: 20% auto;
+	width: 80%;
+	border-left: none;
+	border-right: none;
+	text-align: center;
+}
+.button-imgbtn>a{
+	display: inline-block; 
+	width: 20%;
+	height:20%;
+	margin:0 .1rem;
+	font-weight: bold;
+	color:#FFF;
+}
+.button-imgbtn>a>img{
+	max-width: 100%; 
+}
+/*2015-8-4*/
+.modal-succeed .modal-succeed-content .modal-content h2 {
+	font-size:.9rem;
+	color:#333;
+	padding-bottom: 0.4rem;
+	font-weight: 100;
+}
+.modal-succeed .modal-succeed-content .modal-content h3 {
+	font-size:.8rem;
+	color:#333;
+	padding-bottom: 0.6rem;
+	font-weight: 100;
+}
+.modal-succeed .modal-content .spe {
+	color: #FC7D2D;
+}
+.modal-succeed .modal-succeed-content .modal-content h2.sp-h2 {
+	padding-bottom: 0.6rem;
+}

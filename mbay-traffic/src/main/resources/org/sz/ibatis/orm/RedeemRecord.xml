@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="RedeemRecord">
+	<insert id="createRedeemRecord" parameterType="redeemRecord">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT
+			IFNULL(MAX(record_id),0)+1 id FROM zcc_exchange_card_record
+		</selectKey>
+		INSERT INTO zcc_exchange_card_record(record_id,recharge_result,recharge_time,flow,phone_number,user_info_id,redeemtype)
+		values (${id},#{status},#{createtime},#{traffic},#{mobile},#{userid},#{redeemtype})
+	</insert>
+
+</mapper>

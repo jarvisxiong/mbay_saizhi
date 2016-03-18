@@ -1,0 +1,9 @@
+org/sz/mbay/wechat/error/WeChatCampaignError.class
+org/sz/mbay/wechat/service/WeChatCampaignService.class
+org/sz/mbay/wechat/service/WeChatCampaignAdvertiseService.class
+org/sz/mbay/wechat/contant/WeChatCampaign.class
+org/sz/mbay/wechat/service/impl/WeChatCampaignAdvertiseServiceImpl.class
+org/sz/mbay/wechat/config/WeChatResourceConfig.class
+org/sz/mbay/wechat/service/impl/WeChatCampaignServiceImpl.class
+org/sz/mbay/wechat/service/impl/WeChatCampaignDefaultTemplateServiceImpl.class
+org/sz/mbay/wechat/service/WeChatCampaignDefaultTemplateService.class

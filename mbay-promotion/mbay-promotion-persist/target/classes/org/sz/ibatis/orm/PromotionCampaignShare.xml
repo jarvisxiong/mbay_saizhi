@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PromotionCampaignShare">
+
+	<resultMap type="promotionCampaignShare" id="BaseResultMap">
+		<result column="id" property="id" />
+		<result column="campaignNumber" property="campaignNumber" />
+		<result column="shareLink" property="shareLink" />
+		<result column="shareTitle" property="shareTitle" />
+		<result column="content" property="content" />
+		<result column="shareTimes" property="shareTimes" />
+		<result column="shareImage" property="shareImage" />
+	</resultMap>
+	
+	<select id="findPromotionCampaignShareByCampaignNumber" resultMap="BaseResultMap" parameterType="String">
+		select *
+		from promotion_campaign_share
+		where campaignNumber = #{value}
+	</select>
+	
+	<insert id="createPromotionCampaignShare" parameterType="promotionCampaignShare">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(id),0)+1 id FROM promotion_campaign_share
+		</selectKey>
+		insert into promotion_campaign_share (id, campaignNumber, shareLink, 
+		shareTitle, content, shareTimes, shareImage)
+		values (#{id},#{campaignNumber},#{shareLink},#{shareTitle},#{content},#{shareTimes},#{shareImage})
+	</insert>
+	
+	<update id="updatePromotionCampaignShareInfo" parameterType="promotionCampaignShare">
+		UPDATE promotion_campaign_share
+		<trim prefix="set" suffixOverrides=",">
+			<if test="shareLink !=null and shareLink != ''">
+				shareLink=#{shareLink},
+			</if>
+			<if test="shareTitle !=null and shareTitle != ''">
+				shareTitle=#{shareTitle},
+			</if>
+			<if test="content !=null and content != ''">
+				content=#{content},
+			</if>
+			<if test="shareTimes !=null">
+				shareTimes=#{shareTimes},
+			</if>
+			<if test="shareImage !=null and shareImage != ''">
+				shareImage=#{shareImage}
+			</if>
+		</trim>
+		WHERE campaignNumber=#{campaignNumber}
+	</update>
+</mapper>

@@ -1,0 +1,5 @@
+org/sz/mbay/sms/dao/SMSTemplateDao.class
+org/sz/mbay/sms/bean/SmsTemplate.class
+org/sz/mbay/sms/enums/SMSServiceMethod.class
+org/sz/mbay/sms/bean/SmsUnit.class
+org/sz/mbay/sms/dao/impl/SMSTemplateDaoImpl.class

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="StationLetter">
+	<resultMap type="stationLetter" id="messageInfo">
+		<result property="id" column="msg_id" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="sendTime" column="sendTime" />
+	</resultMap>
+
+	<insert id="createStationLetter" parameterType="stationLetter">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT
+			IFNULL(MAX(msg_id),0)+1 id FROM zcc_message
+		</selectKey>
+		INSERT INTO zcc_message(msg_id,title,content,sendTime)
+		VALUES
+		(#{id},#{title},#{content},now());
+	</insert>
+
+	<!--查询为读信息数量 -->
+	<select id="findStationLetter" parameterType="int" resultType="stationLetter">
+		select * from zcc_message where msg_id=#{value}
+	</select>
+
+	<delete id="deleteStationLetter" parameterType="int">
+		DELETE FROM zcc_message WHERE msg_id = #{value}
+	</delete>
+
+</mapper>

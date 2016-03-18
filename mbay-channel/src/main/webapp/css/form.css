@@ -1,0 +1,444 @@
+*,*:before,*:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html,body {
+	background: #F0F0F0;
+}
+
+.mb-form {
+	background: #F0F0F0;
+	width: 100%;
+}
+
+.mb-form-inner {
+	width: 400px;
+	background: #FFF;
+	position: relative;
+	margin: 30px auto 0 auto;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+	overflow: hidden;
+	padding: 30px 20px 10px 20px;
+}
+
+.mb-form-inner .f-title {
+	font-size: 16px;
+	font-weight: 400;
+	text-align: center;
+	margin-bottom: 25px;
+}
+
+.inner-form-item {
+	width: 100%;
+	position: relative;
+	height: 35px;
+	margin-bottom: 20px;
+}
+
+.inner-form-item input {
+	width: 100%;
+	height: 100%;
+	padding: 7px 7px 7px 15px;
+	border: 1px solid #CCCCCC;
+	font-size: 12px;
+	color: #333;
+	border-radius: 3px;
+	transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s
+		ease-in-out 0s;
+}
+
+.inner-form-item input:focus {
+	border-color: #66afe9;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px
+		rgba(102, 175, 233, 0.6);
+	outline: 0 none;
+}
+
+.f-yanz input {
+	width: 50%;
+}
+
+.f-yanz img {
+	width: 145px;
+	height: 35px;
+	float: right;
+}
+
+.f-btn {
+	width: 100%;
+	height: 40px;
+	margin-top: 5px;
+	border: none;
+	background: #54B931;
+	border-radius: 3px;
+	font-size: 14px;
+	color: #FFF;
+}
+
+.f-btn:hover,.f-btn:active {
+	background: #4ba52c;
+	cursor: pointer;
+}
+
+.f-msg a {
+	font-size: 12px;
+	line-height: 40px;
+	margin-right: 10px;
+	color: #009AFF;
+}
+
+.mb-form-inner .f-type-title {
+	border: 1px solid #E8E8E8;
+	line-height: 65px;
+	text-align: center;
+	font-size: 14px;
+	background: #EDFED0;
+	margin-bottom: 40px;
+}
+
+.f-type-item {
+	border: 1px solid #E8E8E8;
+	margin-bottom: 40px;
+	padding: 5px 0 5px 40px;
+}
+
+.f-type-item:hover {
+	background: rgba(0, 0, 0, 0.1)
+}
+
+.f-type-item h3 {
+	line-height: 30px;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.f-type-item span {
+	font-size: 12px;
+}
+
+.f-type-item a {
+	display: block;
+	background: #54B931;
+	color: #FFF;
+	font-size: 12px;
+	width: 80px;
+	text-align: center;
+	line-height: 25px;
+	margin-top: 5px;
+	border-radius: 3px;
+}
+
+.inner-form-item {
+	width: 100%;
+	position: relative;
+	height: 35px;
+	margin-bottom: 10px;
+}
+
+.inner-form-item h3 {
+	float: left;
+	font-size: 12px;
+	font-weight: 400;
+	width: 60px;
+	text-align: right;
+	line-height: 35px;
+	margin-right: 25px;
+}
+
+.inner-form-item span {
+	font-size: 12px;
+	line-height: 35px;
+}
+
+.inner-form-item a {
+	background: #54B931;
+	font-size: 12px;
+	font-weight: 700;
+	color: #FFF;
+	padding: 5px 10px;
+	border-radius: 4px;
+	position: relative;
+	top: 6px;
+}
+
+.inner-form-item .getC {
+	background: #ADADAD
+}
+
+.f-next {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.f-next .next-btn {
+	background: #54B931;
+	font-size: 12px;
+	font-weight: 700;
+	color: #FFF;
+	padding: 5px 25px;
+	border-radius: 4px;
+}
+
+.f-next .chk-type {
+	display: block;
+	font-size: 12px;
+	line-height: 40px;
+	color: #54B931;
+}
+
+.f-ok span {
+	padding-left: 15px;
+}
+
+.f-msg a {
+	font-size: 12px;
+	line-height: 60px;
+	margin-right: 10px;
+	color: #009AFF;
+}
+
+.form-steps {
+	padding: 0 25px;
+}
+
+.form-step-3 {
+	line-height: 36px;
+	width: 33.33333333333333%;
+	float: left;
+	display: inline;
+	text-align: center;
+	border-radius: 3px;
+	color: #FFF;
+}
+
+.form-step-finished {
+	color: #fff;
+	background-color: #009aff;
+}
+
+.form-step-unfinished {
+	background-color: #009aff;
+}
+
+.form-step-seperator {
+	width: 0.0000000000000000001%
+}
+
+.form-step-seperator:before {
+	position: absolute;
+	content: " ";
+	width: 0;
+	height: 0;
+	margin-top: -5px;
+	border-top: 23px solid transparent;
+	border-left: 23px solid #fff;
+	border-bottom: 23px solid transparent;
+}
+
+.form-step-seperator-finished:after {
+	position: absolute;
+	content: " ";
+	width: 0;
+	height: 0;
+	margin-top: 2px;
+	border-top: 16px solid transparent;
+	border-left: 16px solid #009aff;
+	border-bottom: 16px solid transparent;
+	border-top-right-radius: 3px;
+}
+
+.form-step-seperator-unfinished:after {
+	position: absolute;
+	content: " ";
+	width: 0;
+	height: 0;
+	margin-top: 2px;
+	border-top: 16px solid transparent;
+	border-left: 16px solid #009aff;
+	border-bottom: 16px solid transparent;
+	border-top-right-radius: 3px;
+}
+
+.sig-ok {
+	padding-top: 40px;
+}
+
+.sig-ok h2 {
+	padding-left: 180px;
+	padding-bottom: 12px;
+	font-weight: 400;
+	line-height: 50px;
+	position: relative;
+}
+
+.sig-ok h2 img {
+	margin-right: 12px;
+	position: absolute;
+	top: 0;
+	left: 100px;
+}
+
+.sig-ok p {
+	font-size: 12px;
+	padding-left: 180px;
+	line-height: 19px;
+}
+
+.sig-ok a {
+	margin-left: 180px;
+	margin-top: 10px;
+	display: block;
+	background: #54B831;
+	width: 180px;
+	color: #FFF;
+	font-size: 16px;
+	text-align: center;
+	border-radius: 3px;
+	line-height: 35px;
+}
+
+.firm-register {
+	width: 800px;
+	margin: 100px auto;
+	background: #FFF;
+	border-radius: 3px;
+	overflow: hidden;
+}
+
+.firm-register>h2 {
+	line-height: 70px;
+	text-align: center;
+	color: #000;
+	font-size: 18px;
+	font-weight: 400;
+}
+
+.firm-form {
+	width: 100%;
+	padding: 22px 0;
+}
+
+.firm-form .form-item {
+	width: 450px;
+	min-height: 35px;
+	margin: 0 auto 14px auto;
+	position: relative;
+}
+
+.firm-form .form-item .form-title {
+	width: 100%;
+	font-size: 12px;
+	color: #000;
+	font-weight: 700;
+	line-height: 20px;
+	display: inline;
+}
+
+.form-input {
+	height: 35px;
+	width: 100%;
+	display: block;
+}
+
+.firm-form .form-item input[type=text] {
+	height: 33px;
+	border: 1px solid #CCCCCC;
+	width: 100%;
+	padding-left: 10px;
+	line-height: 100%;
+	color: #4c4c4c;
+	font-size: 12px;
+	border-radius: 3px;
+	font-family: "Microsoft YaHei";
+	transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s
+		ease-in-out 0s;
+}
+
+.firm-form .form-item input[type=text]:focus {
+	border-color: #66afe9;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px
+		rgba(102, 175, 233, 0.6);
+	outline: 0 none;
+}
+
+.firm-form button {
+	font-family: "Microsoft YaHei";
+	font-size: 14px;
+	background: #54b931;
+	border: none;
+	color: #FFF;
+	border-radius: 3px;
+	height: 38px;
+	cursor: pointer;
+	width: 100%;
+}
+
+.firm-form button:hover,.firm-form button:active {
+	background: #4ba52c;
+}
+
+.sex-select {
+	float: left;
+	position: relative;
+	margin-right: 25px;
+}
+
+.sex-select input {
+	display: none;
+}
+
+.sex-select input:checked+label {
+	background:
+		url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEWSURBVDhPpZPPDsFAEMb3JPEqeBPZPfESXsKp2os/BxJx4Sw8AVs3rg7iz1uIOiCk5htVq1YPTPIl293vN92ZTkUynKnKeb5seFptXF+dWFqusYezyPYZ1WE542nZJuPN81Vol7xRsm59XspG2CMieGKHrNJgIlwIV6uOxZQuui3DtMi7vrxaTQnpXZ804DUzxApqUjNptAlgcDyEh2Af9hYV3gNLN1Ab0/R8gykTHi9rrzNiBXX2jAdkhQFGM8lXmCXPcQIIBjOJCY+WTgImaRm8lQCZSVJhEvVgZW3iM0kazNKyJZxZsWD7jEjyWfNLYMDyLPwySGAYRvw9yoi/fiYzMJ5oDtW4JfOFmnxEt7EX1xyHEHfmF0nzUu1xTgAAAABJRU5ErkJggg==)
+		0 50% no-repeat;
+	background-size: 14px auto;
+}
+
+.sex-select label {
+	line-height: 35px;
+	padding-left: 22px;
+	background:
+		url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD+SURBVDhPrVNJCsJAEBwUFdF/uP4t+oK8wOWQgHlCVnIKBPEXwfgPPRhRsGpsRM3BEC3oDF1d1cl0ZtQn4jgeR1G0RORhGJ4l9uRYE1kZnue1IbIQNxjmQRAMkyTpMMCNyLGG2Liu2xXbA2LeQrQ2TbMhdAmsQbOAdkeP0EqBsGmW9CuohcfSie/7EyRXdGxqogKopYdevn2FjjOpVQY99LJBzoEJXxn00MsGxdtAKkIGX/zSoA/vsfYWZPhZ7SHCZ+hfj8cUSa3fSK8mkNQ5SLakfzjKhDTRlwlh4OYNHMdppWnak4EZUitfpldQzC9BHCC+YD1hzYR77PkJpe6VtfYKjkhp7gAAAABJRU5ErkJggg==)
+		0 50% no-repeat;
+	background-size: 14px auto;
+}
+
+.form-input .form-sel {
+	float: left;
+	height: 33px;
+	width: 100%;
+	border: 1px solid #C0C0C0;
+	border-radius: 3px;
+}
+
+.form-item .getCode {
+	line-height: 33px;
+	padding: 0 9px;
+	border-radius: 2px;
+	position: absolute;
+	bottom: 2px;
+	right: 0;
+	background: #009AFF;
+	color: #FFF;
+}
+
+.form-item .getCode:active {
+	background: gray;
+	color: #FFF;
+}
+
+.firm-form .form-item input[type=file] {
+	font-family: "Microsoft YaHei";
+	position: relative;
+	top: 6px;
+	color: gray;
+}
+
+.firm-form ._txt {
+	color: red;
+	font-size: 14px;
+	word-break: break-all;
+}

@@ -1,0 +1,215 @@
+@charset "utf-8";
+/* CSS Document */
+@media screen and (max-width : 414px) {
+	/*摇一摇动画*/
+	.shake-shake-bottom>div {
+		width: 414px;
+		height: 368px;
+	}
+	/*摇一摇弹窗*/
+	.popup {
+		margin: -324px 72px;
+	}
+	/*恭喜获得流量包*/
+	.packet-num {
+		margin: 152px 195px;
+	}
+	/*.packet-transpond{margin:-110px auto;}*/
+	.packet-state {
+		margin: 10px auto 0;
+	}
+	.shake-packet-btn {
+		width: 80%;
+	}
+	.packet-jingxi {
+		margin: 70px 16px 0;
+	}
+	/*再摇一次*/
+	.again {
+		margin: -117px auto 0;
+	}
+	/*用户回馈*/
+	.welcome {
+		margin-left: 115px;
+	}
+	/*再次摇一摇弹出*/
+	.popup>p {
+		width: 210px;
+	}
+	/*兑换红包数字*/
+	.shake-flow-number {
+		margin: 130px 70px;
+	}
+	/*兑换红包惊喜*/
+	.convent-jinxi {
+		margin: 40px 20px 0;
+	}
+	/*更多优惠更多惊喜（获得流量数量排序）*/
+	.flow-ok {
+		margin: 69px 144px;
+	}
+	/*活动结束*/
+	.shake-packet-over {
+		margin-top: 130px;
+	}
+	.over-jinxi {
+		margin: 95px 16px 0;
+	}
+	/*2015041201-update*/
+	.packet-from2 {
+		margin: 333px 76px 0;
+	}
+}
+
+@media screen and (max-width : 375px) {
+	/*摇一摇动画*/
+	.shake-shake-bottom>div {
+		width: 375px;
+		height: 333px;
+	}
+	/*摇一摇弹窗*/
+	.popup {
+		margin: -324px 55px;
+	}
+	.shake-packet-btn {
+		width: 90%;
+	}
+	/*获得红包数量*/
+	.packet-num {
+		margin: 152px 178px 0;
+	}
+	.packet-jingxi {
+		margin: 75px 2px 0;
+	}
+	/*再摇一次*/
+	.again {
+		margin: 35px auto 0;
+	}
+	/*再次摇一摇弹出*/
+	.popup>p {
+		width: 174px;
+	}
+	/*兑换红包数字*/
+	.shake-flow-number {
+		margin: 130px 95px 0;
+	}
+	/*兑换红包惊喜*/
+	.convent-jinxi {
+		margin: 170px 8px 0;
+	}
+	/*更多优惠更多惊喜（获得流量数量排序）*/
+	.flow-ok {
+		margin: 69px 124px;
+		width: 30%;
+	}
+	/*活动结束*/
+	.shake-packet-over {
+		margin-top: 130px;
+	}
+	.over-jinxi {
+		margin: 90px 0px 0;
+	}
+	/*2015041201-updat4e*/
+	.packet-from2 {
+		margin: 312px 60px 0;
+	}
+}
+
+@media screen and (max-width : 360px) {
+	/*摇一摇动画*/
+	.shake-shake-bottom>div {
+		width: 360px;
+		height: 333px;
+	}
+	/*摇一摇弹窗*/
+	.popup {
+		margin: -324px 50px;
+	}
+	/*更多优惠更多惊喜*/
+	.flow-ok {
+		width: 32%;
+		margin: 69px 115px 0;
+	}
+	/*存钱挖宝按钮*/
+	.shake-packet-btn {
+		width: 91%;
+	}
+	/*惊喜*/
+	.packet-jingxi {
+		margin: 70px 0px 0;
+	}
+	/*再摇一次*/
+	.again {
+		margin: 36px auto 0;
+	}
+	/*美贝说明(恭喜你获得··)*/
+	/*说明*/
+	.message {
+		margin: -110px auto 0;
+	}
+	.packet-state {
+		margin: 20px auto 0;
+	}
+	/*获得美贝的数量*/
+	.packet-num {
+		margin: 152px 174px 0;
+	}
+	/*2015041201-updat4e*/
+	.packet-from2 {
+		margin: 255px 52px 0;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	/*摇一摇动画*/
+	.shake-shake-bottom>div {
+		width: 320px;
+		height: 284px;
+	}
+	.opup {
+		margin: -324px 30px;
+	}
+	/*恭喜获得流量包*/
+	.packet-num {
+		margin: 152px 155px;
+	}
+	.shake-packet-btn {
+		width: 100%;
+		margin-top: -2px;
+	}
+	.packet-jingxi {
+		margin: 70px -7px 0;
+	}
+	/*兑换红包数字*/
+	.shake-flow-number {
+		margin: 130px 40px 0;
+	}
+	/*兑换红包惊喜*/
+	.convent-jinxi {
+		margin: 170px -8px 0;
+	}
+	/*再摇一次*/
+	.again {
+		margin: -117px auto 0 0;
+	}
+	/*用户回馈*/
+	.welcome {
+		margin-left: 82px;
+	}
+	/*更多优惠更多惊喜（获得流量数量排序）*/
+	.flow-ok {
+		margin: 69px 96px;
+		width: 36%;
+	}
+	/*活动结束*/
+	.shake-packet-over {
+		margin-top: 130px;
+	}
+	.over-jinxi {
+		margin: 90px -7px 0;
+	}
+	/*2015041201-updat4e*/
+	.packet-from2 {
+		margin: 255px 31px 0;
+	}
+}

@@ -1,0 +1,53 @@
+@charset "utf-8";
+/*身体*/
+.body {
+	height: 800px
+}
+
+.b_con {
+	height: 800px;
+	overflow: hidden;
+	position: relative
+}
+
+.error {
+	display: block;
+	width: 900px;
+	height: 290px;
+	margin-top: 250px
+}
+
+.gif {
+	position: absolute;
+	width: 160px;
+	height: 230px;
+	top: 150px;
+}
+
+.gif img {
+	display: block;
+	width: 160px;
+	height: 230px
+}
+
+.wz {
+	position: absolute;
+	top: 510px;
+	font-family: 'Microsoft YaHei';
+	font-size: 20px;
+	width: 360px
+}
+
+.tip {
+	font-size: 40px;
+	font-weight: bold;
+	font-style: italic
+}
+
+.wz a,.yy {
+	font-size: 14px
+}
+
+.wz a {
+	color: #136ec2
+}

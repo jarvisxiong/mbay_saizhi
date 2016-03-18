@@ -1,0 +1,80 @@
+@charset "utf-8";
+
+.sp {
+	margin-bottom: 0px
+}
+
+.l_nav {
+	width: 142px;
+	border: 1px solid #AFAFAF;
+	border-radius: 4px;
+	font-family: 'Microsoft YaHei';
+	height: 600px
+}
+
+.l_nav a {
+	display: block
+}
+
+.l_nav_con {
+	padding: 10px;
+}
+
+.gn_box {
+	margin: 15px 0px
+}
+
+.gn_box div {
+	display: block;
+}
+
+.gn_icon {
+	padding-left: 22px;
+	position: relative
+}
+
+.jc_icon {
+	background: url(../../images/left_nav/leftnav_f.png) no-repeat left
+}
+
+.yx_icon {
+	background: url(../../images/left_nav/leftnav_market.png) no-repeat left
+}
+
+.sj {
+	width: 10px;
+	background: url(../../images/left_nav/down.png) no-repeat;
+	position: absolute;
+	height: 6px;
+	right: 15px;
+	top: 8px;
+}
+
+h5 .sj_1 {
+	width: 10px;
+	background: url(../../images/left_nav/up.png) no-repeat;
+	position: absolute;
+	height: 6px;
+	right: 15px;
+	top: 10px;
+}
+
+.l_nav h5 {
+	font-size: 16px;
+	color: #35618F;
+	margin-bottom: 18px
+}
+
+.l_nav p {
+	color: #838383;
+	font-size: 14px;
+	margin-bottom: 15px
+}
+
+.l_nav h5:hover {
+	cursor: pointer
+}
+
+.hd_con_r {
+	width: 830px
+}

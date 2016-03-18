@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TrafficRedMbayGift">
+
+	<sql id="base_column_list">
+		id, create_time, mbay_gift_state, sender, reciever, serial_number, amount
+	</sql>
+	
+	<resultMap type="trafficRedMbayGift" id="base_result_map">
+		<result property="id" column="id" />
+		<result property="createTime" column="create_time" />
+		<result property="mbayGiftState" column="mbay_gift_state" />
+		<result property="sender" column="sender" />
+		<result property="reciever" column="reciever" />
+		<result property="serialNumber" column="serial_number" />
+		<result property="amount" column="amount" />
+	</resultMap>
+
+	<insert id="insert" parameterType="trafficRedMbayGift">
+		insert into tr_mbay_gift (<include refid="base_column_list" />)
+		values 
+		(
+			#{id}, #{createTime}, #{mbayGiftState}, #{sender}, #{reciever}, #{serialNumber}, #{amount}
+		)
+	</insert>
+	
+	<select id="selectBySerialNumber" parameterType="java.lang.String" resultMap="base_result_map">
+		select <include refid="base_column_list" />
+		from tr_mbay_gift where serial_number = #{value}
+	</select>
+	
+	<select id="checkExistBySerialNumber" parameterType="java.lang.String" resultType="boolean">
+		select count(*) > 0 from tr_mbay_gift where serial_number = #{value}
+	</select>
+	
+	<update id="updateByIdSelective" parameterType="trafficRedMbayGift">
+		update tr_mbay_gift
+		<set>
+			<if test="mbayGiftState != null">
+				mbay_gift_state = #{mbayGiftState},
+			</if>
+			<if test="reciever != null">
+				reciever = #{reciever},
+			</if>
+			<if test="amount != null">
+				amount = #{amount},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<resultMap type="java.util.HashMap" id="checkParticipableMap">
+		<result property="dayPass" column="dayPass" javaType="boolean" />
+		<result property="weekPass" column="weekPass" javaType="boolean" />
+		<result property="monthPass" column="monthPass" javaType="boolean" />
+	</resultMap>
+	<select id="checkParticipable" parameterType="java.util.Map" resultMap="checkParticipableMap">
+		<![CDATA[
+		select 
+			(
+				select count(*) < #{dayTimes} 
+				from tr_mbay_gift 
+				where reciever = #{mobile} and date(create_time) = curdate()
+			) as dayPass,
+			(
+				select count(*) < #{weekTimes} 
+				from tr_mbay_gift 
+				where reciever = #{mobile} 
+					and date(create_time) >= date_sub(curdate(), interval weekday(curdate()) day)
+					and date(create_time) <= date_add(curdate(), interval (6 - weekday(curdate())) day)
+			) as weekPass,
+			(
+				select count(*) < #{monthTimes} 
+				from tr_mbay_gift 
+				where reciever = #{mobile} 
+					and date(create_time) >= subdate(curdate(), date_format(curdate(), '%d') - 1)
+					and date(create_time) <= last_day(curdate())
+			) as monthPass
+		]]>
+	</select>
+	
+	<select id="findById" parameterType="long" resultMap="base_result_map">
+		select <include refid="base_column_list" />
+		from tr_mbay_gift where id = #{value}
+	</select>
+
+</mapper>

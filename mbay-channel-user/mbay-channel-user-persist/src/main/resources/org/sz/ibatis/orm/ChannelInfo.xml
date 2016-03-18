@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ChannelInfo">
+	<select id="findChannelShortInfo" parameterType="int"
+		resultType="channelinfo">
+		SELECT wechatid,enterpriseName companyName from channelinfo
+		WHERE id=#{id};
+	</select>
+
+	<insert id="createChannelInfo" parameterType="ChannelInfo">
+		INSERT INTO
+		channelinfo(userid,contactsname,gender,department,jobtitle,fixphone,contactsEmail,contactsphone,
+		enterpriseName,province,city,area,address,employees,businessCategory,property,website,licenseNumber,
+		legaltative,capital,registerDate,organizationCode,taxNumber,copyLicense,copyTax,copyCode,createtime)
+		VALUES
+		(#{userid},#{contactsname},#{gender},#{department},#{jobtitle},#{fixphone},#{contactsEmail},#{contactsphone},
+		#{enterpriseName},#{province},#{city},#{area},#{address},#{employees},#{businessCategory},#{property},#{website},#{licenseNumber},
+		#{legaltative},#{capital},#{registerDate},#{organizationCode},#{taxNumber},#{copyLicense},#{copyTax},#{copyCode},#{createtime});
+	</insert>
+
+
+
+	<resultMap type="ChannelInfo" id="certChannelInfo">
+		<result property="contactsname" column="contactsname" />
+		<result property="department" column="department" />
+		<result property="jobtitle" column="jobtitle" />
+		<result property="fixphone" column="fixphone" />
+		<result property="contactsEmail" column="contactsEmail" />
+		<result property="contactsphone" column="contactsphone" />
+		<result property="enterpriseName" column="enterpriseName" />
+		<result property="province" column="province" />
+		<result property="city" column="city" />
+		<result property="area" column="area" />
+		<result property="address" column="address" />
+		<result property="employees" column="employees" />
+		<result property="businessCategory" column="businessCategory" />
+		<result property="property" column="property" />
+		<result property="website" column="website" />
+		<result property="licenseNumber" column="licenseNumber" />
+		<result property="legaltative" column="legaltative" />
+		<result property="capital" column="capital" />
+		<result property="organizationCode" column="organizationCode" />
+		<result property="taxNumber" column="taxNumber" />
+		<result property="copyLicense" column="copyLicense" />
+		<result property="copyTax" column="copyTax" />
+		<result property="copyCode" column="copyCode" />
+		<result property="authinfo" column="authinfo" /> 
+		<result property="createtime" column="createtime" />
+		<result property="gender" column="gender" />
+	</resultMap>
+
+	<!-- findChannelInfo -->
+	<select id="findChannelInfo" parameterType="String" resultMap="certChannelInfo">
+		SELECT
+		contactsname,department,jobtitle,fixphone,contactsEmail,contactsphone,
+		gender,
+		enterpriseName,province,city,area,address,employees,businessCategory,property,website,licenseNumber,
+		legaltative,capital,organizationCode,taxNumber,authinfo,createtime,copyLicense,copyTax,copyCode
+		FROM channelinfo WHERE userid=(SELECT user_info_id  FROM zcc_user_info where usernumber=#{value});
+	</select>
+
+	<delete id="deleteChannelInfoByUid" parameterType="int">
+		delete from
+		channelinfo where userid = ${value}
+	</delete>
+
+	
+	<select id="getEnterpriseName" parameterType="String" resultType="String">
+		SELECT c.enterpriseName 
+		FROM channelinfo c
+		LEFT JOIN zcc_user_info u on u.user_info_id=c.userid
+		WHERE u.usernumber=#{value}
+	</select>
+</mapper>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SMSPurchaseOrder">
+    <resultMap type="sMSPurchaseOrder" id="baseResultMap">
+      <id property="id" column="id" jdbcType="INTEGER"/>
+      <result property="orderId" column="order_id"/>
+      <result property="userNumber" column="user_number" />
+      <result property="smsAmount" column="sms_amount" />
+      <result property="mbayAmount" column="mbay_amount" />
+      <result property="createTime" column="create_time" />
+      <result property="state" column="state" />
+    </resultMap>
+    <sql id="baseColumnList" >
+        id, order_id, user_number, sms_amount, mbay_amount, create_time, state
+    </sql>
+
+    <insert id="createSMSPurchaseOrder" parameterType="sMSPurchaseOrder">
+        INSERT INTO sms_purchase_order(order_id, user_number, sms_amount, mbay_amount, create_time, state)
+        VALUES(#{orderId}, #{userNumber}, #{smsAmount}, #{mbayAmount}, #{createTime}, #{state})
+    </insert>
+
+    <select id="findSMSPurchaseOrder" parameterType="Map" resultMap="baseResultMap">
+      	SELECT <include refid="baseColumnList" />
+         FROM sms_purchase_order WHERE user_number = #{userNumber}
+    </select>
+    
+    <select id="findSMSPurchaseOrderByOrderId" parameterType="String" resultMap="baseResultMap">
+    	SELECT <include refid="baseColumnList" />
+        FROM sms_purchase_order WHERE order_id = #{orderId}
+    </select>
+
+    <select id="findAllSMSPurchaseOrder" parameterType="Map" resultMap="baseResultMap">
+      SELECT <include refid="baseColumnList" /> FROM sms_purchase_order WHERE 
+        user_number = #{userNumber}
+      <if test="depositNumber != null and depositNumber != ''">
+        and order_id = #{depositNumber}
+      </if>
+      <choose>
+          <when test="starttime != null and endtime == null">
+            and create_time &gt; #{starttime}
+          </when>
+          <when test="starttime == null and endtime != null ">
+            and create_time  &lt; #{endtime}
+          </when>
+          <when test="starttime != null and endtime != null ">
+            and create_time between #{starttime} and #{endtime}
+          </when>
+      </choose>
+        order by create_time desc
+    </select>
+
+    <select id="countSMSPurchaseOrder" parameterType="Map" resultType="java.lang.Integer">
+      SELECT count(*) FROM sms_purchase_order WHERE 
+      user_number = #{userNumber}
+      <if test="depositNumber != null and depositNumber != ''">
+        and order_id = #{depositNumber}
+      </if>
+      <choose>
+          <when test="starttime != null and endtime == null">
+            and create_time &gt; #{starttime}
+          </when>
+          <when test="starttime == null and endtime != null ">
+            and create_time &lt; #{endtime}
+          </when>
+          <when test="starttime != null and endtime != null ">
+            and create_time between #{starttime} and #{endtime}
+          </when>
+      </choose>
+    </select>
+</mapper>

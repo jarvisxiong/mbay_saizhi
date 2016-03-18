@@ -1,0 +1,319 @@
+@charset "utf-8";
+
+/*右侧*/
+.r_sec {
+	width: 826px;
+	font-family: 'Microsoft Yahei'
+}
+
+.r_sec_1 {
+	padding: 0px 15px;
+	line-height: 35px;
+	font-size: 15px;
+	border: 1px solid #AFAFAF;
+	margin-bottom: 10px;
+}
+
+.xk_0 {
+	width: 70px;
+	text-align: right;
+	color: #5D5C5C;
+	display: inline-block
+}
+
+.xk_1,.r_sec_1 b {
+	color: #FDAB1B
+}
+
+.r_sec_1 b {
+	margin-right: 10px
+}
+
+.xk_1 {
+	display: inline-block;
+	text-align: right
+}
+
+.yd_0 {
+	margin-left: 80px
+}
+/*分割线*/
+.hr_12 {
+	height: 12px
+}
+/*栏*/
+.r_sec_2 {
+	padding: 0px 15px;
+	border: 1px solid #AFAFAF
+}
+
+.r_sec_2 h3 {
+	padding-left: 35px;
+	background: url(../images/online/zfpt.jpg) no-repeat left;
+	color: #35618F;
+	font-size: 18px;
+	line-height: 60px
+}
+
+.r_sec_2 h4 {
+	padding-left: 40px;
+	background: url(../images/online/yhzf.jpg) no-repeat left;
+	color: #35618F;
+	font-size: 18px;
+	line-height: 60px
+}
+
+.r_sec_2 h4 a {
+	color: #35618F
+}
+
+.sel_tit {
+	border-bottom: 0px
+}
+
+.r_sec_3,.r_sec_4 {
+	border-left: 1px solid #AFAFAF;
+	border-right: 1px solid #AFAFAF
+}
+
+.r_sec_3 li,.r_sec_4 li {
+	position: relative;
+	list-style: none;
+	border: 1px solid #fff;
+	float: left;
+	width: 179px;
+	height: 50px;
+	padding: 0px 2px;
+	margin: 12px 8px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.enterp {
+	position: absolute;
+	right: 15px;
+	width: 15px;
+	top: 7px;
+	font-weight: bold;
+}
+
+.r_sec_4 {
+	border-bottom: 1px solid #AFAFAF
+}
+
+.blue-radio {
+	position: relative;
+	top: 16px;
+	float: left;
+	display: inline-block;
+	position: relative;
+	width: 15px;
+	height: 15px;
+	border: 1px solid #b7b7b7;
+	border-radius: 15px;
+	box-shadow: rgba(255, 255, 255, 1) 0 2px 0 inset;
+	cursor: pointer;
+}
+
+.blue-radio a {
+	position: absolute;
+	left: 3px;
+	top: 3px;
+	width: 9px;
+	height: 9px;
+	border-radius: 30px;
+}
+
+.r_sec_3 li img {
+	height: 48px;
+}
+
+.on_0 {
+	background: #83a7ff
+}
+
+.ljzf {
+	background: #FDAB1B;
+	color: #fff;
+	width: 115px;
+	height: 25px;
+	font-family: 'Microsoft Yahei';
+	border-radius: 6px;
+	letter-spacing: 1px;
+	margin-top: 20px
+}
+
+.hkjl {
+	background: #FDAB1B;
+	color: #fff;
+	width: 115px;
+	height: 25px;
+	font-family: 'Microsoft Yahei';
+	border-radius: 6px;
+	letter-spacing: 1px;
+	margin-top: 20px
+}
+/*账户*/
+#acount {
+	display: none
+}
+
+.acount_tip {
+	border: 1px solid #AFAFAF;
+	padding: 15px 15px;
+	color: #35618F
+}
+
+.acount_tip h4 {
+	padding-left: 18px;
+	background: url(../images/online/cau.jpg) no-repeat left
+}
+
+.acount_tip p {
+	margin: 5px 0px
+}
+
+.acount_tip div {
+	margin-top: 10px
+}
+
+.acount_tip button {
+	width: 115px;
+	hieght: 30px;
+	border: 1px solid #CBCBCB;
+	background: #fff;
+	padding: 10px;
+	color: #000000;
+	cursor: pointer;
+	border-radius: 4px
+}
+
+.acount_tip .button {
+	width: 115px;
+	hieght: 30px;
+	border: 1px solid #CBCBCB;
+	background: #fff;
+	padding: 10px;
+	color: #000000;
+	cursor: pointer;
+	border-radius: 4px
+}
+
+.acount_bank {
+	border-left: 1px solid #AFAFAF;
+	border-right: 1px solid #AFAFAF;
+	padding: 15px 15px;
+	color: #35618F
+}
+
+.acount_bank p span {
+	display: inline-block
+}
+
+.acount_bank p {
+	padding: 15px 0px;
+	border-bottom: 1px solid #AFAFAF;
+	cursor: pointer
+}
+
+.acount_bank h4 {
+	padding-left: 18px
+}
+
+.acount_bank .blue-radio {
+	top: 0px;
+	margin: 0px 10px
+}
+
+.acount_bank_name {
+	color: #C6A007
+}
+
+.acount_bank_com,.acount_bank_num {
+	color: #E40404
+}
+
+.acount_bank_name,.acount_bank_com,.acount_bank_num {
+	margin-right: 20px
+}
+
+.acount_det {
+	overflow: hidden;
+	height: 200px;
+	border: 1px solid #AFAFAF;
+	cursor: pointer;
+	border-top: 0px;
+}
+
+.acount_det_con {
+	margin: 15px;
+	background: #fff;
+	height: 170px;
+	overflow: hidden
+}
+
+.acount_det_con div {
+	margin: 10px 0px
+}
+
+.acount_bank_nr {
+	vertical-align: middle;
+	width: 392px
+}
+
+.acount_bank_nr2 {
+	vertical-align: top;
+	width: 350px
+}
+
+.acount_det_lab {
+	width: 60px;
+	display: inline-block;
+	text-align: right
+}
+
+.acount_txt_0 {
+	border: 1px solid #CBCBCB;
+	width: 133px;
+	height: 31px;
+	padding-right: 5px;
+	text-align: right
+}
+
+.acount_txt_1 {
+	border: 1px solid #CBCBCB;
+	height: 31px;
+	width: 75px;
+	padding-left: 5px
+}
+
+.acount_txt_2 {
+	border: 1px solid #CBCBCB;
+	height: 31px;
+	width: 225px;
+	padding-left: 5px
+}
+
+.acount_txt_3 {
+	border: 1px solid #CBCBCB;
+	width: 230px;
+	height: 65px;
+	vertical-align: top;
+}
+
+.acount_button {
+	text-align: right;
+	margin-bottom: 25px
+}
+/*work title***/
+.ddqr {
+	padding-left: 40px;
+	background: url(../images/online/zfpt.jpg) no-repeat left;
+	color: #35618F;
+	font-size: 18px;
+	height: 36px;
+	line-height: 35px;
+	line-height: 45px;
+	margin-bottom: 15px;
+	font-family: 'Microsoft YaHei';
+}

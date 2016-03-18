@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Appropriation">	
+	
+	<resultMap type="appropriationOrder" id="appropriationOrderInfoMap">
+	  <result property="ordernumber" column="ordernumber" />
+	  <result property="marketUser.usernumber" column="market_unumber" />	  
+	  <result property="mbaynum" column="mbaynum"/>
+	  <result property="transfertime" column="transfertime"/>
+	  <result property="operatorperson" column="operatorperson" />
+	  <result property="remark" column="remark" />
+	  <result property="state" column="state" />
+	</resultMap>
+	
+	<select id="findAppropriationOrderByOrderNumber" resultMap="appropriationOrderInfoMap">		
+		SELECT * FROM appropriation_order WHERE ordernumber=#{ordernumber}
+	</select>
+	
+</mapper>

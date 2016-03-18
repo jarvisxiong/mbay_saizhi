@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TrafficRedCampaign">
+
+	<resultMap id="BaseResultMap" type="trafficRedCampaign">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="userNumber" property="userNumber" jdbcType="CHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="number" property="number" jdbcType="VARCHAR" />
+		<result column="firstShark" property="firstShark" jdbcType="BIT" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+		<result column="sendsms" property="sendsms" jdbcType="BIT" />
+		<result column="startTime" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="endTime" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="trafficRate" property="trafficRate" jdbcType="INTEGER" />
+		<result column="times" property="times" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="TINYINT" />
+		<result column="templateId" property="template.id" jdbcType="BIGINT" />
+		<result column="shareInfoId" property="shareInfo.id" jdbcType="BIGINT" />
+		<result column="mbay_gift_config_id" property="mbayGiftConfig.id" jdbcType="BIGINT" />
+		<result column="dateCreated" property="dateCreated" jdbcType="TIMESTAMP" />
+		<result column="mall_id" property="mall.id" jdbcType="INTEGER" />
+		<result column="threshold_mobile" property="thresholdMobile" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, userNumber, name, number, firstShark, status, sendsms,
+		startTime,
+		endTime, trafficRate, times, type, templateId,
+		shareInfoId,mbay_gift_config_id,
+		dateCreated, mall_id, threshold_mobile
+	</sql>
+
+	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from tr_campaign
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<insert id="createSelective" parameterType="trafficRedCampaign">
+		insert into tr_campaign
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>
+			<if test="userNumber != null">userNumber,</if>
+			<if test="name != null">name,</if>
+			<if test="number != null">number,</if>
+			<if test="firstShark != null">firstShark,</if>
+			<if test="status != null">status,</if>
+			<if test="sendsms != null">sendsms,</if>
+			<if test="startTime != null">startTime,</if>
+			<if test="endTime != null">endTime,</if>
+			<if test="trafficRate != null">trafficRate,</if>
+			<if test="times != null">times,</if>
+			<if test="type != null">type,</if>
+			<if test="template != null">templateId,</if>
+			<if test="shareInfo != null">shareInfoId,</if>
+			<if test="mbayGiftConfig != null">mbay_gift_config_id,</if>
+			<if test="dateCreated != null">dateCreated,</if>
+			<if test="mall != null">mall_id,</if>
+			<if test="thresholdMobile != null">threshold_mobile,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="userNumber != null">
+				#{userNumber,jdbcType=CHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="number != null">
+				#{number,jdbcType=VARCHAR},
+			</if>
+			<if test="firstShark != null">
+				#{firstShark,jdbcType=BIT},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=TINYINT},
+			</if>
+			<if test="sendsms != null">
+				#{sendsms,jdbcType=BIT},
+			</if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="trafficRate != null">
+				#{trafficRate,jdbcType=INTEGER},
+			</if>
+			<if test="times != null">
+				#{times,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=TINYINT},
+			</if>
+			<if test="template != null">
+				#{template.id,jdbcType=BIGINT},
+			</if>
+			<if test="shareInfo != null">
+				#{shareInfo.id,jdbcType=BIGINT},
+			</if>
+			<if test="mbayGiftConfig != null">
+				#{mbayGiftConfig.id,jdbcType=BIGINT},
+			</if>
+			<if test="dateCreated != null">
+				#{dateCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mall != null">
+				#{mall.id,jdbcType=INTEGER},
+			</if>
+			<if test="thresholdMobile != null">
+				#{thresholdMobile},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByIdSelective" parameterType="trafficRedCampaign">
+		update tr_campaign
+		<set>
+			<if test="userNumber != null">
+				userNumber = #{userNumber,jdbcType=CHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="number != null">
+				number = #{number,jdbcType=VARCHAR},
+			</if>
+			<if test="firstShark != null">
+				firstShark = #{firstShark,jdbcType=BIT},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=TINYINT},
+			</if>
+			<if test="sendsms != null">
+				sendsms = #{sendsms,jdbcType=BIT},
+			</if>
+			<if test="startTime != null">
+				startTime = #{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				endTime = #{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="trafficRate != null">
+				trafficRate = #{trafficRate,jdbcType=INTEGER},
+			</if>
+			<if test="times != null">
+				times = #{times,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=TINYINT},
+			</if>
+			<if test="dateCreated != null">
+				dateCreated = #{dateCreated},
+			</if>
+			<if test="mall != null">
+				mall_id = #{mall.id},
+			</if>
+			<if test="thresholdMobile != null">
+				threshold_mobile = #{thresholdMobile},
+			</if>
+			<if test="template != null">
+				templateId = #{template.id},
+			</if>
+			<if test="shareInfo != null">
+				shareInfoId = #{shareInfo.id},
+			</if>
+			<if test="mbayGiftConfig != null">
+				mbay_gift_config_id = #{mbayGiftConfig.id},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<update id="updateById" parameterType="trafficRedCampaign">
+		update tr_campaign set
+		userNumber = #{userNumber,jdbcType=CHAR},
+		name = #{name,jdbcType=VARCHAR},
+		number = #{number,jdbcType=VARCHAR},
+		firstShark = #{firstShark,jdbcType=BIT},
+		status = #{status,jdbcType=TINYINT},
+		sendsms = #{sendsms,jdbcType=BIT},
+		startTime = #{startTime,jdbcType=TIMESTAMP},
+		endTime = #{endTime,jdbcType=TIMESTAMP},
+		trafficRate = #{trafficRate,jdbcType=INTEGER},
+		times = #{times,jdbcType=INTEGER},
+		type = #{type,jdbcType=TINYINT},
+		dateCreated = #{dateCreated,jdbcType=TIMESTAMP},
+		mall_id = #{mall.id},
+		threshold_mobile = #{thresholdMobile},
+		templateId = #{template.id},
+		shareInfoId = #{shareInfo.id},
+		mbay_gift_config_id = #{mbayGiftConfig.id}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="findAllByPage" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from tr_campaign
+		where userNumber = #{userNumber,jdbcType=CHAR}
+		order by
+		dateCreated desc
+	</select>
+
+	<select id="countByPage" resultType="int" parameterType="java.lang.String">
+		select count(id)
+		from tr_campaign
+		where userNumber = #{userNumber,jdbcType=CHAR}
+	</select>
+
+	<select id="findCampaignByNumber" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tr_campaign
+		where number = #{value,jdbcType=VARCHAR}
+	</select>
+
+	<select id="isExistCampaign" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM tr_campaign where id = #{value}
+	</select>
+
+	<resultMap type="CampaignStatistics_TrafficRed" id="campaignStatisticsMap">
+		<result property="noneFinish" column="r0" />
+		<result property="notStarted" column="r1" />
+		<result property="inActive" column="r2" />
+		<result property="over" column="r3" />
+		<result property="cancled" column="r4" />
+	</resultMap>
+
+	<!-- 查询所有不同状态统计 -->
+	<select id="statisticTrafficRedCampaign" parameterType="String"
+		resultMap="campaignStatisticsMap">
+		select
+		(select count(*) from tr_campaign where `status`=0 and
+		usernumber=#{value})
+		as r0,
+		(select count(*) from tr_campaign where
+		`status`=1 and
+		usernumber=#{value}) as r1,
+		(select count(*) from
+		tr_campaign where
+		`status`=2 and usernumber=#{value}) as r2,
+		(select
+		count(*) from
+		tr_campaign where `status`=3 and usernumber=#{value}) as
+		r3,
+		(select
+		count(*) from tr_campaign where `status`=4 and
+		usernumber=#{value}) as
+		r4
+	</select>
+
+	<!-- 查询活动归属用户 -->
+	<select id="findCampaignBelongUser" parameterType="long" resultType="String">
+		SELECT userNumber FROM tr_campaign WHERE id=#{value}
+	</select>
+	
+	<!-- 查询产品中奖概率 -->
+	<select id="findProductHitRate" parameterType="long" resultType="double">
+		SELECT trafficrate FROM tr_campaign WHERE id=#{value}
+	</select>
+	
+	<!-- 根据活动ID查询活动编号 -->
+	<select id="findCampaignNumberById" parameterType="long"
+		resultType="String">
+		SELECT number FROM tr_campaign WHERE id = #{value}
+	</select>
+
+	<select id="findAllCampaignNumberStartToday" parameterType="java.util.Map" resultType="java.lang.String">
+		<![CDATA[ 
+		select number from tr_campaign
+		where status = #{status} and startTime <= #{now} and endTime >= #{now}
+		]]>
+	</select>
+	
+	<select id="findAllCampaignNumberOverToday" parameterType="java.util.Map" resultType="java.lang.String">
+		<![CDATA[ 
+		select number from tr_campaign
+		where status = #{status} and endTime < #{now}
+		]]>
+	</select>
+	
+	<select id="getIdByNumber" parameterType="java.lang.String" resultType="java.lang.Long">
+		select id from tr_campaign where number = #{value}
+	</select>
+
+</mapper>

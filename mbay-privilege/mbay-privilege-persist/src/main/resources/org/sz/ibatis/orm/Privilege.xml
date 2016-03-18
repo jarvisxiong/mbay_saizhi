@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Privilege">
+
+	<resultMap type="Privilege" id="baseListMap">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="createTime" column="create_time" />
+		<result property="parentId" column="parent_id" />
+		<result property="url" column="url" />
+	</resultMap>
+	
+	<insert id="createPrivilege" parameterType="privilege">
+		<selectKey keyProperty="id"  resultType="int" order="BEFORE">		
+			SELECT IFNULL(MAX(id),0)+1 id FROM privilege
+		</selectKey>
+		insert into
+		privilege
+		(id,name,create_time,parent_id,url)
+		VALUES(#{id},#{name},#{createTime},#{parentId},#{url})
+	</insert>
+
+	<update id="updatePrivilege" parameterType="Map">
+		update 
+		privilege 
+		<trim prefix="set" prefixOverrides=",">
+			<if test="name != null and name != ''">name=#{name},</if>
+			<if test="url != null and url != ''">url=#{url},</if>
+			parent_id=#{parentId}
+		</trim>
+		where id=#{id}
+	</update>
+
+	<select id="findAllPrivilege" parameterType="String" resultMap="baseListMap">
+		select
+		*
+		from 
+		privilege
+		where 1=1
+		<if test="value != null and value != ''">
+			and name like CONCAT('%','${value}','%' )
+		</if>
+		order by create_time DESC
+	</select>
+
+	<select id="countPrivilege" parameterType="String" resultType="int">
+		select count(*) from privilege
+		where 1=1 
+		<if test="value != null and value != ''">
+			and name like CONCAT('%','${value}','%' )
+		</if>
+	</select>
+	
+	<select id="findPrivilege" parameterType="int" resultMap="baseListMap">
+		select
+		*
+		from 
+		privilege
+		where 
+		id=#{value}
+	</select>
+	
+	<delete id="deletePrivilege" parameterType="int">
+		delete from 
+		privilege 
+		where 
+		id=#{value}
+	</delete>
+</mapper>

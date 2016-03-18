@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MallExchangeItem">
+	
+	<sql id="queryWhere">
+		<if test="mall != null and mall.id != 0 ">
+			and d.id=#{mall.id}
+		</if>
+		<if test="type != null ">
+			and m.type=#{type}
+		</if>
+		<if test="status !=null ">
+			and m.status=#{status}
+		</if>
+		<if test="title !=null and title != '' ">
+			and m.title=#{title}
+		</if>
+		<if test="userNumber !=null and userNumber != '' ">
+			and m.user_number=#{userNumber}
+		</if>
+		<if test="audit !=null ">
+			and m.audit!=#{audit}
+		</if>
+		<if test="itemNumber !=null and itemNumber != '' ">
+			and m.item_number=#{itemNumber}
+		</if>
+	</sql>
+	
+	<resultMap type="mallExchangeItem" id="baseResultMap">
+		<result property="itemNumber" column="item_number" />
+		<result property="userNumber" column="user_number" />
+		<result property="title" column="title" />
+		<result property="mbay" column="mbay" />
+		<result property="type" column="type" />
+		<result property="status" column="status" />
+		<result property="audit" column="audit" />
+		<result property="remainder" column="remainder" />
+		<result property="mall.name" column="name" />
+	</resultMap>
+	
+	<select id="findAllMallExchangeItem" parameterType="mallExchangeItemQO" resultMap="baseResultMap">
+		select m.item_number,m.user_number,m.title,m.mbay,m.type,m.status,m.audit,m.remainder,d.name from mall_exchange_item m
+		left join duiba_mall d on m.mall_id=d.id
+		where 1=1
+		<include refid="queryWhere" />
+		order by m.create_time DESC
+	</select>
+
+	<select id="countMallExchangeItem" parameterType="mallExchangeItemQO" resultType="Integer">
+		select count(*) from mall_exchange_item m
+		left join duiba_mall d on m.mall_id=d.id
+		where 1=1 
+		<include refid="queryWhere" />
+	</select>
+	
+	<resultMap type="mallExchangeItem" id="detailResultMap">
+		<result property="itemNumber" column="item_number" />
+		<result property="title" column="title" />
+		<result property="description" column="description" />
+		<result property="ruleName" column="rule_name" />
+		<result property="ruleContent" column="rule_content" />
+		<result property="detailName" column="detail_name" />
+		<result property="detailContent" column="detail_content" />
+		<result property="successDescription" column="success_description" />
+		<result property="price" column="price" />
+		<result property="mbay" column="mbay" />
+		<result property="audit" column="audit" />
+		<result property="userLimit" column="user_limit" />
+		<result property="userLimitType" column="user_limit_type" />
+		<result property="extendLimit" column="extend_limit" />
+		<result property="remainder" column="remainder" />
+		<result property="type" column="type" />
+		<result property="status" column="status" />
+		<result property="hide" column="hide" />
+		<result property="mall.id" column="mall_id" />
+		<result property="mall.name" column="name" />
+	</resultMap>
+	
+	<select id="findMallExchangeItemByItemNumber" parameterType="String" resultMap="detailResultMap">
+		select m.item_number,m.title,m.description,m.rule_name,m.rule_content,
+		m.detail_name,m.detail_content,m.success_description,m.price,m.mbay,m.audit,m.user_limit,
+		m.user_limit_type,m.extend_limit,m.remainder,m.type,m.status,m.hide,m.mall_id,d.name
+		from mall_exchange_item m
+		left join duiba_mall d on m.mall_id=d.id
+		where item_number=#{value}
+	</select>
+	
+	<insert id="createMallExchangeItem" parameterType="mallExchangeItem">
+		insert into mall_exchange_item
+		(item_number,user_number,create_time,title,description,rule_name,rule_content,
+		detail_name,detail_content,success_description,price,mbay,user_limit,user_limit_type,
+		audit,extend_limit,remainder,type,status,hide,mall_id)
+		values
+		(#{itemNumber},#{userNumber},#{createTime},#{title},#{description},#{ruleName},#{ruleContent},
+		#{detailName},#{detailContent},#{successDescription},#{price},#{mbay},#{userLimit},#{userLimitType},
+		#{audit},#{extendLimit},#{remainder},#{type},#{status},#{hide},#{mall.id});
+	</insert>
+	
+	<update id="updateMallExchangeItem" parameterType="mallExchangeItem">
+		update mall_exchange_item
+		<trim prefix="set" suffixOverrides=",">
+			<if test="title != null and title != '' ">title=#{title},</if>
+			<if test="description != null and description != '' ">description=#{description},</if>
+			<if test="ruleName != null and ruleName != '' ">rule_name=#{ruleName},</if>
+			<if test="ruleContent != null and ruleContent != '' ">rule_content=#{ruleContent},</if>
+			<if test="detailName != null and detailName != '' ">detail_name=#{detailName},</if>
+			<if test="detailContent != null and detailContent != '' ">detail_content=#{detailContent},</if>
+			<if test="successDescription != null and successDescription != '' ">success_description=#{successDescription},</if>
+			<if test="price != 0 ">price=#{price},</if>
+			<if test="mbay != 1 ">mbay=#{mbay},</if>
+			<if test="userLimit != null and userLimit != '' ">user_limit=#{userLimit},</if>
+			<if test="userLimitType != null ">user_limit_type=#{userLimitType},</if>
+			<if test="extendLimit != null ">extend_limit=#{extendLimit},</if>
+			<if test="remainder != 0 ">remainder=#{remainder},</if>
+			<if test="type != null ">type=#{type},</if>
+			<if test="status != null ">status=#{status},</if>
+			<if test="hide != null ">hide=#{hide},</if>
+			<if test="mall != null ">mall_id=#{mall.id}</if>
+		</trim>
+		WHERE item_number=#{itemNumber}
+	</update>
+	
+	<delete id="deleteMallExchangeItem" parameterType="String">
+		delete from mall_exchange_item where item_number = #{value}
+	</delete>
+	
+	<update id="updateMallExchangeItemStatus" parameterType="Map">
+		update mall_exchange_item
+		<trim prefix="set" suffixOverrides=",">
+			<if test="audit != null ">audit=#{audit},</if>
+			<if test="status != null ">status=#{status}</if>
+		</trim>
+		WHERE item_number=#{itemNumber}
+	</update>
+	
+	<update id="updateMallExchangeItemAudit" parameterType="Map">
+		update mall_exchange_item
+		<trim prefix="set" suffixOverrides=",">
+			<if test="audit != null ">audit=#{audit}</if>
+		</trim>
+		WHERE item_number=#{itemNumber}
+	</update>
+	
+	<update id="updateMallExchangeItemRemainder" parameterType="Map">
+		update mall_exchange_item
+		<trim prefix="set" suffixOverrides=",">
+			<if test="remainder != 0 ">remainder = remainder + #{remainder}</if>
+		</trim>
+		WHERE item_number=#{itemNumber}
+	</update>
+</mapper>

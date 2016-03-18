@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DuiBaMall">
+	<resultMap type="duiBaMall" id="baseResultMap">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="name" column="name" />
+		<result property="appkey" column="appkey" />
+		<result property="appsecret" column="appsecret" />
+		<result property="status" column="status" />
+	</resultMap>
+
+	<select id="findDuiBaMallById" parameterType="Integer" resultMap="baseResultMap">
+		SELECT * FROM duiba_mall WHERE id = #{id, jdbcType=INTEGER}
+	</select>
+	
+	<select id="findAllDuiBaMall" parameterType="String" resultMap="baseResultMap">
+		SELECT * FROM duiba_mall 
+		<if test="value != null and value != '' ">WHERE name=#{value}</if>
+		order by create_time desc
+	</select>
+	
+	<select id="findEnabledDuiBaMall" resultMap="baseResultMap">
+		SELECT * FROM duiba_mall WHERE status=1 order by create_time desc
+	</select>
+
+	<select id="countDuiBaMall" parameterType="String" resultType="Integer">
+		SELECT count(*) FROM duiba_mall 
+		<if test="value != null and value != '' ">WHERE name=#{value}</if>
+	</select>
+
+	<delete id="deleteDuiBaMall" parameterType="Integer">
+		delete from duiba_mall where id = #{id, jdbcType=INTEGER}
+	</delete>
+
+	<insert id="createDuiBaMall" parameterType="duiBaMall">
+		<selectKey keyProperty="id"  resultType="int" order="BEFORE">		
+			SELECT IFNULL(MAX(id),0)+1 id FROM duiba_mall
+		</selectKey>
+		insert into duiba_mall (id, name, appkey, appsecret, status, create_time)
+		values (#{id},#{name,jdbcType=VARCHAR},#{appkey,jdbcType=VARCHAR},#{appsecret,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createTime, jdbcType=VARCHAR})
+	</insert>
+
+	<update id="updateDuiBaMall" parameterType="duiBaMall">
+		UPDATE duiba_mall
+		<trim prefix="set" suffixOverrides=",">
+			<if test="name != null and name != '' ">name=#{name},</if>
+			<if test="appkey != null and appkey != '' ">appkey=#{appkey},</if>
+			<if test="appsecret != null and appsecret != '' ">appsecret=#{appsecret},</if>
+			<if test="status != null ">status=#{status}</if>
+		</trim>
+		WHERE id=#{id}
+	</update>
+</mapper>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AppTemptationIpWhiteList">
+	
+	<sql id="base_column_list">
+		id, user_number, ip, create_time
+	</sql>
+	
+	<resultMap type="appTemptationIpWhiteList" id="base_result_map">
+		<result property="id" column="id" />
+		<result property="userNumber" column="user_number" />
+		<result property="ip" column="ip" />
+		<result property="createTime" column="create_time" />
+	</resultMap>
+	
+	<select id="findByUserNumber" parameterType="java.lang.String" resultMap="base_result_map">
+		select <include refid="base_column_list" />
+		from app_temptation_ip_whitelist
+		where user_number = #{value}
+	</select>
+	
+	<select id="findAllAppTemptationIpWhiteList" parameterType="appTemptationIpWhiteListQO" resultMap="base_result_map">
+		select <include refid="base_column_list" />
+		from app_temptation_ip_whitelist
+		<where>
+			<if test="userNumber != null and userNumber != ''">user_number = #{userNumber}</if>
+		</where>
+		order by create_time desc
+	</select>
+	
+	<select id="countAppTemptationIpWhiteList" parameterType="appTemptationIpWhiteListQO" resultType="int">
+		select count(*) from app_temptation_ip_whitelist
+		<where>
+			<if test="userNumber != null and userNumber != ''">user_number = #{userNumber}</if>
+		</where>
+	</select>
+	
+	<update id="updateByIdSelective" parameterType="appTemptationIpWhiteList">
+		update app_temptation_ip_whitelist
+		<set>
+			<if test="ip != null">ip = #{ip},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<insert id="create" parameterType="appTemptationIpWhiteList">
+		insert into app_temptation_ip_whitelist (<include refid="base_column_list" />)
+		values (#{id}, #{userNumber}, #{ip}, #{createTime})
+	</insert>
+	
+	<select id="checkExistsByUserNumber" parameterType="java.lang.String" resultType="boolean">
+		select count(*) from app_temptation_ip_whitelist where user_number = #{value}
+	</select>
+	
+	<delete id="deleteById" parameterType="long">
+		delete from app_temptation_ip_whitelist where id = #{value}
+	</delete>
+	
+	<select id="findById" parameterType="java.lang.Long" resultMap="base_result_map">
+		select <include refid="base_column_list" />
+		from app_temptation_ip_whitelist
+		where id = #{value}
+	</select>
+	
+</mapper>

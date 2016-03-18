@@ -1,0 +1,48 @@
+ /*public*/
+*, *:before, *:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+body,a,div,span,img,form,input,p{ padding:0; margin:0; border:none;word-wrap: break-word;font-style:normal;}
+body{color:#696969; font-weight:400;text-rendering: optimizelegibility;font-size:.56rem;-webkit-text-size-adjust:100%;max-width:640px;margin:0 auto;}
+a{ color:#696969; text-decoration:none;}
+a:link,a:visited,a:active{color:#696969; text-decoration:none;}
+a,button,span,i,div,h2,aside{-webkit-user-select: none; -webkit-tap-highlight-color:rgba(0,0,0,0);}
+ul,li {list-style: none;}   img{max-width:100%;}
+input::-webkit-input-placeholder {color:#C2C2C2; }
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {display:block; margin:0; padding:0;}
+input[type="button"], input[type="text"], input[type="submit"], input[type="search"], input[type="email"], input[type="number"], input[type="phone"], button {-webkit-appearance: none;outline: 0 none;}
+.clearfix:after { content: ""; display: block; height: 0; overflow: hidden; clear: both; visibility: hidden; }
+  /*public*/
+
+
+ /*login-2015-0426-001 Create*/
+html,body,.mb-form{height:100%;overflow:hidden;background:#ECECEC;position: relative;}
+.mb-form{background-size: cover;}
+     /*nav -start*/
+.mb-tab{padding:1.6rem .4rem 0 .4rem;}
+.mb-tab > a{display:block;float:left;width:50%;height:1.6rem;text-align:center;font-size:.56rem;color:#656565;border-bottom:.16rem solid #ECECEC;line-height:1.6rem;}
+.mb-tab > .active{border-bottom:.16rem solid #FF6700;}
+
+     /*form   forget password -start*/
+.mb-form-a{padding:0 .4rem;background:#FFF;}
+form{display:none;}
+.block{display:block;}
+.form-item{position:relative;width:100%;overflow:hidden;}
+.form-item:first-child{border-bottom:1px solid #999999;}
+.form-item > input{height:1.6rem;width:100%;padding:.2rem 0;line-height:100%;font-size:.56rem;color:#656565;outline:0 none;}
+
+     /*botton*/
+.mb-form-b {padding:1.6rem .4rem;}
+.mb-form-b > button{width:100%;border:none;border-radius:.2rem;background: #FF6700;height:1.6rem;font-size:.8rem;color:#FFF;float:left;}
+.mb-form-b > a{font-size:.48rem;color:#656565;line-height:1.6rem;}
+.mb-form-b > a:first-child{float:left;}.mb-form-b > a:last-child{float:right;}
+.form-code{position:absolute;right:0;top:.2rem;height:1.2rem;background: #DCDCDC;color:#A0A0A0;line-height:1.2rem;padding:0 .2rem;border-radius:.2rem;}
+/*login-2015-04-26-001 end*/
+ 
+/*forget password */
+.forget-psd-1{padding-top:1.8rem;}
+
+/*popup start*/
+.popup{ width:68%;height:1.8rem;border-radius:.2rem;position:absolute;top:48%;left:16%;background:rgba(0,0,0,.7);text-align: center;line-height:1.8rem;display:none;}
+.popup p{color:#fff;}
+  
+.voice {float: right;padding-right: .4rem;font-size: .48rem;padding-top: .2rem;display: none;}
+#voiceyzm {color: #ff6700;}

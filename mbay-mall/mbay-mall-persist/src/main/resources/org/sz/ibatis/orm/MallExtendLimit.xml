@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MallExtendLimit">
+	
+	<resultMap type="mallExtendLimit" id="baseResultMap">
+		<result property="itemNumber" column="item_number" />
+		<result property="dayLimit" column="day_limit" />
+		<result property="startTime" column="start_time" />
+		<result property="endTime" column="end_time" />
+	</resultMap>
+	
+	<select id="findMallExtendLimitByItemNumber" parameterType="String" resultMap="baseResultMap">
+		select * from mall_extend_limit where item_number = #{value}
+	</select>
+	
+	<insert id="createMallExtendLimit" parameterType="mallExtendLimit">
+		insert into mall_extend_limit (item_number,day_limit,start_time,end_time)
+		values (#{itemNumber},#{dayLimit},#{startTime},#{endTime});
+	</insert>
+	
+	<update id="updateMallExtendLimit" parameterType="mallExtendLimit">
+		update mall_extend_limit
+		<trim prefix="set" suffixOverrides=",">
+			<if test="dayLimit != null and dayLimit != '' ">day_limit=#{dayLimit},</if>
+			<if test="startTime != null ">start_time=#{startTime},</if>
+			<if test="endTime != null ">end_time=#{endTime}</if>
+		</trim>
+		WHERE item_number=#{itemNumber}
+	</update>
+	
+	<delete id="deleteMallExtendLimit" parameterType="String">
+		delete from mall_extend_limit where item_number = #{value}
+	</delete>
+	
+</mapper>

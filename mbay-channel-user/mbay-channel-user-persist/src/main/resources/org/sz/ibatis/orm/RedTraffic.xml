@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RedTraffic">
+	<resultMap id="redTrafficMap" type="redTraffic">
+		<result column="traffic" property="traffic" />
+		<result column="usernumber" property="userNumber" />
+		<result column="locked_traffic" property="lockedTraffic" />
+	</resultMap>
+
+	<insert id="createRedTraffic" parameterType="redTraffic">
+		INSERT INTO
+		user_red_traffic (usernumber,traffic,locked_traffic)
+		values(#{userNumber},#{traffic},#{lockedTraffic})
+	</insert>
+
+	<select id="findRedTraffic" parameterType="String" resultMap="redTrafficMap">
+		SELECT usernumber, traffic,locked_traffic FROM user_red_traffic WHERE
+		usernumber=#{value}
+	</select>
+	<select id="findRedTrafficWithLocked" parameterType="String" resultMap="redTrafficMap">
+		SELECT usernumber, traffic,locked_traffic FROM user_red_traffic WHERE
+		usernumber=#{value} FOR UPDATE;
+	</select>
+
+	<update id="reduceRedTraffic" parameterType="Map">
+		UPDATE
+		user_red_traffic SET traffic=traffic-#{traffic}
+		WHERE
+		usernumber=#{userNumber}
+	</update>
+
+	<update id="increaseRedTraffic" parameterType="Map">
+		UPDATE
+		user_red_traffic SET traffic=traffic+#{traffic}
+		WHERE
+		usernumber=#{userNumber}
+	</update>
+	
+	
+	<update id="lockedRedTraffic" parameterType="Map">
+		UPDATE
+		user_red_traffic SET locked_traffic=locked_traffic+#{traffic}
+		WHERE
+		usernumber=#{userNumber} AND traffic >= locked_traffic+#{traffic}
+	</update>
+	
+	<update id="unlockedRedTraffic" parameterType="Map">
+		UPDATE
+		user_red_traffic SET locked_traffic=locked_traffic-#{traffic}
+		WHERE
+		usernumber=#{userNumber}
+	</update>
+
+
+	<insert id="createRedTrafficTransferOrder" parameterType="redTrafficTransferOrder">
+		INSERT
+		INTO red_traffic_transfer_order
+		(ordernumber,from_usernumber,to_usernumber,traffic,createtime,remark,send_sms)
+		values
+		(#{orderNumber},#{fromUserNumber},#{toUserNumber},#{traffic},#{createTime},#{remark},#{sendSms})
+	</insert>
+
+	<insert id="createRedTrafficTradeRecord" parameterType="RedTrafficTradeRecord">
+		INSERT
+		INTO
+		red_traffic_trade_record(trade_number,create_time,trade_name,traffic,trade_type,relate_number)
+		values(#{tradeNumber},#{createTime},#{tradeName},#{traffic},#{tradeType},#{relateNumber});
+	</insert>
+
+	<insert id="createUserRedTrafficTrade" parameterType="RedTrafficTradeRecord">
+		INSERT INTO
+		user_redtraffic_trade(usernumber,tradenumber,payment_type,balance)
+		values(#{userNumber},#{tradeRecord.tradeNumber},#{paymentType},#{balance});
+	</insert>
+
+	<resultMap type="redTrafficTransferOrder" id="redTrafficTransferOrderListMap">
+		<result property="orderNumber" column="ordernumber" />
+		<result property="createTime" column="createtime" />
+		<result property="fromUserNumber" column="from_usernumber" />
+		<result property="toUserNumber" column="to_usernumber" />
+		<result property="traffic" column="traffic" />
+	</resultMap>
+
+	<sql id="transferOrderQueryWhere">
+		WHERE from_usernumber=#{userNumber}
+		<if test="orderNumber!=null and orderNumber !=''">
+			AND ordernumber=#{orderNumber}
+		</if>
+		<if test="startTime !=null and endTime !=null">
+			AND createtime BETWEEN #{startTime} AND #{endTime}
+		</if>
+	</sql>
+
+	<select id="findAllRedTrafficTransferOrder" resultMap="redTrafficTransferOrderListMap"
+		parameterType="trafficTransferQO">
+		SELECT ordernumber,createtime,from_usernumber,to_usernumber,traffic
+		FROM red_traffic_transfer_order
+		<include refid="transferOrderQueryWhere"></include>
+		ORDER BY createtime DESC
+	</select>
+
+	<select id="countRedTrafficTransferOrder" resultType="int">
+		SELECT COUNT(ordernumber) FROM red_traffic_transfer_order
+		<include refid="transferOrderQueryWhere"></include>
+	</select>
+
+	<resultMap type="userRedTrafficTrade" id="redTrafficDetailListMap">
+		<result property="userNumber" column="usernumber" />
+		<result property="paymentType" column="payment_type" />
+		<result property="balance" column="balance" />
+		<association property="tradeRecord" javaType="redTrafficTradeRecord">
+			<result property="tradeNumber" column="trade_number" />
+			<result property="createTime" column="create_time" />
+			<result property="tradeName" column="trade_name" />
+			<result property="traffic" column="traffic" />
+			<result property="tradeType" column="trade_type" />
+			<result property="relateNumber" column="relate_number" />
+		</association>
+	</resultMap>
+
+	<sql id="redTrafficDetailQueryWhere">
+		WHERE usernumber=#{userNumber}
+		<if test="number!=null and  number !=''">
+			AND u.tradenumber=#{number}
+		</if>
+		<if test="startTime !=null and endTime !=null ">
+			AND t.create_time BETWEEN #{startTime} AND #{endTime}
+		</if>
+	</sql>
+
+
+	<select id="findAllRedTrafficDetail" resultMap="redTrafficDetailListMap"
+		parameterType="trafficDetailQO">
+		SELECT
+		u.usernumber,u.payment_type,u.balance,t.trade_number,t.create_time,t.trade_name,t.traffic,t.trade_type,t.relate_number
+		FROM user_redtraffic_trade u
+		LEFT JOIN red_traffic_trade_record  t ON u.tradenumber=t.trade_number
+		<include refid="redTrafficDetailQueryWhere"></include>
+		ORDER BY t.create_time DESC
+	</select>
+
+	<select id="countRedTrafficDetail" resultType="int">
+		SELECT COUNT(*) 
+		FROM user_redtraffic_trade u
+		LEFT JOIN red_traffic_trade_record  t ON u.tradenumber=t.trade_number
+		<include refid="redTrafficDetailQueryWhere"></include>
+	</select>
+
+</mapper>

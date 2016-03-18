@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="WeChatCampaignAdvanced">
+	<resultMap type="wechatCampaignAdvanced" id="wechatCampaignAdvancedInfoMap">
+		<result property="id" column="id" />
+		<result property="campaignNumber" column="campaign_number" />
+		<result property="status" column="status" />
+		<result property="token" column="token" />
+	</resultMap>
+	
+	<select id="findWeChatCampaignAdvanced" parameterType="int" resultMap="wechatCampaignAdvancedInfoMap">
+		SELECT id,campaign_number,status,token
+		FROM  wechat_campaign_advanced
+		WHERE id=#{value}
+	</select>
+	
+
+	<!-- 查询活动模板信息 -->
+	<select id="findWeChatCampaignAdvancedByCampaignNumber" parameterType="String"
+		resultMap="wechatCampaignAdvancedInfoMap">
+		SELECT id,campaign_number,status,token
+		FROM  wechat_campaign_advanced
+		WHERE campaign_number=#{value}
+	</select>
+	
+	<insert id="createWeChatCampaignAdvanced" parameterType="wechatCampaignAdvanced">
+		INSERT INTO wechat_campaign_advanced (id,campaign_number,status,token)
+		VALUES
+		(#{id},#{campaignNumber},#{status},#{token});
+	</insert>
+
+	<update id="updateWeChatCampaignAdvanced" parameterType="Map">
+	  UPDATE wechat_campaign_advanced SET token=#{token}
+	  WHERE id=#{id}
+	</update>
+</mapper>

@@ -1,0 +1,14 @@
+html,body,.shake-form1 {
+	height: 100%;
+}
+.voice {
+	display: inline;
+	float: right;
+	padding-right: .4rem;
+	font-size: .55rem;
+	padding-top: .3rem;
+	visibility: hidden;
+}
+#voiceCode a { 
+	color: #ff6700;
+}

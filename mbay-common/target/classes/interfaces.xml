@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!-- 
+module：接口所属模块。必填
+
+server：服务器地址，非必填；
+
+name：接口名称；必填
+
+url：接口地址，无论GET或POST所需参数必须列在url后面，参数值用{n}占位；server值会被加到url前面
+
+type：接口访问方式GET/POST；默认为GET
+
+header：请求头；value用{n}占位
+-->
+<interfaces>
+	<module></module>
+	<server></server>
+	<interface>
+		<name></name>
+		<url></url>
+		<type></type>	
+		<headers>
+			<header>
+				<name></name>
+				<value></value>
+			</header>
+		</headers>	
+	</interface>
+</interfaces>

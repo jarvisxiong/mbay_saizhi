@@ -1,0 +1,166 @@
+@charset "utf-8";
+
+body,h1,h2,h3,h4,dl,dt,dd,ul,ol,li,a,div,em,span,img,form,input,p,i {
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+
+body {
+	color: #333333;
+	font-weight: 400;
+	text-rendering: optimizelegibility;
+	font-family: Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue",
+		"Droid Sans Fallback", "Heiti SC", sans-self;
+}
+
+em,i {
+	word-wrap: break-word;
+	font-style: normal;
+}
+
+a {
+	color: #333333;
+	text-decoration: none;
+}
+
+a:link,a:visited,a:active {
+	color: #3F3F3F;
+	text-decoration: none;
+}
+
+a,button,span,i,div,h2,aside {
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+input,button,textarea,select {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+input:focus::-webkit-input-placeholder {
+	color: #D8D8D8;
+}
+
+input::-webkit-input-placeholder {
+	color: #D8D8D8;
+}
+
+textarea:focus::-webkit-input-placeholder {
+	color: #D8D8D8;
+}
+
+textarea::-webkit-input-placeholder {
+	color: #D8D8D8;
+}
+
+ul,li {
+	list-style: none;
+}
+
+article,aside,details,figcaption,figure,footer,header,menu,nav,section {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+img {
+	border: none;
+	max-width: 100%;
+	vertical-align: middle;
+}
+
+html,body {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
+
+input[type="button"],input[type="text"],input[type="submit"],input[type="search"],input[type="email"],input[type="number"],input[type="phone"],button
+	{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-webkit-border-image: none;
+	border-image: none;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+}
+
+.clearfix:after {
+	content: "";
+	display: block;
+	height: 0;
+	overflow: hidden;
+	clear: both;
+	visibility: hidden;
+}
+
+html,body,.mb-wrap {
+	height: 100%;
+	width: 100%;
+}
+
+.mb-wrap {
+	background: url(../../images/promotion/content-bg.jpg) 50% 50% no-repeat;
+	background-size: cover;
+}
+
+.head-big {
+	display: block;
+	margin: 0 auto 40px auto;
+}
+
+.content-wrap {
+	width: 250px;
+	margin: 0 auto;
+}
+
+.content-wrap input {
+	border: 1px solid #D8D8D8;
+	color: #9B9B9B;
+	text-indent: 0.5em;
+	height: 35px;
+	width: 100%;
+	line-height: 100%;
+	font-size: 15px;
+	border-radius: 5px;
+	margin-top: 0;
+}
+
+.ct-item {
+	height: 30px;
+	position: relative;
+}
+
+.ct-item a {
+	display: block;
+	height: 30px;
+	width: 90px;
+	position: absolute;
+	top: 0;
+	text-indent: -9999px;
+}
+
+.ct-item .duihuan-btn {
+	left: 0;
+	background: url(../../images/promotion/btn2.png) 50% 50% no-repeat;
+	background-size: cover;
+}
+
+.content-wrap p {
+	display: block;
+	color: red;
+	left: 0;
+	font-size: 12px;
+	text-indent: 0.5em;
+	height: 30px;
+	line-height: 30px;
+	font-family: "微软雅黑"
+}
+
+.ct-item .shuom-btn {
+	right: 0;
+	background: url(../../images/promotion/btn1.png) 50% 50% no-repeat;
+	background-size: cover;
+}

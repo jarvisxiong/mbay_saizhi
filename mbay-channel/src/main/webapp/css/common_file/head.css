@@ -1,0 +1,130 @@
+@charset "utf-8";
+/*内部导航栏 */
+.nav {
+	background: #356391
+}
+
+.nav_list {
+	height: 30px;
+	background: #356391
+}
+
+.nav_con {
+	height: 30px
+}
+
+.nav_list ul {
+	list-style: none;
+	width: 750px;
+	height: 30px;
+	padding-left: 0px;
+	margin-bottom: 0px;
+}
+
+.nav_list ul li {
+	float: left;
+	line-height: 30px;
+}
+
+.nav_list li a {
+	display: block;
+	font-size: 14px;
+	font-family: 'Microsoft YaHei';
+	color: #FFF;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.fanhui {
+	height: 30px;
+	width: 100px;
+	margin-left: 100px;
+}
+
+.fanhui a {
+	display: block;
+	color: #FFF;
+	line-height: 30px;
+	font-family: 'Microsoft YaHei';
+	font-size: 12px;
+}
+
+/*在线客服-默认蓝色皮肤*/
+.SonlineBox {
+	width: 162px;
+	font-size: 12px;
+	overflow: hidden;
+	z-index: 9999;
+}
+
+.SonlineBox .openTrigger {
+	width: 30px;
+	height: 110px;
+	position: absolute;
+	top: 0px;
+	z-index: 1;
+	cursor: pointer;
+	background: #0176ba url(../../images/workimages/openTrigger.jpg)
+		no-repeat;
+}
+
+.SonlineBox .titleBox {
+	width: 158px;
+	height: 35px;
+	line-height: 35px;
+	background: #038bdc url(../../images/workimages/SonlineTitleBg.gif)
+		repeat-x;
+	border-bottom: 2px solid #0176ba;
+}
+
+.SonlineBox .titleBox span {
+	margin-left: 10px;
+	color: #fff;
+	font-size: 14px;
+	font-family: '微软雅黑', '黑体';
+}
+
+.SonlineBox .contentBox {
+	width: 158px;
+	height: auto;
+	border: 2px solid #0176ba;
+	background: #fff;
+	position: absolute;
+	z-index: 2;
+}
+
+.SonlineBox .contentBox .closeTrigger {
+	width: 25px;
+	height: 25px;
+	display: block;
+	cursor: pointer;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	-webkit-transition: all 0.8s ease-out;
+}
+
+.SonlineBox .contentBox .closeTrigger:hover {
+	-webkit-transform: scale(1) rotate(360deg);
+}
+
+.SonlineBox .contentBox .listBox {
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.SonlineBox .contentBox .listBox .QQList {
+	display: block;
+	width: 86%;
+	height: 22px;
+	margin: 10px auto 0px auto;
+}
+
+.SonlineBox .contentBox .listBox .QQList span {
+	float: left;
+	line-height: 22px;
+}
+
+.SonlineBox .contentBox .listBox .QQList a {
+	float: left;
+}

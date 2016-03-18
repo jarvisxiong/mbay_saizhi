@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!-- 
+value：状态码值；必填
+
+desc：错误描述
+
+success：码对应的状态是否是成功的；默认值为false
+-->
+<result-codes>
+	<code>
+		<value>200</value>
+		<desc>成功</desc>	
+		<success>true</success>
+	</code>
+	<code>
+		<value>400</value>
+		<desc>请求语法错误</desc>	
+	</code>
+	<code>
+		<value>403</value>
+		<desc>服务器拒绝请求</desc>	
+	</code>
+	<code>
+		<value>404</value>
+		<desc>未找到请求地址</desc>	
+	</code>
+	<code>
+		<value>409</value>
+		<desc>请求冲突</desc>	
+	</code>
+	<code>
+		<value>414</value>
+		<desc>请求URL过长，服务器无法处理</desc>	
+	</code>
+	<code>
+		<value>500</value>
+		<desc>服务器内部错误</desc>	
+	</code>
+	<code>
+		<value>502</value>
+		<desc>错误网关</desc>	
+	</code>
+	<code>
+		<value>503</value>
+		<desc>服务不可用</desc>	
+	</code>
+	<code>
+		<value>504</value>
+		<desc>网关超时</desc>	
+	</code>
+	<code>
+		<value>505</value>
+		<desc>HTTP版本不受支持</desc>	
+	</code>
+	<code>
+		<value>701</value>
+		<desc>IO异常</desc>	
+	</code>
+	<code>
+		<value>702</value>
+		<desc>接口参数预处理错误</desc>	
+	</code>
+	<code>
+		<value>703</value>
+		<desc>接口响应文本解析错误</desc>	
+	</code>
+</result-codes>

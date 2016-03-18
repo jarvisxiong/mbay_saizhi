@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="RedeemCode">
+	<resultMap type="redeemCode" id="redeemCodeInfo">
+	  <result property="id" column="exchange_card_id"  />
+	  <result property="code" column="exchange_code"  />
+	  <result property="codestatus.key" column="card_status" />
+	  <result property="expiretime" column="expire_time" />
+	  <association property="strategy" javaType="strategy">
+	     <result property="id" column="strategy_id"/>
+		 <result property="endtime" column="end_date"/>
+		 <result property="starttime" column="start_date"/>
+		 <result property="strategyname" column="strategy_name"/>
+		 <result property="area.key" column="area"/>
+		 <result property="sendway.key" column="sendway"/>
+		 <result property="traffictype.key" column="traffictype"/>
+		 <result property="teloperator.key" column="teloperator"/>
+		 <result property="sendnum" column="send_mb"/>
+		 <result property="unitmb" column="unitmb"/>
+		 <result property="userid" column="user_info_id"/>
+	  </association>
+	</resultMap>
+	<select id="findRedeemCodeByCode" parameterType="String"
+		resultMap="redeemCodeInfo">
+		select c.exchange_card_id,c.exchange_code,c.card_status,c.expire_time,
+		s.strategy_id,s.end_date,s.strategy_name,s.area,s.sendway,s.traffictype,s.teloperator,s.send_mb,s.unitmb,
+		s.user_info_id	 
+		from 
+		zcc_exchange_card c 
+		left outer join zcc_strategy s  on c.strategy_info_id = s.strategy_id
+		WHERE c.exchange_code=#{value}
+	</select>
+	<update id="updateCodeToRedeemed" parameterType="Map">
+	   UPDATE zcc_exchange_card SET card_status=#{status}  WHERE exchange_code=#{code}
+	</update>
+</mapper>

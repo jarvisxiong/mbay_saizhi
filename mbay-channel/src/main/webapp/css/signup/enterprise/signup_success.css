@@ -1,0 +1,170 @@
+@charset "utf-8";
+/*注册栏目*/
+.reg_s {
+	background: #F9F9F9;
+	overflow: hidden
+}
+/*进度栏*/
+.jindu {
+	margin-top: 70px;
+	height: 90px;
+	margin-bottom: 50px
+}
+
+.jd {
+	height: 90px;
+	position: relative
+}
+
+.jd_box {
+	height: 30px;
+	width: 60px;
+	margin-top: 30px
+}
+
+.jd_1 {
+	background: url(../../../images/enterprise/images/icons/mb_1.png) center
+		no-repeat;
+	margin-left: 45px
+}
+
+.jd_2 {
+	background: url(../../../images/enterprise/images/icons/mb_6.png) center
+		no-repeat
+}
+
+.jd_3 {
+	background: url(../../../images/enterprise/images/icons/mb_3.png) center
+		no-repeat
+}
+
+.jd_4 {
+	background: url(../../../images/enterprise/images/icons/mb_4.png) center
+		no-repeat
+}
+
+.jd_5 {
+	background: url(../../../images/enterprise/images/icons/mb_5.png) center
+		no-repeat
+}
+
+.jd_b {
+	height: 90px;
+	width: 148px;
+	background: url(../../../images/enterprise/images/icons/jd_bar.jpg)
+		center no-repeat
+}
+
+.sp {
+	background: url(../../../images/enterprise/images/icons/jd_bar_1.jpg)
+		center no-repeat
+}
+/*进度条文字*/
+.wenzi_1 {
+	position: absolute;
+	bottom: 5px;
+	left: 52px;
+	color: #3b7cb8;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_2 {
+	position: absolute;
+	bottom: 5px;
+	left: 271px;
+	color: #3b7cb8;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_3 {
+	position: absolute;
+	bottom: 5px;
+	left: 465px;
+	color: #b7b7b7;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_4 {
+	position: absolute;
+	bottom: 5px;
+	left: 675px;
+	color: #b7b7b7;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_5 {
+	position: absolute;
+	bottom: 5px;
+	left: 895px;
+	color: #b7b7b7;
+	font-family: 'Microsoft YaHei';
+}
+/*注册完成*/
+.zhuce {
+	font-family: 'Microsoft YaHei';
+	width: 780px;
+	margin: 0px auto;
+	box-shadow: 0 0 5px #c7c5c5;
+	box-shadow: 0 0 5px #c7c5c5;
+	border: 1px solid #e7e7e7;
+	margin-bottom: 200px;
+	background: white;
+	height: 500px
+}
+
+.zhuce h2 {
+	text-align: center;
+	color: #1573AF;
+	margin-top: 20px;
+	font-size: 40px;
+	margin-bottom: 50px;
+}
+
+.e_tip {
+	border: 1px solid #bfbfbf;
+	width: 420px;
+	height: 240px;
+	margin: 0px auto;
+	text-align: left;
+	line-height: 32px;
+	font-family: Microsoft YaHei;
+}
+
+.tip_con {
+	width: 260px;
+	margin: 0px auto
+}
+
+.anniu {
+	text-align: center;
+	margin-top: 40px;
+	clear: left
+}
+
+#fanhui,#tijiao {
+	text-align: center;
+	cursor: pointer;
+	display: inline-block;
+	width: 120px;
+	height: 37px;
+	color: #FFFFFF;
+	font-family: 'Microsoft YaHei';
+	font-size: 14px;
+	background: #4577AB;
+	border-radius: 4px;
+}
+
+#fanhui {
+	margin-right: 60px
+}
+
+.tip_con h5 {
+	text-align: center;
+	font-weight: normal
+}
+
+.anniu .btn_reset {
+	width: 120px;
+	height: 37px;
+	margin-right: 20px;
+}

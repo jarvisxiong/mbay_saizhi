@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="storeCampaign">
+
+	<!-- <resultMap type="campaignStatistics" id="campaignStatisticsMap"> <result 
+		property="noneFinish" column="r0" /> <result property="notStarted" column="r1" 
+		/> <result property="inActive" column="r2" /> <result property="over" column="r3" 
+		/> <result property="cancled" column="r4" /> </resultMap> -->
+
+	<select id="findCampaignsByUser" resultType="storeCampaign"
+		parameterType="java.lang.String">
+		SELECT
+		id,number,name,userNumber,startTime,endTime,validity,quantity,repeatGet,deductSend,deductReedem,deliverNum,redeemNum,link,logoId,mbayPlatSend,lockMbay,describtion,status,dateCreated
+		FROM
+		o2o_campaign
+		where
+		userNumber=#{userNumber}
+		and
+		deleted=0
+	</select>
+	<select id="findStoreCampaign" resultType="storeCampaign"
+		parameterType="java.lang.String">
+		SELECT
+		id,number,name,userNumber,startTime,endTime,validity,quantity,lockMbay,costMbay,price,repeatGet,getInTime,deductSend,deductReedem,deliverNum,redeemNum,link,logoId,mbayPlatSend,lockMbay,describtion,status,dateCreated
+		FROM
+		o2o_campaign
+		where
+		id=#{id}
+		and
+		deleted=0
+	</select>
+	<select id="findAllStoreCampaign" resultType="storeCampaign"
+		parameterType="java.lang.String">
+		SELECT
+		id,number,name,userNumber,startTime,endTime,validity,quantity,repeatGet,deductSend,deductReedem,deliverNum,redeemNum,link,logoId,mbayPlatSend,lockMbay,describtion,status,dateCreated
+		FROM
+		o2o_campaign
+		where
+		userNumber=#{userNumber}
+		and
+		deleted=0
+	</select>
+
+	<select id="countStoreCampaign" resultType="int">
+		select count(id) from
+		o2o_campaign where
+		userNumber=#{userNumber} and deleted=false
+	</select>
+
+	<insert id="createStoreCampaign" parameterType="storeCampaign">
+		insert into
+		o2o_campaign
+		(id,number,name,userNumber,startTime,endTime,validity,redeemNum,deliverNum,status,price,quantity,repeatGet,getInTime,deductSend,deductReedem,link,logoId,deleted,mbayPlatSend,lockMbay,costMbay,describtion,dateCreated,dateModified)
+		VALUES
+		(#{id},#{number},#{name},#{userNumber},#{startTime},#{endTime},#{validity},#{redeemNum},#{deliverNum},#{status},#{price},#{quantity},#{repeatGet},#{getInTime},#{deductSend},#{deductReedem},#{link},#{logoId},#{deleted},#{mbayPlatSend},#{lockMbay},#{costMbay},#{describtion},#{dateCreated},#{dateModified});
+	</insert>
+
+	<update id="deleteStoreCampaign" parameterType="storeCampaign">
+		update
+		o2o_campaign set deleted=#{deleted}
+		where
+		id=#{id} and
+		userNumber=#{userNumber}
+	</update>
+	<select id="findDeliverPriceById" resultType="double"
+		parameterType="java.lang.String">
+		SELECT deductSend FROM o2o_campaign where
+		id=#{id}
+		and
+		deleted=0
+	</select>
+	<select id="findRedeemPriceById" resultType="double"
+		parameterType="java.lang.String">
+		SELECT deductReedem FROM o2o_campaign where
+		id=#{id}
+		and
+		deleted=0
+	</select>
+
+	<update id="updateDeliverNumAndLockMbayAndCostMbay"
+		parameterType="map">
+		update
+		o2o_campaign
+		set
+		deliverNum=deliverNum+1,lockMbay=lockMbay-#{price},costMbay=costMbay+#{price},dateModified=now()
+		where
+		id=#{campaignId} and
+		userNumber=#{userNumber} and deleted=0
+	</update>
+
+	<update id="updateRedeemNumAndLockMbayAndCostMbay"
+		parameterType="map">
+		update
+		o2o_campaign
+		set
+		redeemNum=redeemNum+1,lockMbay=lockMbay-#{price},costMbay=costMbay+#{price},dateModified=now()
+		where
+		id=#{campaignId} and
+		userNumber=#{userNumber} and deleted=0
+	</update>
+
+	<update id="updateStormCampaignStatus" parameterType="map">
+		update
+		o2o_campaign
+		set `status`=#{status},dateModified=NOW() where id=#{id}
+		and
+		userNumber=#{userNumber} and deleted=false
+	</update>
+
+	<update id="updateLockMbay" parameterType="map">
+		update
+		o2o_campaign
+		set
+		lockMbay=lockMbay-#{price},
+		dateModified=NOW() where id=#{campaignId}
+		and deleted=false
+	</update>
+
+	<update id="checkO2OCampaignIsExpire" parameterType="java.lang.String"
+		statementType="CALLABLE">
+	 <![CDATA[ 
+		{call CHECK_O2O_ISEXPIRE(#{userNumber, mode=IN, jdbcType=VARCHAR}) } 
+  		]]>
+	</update>
+
+	<!-- 查询所有不同状态统计 -->
+	<select id="statisticStoreCampaign" parameterType="String"
+		resultMap="WeChatCampaign.campaignStatisticsMap">
+		select
+		(select count(*) from o2o_campaign where status=0 and
+		userNumber=#{value}) as
+		r0,
+		(select count(*) from o2o_campaign where
+		status=1 and
+		userNumber=#{value}) as r1,
+		(select count(*) from
+		o2o_campaign where
+		status=2 and userNumber=#{value}) as r2,
+		(select
+		count(*) from
+		o2o_campaign where status=3 and userNumber=#{value}) as
+		r3,
+		(select
+		count(*) from o2o_campaign where status=4 and
+		userNumber=#{value}) as
+		r4
+	</select>
+</mapper>

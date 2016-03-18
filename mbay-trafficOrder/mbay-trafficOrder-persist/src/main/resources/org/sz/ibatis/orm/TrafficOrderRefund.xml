@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TrafficOrderRefund">
+	
+	<sql id="Base_Column_List">
+		order_number, status, reason, mbay_price, create_time
+	</sql>
+	
+	<resultMap type="trafficOrderRefund" id="Base_Result_Map">
+		<result column="order_number" property="orderNumber" />	
+		<result column="status" property="status" />	
+		<result column="reason" property="reason" />	
+		<result column="mbay_price" property="mbayPrice" />	
+		<result column="create_time" property="createTime" />
+		<association property="order" javaType="trafficOrder">
+			<result property="mobile" column="mobile" />
+			<result property="orderName" column="name" />
+			<result property="relateNumber" column="eventnumber" />
+			<result property="userNumber" column="usernumber" />
+			<result property="createTime" column="createtime" />
+			<result property="status" column="status" />
+			<result property="ors" column="oper_r_status" />
+			<result property="orderType" column="order_type" />
+			<result property="mbayPrice" column="mbayprice" />
+		</association>	
+	</resultMap>
+	
+	<insert id="create" parameterType="trafficOrderRefund">
+		INSERT INTO traffic_charge_order_refund (<include refid="Base_Column_List" />)
+		VALUES (#{orderNumber}, #{status}, #{reason}, #{mbayPrice}, #{createTime})
+	</insert>
+	
+	<select id="findByOrderNumber" parameterType="java.lang.String" resultMap="Base_Result_Map">
+		select <include refid="Base_Column_List" />
+		from traffic_charge_order_refund
+		where order_number = #{value}
+	</select>
+	
+	<sql id="findAllTrafficOrderRefundSql">
+		<if test="relateNumber != null and relateNumber !=''">
+			AND o.eventnumber = #{relateNumber}
+		</if>
+		<if test="userNumber != null and userNumber != ''">
+			AND o.usernumber = #{userNumber}
+		</if>
+		<if test="orderNumber != null and orderNumber != ''">
+			AND f.order_number = #{orderNumber}
+		</if>
+		<if test="mobile != null and mobile != ''">
+			AND o.mobile = #{mobile}
+		</if>
+		<if test="startTime != null">
+			<![CDATA[
+			AND f.create_time >= #{startTime}
+			]]>
+		</if>
+		<if test="endTime != null">
+			<![CDATA[
+			AND f.create_time <= #{endTime}
+			]]>
+		</if>
+	</sql>
+	
+	<select id="findAllTrafficOrderRefund" parameterType="trafficOrderRefundQO" resultMap="Base_Result_Map">
+		select f.order_number, f.mbay_price, f.create_time, 
+			o.mobile, o.name, o.eventnumber, o.order_type, o.usernumber, o.mbayprice
+		from traffic_charge_order_refund f
+		inner join traffic_charge_order o on f.order_number = o.number
+		where f.status = 0
+		<include refid="findAllTrafficOrderRefundSql" />
+		order by f.create_time desc 
+	</select>
+	
+	<select id="countTrafficOrderRefund" parameterType="trafficOrderRefundQO" resultType="int">
+		select count(*) 
+		from traffic_charge_order_refund f
+		inner join traffic_charge_order o on f.order_number = o.number
+		where f.status = 0
+		<include refid="findAllTrafficOrderRefundSql" />
+	</select>
+	
+	<update id="updateByOrderNumberSelective" parameterType="trafficOrderRefund">
+		UPDATE traffic_charge_order_refund
+		<set>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="reason != null">
+				reason = #{reason},
+			</if>
+		</set>
+		WHERE order_number = #{orderNumber}
+	</update>
+	
+</mapper>

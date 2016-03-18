@@ -1,0 +1,152 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.sz.mbay</groupId>
+		<artifactId>mbay_saizhi</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>org.sz.mbay</groupId>
+	<artifactId>mbaytraffic</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>mbaytraffic Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<build>
+		<finalName>mbaytraffic</finalName>
+	</build>
+	<repositories>
+		<repository>
+			<id>ext-release</id>
+			<name>meibei-HAN-PC-releases</name>
+			<url>http://192.168.21.165:8081/artifactory/ext-release-local</url>
+		</repository>
+		<repository>
+			<id>libs-release</id>
+			<name>meibei-HAN-PC-releases</name>
+			<url>http://192.168.21.165:8081/artifactory/libs-release-local</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- <dependency> <groupId>org.jboss.resteasy</groupId> <artifactId>resteasy-jaxrs</artifactId> 
+			<version>2.2.1.GA</version> </dependency> <dependency> <groupId>org.jboss.resteasy</groupId> 
+			<artifactId>resteasy-jaxb-provider</artifactId> <version>2.2.0.GA</version> 
+			</dependency> -->
+		<dependency>
+			<groupId>org.jvnet.jax-ws-commons.spring</groupId>
+			<artifactId>jaxws-spring</artifactId>
+			<version>1.9</version>
+		</dependency>
+
+		<!-- apchae poi for Excel -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.9</version>
+		</dependency>
+		<!-- 北京全国联通接口jar包依赖 -->
+		<dependency>
+			<groupId>traffic.unicom.bjstate</groupId>
+			<artifactId>vip-md5</artifactId>
+			<version>vip-md5</version>
+		</dependency>
+		<!-- jsp and servlet dependency -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- axis2 -->
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-transport-http</artifactId>
+			<version>1.6.2</version>
+			<exclusions>
+				<!-- 排除依赖 -->
+				<exclusion>
+					<groupId>org.apache.httpcomponents</groupId>
+					<artifactId>httpcore</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-transport-local</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-spring</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.3</version>
+		</dependency>
+
+		<!-- Apache commons-codec -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.9</version>
+		</dependency>
+
+		<!-- mbay-operator-service -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-operator-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- mbay-base -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-base</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<!-- mbay-common -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+
+		<!-- mbay-hcode -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-hcode</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<exclusions>
+				<!-- 排除依赖 -->
+				<exclusion>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+</project>

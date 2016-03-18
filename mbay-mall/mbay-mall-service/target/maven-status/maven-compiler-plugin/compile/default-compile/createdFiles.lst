@@ -1,0 +1,8 @@
+org/sz/mbay/mall/service/MallCouponTicketService.class
+org/sz/mbay/mall/service/MallExtendLimitService.class
+org/sz/mbay/mall/service/impl/MallExchangeItemServiceImpl.class
+org/sz/mbay/mall/service/MallPictureService.class
+org/sz/mbay/mall/service/impl/MallExtendLimitServiceImpl.class
+org/sz/mbay/mall/service/impl/MallPictureServiceImpl.class
+org/sz/mbay/mall/service/MallExchangeItemService.class
+org/sz/mbay/mall/service/impl/MallCouponTicketServiceImpl.class

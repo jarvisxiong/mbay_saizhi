@@ -1,0 +1,30 @@
+@charset "utf-8";
+/*通用隐藏*/
+.hide {
+	display: none
+}
+/*通用文本框*/
+.input_txt {
+	border: 1px solid #94ABC4;
+	line-height: 20px;
+	padding: 5px 5px;
+	border-radius: 4px
+}
+/*通用按钮*/
+.btn_confirm,.btn_reset {
+	padding: 0px 5px;
+	height: 26px;
+	letter-spacing: 1px;
+	border-radius: 4px;
+	color: #FFF;
+	font-family: 'Microsoft YaHei';
+	cursor: pointer;
+}
+/*按钮确定*/
+.btn_confirm {
+	background: #FDAC1C
+}
+/*按钮取消*/
+.btn_reset {
+	background: #ccc
+}

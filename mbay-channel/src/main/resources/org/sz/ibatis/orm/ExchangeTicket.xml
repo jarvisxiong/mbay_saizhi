@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ExchangeTicket">
+	
+    <insert id="createExchangeTicket">
+        INSERT INTO wl_exchange_ticket
+        (
+        	event_number, ticket_type, order_number, owner_number, link, image, enterprise_name, used, createtime
+        ) 
+        VALUES 
+        (
+        	#{eventNumber}, #{ticketType}, #{orderNumber}, #{ownerNumber}, #{link}, #{image}, #{enterpriseName}, #{used}, #{createTime}
+        )
+    </insert>
+    
+</mapper>

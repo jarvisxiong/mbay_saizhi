@@ -1,0 +1,15 @@
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-privilege/mbay-privilege-persist/src/main/java/org/sz/mbay/privilege/bean/RolePrivilege.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-privilege/mbay-privilege-persist/src/main/java/org/sz/mbay/privilege/dao/PrivilegeDao.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-privilege/mbay-privilege-persist/src/main/java/org/sz/mbay/privilege/bean/Privilege.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-privilege/mbay-privilege-persist/src/main/java/org/sz/mbay/privilege/dao/impl/BuserDaoImpl.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-privilege/mbay-privilege-persist/src/main/java/org/sz/mbay/privilege/dao/RolePrivilegeDao.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-privilege/mbay-privilege-persist/src/main/java/org/sz/mbay/privilege/dao/BuserDao.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-privilege/mbay-privilege-persist/src/main/java/org/sz/mbay/privilege/bean/BuserRole.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-privilege/mbay-privilege-persist/src/main/java/org/sz/mbay/privilege/dao/impl/PrivilegeDaoImpl.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-privilege/mbay-privilege-persist/src/main/java/org/sz/mbay/privilege/dao/impl/BuserRoleDaoImpl.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-privilege/mbay-privilege-persist/src/main/java/org/sz/mbay/privilege/dao/impl/RoleDaoImpl.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-privilege/mbay-privilege-persist/src/main/java/org/sz/mbay/privilege/dao/RoleDao.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-privilege/mbay-privilege-persist/src/main/java/org/sz/mbay/privilege/bean/Role.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-privilege/mbay-privilege-persist/src/main/java/org/sz/mbay/privilege/dao/impl/RolePrivilegeDaoImpl.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-privilege/mbay-privilege-persist/src/main/java/org/sz/mbay/privilege/dao/BuserRoleDao.java
+/Users/creekhan/Java/workspace/hey/mbay_saizhi/mbay-privilege/mbay-privilege-persist/src/main/java/org/sz/mbay/privilege/bean/Buser.java

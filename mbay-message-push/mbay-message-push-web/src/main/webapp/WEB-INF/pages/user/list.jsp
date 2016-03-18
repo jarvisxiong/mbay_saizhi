@@ -1,0 +1,62 @@
+<%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%>
+<%@ include file="/includes/taglibs.jsp"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>XMPP消息推送</title>
+<meta name="menu" content="user" />
+<link rel="stylesheet" type="text/css" href="<c:url value='/styles/tablesorter/style.css'/>" />
+<script type="text/javascript" src="<c:url value='/scripts/jquery.tablesorter.js'/>"></script>
+</head>
+
+<body>
+
+<div style="margin:20px 0px;">
+	<div class="search">
+		<form action="<c:url value="/user/list.mbay" />" method="post">
+			<input type="text" class="input-txt" placeholder="应用" name="application" value="${applicationQO }" autocomplete="off" />
+			<input type="submit" value="查询" class="btn-primary" />
+		</form>
+	</div>
+	<table id="tableList" class="tablesorter" cellspacing="1">
+		<thead>
+			<tr>
+				<th>应用</th>
+				<th>用户状态</th>
+				<th>用户名</th>
+				<th>创建日期</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="user" items="${userList}">
+				<tr>
+					<td><c:out value="${user.application}" /></td>
+					<td align="center">
+						<c:choose>
+							<c:when test="${user.online eq true}">
+								<img src="<c:url value='/images/user-online.png' />" class="state-img" /><span>在线</span>
+							</c:when>
+							<c:otherwise>
+								<img src="<c:url value='/images/user-offline.png' />" class="state-img" /><span>离线</span>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td><c:out value="${user.userId}" /></td>
+					<td align="center"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${user.createdDate}" /></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+$(function() {
+	$('#tableList').tablesorter();
+	$('table tr:nth-child(even)').addClass('even');	 
+});
+//]]>
+</script>
+
+</body>
+</html>

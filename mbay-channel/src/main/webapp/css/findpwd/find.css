@@ -1,0 +1,247 @@
+@charset "utf-8";
+/*注册栏目*/
+.reg_s {
+	background: #F9F9F9;
+	overflow: hidden
+}
+/*进度栏*/
+.jindu {
+	margin-top: 70px;
+	height: 90px;
+	margin-bottom: 50px
+}
+
+.jd {
+	height: 90px;
+	position: relative
+}
+
+.jd_box {
+	height: 30px;
+	width: 60px;
+	margin-top: 30px
+}
+
+.jd_1 {
+	background: url(../../images/person/images/icons/mb_1.png) center
+		no-repeat
+}
+
+.jd_2 {
+	background: url(../../images/person/images/icons/mb_6.png) center
+		no-repeat
+}
+
+.jd_3 {
+	background: url(../../images/person/images/icons/mb_3.png) center
+		no-repeat
+}
+
+.jd_4 {
+	background: url(../../images/person/images/icons/mb_4.png) center
+		no-repeat
+}
+
+.jd_5 {
+	background: url(../../images/person/images/icons/mb_5.png) center
+		no-repeat
+}
+
+.jd_b {
+	height: 90px;
+	width: 148px;
+	background: url(../../images/person/images/icons/jd_bar.jpg) center
+		no-repeat
+}
+
+.sp {
+	background: url(../../images/person/images/icons/jd_bar_2.jpg) center
+		no-repeat
+}
+/*进度条文字*/
+.wenzi_1 {
+	position: absolute;
+	bottom: 5px;
+	left: 7px;
+	color: #f16f20;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_2 {
+	position: absolute;
+	bottom: 5px;
+	left: 226px;
+	color: #f16f20;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_3 {
+	position: absolute;
+	bottom: 5px;
+	left: 420px;
+	color: #b7b7b7;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_4 {
+	position: absolute;
+	bottom: 5px;
+	left: 630px;
+	color: #b7b7b7;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_5 {
+	position: absolute;
+	bottom: 5px;
+	left: 850px;
+	color: #b7b7b7;
+	font-family: 'Microsoft YaHei';
+}
+/*个人注册*/
+.zhaohui {
+	font-family: 'Microsoft YaHei';
+	width: 880px;
+	margin: 0px auto;
+	margin-bottom: 200px;
+	background: #F9F9F9;
+	height: 500px;
+	margin-top: 100px;
+	font-size: 14px;
+}
+
+.cz {
+	letter-spacing: 1px;
+	margin-bottom: 40px
+}
+
+.jc {
+	padding-left: 40px;
+	height: 70px;
+	background: #EDFED0;
+	border: 1px solid #E1E1CA;
+	margin-bottom: 40px
+}
+
+.jc_con {
+	padding-left: 45px;
+	height: 70px;
+	background: url(../../images/icons/gou.png) no-repeat left;
+	line-height: 70px;
+	letter-spacing: 1px;
+	font-size: 16px;
+}
+
+.zj {
+	border: 1px solid #E8E8E8;
+	height: 90px;
+	background: #FFF;
+	margin-bottom: 30px;
+	padding-left: 40px
+}
+
+.zj_con {
+	padding-left: 50px;
+	height: 90px
+}
+
+.zj_con h2 {
+	font-weight: normal;
+	font-size: 16px;
+	margin-top: 20px;
+}
+
+.zj_left {
+	width: 600px;
+	height: 90px;
+}
+
+.zj_right {
+	height: 90px;
+	width: 180px
+}
+
+.zj_right input {
+	width: 100px;
+	margin-top: 30px;
+	margin-left: 40px;
+	cursor: pointer
+}
+
+.zj_l_con {
+	color: #8896B8;
+	font-size: 0.7em;
+	padding-right: 200px
+}
+
+.phone {
+	background: url(../../images/icons/phone.png) no-repeat left
+}
+
+.email {
+	background: url(../../images/icons/email.png) no-repeat left
+}
+
+.rz {
+	background: url(../../images/icons/rz.png) no-repeat left
+}
+
+.hm {
+	color: #F4A21C
+}
+
+/*尾部*/
+
+/*验证*/
+.zhuce label.error {
+	width: 200px;
+	text-align: center;
+	width: 200px;
+	text-align: left;
+	margin-left: 10px;
+	font-size: 1em;
+	vertical-align: bottom;
+	color: rgb(240, 23, 23);
+	height: 32px;
+	line-height: 32px;
+	padding-left: 16px;
+	background: url(../../images/error.png) no-repeat left
+}
+
+.valid {
+	background: url(../../images/person/images/reg_succ.png) no-repeat right;
+}
+
+.yanzhenma .valid {
+	background: none
+}
+/*密码强弱*/
+.qiang {
+	background: url(../../images/person/images/4.jpg) no-repeat;
+	width: 180px;
+	height: 31px;
+}
+
+.zhong {
+	background: url(../../images/person/images/3.jpg) no-repeat;
+	width: 180px;
+	height: 31px;
+}
+
+.ruo {
+	background: url(../../images/person/images/2.jpg) no-repeat;
+	width: 180px;
+	height: 31px;
+}
+
+.ruox {
+	background: url(../../images/person/images/1.jpg) no-repeat;
+	width: 180px;
+	height: 31px;
+}
+
+#div2 {
+	height: 31px;
+	width: 180px;
+	margin-left: 362px;
+}

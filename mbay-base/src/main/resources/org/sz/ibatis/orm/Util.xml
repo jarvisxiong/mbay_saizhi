@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Util">
+	<select id="getTableIndex" resultType="Integer" parameterType="String">
+	  SELECT next FROM zcc_table_generator where segment_name =#{value} FOR UPDATE
+	</select>
+	<insert id="insertTableIndex" parameterType="String">
+	  INSERT INTO zcc_table_generator(segment_name,next) values(#{value},1);
+	</insert>
+	
+	<update id="updateTableIndex" parameterType="String">
+	 UPDATE zcc_table_generator SET next=next+1 WHERE segment_name=#{value}
+	</update>
+</mapper>

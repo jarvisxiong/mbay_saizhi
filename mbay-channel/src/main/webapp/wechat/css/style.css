@@ -1,0 +1,42 @@
+body{
+	font:12px/180% Arial, "宋体", Helvetica, sans-serif, Verdana; color:#000; margin:0; text-align:center;margin:0 auto;
+	}
+#top,#content,#foot{ text-align:center; margin:0 auto;  }	
+.{ padding:0; margin:0;}
+.f{ float:left;}	
+.r{ float:right;}
+.c{ clear:both;}
+input{border:none;}
+.m_a{ margin:0 auto; text-align:center;}
+.mt5{ margin-top:5px;}
+.mt15{ margin-top:15px;}
+.mf5{ margin-left:5px;}
+.mf15{ margin-left:15px;}
+.mf30{ margin-left:30px;}
+.mr15{ margin-right:15px;}
+.mr45{ margin-right:50px;}
+.pt15{ padding-top:15px;}
+.ht15{ height:15px;}
+ol, ul, li { list-style-type:none; }
+table { border-collapse:collapse; border-spacing:0; empty-cells:show; }
+th, td { border-collapse:collapse; }
+#content{ background-color:#F1F1F1; width:100%; padding-bottom:15px;padding-top:15px; }
+#content_bot{ background-repeat:repeat-x; background-image:url(../imges/weixin06.gif); height:14px;}
+.con{ width:420px; text-align:center; margin:0 auto;}
+.tel_1{ border-collapse:collapse; background-color:#FFF; border:1px solid #B4B2B3;}
+.tel_2{  height:35px; width:37px; display:block; border-right:1px solid #B4B2B3; border-collapse:collapse;   }
+.tel_3{ width:283px; height:33px; display:block;}
+.tel_4{ width:222px; height:33px; display:block; border:1px solid #B4B2B3;}
+.tel_5{ background-image:url(../imges/weixin03.jpg); width:100px; height:37px; display:block;}
+.ziti{ text-align:center; margin:0 auto;}
+.zi{width:330px; }
+.tel_7{ color:#ff9c01; text-align:left; text-indent:4em;}
+.tjan{ width:340px; text-align:center; margin:0 auto;}
+.anniu{ width:330px;}
+.anniu dd{ display:block; width:129px;} 
+
+.tel_8{ border:none;}
+.tel_9{ background-image:url(../imges/weixin04.jpg); width:129px; height:34px; display:block;}
+.tel_10{ background-image:url(../imges/weixin05.jpg); width:129px; height:34px;   display:block;}
+#foot{ margin-top:107px;}
+.xian{ border:1px solid #3b3738; width:330px; text-align:center; margin:0 auto;}

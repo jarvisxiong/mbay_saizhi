@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PromotionCampaignPackage">
+
+	<resultMap type="promotionCampaignPackage" id="BaseResultMap">
+		<result property="id" column="id" />
+		<result property="campaignNumber" column="campaignNumber" />
+		<result column="ratio" property="ratio" />
+		<association property="trafficPackage" column="packageId" javaType="trafficRedPackage">
+			<result column="tpId" property="id" />
+			<result column="traffic" property="traffic" />
+			<result column="package_id" property="packageId" />
+			<result column="operator_type" property="operatorType" />
+			<association property="trafficPackage" column="package_id" javaType="trafficPackage">
+				<result column="mbayprice" property="mbayprice" />
+			</association>
+		</association>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, campaignNumber, packageId, ratio
+	</sql>
+	
+	<select id="findPromotionCampaignPackageByCampaignNumber" resultMap="BaseResultMap" parameterType="String">
+		select a.*,a.id tpId,b.operator_type,b.package_id,b.traffic from
+		(
+			(SELECT * from promotion_campaign_package WHERE campaignNumber=#{value}) a
+			left join
+			tr_package b on a.packageId = b.package_id
+		)
+		ORDER BY operator_type
+	</select>
+	
+	<delete id="deletePromotionCampaignTrafficProduct" parameterType="Map">
+		DELETE
+		FROM promotion_campaign_package where campaignNumber=#{campaignNumber} AND
+		packageId=#{packageId}
+	</delete>
+	
+	<insert id="createPromotionCampaignPackage" parameterType="promotionCampaignPackage">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(id),0)+1 id FROM promotion_campaign_package
+		</selectKey>
+		insert into promotion_campaign_package (id, campaignNumber, packageId, ratio)
+		values (#{id},#{campaignNumber},#{trafficPackage.packageId},#{ratio})
+	</insert>
+	
+	<select id="findPromotionCampaignPackageValidMin" parameterType="Map" resultMap="BaseResultMap">
+		SELECT c.campaignNumber, c.packageId, c.ratio, 
+			t.traffic, t.package_id, t.operator_type, p.mbayprice 
+		FROM promotion_campaign_package c
+		LEFT JOIN tr_package t ON c.packageId = t.package_id
+        LEFT JOIN operator_traffic_package p on c.packageId = p.id
+        WHERE c.campaignNumber = #{campaignNumber} AND t.operator_type = #{operatorType} AND c.ratio >= 1
+        	AND p.mbayprice = 
+        	(
+        		SELECT MIN(p.mbayprice) FROM promotion_campaign_package c
+        		LEFT JOIN tr_package t ON c.packageId = t.package_id
+        		LEFT JOIN operator_traffic_package p on c.packageId = p.id
+        		WHERE c.campaignNumber = #{campaignNumber} AND t.operator_type = #{operatorType} AND c.ratio >= 1
+        	)
+	</select>
+	
+	<select id="findPromotionCampaignPackageByCampaignNumberAndOperatorType" parameterType="Map" resultMap="BaseResultMap">
+		SELECT c.id, c.campaignNumber, c.packageId, c.ratio, 
+			t.traffic, t.package_id, t.operator_type, p.mbayprice 
+		FROM promotion_campaign_package c
+		INNER JOIN tr_package t ON c.packageId = t.package_id
+        INNER JOIN operator_traffic_package p on c.packageId = p.id
+        WHERE c.campaignNumber = #{campaignNumber} AND t.operator_type = #{operatorType}
+	</select>
+</mapper>

@@ -1,0 +1,115 @@
+@charset "utf-8";
+/*手机端通用页面布局样式   */
+body,h1,h2,h3,h4,dl,dt,dd,ul,ol,li,a,div,em,span,img,form,input,p,i {
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+
+body {
+	color: #333333;
+	font-weight: 400;
+	text-rendering: optimizelegibility;
+	font-family: Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue",
+		"Droid Sans Fallback", "Heiti SC", sans-self;
+}
+
+em,i {
+	word-wrap: break-word;
+	font-style: normal;
+}
+
+a {
+	color: #333333;
+	text-decoration: none;
+}
+
+a:link,a:visited,a:active {
+	color: #3F3F3F;
+	text-decoration: none;
+}
+
+a,button,span,i,div,h2,aside {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+input,button,textarea,select {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+input:focus::-webkit-input-placeholder {
+	color: #D8D8D8;
+}
+
+input::-webkit-input-placeholder {
+	color: #D8D8D8;
+}
+
+textarea:focus::-webkit-input-placeholder {
+	color: #D8D8D8;
+}
+
+textarea::-webkit-input-placeholder {
+	color: #D8D8D8;
+}
+
+ul,li {
+	list-style: none;
+}
+
+article,aside,details,figcaption,figure,footer,header,menu,nav,section {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+img {
+	border: none;
+	max-width: 100%;
+	vertical-align: middle;
+}
+
+html,body {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
+
+input[type="button"],input[type="text"],input[type="submit"],
+input[type="search"],input[type="email"],input[type="number"],input[type="phone"],button
+	{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-webkit-border-image: none;
+	border-image: none;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+}
+
+.clearfix:after {
+	content: "";
+	display: block;
+	height: 0;
+	overflow: hidden;
+	clear: both;
+	visibility: hidden;
+}
+.absolute-center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+.absolute-vert-center {
+	position:absolute;
+	top:50%;
+	left:0;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+}

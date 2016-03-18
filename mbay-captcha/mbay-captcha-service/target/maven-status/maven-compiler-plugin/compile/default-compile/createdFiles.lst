@@ -1,0 +1,3 @@
+org/sz/mbay/captcha/CaptchaResult.class
+org/sz/mbay/captcha/AuthCode.class
+org/sz/mbay/captcha/SMSAuthCodeUtil.class

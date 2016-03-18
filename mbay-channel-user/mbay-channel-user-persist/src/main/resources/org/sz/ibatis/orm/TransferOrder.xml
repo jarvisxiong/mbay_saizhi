@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TransferOrder">
+	<insert id="createMbayTransferOrder" parameterType="mbayTransferOrder">
+		INSERT INTO
+		transfer_order(ordernumber,payamount,transfernote,createtime,sendsms,usernumber,optusernumber,sendamount,status)
+		VALUES(#{orderNumber},#{payAmount},#{transferNote},now(),#{sendsms},#{fromUserNumber},#{toUser.usernumber},#{sendAmount},1);
+	</insert>
+
+
+	<resultMap type="mbayTransferOrder" id="transferOrderInfo">
+		<result column="payamount" property="payAmount" />
+		<result column="usernumber" property="toUser.usernumber" />
+		<result column="transfernote" property="transferNote" />
+		<result column="truename" property="toUser.name" />
+		<result column="ordernumber" property="orderNumber" />
+		<result column="sendamount" property="sendAmount" />
+		
+	</resultMap>
+
+	<select id="findMbayTransferOrder" parameterType="Map" resultMap="transferOrderInfo">
+		SELECT R.ordernumber,
+		R.payamount,U.usernumber,R.transfernote,R.sendamount,U.real_name
+		truename,R.status
+		FROM transfer_order R
+		LEFT JOIN zcc_user_info U ON U.usernumber=R.optusernumber
+		where orderid=#{orderid} and R.usernumber=#{usernumber}
+	</select>
+
+	<select id="existsTransferOrder" parameterType="Map" resultType="int">
+		SELECT count(*) from transfer_order where orderid=#{orderid} and
+		usernumber=#{usernumber}
+	</select>
+
+	<sql id="transferOrderWhere">
+		<if test="orderNumber and orderNumber !=''">
+			AND ordernumber=#{orderNumber}
+		</if>
+		<if test="startTime !=null and startTime !=''">
+			AND R.createtime>= #{startTime}
+		</if>
+		<if test="endTime !=null and endTime !=''">
+	   <![CDATA[AND  R.createtime<= #{endTime} ]]>
+		</if>
+	</sql>
+
+	<!--查询转账记录信息 -->
+	<select id="findAllMbayTransferOrder" parameterType="mbayTransferOrderQO"
+		resultMap="transferOrderInfo">
+		SELECT R.ordernumber,
+		R.payamount,R.createtime,U.usernumber,R.transfernote,R.sendamount,U.real_name
+		truename,R.status
+		FROM transfer_order R
+		LEFT JOIN zcc_user_info U ON U.usernumber=R.optusernumber
+		where R.usernumber=#{userNumber}
+		<include refid="transferOrderWhere" />
+		ORDER BY R.createtime DESC
+	</select>
+
+	<select id="countMbayTransferOrder" parameterType="mbayTransferOrderQO"
+		resultType="int">
+		SELECT COUNT(*) FROM transfer_order R WHERE usernumber=#{userNumber}
+		<include refid="transferOrderWhere" />
+	</select>
+
+	<resultMap type="mbayTransferOrder" id="transferOrderfullInfo">
+		<result column="ordernumber" property="orderNumber" />
+		<result column="payamount" property="payAmount" />
+		<result column="transfernote" property="transferNote" />
+		<result column="createtime" property="createTime" />
+		<result column="sendsms" property="sendsms" />
+		<result column="sendamount" property="sendAmount" />
+		<result column="usernumber" property="fromUserNumber" />
+		<association property="toUser" javaType="user">
+			<result column="user_name" property="namename" />
+			<result column="usernumber" property="usernumber" />
+			<result column="user_info_id" property="id" />
+			<result column="property" property="property" />
+		</association>
+	</resultMap>
+
+	<select id="findTransferOrderByOrderNumber" parameterType="string"
+		resultMap="transferOrderfullInfo">
+		SELECT t.ordernumber, t.payamount, t.transfernote,
+		t.createtime, t.sendsms, t.usernumber, t.sendamount,t.status
+		u.user_name, u.user_info_id, u.property
+		FROM transfer_order t
+		LEFT JOIN
+		zcc_user_info u ON t.optusernumber = u.usernumber
+		WHERE
+		ordernumber=#{value}
+	</select>
+	<update id="updateTransferOrderStatus" parameterType="Map">
+		UPDATE transfer_order
+		<set>
+			<if test="status!=null">
+				status=#{status}
+			</if>
+		</set>
+		WHERE ordernumber=#{ordernumber}
+	</update>
+</mapper>
+

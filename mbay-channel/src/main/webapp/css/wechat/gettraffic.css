@@ -1,0 +1,149 @@
+@charset "utf-8";
+/*通用*/
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	font-size: 12px;
+	margin: 0px auto;
+	position: static;
+	min-height: 100%
+}
+
+img {
+	border: none;
+}
+
+input,select,textarea {
+	outline: none;
+}
+
+textarea {
+	resize: none
+}
+
+a {
+	text-decoration: none;
+}
+
+.fl {
+	float: left
+}
+
+.fr {
+	float: right
+}
+/*头部*/
+.con {
+	width: 100%;
+	max-width: 400px;
+	min-width: 320px;
+	margin: 0px auto
+}
+
+.head {
+	height: 200px;
+	width: 100%
+}
+
+.head img {
+	display: block;
+	height: 200px;
+	width: 100%
+}
+
+.body {
+	height: 130px;
+	background: url(../../images/wechat/weixin_6.jpg);
+	overflow: hidden;
+	width: 100%
+}
+
+.ss {
+	margin-top: 35px;
+	width: 100%;
+}
+
+.foot {
+	width: 100%
+}
+
+.body input.txt {
+	width: 55%;
+	height: 35px;
+	border: 1px solid #B2B1B1;
+	border-left: none;
+	font-size: 18px
+}
+
+.pic {
+	background: url(../../images/wechat/phone.jpg) center no-repeat;
+	width: 40px;
+	height: 37px;
+	margin-left: 30px
+}
+
+.btn {
+	width: 20%;
+	height: 37px;
+	background: url(../../images/wechat/wxb.jpg) center no-repeat;
+	vertical-align: top;
+	cursor: pointer;
+	margin-left: -6px;
+	color: #FFF;
+	font-size: 13px;
+	font-family: 'Microsoft YaHei'
+}
+
+.tip span {
+	margin-left: 28px;
+	color: red;
+	font-family: 'Microsoft YaHei'
+}
+
+.suc {
+	height: 28px;
+	line-height: 38px;
+	text-align: center;
+	color: #FD8400;
+	font-family: 'Microsoft YaHei';
+	font-size: 14px;
+}
+
+.footer_1 {
+	height: 15px;
+	background: url(../../images/wechat/wxf_1.jpg) center no-repeat;
+	width: 100%
+}
+
+.footer_2 {
+	height: 240px;
+	background: url(../../images/wechat/wxf_2.jpg) center repeat-y;
+	width: 100%
+}
+
+.footer_3 {
+	height: 92px;
+	background: url(../../images/wechat/wxf_3.jpg) center no-repeat;
+	width: 100%
+}
+
+.foot_txt {
+	letter-spacing: 2px;
+	font-family: 'Microsoft YaHei';
+	letter-spacing: 1px
+}
+
+.foot_txt span {
+	margin-bottom: 13px;
+	display: block;
+	padding-left: 10px;
+	padding-right: 10px
+}
+
+#s_3 {
+	line-height: 20px
+}

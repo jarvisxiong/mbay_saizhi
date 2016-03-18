@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Strategy">
+
+	<resultMap type="strategy" id="strategylist">
+		<result property="id" column="strategy_id" />
+		<result property="endtime" column="end_date" />
+		<result property="validityday" column="exchange_code_expire_days" />
+		<result property="quantity" column="num_max" />
+		<result property="sendnum" column="send_mb" />
+		<result property="starttime" column="start_date" />
+		<result property="strategyname" column="strategy_name" />
+		<result property="area.key" column="area" />
+		<result property="createtime" column="createtime" />
+		<result property="sendway.key" column="sendway" />
+		<result property="traffictype.key" column="traffictype" />
+		<result property="teloperator.key" column="teloperator" />
+		<result property="sended" column="sended" />
+		<result property="mbayamount" column="mbayamount" />
+		<result property="mbaybalance" column="mbaybalance" />
+	</resultMap>
+	<resultMap type="strategy" id="strategyinfo" extends="strategylist">
+		<result property="userid" column="user_info_id" />
+		<result property="redeemcodeurl" column="exchange_code_url" />
+	</resultMap>
+	<insert id="createStrategy" parameterType="strategy">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT
+			IFNULL(MAX(strategy_id),0)+1 id FROM zcc_strategy
+		</selectKey>
+		INSERT INTO
+		zcc_strategy(strategy_id,end_date,exchange_code_expire_days,num_max,send_mb,
+		start_date,strategy_name,user_info_id,area,createtime,sendway,traffictype,teloperator,securitycode,
+		sended,unitmb,mbayamount,mbaybalance,del_flag
+		)
+		VALUES(#{id},#{endtime},#{validityday},#{quantity},#{sendnum},#{starttime},
+		#{strategyname},#{userid},#{area.key},#{createtime},#{sendway.key},#{traffictype.key},#{teloperator.key},
+		#{securitycode},0,#{unitmb},#{mbayamount},#{mbaybalance},0);
+	</insert>
+
+	<select id="findAllStrategy" parameterType="strategy" resultMap="strategylist">
+		SELECT strategy_id,end_date,exchange_code_expire_days,num_max,send_mb,
+		start_date,strategy_name,area,createtime,sendway,traffictype,teloperator,sended,mbayamount,mbaybalance
+		FROM zcc_strategy WHERE user_info_id=#{userid} and del_flag=0
+	</select>
+	<select id="countStrategy" parameterType="strategy" resultType="Integer">
+		SELECT count(*) FROM zcc_strategy WHERE user_info_id=#{userid} and del_flag=0
+	</select>
+	<select id="findStrategy" parameterType="Integer" resultMap="strategyinfo">
+		SELECT user_info_id,
+		strategy_id,end_date,exchange_code_expire_days,num_max,send_mb,
+		start_date,strategy_name,area,createtime,sendway,traffictype,teloperator,sended,
+		exchange_code_url,mbaybalance,mbayamount
+		FROM zcc_strategy WHERE 
+		strategy_id=#{id} and  del_flag=0
+	</select>
+
+
+	<update id="plusRedeemCodeSend" parameterType="Integer">
+		UPDATE zcc_strategy SET sended= sended+1 where strategy_id=#{value}
+	</update>
+
+	<update id="updateStrategyRedeemCodeURL" parameterType="Map">
+		UPDATE zcc_strategy SET exchange_code_url=#{url} where
+		strategy_id=#{strategyid}
+	</update>
+	<update id="deleteStrategy" parameterType="Map">
+       UPDATE zcc_strategy SET del_flag=1,mbaybalance=0  WHERE strategy_id=#{strategyid} AND user_info_id=#{userid};
+	</update>
+</mapper>

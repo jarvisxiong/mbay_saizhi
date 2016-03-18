@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="UserContext">
+	<resultMap type="usercontext" id="usercontext">
+		<result property="smscount" column="smscount" />
+		<result property="subagent" column="subagent" />
+		<result property="event_inuse" column="event_inuse" />
+		<result property="updtime" column="updtime" />
+	</resultMap>
+
+
+	<select id="findUserContext" parameterType="String" resultMap="usercontext">
+		select
+		smscount,subagent,event_inuse,updtime
+		from usercontext where
+		usernumber=#{usernumber}
+	</select>
+	<update id="increaseNumOfCampaignInTime" parameterType="String">
+		UPDATE
+		usercontext SET event_inuse=event_inuse+1 WHERE usernumber=#{value}
+	</update>
+
+	<insert id="createUserContext" parameterType="usercontext">
+		insert into
+		usercontext(usernumber,smscount,subagent,event_inuse,updtime)
+		values
+		(#{usernumber},#{smscount},#{subagent},#{event_inuse},now());
+	</insert>
+
+	<select id="selectSmsCount" parameterType="String" resultType="java.lang.Integer">
+		select smscount from usercontext where usernumber = #{userNumber}
+	</select>
+	<!-- 调用存储过程 -->
+	<update id="initUserContext" parameterType="String"
+		statementType="CALLABLE">
+		{call INIT_USER_CONTEXT
+		(#{value,mode=IN,jdbcType=CHAR})}
+	</update>
+
+
+	<update id="increaseEventInUse" parameterType="String">
+		UPDATE usercontext
+		SET event_inuse=event_inuse+1 WHERE usernumber=#{value}
+	</update>
+	
+	<update id="deductOneCamNumInActive" parameterType="String">
+		UPDATE usercontext
+		SET event_inuse=event_inuse-1 WHERE usernumber=#{value}
+	</update>
+	
+	<update id="accretionSMS" parameterType="Map">
+		update usercontext set
+		smscount = (smscount + #{smsAmount}) where usernumber
+		= #{userNumber}
+	</update>
+	<!-- 扣除用户短信数量 -->
+	<update id="deductUserSMS" parameterType="Map">
+		update usercontext set
+		smscount = (smscount - #{smsAmount}) where usernumber
+		= #{usernumber}
+	</update>
+</mapper>

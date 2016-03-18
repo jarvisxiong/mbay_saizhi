@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UsserAccount">
+	<update id="deductUserAccountBalance" parameterType="Map">
+		update zcc_data_traffic_wallet set remained_meicoin=remained_meicoin-#{mbay} WHERE userid=#{value});
+	</update>
+	
+	<select id="findUserAccountByUid" parameterType="int" resultType="useraccount">
+	   select userid  id, remained_meicoin amount  from zcc_data_traffic_wallet
+	    where userid=#{value}
+	</select>
+
+</mapper>

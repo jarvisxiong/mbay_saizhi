@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="TrafficPackage">
+	<resultMap type="trafficPackage" id="packageInfoMap">
+		<result property="id" column="id" />
+		<result property="operatorid" column="operatorid" />
+		<result property="traffic" column="traffic" />
+		<result property="mbayprice" column="mbayprice" />
+		<result property="trafficType.value" column="traffictype" />
+		<association property="operator" javaType="operator">
+			<result property="area.value" column="area" />
+			<result property="type.value" column="operator_type" />
+		</association>
+	</resultMap>
+
+	<select id="findTrafficPackage" parameterType="int" resultMap="packageInfoMap">
+		SELECT pac.id,pac.operatorid,pac.traffic,pac.mbayprice,pac.traffictype,
+		ope.area,ope.operator_type
+		FROM operator_traffic_package pac
+		LEFT JOIN
+		zcc_operator_info ope ON ope.operator_id=pac.operatorid
+		WHERE id=#{value}
+	</select>
+	
+
+	
+
+</mapper>

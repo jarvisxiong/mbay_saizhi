@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PromotionCampaignTemplate">
+	<resultMap type="promotionCampaignTemplate" id="promotionCampaignTemplateInfoMap">
+		<result property="id" column="id" />
+		<result property="eventurl" column="url" />
+		<result property="redeemurl" column="redeem_url" />
+		<result property="backphoto" column="bg_photo" />
+		<result property="redeemBackphoto" column="redeem_bg_photo" />
+		<result property="introduction" column="introduction" />
+		<result property="gotText" column="got_text" />
+		<result property="redeemText" column="redeem_text" />
+		<result property="introductionText" column="introduction_text" />
+	</resultMap>
+
+	<insert id="createPromotionCampaignTemplate" parameterType="promotionCampaignTemplate">
+		INSERT INTO promotion_campaign_template
+		(id,eventnumber,url,redeem_url,bg_photo,redeem_bg_photo,introduction,got_text,redeem_text,introduction_text)
+		VALUES
+		(#{id},#{eventnumber},#{eventurl},#{redeemurl},#{backphoto},#{redeemBackphoto},#{introduction},#{gotText},#{redeemText},#{introductionText});
+	</insert>
+
+	<select id="findPromotionCampaignTemplate" parameterType="int"
+		resultMap="promotionCampaignTemplateInfoMap">
+		SELECT
+		id,eventnumber,url,redeem_url,bg_photo,redeem_bg_photo,introduction,got_text,redeem_text,introduction_text
+		FROM
+		promotion_campaign_template
+		WHERE id=#{value}
+	</select>
+
+	<select id="findPromotionCampaignTemplateByEventNumber"
+		parameterType="String" resultMap="promotionCampaignTemplateInfoMap">
+		SELECT
+		id,eventnumber,url,redeem_url,bg_photo,redeem_bg_photo,introduction,got_text,redeem_text,introduction_text
+		FROM
+		promotion_campaign_template
+		WHERE eventnumber=#{value}
+	</select>
+
+	<update id="updatePromotionCampaignTemplate" parameterType="promotionCampaignTemplate">
+		UPDATE promotion_campaign_template
+		<set>
+			<if test="backphoto !=null and backphoto != ''">
+				bg_photo=#{backphoto},
+			</if>
+			<if test="redeemBackphoto !=null and redeemBackphoto != ''">
+				redeem_bg_photo=#{redeemBackphoto},
+			</if>
+			<if test="introduction !=null">
+				introduction=#{introduction},
+			</if>
+			<if test="gotText !=null and gotText != ''">
+				got_text=#{gotText},
+			</if>
+			<if test="redeemText !=null and redeemText != ''">
+				redeem_text=#{redeemText},
+			</if>
+			<if test="introductionText !=null and introductionText != ''">
+				introduction_text=#{introductionText}
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!-- 删除模板信息 -->
+	<delete id="deletePromotionCampaignTemplate" parameterType="promotionCampaignTemplate">
+		delete from promotion_campaign_template where id=#{id}
+	</delete>
+</mapper>

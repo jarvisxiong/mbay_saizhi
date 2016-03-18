@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="WeChatCampaignTemplate">
+	<resultMap type="wechatCampaignTemplate" id="wechatCampaignTemplateInfoMap">
+		<result property="id" column="id" />
+		<result property="eventurl" column="url" />
+		<result property="status" column="status" />
+		<result property="backphoto" column="bg_photo" />
+		<result property="buttonphoto" column="bt_photo" />
+		<result property="shareTimes" column="shareTimes" />
+		<result property="content" column="content" />
+		<result property="shareTitle" column="shareTitle" />
+		<result property="shareLink" column="shareLink" />
+		<result property="shareImage" column="share_photo" />
+		<result property="successPhoto" column="success_photo" />
+	</resultMap>
+
+	<select id="findWeChatCampaignTemplate" parameterType="int"
+		resultMap="wechatCampaignTemplateInfoMap">
+		SELECT id,eventnumber,url,status,bg_photo,bt_photo,
+		share_times shareTimes,content,share_title shareTitle,share_link
+		shareLink,share_photo,success_photo
+		FROM wechat_campaign_template
+		WHERE
+		id=#{value}
+	</select>
+
+
+	<!-- 查询活动模板信息 -->
+	<select id="findWeChatCampaignTemplateByEventNumber"
+		parameterType="String" resultMap="wechatCampaignTemplateInfoMap">
+		SELECT
+		id,eventnumber,url,status,bg_photo,bt_photo,
+		share_times
+		shareTimes,content,share_title shareTitle,share_link
+		shareLink,share_photo,success_photo
+		FROM wechat_campaign_template
+		WHERE
+		eventnumber=#{value}
+	</select>
+
+
+	<!-- 活动默认模板 -->
+	<resultMap type="weChatCampaignDefaultTemplate" id="eventDefaultTemplateInfoMap">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="backPicture" column="back_picture" />
+		<result property="buttonPicture" column="button_picture" />
+		<result property="createtime" column="createtime" />
+		<result property="username" column="username" />
+	</resultMap>
+
+	<select id="findWeChatCampaignDefaultTemplate" parameterType="int" resultMap="eventDefaultTemplateInfoMap">
+		SELECT * FROM event_default_template WHERE id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<insert id="createWeChatCampaignTemplate" parameterType="wechatCampaignTemplate">
+		INSERT
+		INTO wechat_campaign_template (id,eventnumber,url,status,bg_photo,
+		bt_photo,share_times,content,share_title,share_link,share_photo,success_photo)
+		VALUES
+		(#{id},#{eventnumber},#{eventurl},#{status},#{backphoto},0,
+		#{shareTimes},#{content},#{shareTitle},#{shareLink},#{shareImage},#{successPhoto});
+	</insert>
+
+	<!-- 判断是否是默认图片 -->
+	<select id="isDefault" parameterType="String" resultType="int">
+		select count(*) from event_default_template 
+		where back_picture=#{value}
+	</select>
+
+	<!-- 删除模板信息 -->
+	<delete id="deleteWeChatCampaignTemplate" parameterType="wechatCampaignTemplate">
+		delete
+		from wechat_campaign_template where id=#{id}
+	</delete>
+	
+	<update id="updateWeChatCampaignTemplate" parameterType="wechatCampaignTemplate">
+		UPDATE wechat_campaign_template
+		<set>
+			share_times=#{shareTimes},
+			content=#{content},
+			share_title=#{shareTitle},
+			share_link=#{shareLink},
+			<if test="shareImage!=null and shareImage!=''">
+				share_photo=#{shareImage},
+			</if>
+			<if test="backphoto!=null and backphoto!=''">
+				bg_photo=#{backphoto},
+			</if>
+			<if test="successPhoto!=null and successPhoto!=''">
+				success_photo=#{successPhoto}
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+</mapper>

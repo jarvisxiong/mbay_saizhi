@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="TrafficChargeOrder">
+	<resultMap type="trafficChargeOrder" id="charegeOrderList">
+		<result property="number" column="number" />
+		<result property="eventnumber" column="eventnumber" />
+		<result property="mobile" column="mobile" />
+		<result property="traffic" column="traffic" />
+		<result property="status.value" column="status" />
+		<result property="mbayprice" column="mbayprice" />
+		<result property="ordername" column="name" />
+		<result property="createtime" column="createtime" />
+	</resultMap>
+	
+	<resultMap type="trafficChargeOrder" id="chargeOrderInfoMap">
+		<result property="number" column="number" />
+		<result property="usernumber" column="usernumber" />
+		<result property="packageid" column="packageid" />
+		<result property="mobile" column="mobile" />
+		<result property="status.value" column="status" />
+		<result property="ordername" column="name" />
+		<result property="traffic" column="traffic" />
+		<result property="mbayprice" column="mbayprice" />
+		<result property="eventnumber" column="eventnumber" />
+		<result property="createtime" column="createtime" />
+		<result property="ors.value" column="oper_r_status" />
+	</resultMap>
+	
+	<select id="findTrafficChargeOrder" parameterType="String" resultMap="chargeOrderInfoMap">
+	SELECT 
+	  number,usernumber,packageid,mobile,status,name,createtime,traffic,mbayprice,eventnumber,oper_r_status
+	  FROM traffic_charge_order  WHERE number=#{value}
+	</select>
+	
+	<resultMap type="trafficChargeOrder" id="timeZoneTrafficOrderMap">
+	  <result property="ordernumber" column="ordernumber" />
+	  <result property="mobile" column="mobile" />
+	  <result property="traffic" column="traffic" />	  
+	</resultMap>
+	<!-- 查找对应地区指定时间段订单 -->
+	<select id="findAllTrafficOrderByAreaAndTimeZone" parameterType="Map" resultMap="timeZoneTrafficOrderMap">
+	   SELECT o.number, o.mobile,o.traffic FROM traffic_charge_order o 
+       LEFT JOIN operator_traffic_package p ON o.packageid=p.id
+       LEFT JOIN zcc_operator_info y on p.operatorid= y.operator_id
+       WHERE   o.createtime BETWEEN #{starttime} AND #{endtime}  and  y.area=#{area} and y.operator_type=#{operator_type} 
+	   
+	</select>
+	
+	
+	
+	<update id="updateOrderStatus" parameterType="Map">
+	  UPDATE traffic_charge_order
+	  <set>
+	  <if test="orderstatus!=null">
+	  status=#{orderstatus.value},
+	  </if>
+	  <if test="ops!=null">
+	  oper_r_status=#{ops.value},
+	  </if>
+	  </set>
+	  WHERE number=#{ordernumber}
+	</update>
+
+</mapper>

@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="WeChatCampaign">
+
+	<resultMap type="wechatCampaign" id="wechatCampaignListMap">
+		<result property="eventnumber" column="eventnumber" />
+		<result property="eventname" column="eventname" />
+		<result property="createtime" column="createtime" />
+		<result property="starttime" column="starttime" />
+		<result property="endingtime" column="endingtime" />
+		<result property="sendway" column="sendway" />
+		<result property="quantity" column="quantity" />
+		<result property="sendednum" column="sendednum" />
+		<result property="amount" column="amount" />
+		<result property="costamount" column="costamount" />
+		<result property="state" column="state" />
+		<result property="sendsms" column="send_sms" />
+	</resultMap>
+
+	<sql id="campaignListQueryWhere">
+		<if test="usernumber!=null and usernumber!=''">
+			AND usernumber=#{usernumber}
+		</if>
+		<if test="eventnumber!=null and eventnumber!=''">
+			AND eventnumber=#{eventnumber}
+		</if>
+		<if test="eventstate!=null">
+			AND state=#{eventstate}
+		</if>
+		<if test="starttime!=null and starttime!=''">
+			AND createtime>= #{starttime}
+		</if>
+		<if test="endtime!=null and endtime!=''">
+	   <![CDATA[AND  createtime<= #{endtime} ]]>
+		</if>
+	</sql>
+
+	<select id="findAllWeChatCampaign" parameterType="weChatCampaignForm"
+		resultMap="wechatCampaignListMap">
+		SELECT eventnumber,eventname,createtime,starttime,
+		endingtime,sendway,quantity,sendednum,amount,costamount,state
+		FROM wechat_campaign
+		WHERE 1=1
+		<include refid="campaignListQueryWhere" />
+		ORDER BY createtime DESC
+	</select>
+
+	<select id="countWeChatCampaign" parameterType="weChatCampaignForm"
+		resultType="int">
+		SELECT COUNT(*) FROM wechat_campaign WHERE 1=1
+		<include refid="campaignListQueryWhere" />
+	</select>
+
+	<resultMap type="wechatCampaign" id="wechatCampaignInfoMap" extends="wechatCampaignListMap">
+		<result property="repeatEnable" column="repeat_enable" />
+		<result property="continuable" column="continuable" />
+		<result property="directEnable" column="direct_enable" />
+		<collection property="stratetgylist" javaType="ArrayList"
+			ofType="wechatCampaignStrategy" column="eventnumber" select="selectWeChatCampaignStrategyByEventNumber" />
+	</resultMap>
+
+	<!-- 根据活动号查看活动详情 -->
+	<select id="findWeChatCampaign" parameterType="String" resultMap="wechatCampaignInfoMap">
+		SELECT eventnumber,eventname,createtime,starttime,
+		endingtime,sendway,quantity,sendednum,amount,costamount,state,
+		repeat_enable,continuable,direct_enable
+		FROM wechat_campaign
+		WHERE eventnumber=#{eventnumber} and usernumber=#{usernumber}
+	</select>
+
+	<resultMap type="wechatCampaignStrategy" id="wechatCampaignStrategyInfoMap">
+		<result property="strategynumber" column="strategynumber" />
+		<result property="sendednum" column="strategysendednum" />
+		<result property="state" column="strategystate" />
+		<result property="trafficPackage.id" column="packageid" />
+		<association property="trafficPackage" javaType="trafficPackage">
+			<result property="id" column="packageid" />
+			<result property="traffic" column="traffic" />
+			<result property="mbayprice" column="mbayprice" />
+			<result property="trafficType" column="traffictype" />
+			<association property="operator" javaType="operator">
+				<result property="area.value" column="area" />
+				<result property="type" column="teltype" />
+			</association>
+		</association>
+	</resultMap>
+
+	<select id="selectWeChatCampaignStrategyByEventNumber" parameterType="String"
+		resultMap="wechatCampaignStrategyInfoMap">
+		SELECT s.strategynumber,s.sendednum strategysendednum,s.state
+		strategystate,s.packageid,
+		p.traffic,p.mbayprice,p.traffictype,o.area,o.operator_type teltype
+		FROM wechat_campaign_strategy s
+		LEFT JOIN operator_traffic_package p 
+		on p.id=s.packageid
+		LEFT JOIN zcc_operator_info o 
+		on o.operator_id=p.operatorid
+		WHERE s.eventnumber=#{value}
+	</select>
+
+	<resultMap type="wechatCampaign" id="wechatCampaignBaseInfo">
+		<result property="eventnumber" column="eventnumber" />
+		<result property="usernumber" column="usernumber" />
+		<result property="createtime" column="createtime" />
+		<result property="starttime" column="starttime" />
+		<result property="endingtime" column="endingtime" />
+		<result property="sendway" column="sendway" />
+		<result property="state" column="state" />
+		<result property="quantity" column="quantity" />
+		<result property="sendednum" column="sendednum" />
+		<result property="sendsms" column="send_sms" />
+		<result property="eventname" column="eventname" />
+		<result property="amount" column="amount" />
+	</resultMap>
+
+	<!-- 根据活动编号和用户编号查询活动基本信息，以用于生成兑换码 -->
+	<select id="findWeChatCampaignBaseInfo" parameterType="Map"
+		resultMap="wechatCampaignBaseInfo">
+		SELECT e.eventnumber,e.usernumber,e.createtime,e.starttime,
+		e.endingtime,e.sendway,e.state,e.quantity,e.sendednum,e.send_sms,e.eventname,e.amount
+		FROM wechat_campaign e
+		WHERE e.eventnumber=#{eventnumber} 
+	</select>
+
+	<resultMap type="wechatCampaign" id="wechatCampaignSendInfoMap">
+		<result property="usernumber" column="usernumber" />
+		<result property="eventname" column="eventname" />
+		<result property="starttime" column="starttime" />
+		<result property="endingtime" column="endingtime" />
+		<result property="sendway" column="sendway" />
+		<result property="quantity" column="quantity" />
+		<result property="sendednum" column="sendednum" />
+		<result property="state" column="state" />
+		<result property="continuable" column="continuable" />
+		<result property="sendsms" column="send_sms" />
+	</resultMap>
+
+	<!--根据活动编号查询活动赠送信息 -->
+	<select id="findWeChatCampaignSendInfo" parameterType="String"
+		resultMap="wechatCampaignSendInfoMap">
+		SELECT e.usernumber, e.eventname,e.starttime,
+		e.endingtime,e.sendway,e.quantity,e.sendednum,e.state,e.continuable,e.send_sms
+		FROM wechat_campaign e
+		WHERE e.eventnumber=#{value}
+	</select>
+
+	<resultMap type="wechatCampaignStrategy" id="wechatCampaignStrategyInfo">
+		<result property="strategynumber" column="strategynumber" />
+		<result property="eventnumber" column="eventnumber" />
+		<association property="trafficPackage" javaType="trafficPackage">
+			<result property="id" column="packageid" />
+			<result property="traffic" column="traffic" />
+			<result property="mbayprice" column="mbayprice" />
+			<result property="trafficType" column="traffictype" />
+			<association property="operator" javaType="operator">
+				<result property="area.value" column="area" />
+				<result property="type" column="operator_type" />
+			</association>
+		</association>
+	</resultMap>
+
+	<!-- 根据活动编号和号码归属地信息查询对应的流量包 -->
+	<select id="findCampaignStrategyInfo" parameterType="Map"
+		resultMap="wechatCampaignStrategyInfo">
+		SELECT E.eventnumber, S.strategynumber,
+		O.area,O.operator_type,P.id packageid,
+		P.traffic,P.traffictype,P.mbayprice FROM wechat_campaign E
+		LEFT JOIN
+		wechat_campaign_strategy S ON E.eventnumber=S.eventnumber
+		LEFT JOIN
+		operator_traffic_package P ON P.id=S.packageid
+		LEFT JOIN
+		zcc_operator_info O ON O.operator_id=P.operatorid
+		WHERE (O.area=#{area} or O.area=0) 
+		AND O.operator_type=#{operator} 
+		AND E.eventnumber=#{eventnumber}
+	</select>
+
+	<!-- 查询活动赠送份数 -->
+	<select id="getWeChatCampaignSendQuantity" parameterType="String"
+		resultType="int">
+		SELECT quantity FROM wechat_campaign 
+		WHERE eventnumber=#{eventnumber}
+	</select>
+
+	<!-- 活动状态Map -->
+	<resultMap type="wechatCampaign" id="wechatCampaignStateMap">
+		<result property="state" column="state" />
+	</resultMap>
+
+	<!-- 根据活动标号获取活动状态 -->
+	<select id="getWeChatCampaignState" parameterType="Map" resultMap="wechatCampaignStateMap">
+		SELECT e.state FROM wechat_campaign e
+		WHERE e.eventnumber=#{eventnumber} 
+		AND usernumber=#{usernumber}
+	</select>
+	
+	<!-- 查询活动开始时间，以便在创建活动后修改活动状态 -->
+	<select id="selectWeChatCampaignStartTime" parameterType="String"
+		resultType="java.sql.Timestamp">
+		SELECT starttime FROM wechat_campaign 
+		WHERE eventnumber=#{value}
+	</select>
+
+	<!-- 查询活动步骤 -->
+	<select id="findWeChatCampaignStep" parameterType="Map" resultType="int">
+		SELECT step FROM wechat_campaign 
+		WHERE eventnumber=#{eventnumber} 
+		AND usernumber=#{usernumber}
+	</select>
+
+	<!-- 查询活动赠送数量 -->
+	<select id="findWeChatCampaignSendQuantity" parameterType="String"
+		resultType="int">
+		SELECT quantity FROM wechat_campaign 
+		WHERE eventnumber=#{value}
+	</select>
+	
+	<!-- 查询活动已送出数量 -->
+	<select id="findWeChatCampaignSendedQuantity" parameterType="String"
+		resultType="int">
+		SELECT sendednum FROM wechat_campaign 
+		WHERE eventnumber=#{value}
+	</select>
+
+	<!-- 查询活动是否可以直接领取 -->
+	<select id="findCampaignDirectEnable" parameterType="String" resultType="int">
+		SELECT direct_enable FROM wechat_campaign 
+		WHERE eventnumber=#{value}
+	</select>
+
+	<select id="getCountOfWeChatCampaign" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM wechat_campaign 
+		WHERE eventnumber=#{eventNumber}
+		AND usernumber=#{userNumber}
+	</select>
+
+	<!-- 根据活动编号返回用户编号 -->
+	<select id="findUserNumberByWeChatCampaignNumber" parameterType="String"
+		resultType="String">
+		SELECT usernumber FROM wechat_campaign 
+		WHERE eventnumber=#{value}
+	</select>
+	
+	<resultMap type="weChatCampaignDefaultTemplate" id="baseResultMap">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="backPicture" column="back_picture" />
+		<result property="buttonPicture" column="button_picture" />
+		<result property="createtime" column="createtime" />
+		<result property="username" column="username" />
+	</resultMap>
+
+	<!-- 查询所有活动默认模板 -->
+	<select id="findAllWeChatCampaignDefaultTemplate" resultMap="baseResultMap">
+		SELECT * 
+		FROM event_default_template 
+		order by createtime desc
+	</select>
+	
+	<select id=""></select>
+	
+	<resultMap type="weChatCampaignAdvertise" id="baseEventAdvertiseMap">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="picture" column="picture" />
+		<result property="name" column="name" />
+		<result property="status" column="status" />
+		<result property="createtime" column="createtime" />
+		<result property="username" column="username" />
+	</resultMap>
+	
+	<!-- 查询所有活动广告图片 -->
+	<select id="findAllWeChatCampaignAdvertise" resultMap="baseEventAdvertiseMap">
+		SELECT * 
+		FROM event_advertise 
+		where status = 1 
+		order by createtime desc
+	</select>
+	
+	<resultMap type="weChatCampaignStatistics" id="campaignStatisticsMap">
+		<result property="noneFinish" column="r0" />
+		<result property="notStarted" column="r1" />
+		<result property="inActive" column="r2" />
+		<result property="over" column="r3" />
+		<result property="cancled" column="r4" />
+	</resultMap>
+	
+	<!-- 查询所有不同状态统计 -->
+	<select id="statisticWechatCampaign" parameterType="String" resultMap="campaignStatisticsMap">
+		select 
+		(select count(*) from wechat_campaign where state=0 and usernumber=#{value}) as r0,
+		(select count(*) from wechat_campaign where state=1 and usernumber=#{value}) as r1,
+		(select count(*) from wechat_campaign where state=2 and usernumber=#{value}) as r2,
+		(select count(*) from wechat_campaign where state=3 and usernumber=#{value}) as r3,
+		(select count(*) from wechat_campaign where state=4 and usernumber=#{value}) as r4
+	</select>
+
+	<insert id="createWeChatCampaign" parameterType="wechatCampaign">
+		INSERT INTO
+		wechat_campaign
+		(usernumber,eventnumber,eventname,createtime,starttime,
+		endingtime,sendway,quantity,sendednum,amount,costamount,state,step,repeat_enable,continuable,direct_enable,send_sms)
+		VALUES(#{usernumber},#{eventnumber},#{eventname},#{createtime},#{starttime},#{endingtime},#{sendway},
+		#{quantity},#{sendednum},#{amount},#{costamount},#{state},#{step},#{repeatEnable,jdbcType=BOOLEAN},#{continuable,jdbcType=BOOLEAN},#{directEnable,jdbcType=BOOLEAN},#{sendsms,jdbcType=BOOLEAN});
+	</insert>
+
+	<insert id="createWeChatCampaignStrategy" parameterType="wechatCampaignStrategy">
+		INSERT INTO
+		wechat_campaign_strategy(strategynumber,eventnumber,area,operator,packageid,sendednum,state)
+		VALUES
+		(#{strategynumber},#{eventnumber},#{supportArea.value},#{supportOperator},#{trafficPackage.id},#{sendednum},#{state})
+	</insert>
+     
+     <select id="getCampaignMaxPackegePrice" resultType="double" parameterType="String">
+     SELECT max(p.mbayprice) FROM operator_traffic_package p 
+     LEFT JOIN wechat_campaign_strategy s on s.packageid=p.id 
+     where s.eventnumber=#{value}
+     </select>
+
+	<!-- 设置活动锁定美贝 -->
+	<update id="setWeChatCampaignLockedMbay" parameterType="Map">
+		UPDATE wechat_campaign 
+		SET amount=(quantity*#{maxpackageprice}) 
+		WHERE eventnumber=#{eventnumber}
+	</update>
+
+	<!--修改活动创建步骤，记录活动创建情况 -->
+	<update id="updateWeChatCampaignStep" parameterType="Map">
+		UPDATE wechat_campaign 
+		SET step=#{step} 
+		where eventnumber=#{eventnumber}
+	</update>
+
+	<!-- 修改活动状态 -->
+	<update id="updateWeChatCampaignState" parameterType="Map">
+		UPDATE wechat_campaign 
+		SET state=${state} 
+		where eventnumber=#{eventnumber}
+	</update>
+
+	<!-- 修改活动单个号码是否可多次参与 -->
+	<update id="updateWeChatCampaignRepeatEnable" parameterType="Map">
+		UPDATE wechat_campaign 
+		SET repeat_enable =${repeat_enable} 
+		where eventnumber=#{eventnumber}
+	</update>
+
+	<!-- 修改活动超出数量是否可继续兑换 -->
+	<update id="updateWeChatCampaignContinuable" parameterType="Map">
+		UPDATE wechat_campaign 
+		SET continuable =${continuable} 
+		where eventnumber=#{eventnumber}
+	</update>
+	
+	<!--修改活动日期 -->
+	<update id="updateWeChatCampaignDate" parameterType="Map">
+		UPDATE wechat_campaign 
+		SET
+		<if test="eventstarttime!=null and eventstarttime!=''">
+			starttime=#{eventstarttime},
+		</if>
+		endingtime=#{eventendtime} 
+		where eventnumber=#{eventnumber}
+	</update>
+	
+	<!-- 修改活动是否可直接领取 -->
+	<update id="updateWeChatCampaignDirectEnable" parameterType="Map">
+		UPDATE wechat_campaign
+		SET direct_enable =${directEnable}
+		where eventnumber=#{eventnumber}
+	</update>
+	
+	<select id="isExistingWeChatCampaign" parameterType="Map" resultType="boolean" >
+	 SELECT COUNT(*)>0 FROM  wechat_campaign  WHERE eventnumber=#{campaignNumber} AND usernumber=#{userNumber}
+	</select>
+	
+	<select id="findCampaignStatus" parameterType="String" resultType="org.sz.mbay.base.enums.CampaignStatus">
+	 select state  from wechat_campaign  where eventnumber=#{value}
+	</select>
+	
+	<!-- 判断手机号是否可以参与当前活动 -->
+	<parameterMap type="map" id="judgeMap">
+		<parameter property="event_number" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="r_mobile" jdbcType="CHAR" mode="IN" />
+		<parameter property="renable" jdbcType="INTEGER" mode="OUT" />
+		<parameter property="message" jdbcType="VARCHAR" mode="OUT" />
+	</parameterMap>
+
+	<update id="wechatJudgeMobileReceiveEnable" parameterMap="judgeMap"
+		statementType="CALLABLE">
+		{call WECHAT_JUDGE_MOBILE_RECEIVE_ENABLE (?,?,?,?)}
+	</update>
+
+	<!-- 取消活动调用存储过程 -->
+	<parameterMap type="map" id="cancelWeChatCampaignMap">
+		<parameter property="eventnumber" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="usernumber" jdbcType="CHAR" mode="IN" />
+		<parameter property="rowc" jdbcType="INTEGER" mode="OUT" />
+	</parameterMap>
+
+	<delete id="cancelWeChatCampaign" parameterMap="cancelWeChatCampaignMap"
+		statementType="CALLABLE">
+		{call CANCEL_WECHAT_CAMPAIGN (?,?,?)}
+	</delete>
+
+	<!-- 完成活动调用存储过程 -->
+	<parameterMap type="map" id="completeWeChatCampaignCreateMap">
+		<parameter property="eventnumber" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="rowc" jdbcType="INTEGER" mode="OUT" />
+	</parameterMap>
+
+	<delete id="completeWeChatCampaignCreate" parameterMap="completeWeChatCampaignCreateMap"
+		statementType="CALLABLE">
+		{call FINISH_WECHAT_CAMPAIGN (?,?)}
+	</delete>
+
+	<!-- 完成活动调用存储过程 -->
+	<parameterMap type="map" id="weChatCampaignSendMap">
+		<parameter property="event_strategy_number" jdbcType="VARCHAR"
+			mode="IN" />
+		<parameter property="rowc" jdbcType="INTEGER" mode="OUT" />
+	</parameterMap>
+
+	<!-- 增加策略送出数量,增加活动送出数量,减少活动锁定美贝，增加活动送出美贝 -->
+	<update id="weChatCampaignSend" parameterMap="weChatCampaignSendMap"
+		statementType="CALLABLE">
+		{call WECHAT_CAMPAIGN_SENT (?,?)}
+	</update>
+	
+	<select id="findAllWeChatCampaignNumberStartToday" parameterType="Map"
+		resultType="String">
+		SELECT eventnumber
+		FROM wechat_campaign
+		WHERE 
+		<![CDATA[starttime<=#{currentTime} and endingtime>=#{currentTime}]]>
+		and state=#{state}
+	</select>
+	
+	<select id="findAllWeChatCampaignNumberOverToday" parameterType="Map"
+		resultType="String">
+		SELECT eventnumber
+		FROM wechat_campaign
+		WHERE 
+		<![CDATA[endingtime<=#{currentTime}]]>
+		and state=#{state}
+	</select>
+	
+	<update id="decreaseWeChatCampaignLockedMbay" parameterType="String">
+		UPDATE wechat_campaign
+		SET amount=0
+		WHERE eventnumber=#{value}
+	</update>
+</mapper>

@@ -1,0 +1,118 @@
+@charset "utf-8";
+/*右侧内容*/
+.tip_setting {
+	width: 828px;
+	font-family: 'Microsoft YaHei';
+	font-size: 15px;
+}
+
+.tip_setting_con {
+	padding-bottom: 30px;
+}
+
+.tab_block {
+	width: 100%
+}
+
+.tab_block table {
+	width: 100%;
+}
+
+.an {
+	margin-top: 60px
+}
+
+.an_btn {
+	width: 150px;
+	height: 35px;
+	line-height: 35px;
+	letter-spacing: 1px;
+	border-radius: 4px;
+	color: #FFF;
+	font-family: 'Microsoft YaHei';
+	background: #FDAC1C;
+	margin-left: 165px;
+	cursor: pointer
+}
+/*表格一*/
+table {
+	border-spacing: 0;
+}
+
+li {
+	list-style: none;
+}
+
+.type {
+	width: 80px;
+}
+
+.tab_0 thead th {
+	background: #ebebeb;
+	border-bottom: 1px #d2d2d2 solid;
+}
+
+.tab_0  th,.tab_0  td {
+	padding: 5px;
+}
+
+th {
+	text-align: left;
+}
+
+.tab_0 tfoot td {
+	border-top: 1px #d2d2d2 solid;
+	text-align: right;
+	color: #a6a6a6;
+}
+
+.tab_0 tbody .amount {
+	color: #ff831c;
+	font-size: 16px;
+	width: 80px;
+	text-align: left;
+}
+/*表格二*/
+.tab_1 table {
+	border: 1px #d2d2d2 solid;
+	border-width: 1px 0 0 1px;
+	width: 100%;
+}
+
+.tab_1 .first {
+	width: 75px;
+	padding-left: 3px;
+}
+
+.tab_1 th {
+	width: 60px;
+	background: #f0f0f0;
+}
+
+.tab_1 th,.tab_1 td {
+	border: 1px #d2d2d2 solid;
+	border-width: 0 1px 1px 0;
+	padding: 0px;
+}
+
+body td.tb-reset table {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	background: transparent;
+}
+
+th,td {
+	font-size: 12px
+}
+
+.hdlb {
+	padding-left: 40px;
+	background: url(../../images/workimages/mbzz.jpg) no-repeat left;
+	color: #35618F;
+	font-size: 18px;
+	height: 36px;
+	line-height: 35px;
+	line-height: 45px;
+	margin-bottom: 15px;
+}

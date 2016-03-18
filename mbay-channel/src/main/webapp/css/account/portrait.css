@@ -1,0 +1,112 @@
+.preview_div {
+	background: url(../../images/portrait/div_back.jpg) no-repeat left;
+	height: 300px;
+	line-height: 300px;
+	text-align: center;
+	width: 400px;
+	overflow: hidden;
+	position: relative;
+	z-index: 5;
+	margin-top: 20px;
+}
+
+#preview {
+	max-width: 400px;
+	max-height: 300px;
+	position: relative;
+	z-index: 6;
+}
+
+#preview-pane {
+	border-left: 1px solid #CCC;
+	width: 380px;
+	float: right;
+	height: 350px;
+	margin-top: 42px;
+}
+
+#preview-pane>h4,#preview-pane>div {
+	padding-left: 13px;
+}
+
+#preview-pane .preview-container {
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+	float: left;
+	margin: 10px 17px;
+}
+
+.prevrew_content {
+	width: 405px;
+	float: left;
+}
+
+#preview_short {
+	margin-left: -14px;
+	width: 100px;
+	height: 100px;
+}
+
+.hdlb {
+	padding-left: 40px;
+	background: url(../../images/workimages/hdlb.jpg) no-repeat left;
+	color: #35618F;
+	font-size: 18px;
+	height: 36px;
+	line-height: 35px;
+	line-height: 45px;
+	margin-bottom: 15px
+}
+
+h4 {
+	font-size: 20px;
+	font-family: 微软雅黑;
+	padding-left: 8px;
+}
+
+.portrait_body {
+	margin-top: 20px;
+	padding: 10px;
+}
+
+.btn_default {
+	color: #bbb;
+	cursor: default;
+	font-size: 12px;
+	padding: 0 20px;
+	height: 30px;
+	line-height: 26px;
+	letter-spacing: 1px;
+	border-radius: 4px;
+	font-family: 'Microsoft YaHei';
+}
+
+input[type="submit"],input[type="button"] {
+	position: absolute;
+	top: 700px;
+	left: 627px;
+}
+
+#portraitForm .Validform_checktip {
+	text-align: left;
+	font-size: 1em;
+	color: #999;
+	width: 200px;
+}
+
+#portraitForm .Validform_right {
+	font-size: 1em;
+	background: url(../../images/workimages/tb.png) no-repeat left;
+	padding-left: 20px;
+	background-position: 0 -29px;
+	color: #5BB53C
+}
+
+#portraitForm .Validform_wrong {
+	font-size: 1em;
+	color: #ff5243;
+	background: url(../../images/workimages/tb.png) no-repeat left;
+	padding-left: 20px;
+	background-position: 0 -53px;
+}

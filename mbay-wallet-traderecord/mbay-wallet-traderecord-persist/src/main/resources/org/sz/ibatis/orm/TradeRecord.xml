@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TradeRecord">
+
+	<sql id="base_column_list">
+		id, serial_number, account_type, trade_type, description, master_telephone, reciprocal_telephone, 
+	    payment_type, amount, related_number, createtime
+	</sql>
+	
+	<resultMap type="tradeRecord" id="base_result_map">
+		<result property="id" column="id" />
+		<result property="serialNumber" column="serial_number" />
+		<result property="accountType" column="account_type" />
+		<result property="tradeType" column="trade_type" />
+		<result property="description" column="description" />
+        <result property="paymentType" column="payment_type" />
+        <result property="amount" column="amount" />
+        <result property="createTime" column="createtime" />
+        <result property="masterTelephone" column="master_telephone" />
+        <result property="reciprocalTelephone" column="reciprocal_telephone" />
+        <result property="relatedNumber" column="related_number" />
+	</resultMap>
+
+	<insert id="insert" parameterType="tradeRecord">
+	    INSERT INTO wl_trade_record (<include refid="base_column_list" />)
+	    VALUES 
+	    (	
+	    	#{id}, #{serialNumber}, #{accountType}, #{tradeType}, #{description}, #{masterTelephone}, 
+	    	#{reciprocalTelephone}, #{paymentType}, #{amount}, #{relatedNumber}, #{createTime}
+	    )
+	</insert>
+	
+	<resultMap type="tradeRecord" id="findAllTradeRecordMap">
+        <result property="description" column="description" />
+        <result property="paymentType" column="payment_type" />
+        <result property="amount" column="amount" />
+        <result property="relatedNumber" column="related_number" />
+        <result property="createTime" column="createtime" />
+    </resultMap>
+	<select id="findAllTradeRecord" parameterType="tradeRecordQO" resultMap="findAllTradeRecordMap">
+	    SELECT description, payment_type, amount, related_number, createtime
+	    FROM wl_trade_record 
+	    <where>
+	        master_telephone = #{masterTelephone}
+	        <if test="startTime != null">and createtime &gt;= #{startTime}</if>
+	        <if test="endTime != null">and createtime &lt;= #{endTime}</if> 
+	        <if test="paymentType != null">and payment_type = #{paymentType}</if> 
+	        <if test="tradeType != null">and trade_type = #{tradeType}</if> 
+	    </where>
+	    ORDER BY createtime DESC
+	</select>
+	
+	<select id="countTradeRecord" parameterType="tradeRecordQO" resultType="int">
+		SELECT COUNT(*)
+	    FROM wl_trade_record 
+	    <where>
+	        master_telephone = #{masterTelephone}
+	        <if test="startTime != null">and createtime &gt;= #{startTime}</if>
+	        <if test="endTime != null">and createtime &lt;= #{endTime}</if> 
+	        <if test="paymentType != null">and payment_type = #{paymentType}</if> 
+	        <if test="tradeType != null">and trade_type = #{tradeType}</if> 
+	    </where>
+	</select>
+	
+	<select id="isRecordExsit" parameterType="java.lang.String" resultType="java.lang.Boolean">
+		SELECT COUNT(*) > 0 FROM wl_trade_record WHERE serial_number = #{value}
+	</select>
+
+	<select id="findBySerialNumber" parameterType="java.lang.String" resultMap="base_result_map">
+		select 
+		<include refid="base_column_list" />
+		from wl_trade_record
+		where serial_number = #{value}
+	</select>
+	
+	<update id="updateByIdSelective" parameterType="tradeRecord">
+		update wl_trade_record
+		<set>
+			<if test="serialNumber != null">serial_number = #{serialNumber},</if>
+			<if test="accountType != null">account_type = #{accountType},</if>
+			<if test="tradeType != null">trade_type = #{tradeType},</if>
+			<if test="description != null">description = #{description},</if>
+			<if test="paymentType != null">payment_type = #{paymentType},</if>
+			<if test="amount != null">amount = #{amount},</if>
+			<if test="createTime != null">createtime = #{createTime},</if>
+			<if test="masterTelephone != null">master_telephone = #{masterTelephone},</if>
+			<if test="reciprocalTelephone != null">reciprocal_telephone = #{reciprocalTelephone},</if>
+			<if test="relatedNumber != null">related_number = #{relatedNumber},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+</mapper>

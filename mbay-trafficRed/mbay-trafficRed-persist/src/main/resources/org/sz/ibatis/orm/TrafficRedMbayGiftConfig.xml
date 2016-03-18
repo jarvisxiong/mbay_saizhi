@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TrafficRedMbayGiftConfig">
+
+	<sql id="base_column_list">
+		id, campaign_id, share_img, share_title, share_content, participation_link, bg_img
+	</sql>
+	
+	<resultMap type="trafficRedMbayGiftConfig" id="base_result_map">
+		<result property="id" column="id" />
+		<result property="campaignId" column="campaign_id" />
+		<result property="shareImg" column="share_img" />
+		<result property="shareTitle" column="share_title" />
+		<result property="shareContent" column="share_content" />
+		<result property="participationLink" column="participation_link" />
+		<result property="bgImg" column="bg_img" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="trafficRedMbayGiftConfig">
+		insert into tr_mbay_gift_config(<include refid="base_column_list" />)
+		values 
+		(
+			#{id}, #{campaignId}, #{shareImg}, #{shareTitle}, #{shareContent}, #{participationLink}, #{bgImg}		
+		)
+	</insert>
+	
+	<select id="selectById" parameterType="java.lang.Long" resultMap="base_result_map">
+		select <include refid="base_column_list" />
+		from tr_mbay_gift_config
+		where id = #{value}
+	</select>
+	
+	<update id="updateByIdSelective" parameterType="trafficRedMbayGiftConfig">
+		update tr_mbay_gift_config
+		<set>
+			<if test="shareImg != null">
+				share_img = #{shareImg},
+			</if>
+			<if test="shareTitle != null">
+				share_title = #{shareTitle},
+			</if>
+			<if test="shareContent != null">
+				share_content = #{shareContent},
+			</if>
+			<if test="participationLink != null">
+				participation_link = #{participationLink},
+			</if>
+			<if test="bgImg != null">
+				bg_img = #{bgImg},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="StoreCampaignOrder">
+	<insert id="createStoreCampaignOrder" parameterType="storeCampaignOrder">
+		insert into
+		store_campaign_order
+		(id,number,userNumber,status,price,redeemCode,type,dateCreated,dateModified,deleted)
+		values(#{id},#{number},#{userNumber},#{status},#{price},#{redeemCode},#{type},#{dateCreated},#{dateModified},#{deleted});
+	</insert>
+
+	<select id="findOrderByNumber" resultType="storeCampaignOrder"
+		parameterType="java.lang.String">
+		SELECT id,number,userNumber,status,price,type,dateCreated FROM store_campaign_order where number=#{ordernumber} and deleted=false;
+	</select>
+</mapper>

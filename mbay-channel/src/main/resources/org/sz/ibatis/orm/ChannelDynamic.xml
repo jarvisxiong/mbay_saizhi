@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="channelDynamic">
+	<resultMap type="channelDynamic" id="baseResultMap">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="createTime" column="create_time" />
+		<result property="category.name" column="category" />
+		<result property="username" column="username" />
+		<result property="url" column="url" />
+		<result property="link" column="link" />
+		<result property="description" column="description" />
+		<result property="name" column="name" />
+	</resultMap>
+	<resultMap type="dynamicItem" id="sampleResultMap">
+	    <result property="id" column="category_id" />
+        <result property="name" column="category_name" />
+        <collection property="channelDynamics" ofType="channelDynamic" resultMap="baseResultMap"/>
+    </resultMap>
+
+	<select id="findList" resultMap="baseResultMap">
+		SELECT * FROM channel_dynamic order by category, create_time
+	</select>
+	<select id="selectCategory" resultMap="sampleResultMap">
+	    SELECT item.id as category_id, item.name as category_name, dy.* from dynamic_item item left outer join channel_dynamic dy on item.id=dy.category
+	    order by item.sort desc
+	</select>
+</mapper>

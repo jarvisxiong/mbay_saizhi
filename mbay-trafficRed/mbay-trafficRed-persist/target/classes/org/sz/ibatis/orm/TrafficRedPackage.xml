@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TrafficRedPackage">
+
+	<resultMap id="BaseResultMap" type="trafficRedPackage">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="package_id" property="packageId" jdbcType="INTEGER" />
+		<result column="traffic" property="traffic" jdbcType="SMALLINT" />
+		<result column="operator_type" property="operatorType"
+			jdbcType="TINYINT" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, package_id, traffic, operator_type
+	</sql>
+	
+	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from tr_package
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<delete id="deleteById" parameterType="java.lang.Long">
+		delete from tr_package
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	
+	<insert id="create" parameterType="trafficRedPackage">
+		insert into tr_package (id, package_id, traffic,
+		operator_type)
+		values
+		(#{id,jdbcType=BIGINT}, #{packageId,jdbcType=INTEGER},
+		#{traffic,jdbcType=SMALLINT},
+		#{operatorType,jdbcType=TINYINT})
+	</insert>
+	
+	<insert id="createSelective" parameterType="trafficRedPackage">
+		insert into tr_package
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="packageId != null">
+				package_id,
+			</if>
+			<if test="traffic != null">
+				traffic,
+			</if>
+			<if test="operatorType != null">
+				operator_type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="packageId != null">
+				#{packageId,jdbcType=INTEGER},
+			</if>
+			<if test="traffic != null">
+				#{traffic,jdbcType=SMALLINT},
+			</if>
+			<if test="operatorType != null">
+				#{operatorType,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="updateByIdSelective" parameterType="trafficRedPackage">
+		update tr_package
+		<set>
+			<if test="packageId != null">
+				package_id = #{packageId,jdbcType=INTEGER},
+			</if>
+			<if test="traffic != null">
+				traffic = #{traffic,jdbcType=SMALLINT},
+			</if>
+			<if test="operatorType != null">
+				operator_type = #{operatorType,jdbcType=TINYINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<update id="updateById" parameterType="trafficRedPackage">
+		update tr_package
+		set package_id = #{packageId,jdbcType=INTEGER},
+		traffic = #{traffic,jdbcType=SMALLINT},
+		operator_type =
+		#{operatorType,jdbcType=TINYINT}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="findByOperatorType" parameterType="org.sz.mbay.operator.enums.OperatorType"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tr_package
+		where operator_type = #{type,jdbcType=TINYINT} order by
+		traffic ASC
+	</select>
+	
+	<delete id="deleteByOperatorType" parameterType="org.sz.mbay.operator.enums.OperatorType">
+		delete from tr_package where operator_type = #{value}
+	</delete>
+
+</mapper>

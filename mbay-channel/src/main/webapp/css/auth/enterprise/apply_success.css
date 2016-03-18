@@ -1,0 +1,142 @@
+@charset "utf-8";
+/*注册栏目*/
+.reg_s {
+	background: #F9F9F9;
+	overflow: hidden
+}
+/*进度栏*/
+.jindu {
+	margin-top: 70px;
+	height: 90px;
+	margin-bottom: 50px
+}
+
+.jd {
+	height: 90px;
+	position: relative
+}
+
+.jd_box {
+	height: 30px;
+	width: 60px;
+	margin-top: 30px
+}
+
+.jd_1 {
+	background: url(../../../images/enterprise/images/icons/mb_1.png) center
+		no-repeat;
+	margin-left: 45px
+}
+
+.jd_2 {
+	background: url(../../../images/enterprise/images/icons/mb_6.png) center
+		no-repeat
+}
+
+.jd_3 {
+	background: url(../../../images/enterprise/images/icons/mb_7.png) center
+		no-repeat
+}
+
+.jd_4 {
+	background: url(../../../images/enterprise/images/icons/mb_8.png) center
+		no-repeat
+}
+
+.jd_5 {
+	background: url(../../../images/enterprise/images/icons/mb_9.png) center
+		no-repeat
+}
+
+.jd_b {
+	height: 90px;
+	width: 148px;
+	background: url(../../../images/enterprise/images/icons/jd_bar.jpg)
+		center no-repeat
+}
+
+.sp {
+	background: url(../../../images/enterprise/images/icons/jd_bar_1.jpg)
+		center no-repeat
+}
+/*进度栏文字*/
+.wenzi_1 {
+	position: absolute;
+	bottom: 5px;
+	left: 52px;
+	color: #3b7cb8;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_2 {
+	position: absolute;
+	bottom: 5px;
+	left: 271px;
+	color: #3b7cb8;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_3 {
+	position: absolute;
+	bottom: 5px;
+	left: 465px;
+	color: #3b7cb8;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_4 {
+	position: absolute;
+	bottom: 5px;
+	left: 675px;
+	color: #3b7cb8;
+	font-family: 'Microsoft YaHei';
+}
+
+.wenzi_5 {
+	position: absolute;
+	bottom: 5px;
+	left: 895px;
+	color: #3b7cb8;
+	font-family: 'Microsoft YaHei';
+}
+/*企业注册*/
+.zhuce {
+	font-family: 'Microsoft YaHei';
+	width: 780px;
+	margin: 0px auto;
+	box-shadow: 0 0 5px #c7c5c5;
+	box-shadow: 0 0 5px #c7c5c5;
+	border: 1px solid #e7e7e7;
+	margin-bottom: 200px;
+	background: white;
+	height: 400px
+}
+
+.zhuce h3 {
+	margin-top: 150px;
+	color: #1573AF;
+	letter-spacing: 4px;
+	font-size: 16px;
+	padding: 0px 20px
+}
+
+.cbtn {
+	text-align: center;
+	margin-top: 20px
+}
+
+.btn {
+	text-align: center;
+	margin-top: 60px;
+	clear: left;
+}
+
+#btn7 {
+	background: #4577AB;
+	cursor: pointer;
+	width: 120px;
+	height: 37px;
+	border-radius: 4px;
+	color: #FFF;
+	font-family: 'Microsoft YaHei';
+}

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias alias="redeemRecord" type="org.sz.mbay.traffic.bean.RedeemRecord" />
+		<typeAlias alias="redeemCode" type="org.sz.mbay.traffic.bean.RedeemCode" />
+		<typeAlias alias="strategy" type="org.sz.mbay.traffic.bean.Strategy" />
+		<typeAlias alias="trafficcard" type="org.sz.mbay.traffic.bean.Trafficcard" />
+		<typeAlias alias="trafficbiz" type="org.sz.mbay.traffic.bean.Trafficbusiness" />
+		<typeAlias alias="useraccount" type="org.sz.mbay.traffic.bean.UserAccount" />
+		<typeAlias alias="trafficPackage" type="org.sz.mbay.traffic.bean.TrafficPackage" />
+		<typeAlias alias="trafficChargeOrder" type="org.sz.mbay.traffic.bean.TrafficChargeOrder" />
+		<typeAlias alias="operator" type="org.sz.mbay.traffic.bean.Operator" />
+		<typeAlias alias="trafficChargeOrderRecord" type="org.sz.mbay.traffic.bean.TrafficChargeOrderRecord" />
+		<typeAlias alias="liuMiRecord" type="org.sz.mbay.traffic.bean.LiuMiRecord" />
+		<typeAlias alias="liuMiTotalPrice" type="org.sz.mbay.traffic.bean.LiuMiTotalPrice" />
+		<typeAlias alias="hcodeinfo" type="org.sz.mbay.traffic.component.hcode.HcodeInfo" />
+	</typeAliases>
+ 
+    <mappers>      
+        <mapper resource="org/sz/ibatis/orm/RedeemRecord.xml" />
+        <mapper resource="org/sz/ibatis/orm/RedeemCode.xml" />
+        <mapper resource="org/sz/ibatis/orm/Trafficcard.xml" />
+        <mapper resource="org/sz/ibatis/orm/UserAccount.xml" />
+        <mapper resource="org/sz/ibatis/orm/Trafficbiz.xml" />
+        <mapper resource="org/sz/ibatis/orm/TrafficChargeOrder.xml" />
+        <mapper resource="org/sz/ibatis/orm/TrafficPackage.xml" />
+        <mapper resource="org/sz/ibatis/orm/TrafficChargeOrderRecord.xml" />
+        <mapper resource="org/sz/ibatis/orm/LiuMi.xml" />
+        <mapper resource="org/sz/ibatis/orm/Hcode.xml" />
+    </mappers>
+</configuration>

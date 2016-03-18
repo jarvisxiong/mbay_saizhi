@@ -1,0 +1,116 @@
+@charset "utf-8";
+/*通用*/
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	font-size: 12px;
+	margin: 0px auto;
+	position: static;
+	min-height: 100%
+}
+
+img {
+	border: none;
+}
+
+input,select,textarea {
+	outline: none;
+}
+
+textarea {
+	resize: none
+}
+
+a {
+	text-decoration: none;
+}
+
+.fl {
+	float: left
+}
+
+.fr {
+	float: right
+}
+/*头部*/
+.con {
+	width: 100%;
+	max-width: 400px;
+	min-width: 320px;
+	margin: 0px auto
+}
+
+.head {
+	width: 100%;
+	background: url(../../images/wechat/bg_1.jpg) no-repeat center;
+	height: 483px
+}
+
+.pic {
+	overflow: hidden
+}
+
+.txt {
+	font-size: 16px;
+	width: 45%;
+	background: url(../../images/wechat/sousuo.jpg) no-repeat left;
+	height: 37px;
+	margin-top: 290px;
+	margin-left: 40px;
+	padding-left: 12%;
+	border-right: 1px solid #B2B1B1
+}
+
+.btn {
+	vertical-align: bottom;;
+	width: 25%;
+	height: 37px;
+	background: #D7195F;
+	color: #FFF;
+	letter-spacing: 1px;
+	border-radius: 4px;
+	font-family: 'Microsoft YaHei'
+}
+
+.tip span {
+	margin-left: 35px;
+	color: red;
+	font-family: 'Microsoft YaHei'
+}
+
+.suc {
+	height: 28px;
+	line-height: 28px;
+	text-align: center;
+	color: #FD8400;
+	font-family: 'Microsoft YaHei';
+	font-size: 18px;
+}
+/*尾部*/
+.foot {
+	width: 100%;
+	height: 200px;
+	background: url(../../images/wechat/bg_2.jpg) repeat-y;
+}
+
+.foot_txt {
+	margin-left: 30px;
+	letter-spacing: 2px;
+	font-family: 'Microsoft YaHei';
+	letter-spacing: 1px
+}
+
+.foot_txt span {
+	margin-bottom: 13px;
+	display: block;
+	padding-left: 10px;
+	padding-right: 10px
+}
+
+#s_3 {
+	line-height: 20px
+}

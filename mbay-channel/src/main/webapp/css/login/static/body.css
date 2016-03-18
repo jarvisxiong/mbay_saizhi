@@ -1,0 +1,150 @@
+@charset "utf-8";
+/*身体*/
+body {
+	font-family: 'Microsoft YaHei';
+}
+
+.body .com_width {
+	width: 990px;
+	margin: 0px auto
+}
+
+.hr_15 {
+	height: 15px
+}
+
+.body {
+	overflow: hidden;
+	background: #FEF7EA;
+	padding-top: 20px;
+	padding-bottom: 20px
+}
+
+.wxbl_tit {
+	height: 128px
+}
+
+.wxbl_tit_l {
+	background: url(../../../images/workimages/wxbl_0.jpg) no-repeat center;
+	width: 242px;
+	height: 128px
+}
+
+.khgh_tit_l {
+	background: url(../../../images/workimages/khgh_0.jpg) no-repeat center;
+	width: 242px;
+	height: 128px
+}
+
+.wxbl_tit_r {
+	font-size: 24px;
+	text-align: center;
+	line-height: 85px;
+	background: #356190;
+	width: 699px;
+	height: 88px;
+	color: #FFFFFF;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px
+}
+
+.lc_tit {
+	padding-bottom: 15px;
+	background: #B0B0B0;
+	color: #fff;
+	font-size: 24px;
+	line-height: 155px;
+	letter-spacing: 1px;
+	padding-left: 20px;
+}
+
+.lc_con {
+	background: #F5F5F5;
+	overflow: hidden;
+	padding-top: 25px;
+	padding-bottom: 25px
+}
+
+.pic_0 {
+	margin-left: 30px;
+	display: block;
+	width: 623px;
+	height: 600px;
+}
+
+.pic_1,.pic_2,.pic_3,.pic_4,.pic_5 {
+	margin-left: 30px;
+	margin-bottom: 20px;
+	display: inline-block
+}
+
+.img_sec {
+	display: block;
+	width: 730px;
+	height: 454px
+}
+
+.bz_2 .lc_wz {
+	color: #2F2F2F;
+	margin-left: 20px;
+	width: 300px
+}
+
+h3 {
+	font-size: 24px;
+	font-weight: normal
+}
+
+.bz_3 .lc_wz {
+	color: #2F2F2F;
+	padding-left: 30px;
+	padding-right: 92px
+}
+
+.lc_wz_con {
+	padding-bottom: 10px;
+	font-size: 14px;
+	margin-bottom: 20px;
+	border-bottom: 1px dashed #99FF00
+}
+
+.bz_3 img {
+	margin-left: 30px;
+	margin-bottom: 20px;
+	display: block
+}
+
+.bz_4 {
+	text-align: center
+}
+
+.bz_4 img {
+	display: inline-block;
+	margin-left: 100px;
+	margin-right: 20px;
+	margin-bottom: 30px
+}
+
+.dsb {
+	font-size: 14px;
+}
+
+.sp_5 {
+	line-height: 0px;
+	overflow: hidden
+}
+
+.sp_5 h3 {
+	line-height: 40px;
+	font-size: 24px;
+	font-weight: normal;
+	margin-top: 60px;
+	height: 40px
+}
+
+.dsb {
+	line-height: 15px;
+	font-size: 14px
+}

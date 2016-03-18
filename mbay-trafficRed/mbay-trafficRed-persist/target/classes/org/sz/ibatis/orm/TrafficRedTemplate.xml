@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="TrafficRedTemplate">
+
+	<resultMap id="BaseResultMap" type="trafficRedTemplate">
+		<id column="id" property="id" />
+		<result column="campaignId" property="campaignId" />
+		<result column="adImg1" property="adImg1" />
+		<result column="adImg2" property="adImg2" />
+		<result column="adLink1" property="adLink1" />
+		<result column="adLink2" property="adLink2" />
+		<result column="logoCycleLink" property="logoCycleLink" />
+		<result column="sharkResultLink" property="sharkResultLink" />
+		<result column="shakeIndexImg" property="shakeIndexImg" />
+		<result column="shakeUIImg" property="shakeUIImg" />
+		<result column="shakeImgsAddTime" property="shakeImgsAddTime" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, campaignId, adImg1, adImg2, adLink1, adLink2, logoCycleLink, sharkResultLink, 
+		shakeIndexImg, shakeUIImg, shakeImgsAddTime
+	</sql>
+	
+	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from tr_template
+		where id = #{id}
+	</select>
+	
+	<insert id="create" parameterType="trafficRedTemplate">
+		insert into tr_template (<include refid="Base_Column_List" />)
+		values
+		(
+			#{id},#{campaignId},#{adImg1},#{adImg2},#{adLink1},
+			#{adLink2},#{logoCycleLink},#{sharkResultLink},
+			#{shakeIndexImg},#{shakeUIImg},#{shakeImgsAddTime}
+		)
+	</insert>
+
+	<update id="updateByIdSelective" parameterType="trafficRedTemplate">
+		update tr_template
+		<set>
+			<if test="adImg1 != null and adImg1 != ''">
+				adImg1 = #{adImg1},
+			</if>
+			<if test="adImg2 != null and adImg2 != ''">
+				adImg2 = #{adImg2},
+			</if>
+			<if test="shakeIndexImg != null and shakeIndexImg != ''">
+				shakeIndexImg = #{shakeIndexImg},
+			</if>
+			<if test="shakeUIImg != null and shakeUIImg != ''">
+				shakeUIImg = #{shakeUIImg},
+			</if>
+			<if test="adLink1 != null">
+				adLink1 = #{adLink1},
+			</if>
+			<if test="adLink2 != null">
+				adLink2 = #{adLink2},
+			</if>
+			<if test="logoCycleLink != null">
+				logoCycleLink = #{logoCycleLink},
+			</if>
+			<if test="sharkResultLink != null">
+				sharkResultLink = #{sharkResultLink},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<resultMap type="trafficRedTemplate" id="ShakeCustomizedMap">
+		<id column="id" property="id" />
+		<result column="campaignId" property="campaignId" />
+		<result column="shakeIndexImg" property="shakeIndexImg" />
+		<result column="shakeUIImg" property="shakeUIImg" />
+		<association property="campaign" javaType="trafficRedCampaign">
+			<result column="number" property="number" />
+		</association>
+	</resultMap>
+	<select id="findAllShakeCustomized" parameterType="trafficRedCampaignQO" resultMap="ShakeCustomizedMap">
+		select t.id, t.campaignId, t.shakeIndexImg, t.shakeUIImg, c.number 
+		from tr_template t
+		inner join tr_campaign c on t.campaignId = c.id
+		where t.shakeIndexImg is not null and t.shakeIndexImg != '' 
+			and t.shakeUIImg is not null and t.shakeUIImg != ''
+			<if test="campaignNumber != null and campaignNumber != ''">
+				and c.number = #{campaignNumber}
+			</if>
+		order by t.shakeImgsAddTime desc
+	</select>
+	
+	<select id="countShakeCustomized" parameterType="trafficRedCampaignQO" resultType="int">
+		select count(*) 
+		from tr_template t
+		inner join tr_campaign c on t.campaignId = c.id
+		where t.shakeIndexImg is not null and t.shakeIndexImg != '' 
+			and t.shakeUIImg is not null and t.shakeUIImg != ''
+			<if test="campaignNumber != null and campaignNumber != ''">
+				and c.number = #{campaignNumber}
+			</if>
+	</select>
+	
+	<update id="clearShakeCustomize" parameterType="java.lang.Long">
+		update tr_template set shakeIndexImg = null, shakeUIImg = null, shakeImgsAddTime = null
+		where id = #{value}
+	</update>
+	
+	<update id="createShakeCustomize" parameterType="trafficRedTemplate">
+		update tr_template 
+		set shakeIndexImg = #{shakeIndexImg}, shakeUIImg = #{shakeUIImg}, 
+			shakeImgsAddTime = #{shakeImgsAddTime}
+		where campaignId = #{campaignId}
+	</update>
+	
+	<select id="isExistShakeCustomize" parameterType="java.lang.Long" resultType="boolean">
+		select if(shakeIndexImg is not null and shakeIndexImg != ''  
+			and shakeUIImg is not null and shakeUIImg != '', 1, 0)
+		from tr_template
+		where campaignId = #{value}
+	</select>
+
+</mapper>

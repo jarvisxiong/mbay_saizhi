@@ -1,0 +1,176 @@
+@charset "utf-8"; 
+
+.body {
+	margin-bottom: 200px;
+	font-family: 'Microsoft YaHei'
+}
+
+.b_tit {
+	padding-left: 45px;
+	background: url(../../images/workimages/money.jpg) no-repeat left;
+	color: #35618F;
+	font-size: 18px;
+	height: 34px;
+	line-height: 34px;
+	margin-bottom: 15px
+}
+
+.hm {
+	color: #5D5C5C;
+	font-size: 15px;
+	margin-right: 20px
+}
+
+.hm_txt {
+	width: 219px;
+	height: 21px;
+	border: 1px solid #BFBFBF;
+	padding-left: 5px;
+	margin-right: 10px
+}
+
+.cxhm {
+	margin-bottom: 20px
+}
+
+.hd_btn {
+	width: 76px;
+	height: 24px;
+	color: #FFF;
+	font-family: 'Microsoft YaHei';
+	background: #FDAB1B;
+	border-radius: 4px
+}
+
+table {
+	border: 1px solid #C2C2C2;
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px
+}
+
+td,th {
+	border: 1px solid #C2C2C2
+}
+
+th {
+	font-size: 12px;
+	color: #5D5C5C;
+	background: #f3f3f3;
+	padding-top: 5px;
+	padding-bottom: 5px
+}
+
+td {
+	text-align: center;
+	height: 35px
+}
+
+#ed {
+	text-align: center;
+	width: 100px;
+	padding: 3px 0px
+}
+
+.ser_box {
+	border-bottom: 1px solid #BFBFBF;
+	padding: 10px 25px 35px 25px
+}
+
+.ser_1 {
+	color: #5D5C5C;
+	font-size: 15px;
+	height: 20px;
+	line-height: 20px
+}
+
+.ser_box a {
+	color: #FDAB1B
+}
+
+.sl_0,.sl_1 {
+	color: #4677AB
+}
+
+.sl_1,.zj {
+	margin-left: 15px
+}
+
+.ser_2 {
+	text-align: right;
+	hieght: 20px;
+	line-height: 20px;
+	margin-top: 20px
+}
+
+#tx {
+	vertical-align: sub;
+	margin-right: 3px
+}
+
+.xzrq {
+	height: 50px;
+	text-align: right;
+	line-height: 50px;
+	font-size: 15px;
+	color: #5D5C5C;
+	clear: both;
+}
+
+b {
+	color: #FC0202
+}
+
+.tj,.btn_1 {
+	width: 76px;
+	height: 24px;
+	background: #FDAB1B;
+	color: #FFF;
+	letter-spacing: 1px;
+	font-family: 'Microsoft YaHei';
+	border-radius: 4px
+}
+
+.tj {
+	margin-top: 15px
+}
+
+.mb_tip {
+	position: absolute;
+	bottom: 25px;
+	right: -20px;
+	border: 1px solid #dbdbdb;
+	padding: 5px;
+	background: #f2f3f5;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	cursor: default;
+	font-style: normal;
+	color: #666;
+	font-size: 12px;
+	font-weight: normal;
+	z-index: 999;
+	width: 300px;
+	text-align: left
+}
+
+.mb_tip em {
+	height: 20px;
+	width: 20px;
+	position: absolute;
+	right: 40px;
+	padding: 0px;
+	background: url(../../images/icon-item.png) no-repeat -30px -463px;
+	bottom: -20px
+}
+
+.mbtx,.mbtx a {
+	cursor: pointer;
+	color: #FDAC1C;
+	position: relative
+}
+
+.mbtx a {
+	color: #ccc;
+}

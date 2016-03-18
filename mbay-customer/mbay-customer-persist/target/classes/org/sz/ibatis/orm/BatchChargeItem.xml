@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BatchChargeItem">
+	<insert id="createBatchChargeItem" parameterType="batchChargeItem">
+		insert into
+		batchchargeitem(id,batchid,createtime,success,fail,num,chargemethod,note)
+		values
+		(#{id},#{batchid},#{createtime},#{success},#{fail},#{num},#{chargemethod},#{note});
+	</insert>
+	
+	<resultMap type="batchChargeItem" id="batchChargeItemList">
+		<result property="id" column="id" />
+		<result property="createtime" column="createtime" />
+		<result property="success" column="success" />
+		<result property="fail" column="fail" />
+		<result property="num" column="num" />
+		<result property="chargemethod" column="chargemethod" />
+	</resultMap>
+	
+	<select id="findAllBatchChargeItem" parameterType="int"
+		resultMap="batchChargeItemList">
+		SELECT id,createtime,success,fail,num,chargemethod FROM batchchargeitem WHERE
+		batchid=#{value}
+	</select>
+	
+	<select id="countBatchChargeItem" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM batchchargeitem WHERE batchid=#{value}
+	</select>
+</mapper>

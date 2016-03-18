@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.sz.mbay</groupId>
+    <artifactId>mbay-promotion</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>mbay-promotion-persist</artifactId>
+  <name>mbay-promotion-persist</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+		<!-- fastdfs -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-filesystem</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- mbay-trafficRed-service -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-trafficRed-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- mbay-base -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-base</artifactId>
+			<version>${project.version}</version>
+		</dependency>		
+		<!-- mbay-channel-user-service -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-channel-user-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- mbay-trafficRecharge-service -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-trafficRecharge-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- mbay-hcode -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-hcode</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- mbay-trafficOrder-service -->
+		<dependency>
+			<groupId>org.sz.mbay</groupId>
+			<artifactId>mbay-trafficOrder-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+  </dependencies>
+</project>

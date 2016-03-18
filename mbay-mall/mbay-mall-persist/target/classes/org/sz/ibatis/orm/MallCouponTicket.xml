@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MallCouponTicket">
+	
+	<resultMap type="mallCouponTicket" id="baseResultMap">
+		<result property="id" column="id" />
+		<result property="itemNumber" column="item_number" />
+		<result property="createTime" column="create_time" />
+		<result property="startTime" column="start_time" />
+		<result property="endTime" column="end_time" />
+		<result property="ticket" column="ticket" />
+		<result property="password" column="password" />
+	</resultMap>
+	
+	<select id="findAllMallCouponTicket" parameterType="Map" resultMap="baseResultMap">
+		select * from mall_coupon_ticket where item_number = #{itemNumber}
+		<if test="ticket != null and ticket != '' ">and ticket = #{ticket}</if>
+		order by create_time DESC
+	</select>
+	
+	<select id="countMallCouponTicket" parameterType="Map" resultType="Integer">
+		select count(*) from mall_coupon_ticket where item_number = #{itemNumber}
+		<if test="ticket != null and ticket != '' ">and ticket = #{ticket}</if>
+	</select>
+	
+	<insert id="createMallCouponTicket" parameterType="mallCouponTicket">
+		<selectKey keyProperty="id" order="BEFORE" resultType="int">
+			SELECT IFNULL(MAX(id),0)+1 id FROM mall_coupon_ticket
+		</selectKey>
+		insert into mall_coupon_ticket (id,item_number,create_time,start_time,end_time,ticket,password)
+		values (#{id},#{itemNumber},#{createTime},#{startTime},#{endTime},#{ticket},#{password});
+	</insert>
+	
+	<delete id="deleteMallCouponTicketByItemNumber" parameterType="String">
+		delete from mall_coupon_ticket where item_number = #{value}
+	</delete>
+	
+	<delete id="deleteMallCouponTicket" parameterType="int">
+		delete from mall_coupon_ticket where id = #{value}
+	</delete>
+	
+</mapper>

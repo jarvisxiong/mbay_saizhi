@@ -1,0 +1,134 @@
+input[type=text] {
+	border: 1px solid #94ABC4;
+	padding: 5px;
+	color: #5D5C5C;
+	height: 20px;
+	line-height: 20px;
+	padding: 5px;
+}
+
+select {
+	border: 1px solid #94ABC4;
+	height: 32px;
+}
+
+/* 表单 */
+.cmp-form {
+	font-family: 'Microsoft YaHei';
+	font-size: 15px;
+}
+
+.cmp-form .select {
+	width: 352px;
+}
+
+.cmp-form .txt {
+	width: 340px;
+}
+
+.cmp-form img.date-img {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 5px;
+	margin-right: 2px;
+}
+
+.cmp-form input.date-txt {
+	width: 126px;
+}
+
+/* 表格 */
+.cmp-table {
+	border: 0;
+	width: 100%;
+}
+
+.cmp-table td {
+	border: 0;
+	padding: 6px;
+	vertical-align: middle;
+}
+
+.cmp-table td:nth-child(1) {
+	text-align: right;
+}
+
+.cmp-table td:nth-child(2) {
+	text-align: left;
+}
+
+.cmp-table .warn {
+	vertical-align: middle;
+	color: #F00;
+}
+
+.cmp-table td.cent-td {
+	text-align: center;
+}
+
+.cmp-table .top-td {
+	vertical-align: top;
+}
+
+/* 其他 */
+.tjhd {
+	padding-left: 40px;
+	background: url(../../images/trafficred/traffic_red_small.png) no-repeat
+		left;
+	color: #35618F;
+	font-size: 18px;
+	height: 36px;
+	line-height: 35px;
+	line-height: 45px;
+	margin-bottom: 15px;
+}
+
+.hd {
+	width: 828px;
+	border: 1px solid #BFBFBF;
+	border-radius: 4px;
+	font-family: 'Microsoft YaHei';
+	font-size: 15px;
+}
+
+.hd_con {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.bjms {
+	width: 100px;
+	height: 35px;
+	background: #FDAC1C;
+	color: #FFF;
+	font-family: 'Microsoft YaHei';
+	letter-spacing: 1px;
+	border-radius: 4px;
+}
+
+.bjms:hover {
+	opacity: 0.8;
+	filter: alpha(opacity = 80);
+}
+
+.Validform_checktip {
+	text-align: left;
+	font-size: 1em;
+	color: #999;
+	margin-left: 2px;
+	white-space: nowrap;
+}
+
+.Validform_right {
+	background: url(../../images/workimages/tb.png) no-repeat left;
+	padding-left: 20px;
+	background-position: 0 -29px;
+	color: #5BB53C;
+}
+
+.Validform_wrong {
+	color: #ff5243;
+	background: url(../../images/workimages/tb.png) no-repeat left;
+	padding-left: 20px;
+	background-position: 0 -53px;
+}

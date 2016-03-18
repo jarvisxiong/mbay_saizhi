@@ -1,0 +1,214 @@
+.hide {
+	display: none;
+}
+.input_p {
+	padding: 3px 0;
+}
+.input_p select {
+	width: 72px;
+}
+.input_p .time_btn {
+	color: #000;
+	border: 1px solid #94ABC4;
+	display: inline-block;
+	width: 48px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	margin-left: 10px;
+}
+.time-limit {
+	padding: 5px 0;
+}
+.time-limit span {
+	margin-right: 20px;
+}
+.times {
+	width: 299px;
+}
+.cmp-form .txt {
+	width: 409px;
+}
+.cmp-form input.date-txt {
+	width: 160px;
+}
+.cmp-form .advanced-txt {
+	width: 300px;
+}
+.dialog .Validform_right {
+	display: none;
+}
+.advanced-file {
+	border: 1px solid rgb(204, 204, 204);
+	height: 30px;
+	line-height: 27px;
+	vertical-align: middle;
+	padding: 0px 3px;
+	font-family: '宋体';
+}
+.advanced-finfo {
+	width: 321px;
+	border: 0 !important;
+}
+.advanced-file:hover {
+	opacity: 0.7;
+	filter: alpha(opacity = 70);
+}
+.dialog .advanced-finfo {
+	width: 180px;
+	border: 0 !important;
+	margin-left: 4px;
+}
+div.qs_suc {
+	background: none repeat scroll 0 0 #D6F3BD;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+div.qs_suc p {
+	cursor: default;
+}
+/***table start**/
+.table-ul {
+	width: 419px;
+	height: 36px;
+	border-bottom: 1px solid #d6d6d6;
+	display: inline-block;
+}
+.table-ul>li {
+	float: left;
+	list-style: none;
+}
+.table-ul>li>a {
+	color: #000;
+	width: 90px;
+	height: 35px;
+	display: block;
+	text-align: center;
+	line-height: 35px;
+}
+.table-list-content {
+}
+.at-list {
+	border-top: #d6d6d6 solid 1px !important;
+	border-left: #d6d6d6 solid 1px !important;
+	border-right: #d6d6d6 solid 1px !important;
+	border-bottom: #fff solid 1px !important;
+	color: #333 !important;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+/***end table**/
+.tab-con-tab-ul {
+	height: 35px;
+	line-height: 36px;
+	font-size: 13px;
+	font-style: italic;
+	margin-top: -16px;
+}
+.tab-con-tab-ul>li>a {
+	width: 70px;
+}
+.table-10list-content {
+}
+.tab-ul-font {
+	font-weight: bold;
+	color: red;
+}
+/****/
+.table-10list-content>.weight {
+}
+
+.cmp-form .weight-list>input {
+	width: 30px;
+	height: 12px;
+}
+.cmp-form .weight-list>.ck-b {
+	width: 15px;
+}
+/* checkbox */
+.weight {
+	margin-top: 0px;
+}
+.weight:after {
+	content: '.';
+	height: 0;
+	clear: both;
+	display: block;
+	visibility: hidden;
+}
+.chk_1 {
+	display: none;
+}
+.chk_1+label {
+	background-color: #FFF;
+	border: 1px solid #94ABC4;
+	width: 20px;
+	height: 20px;
+	border-radius: 2px;
+	display: inline-block;
+	margin: 1px 0;
+	float: left;
+	cursor: pointer;
+}
+.chk_1+label:active {
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px
+		rgba(0, 0, 0, 0.1);
+}
+.chk_1:checked+label:after {
+	content: '\2714';
+	position: absolute;
+	margin: -1px 6px;
+	color: #758794;
+	text-align: center;
+	font-size: 1em;
+}
+.weight-list {
+	width: 128px;
+	float: left;
+	margin-top: 8px;
+	margin-right: 18px;
+}
+.weight-list>span {
+	display: block;
+	width: 60px;
+	height: 24px;
+	float: left;
+	line-height: 24px;
+	margin: 0 2px;
+	text-align: right;
+}
+.weight-list2>span {
+	width: 44px;
+}
+.table-list-content2>.weight2 {
+	margin-top: -12px;
+}
+a {
+	color: #29b6b0;
+	transition: color .3s
+}
+a.text-line {
+	text-decoration: underline;
+}
+.Validform_checktip {
+	margin: 0;
+}
+.line-bj {
+	background: url(http://yun.duiba.com.cn/developer/img/custom/line.png)
+		repeat-x;
+	height: 2px;
+	width: 100%;
+}
+/*20150706-update*/
+/*产品数量*/
+.cmp-form .product-num > li {
+	list-style:none; margin-top:8px;
+}
+.cmp-form .product-num input {
+	width: 295px;
+	margin-left: 6px;
+}
+.cmp-form .product-num input.mbay {
+	width: 301px;
+}

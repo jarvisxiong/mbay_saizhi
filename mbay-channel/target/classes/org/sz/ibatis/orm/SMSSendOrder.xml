@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SMSSendOrder">
+	<insert id="createSMSSendOrder" parameterType="smsSendOrder">
+	INSERT INTO sms_send_order (order_number,user_number,mbay_price,sms_content,create_time)
+	VALUES(#{orderNumber},#{usernumber},#{mbayPrice},#{content},#{createTime})
+	</insert>
+</mapper>

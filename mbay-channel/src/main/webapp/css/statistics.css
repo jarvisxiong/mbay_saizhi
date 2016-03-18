@@ -1,0 +1,105 @@
+@charset "utf-8";
+/*通用*/
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	font-size: 12px;
+	min-width: 1115px;
+}
+
+img {
+	border: none;
+}
+
+input,select,textarea {
+	outline: none;
+}
+
+textarea {
+	resize: none
+}
+
+a {
+	text-decoration: none;
+}
+
+.fl {
+	float: left
+}
+
+.fr {
+	float: right
+}
+
+.dpa {
+	padding-bottom: 5px;
+}
+
+.dpa span {
+	color: black;
+}
+
+table {
+	width: 790px;
+	border: none;
+	margin-bottom: 0px;
+}
+
+td,th {
+	padding: 5px
+}
+
+td {
+	text-align: center;
+	height: 40px;
+}
+
+th {
+	font-size: 12px;
+	color: #5D5C5C;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.tbd {
+	padding: 10px;
+}
+
+.tbd img {
+	width: 45px;
+	height: 45px;
+	display: block;
+	margin: 0px auto;
+	margin-bottom: 5px
+}
+
+.tdi {
+	border: none;
+	padding-left: 10px;
+}
+
+.hd {
+	padding: 25px 0px 25px 40px;
+	transition: all 100ms ease;
+}
+
+.hd i {
+	background: url(http://dui88.qiniudn.com/assets/images/icon.png)
+		no-repeat 0px -108px;
+	display: block;
+	height: 20px;
+	width: 20px;
+	position: relative;
+}
+
+.hover_border {
+	box-shadow: 0px 0px 15px #999
+}
+
+.lb {
+	border-radius: 10px;
+}

@@ -1,0 +1,17 @@
+
+*, *:before, *:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+body,h1,h2,h3,h4,dl,dt,dd,ul,ol,li,a,div,em,span,img,form,input,p,i{ padding:0; margin:0; border:none;/*font-family: Tahoma,"Lucida Grande",Verdana,"Microsoft Yahei";*/}
+body{color:#696969; font-weight:400;text-rendering: optimizelegibility;font-size:14px;}
+em,i{word-wrap: break-word;font-style:normal;}
+a{ color:#696969; text-decoration:none;}
+a:link,a:visited,a:active{color:#696969; text-decoration:none;}
+a,button,span,i,div,h2,aside{-webkit-user-select: none; -webkit-tap-highlight-color:rgba(0,0,0,0);}
+ul,li {list-style: none;}
+h1,h2,h3,h4{font-weight:100;}
+input:focus::-webkit-input-placeholder { color:rgb(109,109,109); }
+input::-webkit-input-placeholder {color:#C2C2C2; }
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {display:block; margin:0; padding:0;}
+img{max-width:100%;}
+html,body{height:100%;-webkit-text-size-adjust:100%;font-size:20px;max-width:640px;margin:auto;}
+input[type="button"], input[type="text"], input[type="submit"], input[type="search"], input[type="email"], input[type="number"], input[type="phone"], button {-webkit-appearance: none;outline: 0 none;}
+.clearfix:after { content: ""; display: block; height: 0; overflow: hidden; clear: both; visibility: hidden; }

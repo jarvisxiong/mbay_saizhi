@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+    
+<configuration>
+	<typeAliases>
+		<typeAlias alias="user" type="org.sz.mbay.routeros.bean.User" /> 
+		
+		<typeAlias alias="userQO" type="org.sz.mbay.routeros.qo.UserQO" /> 
+	</typeAliases>
+
+	<typeHandlers>
+	    <typeHandler handler="org.apache.ibatis.type.BlobTypeHandler" />
+		<typeHandler handler="org.sz.mbay.routeros.mybatis.handler.DateTimeTypeHandler" />
+	</typeHandlers> 
+
+	<mappers>
+		<mapper resource="org/sz/ibatis/orm/User.xml" />
+	</mappers>
+</configuration>

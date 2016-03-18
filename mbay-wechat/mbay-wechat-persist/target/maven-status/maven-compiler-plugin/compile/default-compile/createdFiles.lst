@@ -1,0 +1,14 @@
+org/sz/mbay/wechat/dao/WeChatCampaignDefaultTemplateDao.class
+org/sz/mbay/wechat/dao/impl/WeChatCampaignAdvertiseDaoImpl.class
+org/sz/mbay/wechat/bean/WeChatCampaignAdvertise.class
+org/sz/mbay/wechat/bean/WeChatCampaignDefaultTemplate.class
+org/sz/mbay/wechat/dao/WeChatCampaignAdvertiseDao.class
+org/sz/mbay/wechat/bean/WeChatCampaign.class
+org/sz/mbay/wechat/dao/WeChatCampaignDao.class
+org/sz/mbay/wechat/bean/WeChatCampaignAdvanced.class
+org/sz/mbay/wechat/bean/WeChatCampaignStatistics.class
+org/sz/mbay/wechat/qo/WeChatCampaignForm.class
+org/sz/mbay/wechat/bean/WeChatCampaignStrategy.class
+org/sz/mbay/wechat/dao/impl/WeChatCampaignDefaultTemplateDaoImpl.class
+org/sz/mbay/wechat/bean/WeChatCampaignTemplate.class
+org/sz/mbay/wechat/dao/impl/WeChatCampaignDaoImpl.class

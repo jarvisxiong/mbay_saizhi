@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BatchChargeInfo">
+	<resultMap type="batchChargeInfo" id="batchChargeInfoItems">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="chargetimes" column="chargetimes" />
+		<result property="regulartime" column="regulartime" />
+		<result property="chargemethod" column="chargemethod" />
+		<result property="createtime" column="createtime" />
+		<result property="costmbay" column="costmbay" />
+		<result property="mobilenum" column="mobilenum" />
+		<collection property="strategys" javaType="ArrayList"
+			column="id" select="selectBatchChargeStrategys" />
+	</resultMap>
+	
+	<!-- 创建批充基本信息表 -->
+	<insert id="createBatchChargeInfo" parameterType="batchChargeInfo">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(id),0)+1 id FROM batch_charge
+		</selectKey>
+		INSERT INTO batch_charge(id,name,usernumber,chargetimes,
+		regulartime,chargemethod,createtime,costmbay,mobilenum)
+		VALUES (#{id},#{name},#{usernumber},#{chargetimes},#{regulartime},#{chargemethod},
+		#{createtime},#{costmbay},#{mobilenum});
+	</insert>
+	
+	<!-- 创建批充信息-流量包关联表 -->
+	<insert id="createBatchChargeStrategy" parameterType="batchChargeStrategy">
+		INSERT INTO batchcharge_strategy(batchid,operator,packageid)
+		VALUES (#{batchid},#{operator},#{trafficpackage.id});
+	</insert>
+	
+	<!-- 创建批充信息-流量订单关联表 -->
+	<insert id="createBatchChargeOrder" parameterType="batchChargeOrder">
+		INSERT INTO batchcharge_order(itemid,ordernumber)
+		VALUES (#{itemid},#{ordernumber});
+	</insert>
+
+	<!-- 创建批充手机信息表 -->
+	<insert id="createBatchChargeMobile" parameterType="batchChargeMobile">
+		INSERT INTO batchcharge_mobile(batchid,mobile,operator)
+		values(#{batchid},#{mobile},#{operator})
+	</insert>
+
+	<select id="findAllBatchChargeInfo" parameterType="batchChargeInfo"
+		resultMap="batchChargeInfoItems">
+		SELECT id,name,chargetimes,regulartime,chargemethod,createtime,costmbay,mobilenum
+		FROM batch_charge
+		WHERE usernumber=#{usernumber}
+		<if test="name !=null and name !=''">
+			AND name like CONCAT('%',#{name},'%')
+		</if>
+		ORDER BY createtime DESC
+	</select>
+
+	<select id="countBatchChargeInfo" parameterType="batchChargeInfo"
+		resultType="int">
+		SELECT COUNT(*) FROM batch_charge WHERE usernumber=#{usernumber}
+		<if test="name !=null and name !=''">
+			AND name like CONCAT('%',#{name},'%')
+		</if>
+	</select>
+
+	<resultMap type="batchChargeStrategy" id="batchChargeStrategyMap">
+		<result property="batchid" column="id" />
+		<result property="operator" column="operator" />
+		<association property="trafficpackage" javaType="trafficPackage">
+			<result property="traffic" column="traffic" />
+		</association>
+	</resultMap>
+	
+	<select id="selectBatchChargeStrategys" parameterType="int"
+		resultMap="batchChargeStrategyMap">
+		SELECT b.batchid,b.packageid,b.operator,p.traffic
+		FROM batchcharge_strategy b
+		LEFT JOIN operator_traffic_package p ON p.id=b.packageid
+		WHERE b.batchid=#{value}
+	</select>
+	
+	<resultMap type="trafficPackage" id="trafficPackageInfoMap">
+		<result property="id" column="id" />
+		<result property="traffic" column="traffic" />
+		<result property="mbayprice" column="mbayprice" />
+	</resultMap>
+	
+	<select id="findTrafficPackageByBatchChargeStrategy" parameterType="Map"
+		resultMap="trafficPackageInfoMap">
+		SELECT p.mbayprice,p.id,p.traffic
+		FROM batchcharge_strategy b
+		LEFT JOIN operator_traffic_package p ON p.id=b.packageid
+		WHERE b.batchid=#{batchid} and b.operator=#{operator}
+	</select>
+
+	<select id="fincChargeInfoExcelURL" parameterType="int"
+		resultType="String">
+		SELECT fileurl FROM batch_charge where id=#{id}
+	</select>
+
+	<resultMap type="batchChargeInfo" id="batchChargeInfoMap">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="mobilenum" column="mobilenum" />
+		<result property="costmbay" column="costmbay" />
+		<collection property="strategys" javaType="ArrayList"
+			column="id" select="selectBatchChargeStrategys" />
+	</resultMap>
+	
+	<!-- 查询出批充信息详情 -->
+	<select id="findBatchChargeInfo" resultMap="batchChargeInfoMap" parameterType="Map">
+		SELECT id,name,mobilenum,costmbay
+		FROM batch_charge
+		WHERE id=#{id} and usernumber=#{usernumber}
+	</select>
+	
+	<!-- 批充手机信息Map -->
+	<resultMap type="batchChargeMobile" id="mobileInfoMap">
+	   <result property="mobile" column="mobile" />
+	   <result property="operator" column="operator"/>
+	</resultMap>
+	<!-- 结束 -->
+
+	<!-- 查询批充手机信息 -->
+	<select id="findAllBatchChargeMobileInfo" parameterType="batchChargeMobileForm" resultMap="mobileInfoMap" >
+		SELECT bm.mobile,bm.operator
+		FROM batchcharge_mobile bm
+		WHERE bm.batchid=#{batchid}
+		<if test="mobile!=null and mobile!=''">
+		 and bm.mobile=#{mobile}
+		</if>
+	</select>
+	<select id="countBatchChargeMobileInfo" parameterType="batchChargeMobileForm" resultType="int" >
+	  SELECT COUNT(*) FROM batchcharge_mobile WHERE batchid=#{batchid}
+	  <if test="mobile!=null and mobile!=''">
+		 and mobile=#{mobile}
+		</if>
+	</select>
+	<!-- 结束 -->
+	
+	<!-- 查询批充手机号码执行批充 -->
+	<select id="findChargeMobilesByBatchId" parameterType="int" resultMap="mobileInfoMap" >
+		SELECT bm.mobile, bm.operator
+		FROM batchcharge_mobile bm
+		WHERE bm.batchid=#{value}
+	</select>
+
+	<!-- 修改批充次数 -->
+	<update id="increaseBatchChargeTimes" parameterType="int">
+		UPDATE batch_charge SET chargetimes=chargetimes+1 WHERE id=#{value}
+	</update>
+	<!-- 增加批充号码数量 -->
+	<update id="increaseBatchChargeMobileNum" parameterType="int">
+		UPDATE batch_charge SET mobilenum=mobilenum+1 WHERE id=#{value}
+	</update>
+	<!-- 减少充号码数量 -->
+	<update id="reduceBatchChargeMobileNum" parameterType="int">
+		UPDATE batch_charge SET mobilenum=mobilenum-1 WHERE id=#{value}
+	</update>
+	
+	<!-- 设置消耗美贝 -->
+	<update id="setBatchChargeCostmbay" parameterType="Map">
+		UPDATE batch_charge SET costmbay=#{costmbay} WHERE id=#{id}
+	</update>
+	<!-- 增加消耗美贝 -->
+	<update id="increaseBatchChargeCostmbay" parameterType="Map">
+		UPDATE batch_charge SET costmbay=costmbay+#{costmbay} WHERE id=#{id}
+	</update>
+	<!-- 减少消耗美贝 -->
+	<update id="reduceBatchChargeCostmbay" parameterType="Map">
+		UPDATE batch_charge SET costmbay=costmbay-#{costmbay} WHERE id=#{id}
+	</update>
+	
+	<!-- 查询批充信息详情订单是否存在  -->
+	<select id="isExistingBatchCharge" parameterType="Map" resultType="boolean">
+	 SELECT COUNT(*)=1  FROM batch_charge  WHERE id=#{batchid} and usernumber=#{usernumber}
+	</select>
+	
+	<!-- 删除批充手机号码 -->
+	<delete id="deletChargeMobile" parameterType="Map">
+	  DELETE FROM batchcharge_mobile WHERE mobile=#{mobile} AND batchid=#{batchid};
+	</delete>
+</mapper>

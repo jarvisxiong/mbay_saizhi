@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="emailretrievepwdrecord">
+
+	<resultMap type="emailretrievepwdrecord" id="recordmap">
+		<result property="userNumber" column="userNumber" />
+		<result property="createtime" column="createtime" />
+		<result property="digest" column="digest" />
+	</resultMap>
+
+	<select id="findEmailretrievepwdrecord" parameterType="int"	resultMap="recordmap">
+		SELECT usernumber,createtime,digest FROM email_retrievepwd_record where
+		usernumber=#{userNumber}
+	</select>
+
+	<insert id="createEmailretrievepwdrecord" parameterType="Emailretrievepwdrecord">
+		INSERT INTO email_retrievepwd_record(usernumber,digest,createtime)
+		VALUES(#{userNumber},#{digest},#{createtime});
+	</insert>
+
+	<delete id="deleteEmailretrievepwdrecord" parameterType="int">
+		DELETE FROM email_retrievepwd_record WHERE usernumber = #{userNumber}
+	</delete>
+
+
+</mapper>

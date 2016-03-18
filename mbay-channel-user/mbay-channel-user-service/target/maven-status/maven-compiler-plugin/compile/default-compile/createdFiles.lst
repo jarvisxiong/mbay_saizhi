@@ -1,0 +1,16 @@
+org/sz/mbay/channel/user/service/impl/UserServiceImpl.class
+org/sz/mbay/channel/user/exception/MBAccountTradeException.class
+org/sz/mbay/channel/user/service/UserAccountService.class
+org/sz/mbay/channel/user/service/impl/CertificateAuthServiceImpl.class
+org/sz/mbay/channel/user/service/MBAccountService.class
+org/sz/mbay/channel/user/service/impl/UserAccountServiceImpl.class
+org/sz/mbay/channel/user/service/impl/RedTrafficAccountServiceImpl.class
+org/sz/mbay/channel/user/error/UserAccountTradeError.class
+org/sz/mbay/channel/user/service/impl/UserContextServiceImpl.class
+org/sz/mbay/channel/user/service/CertificateAuthService.class
+org/sz/mbay/channel/user/service/RedTrafficAccountService.class
+org/sz/mbay/channel/user/exception/RedAccountTradeException.class
+org/sz/mbay/channel/user/exception/UserAccountTradeException.class
+org/sz/mbay/channel/user/service/UserContextService.class
+org/sz/mbay/channel/user/service/UserService.class
+org/sz/mbay/channel/user/service/impl/MBAccountServiceImpl.class

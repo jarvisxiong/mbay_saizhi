@@ -1,0 +1,42 @@
+/*标题:
+**描述:错误页面 返回钱包或者重新输入手机号
+**类型:局部样式表
+**版本:v=1.0
+***用途:1.错误页面
+*/
+@charset "utf-8";
+body{font-family: "黑体";}
+/*背景*/
+.mistake_page{padding:10rem 1rem 0 1rem;height:100%;background:url(../img/fault_bg.jpg) 50% 50% no-repeat;background-size: 100% 100%;max-width: 100%;position: relative;}
+/*小人*/
+.mistake_page>img{width:4.5rem;}
+/*内容*/
+.mistake_page_content{border:1px solid #FC9820;background: #ECECEC;height:10rem;position: relative; text-align: center;text-align: center;}
+.mistake_page_content>.img{text-align:center;padding:0 1.2rem;position:absolute;left:0;width:100%;height:6.5rem;top:-5rem;}
+.mistake_page header img{max-width:none;max-height:100%;}
+.mistake_message{text-align:center;padding-top:2rem;}
+.mistake_message h2{color:#F1323A;font-size:1.2rem;margin-bottom:.3rem;}
+.mistake_message h2 i{font-size:.9rem;color:#010101;}
+.mistake_message p{font-size:.7rem;margin-bottom:.3rem;color:#010101;padding:.2rem 2rem;}
+.mistake_message p i{color:#F1323A;}
+.mistake_message a{display: block;margin:0 1.375rem;height:1.75rem;text-align:center;color:#FFF;background: #FC9820;line-height:1.75rem;font-size:.8rem;border-radius:.2rem;}
+/*按钮*/
+.mistake_page_content>footer{bottom:0.4rem;width:11rem;display:-webkit-box;display:-moz-box;display: box; margin:15px auto;border: ;}
+
+/*.mistake_page footer a{display: block;height:2rem;text-align:center;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;background:#ff6700;line-height:2rem; color: #fff;border-radius: 1px;font-size: .8rem;}*/
+.mistake_page_content>footer>a{display:inline-block;border:1px solid #FC9820;background:#ff6700;color: #FFF;border-radius: 1px;height:2rem;text-align:center;line-height:2rem;font-size: .8rem;width:4rem;}    
+footer>.two_import{}
+footer>.MB_wallet{margin-left:48px;}
+/*背景*/
+.safeness_bg{height:100%;background:url(../img/without_bg.jpg);background-size: 100% 100%;max-width: 100%;position: relative;}
+/*输入*/
+.import_form{position: relative; top:55%;text-align: center;}
+input[type='tel'],
+input[type='button']{border:none; width:80%;height: 2.5rem;border-radius:.1rem; text-align: center;}
+p[class='message']{width:80%;text-align: left; margin: 0 auto; color: #FFF;font-size: .5rem;height:1rem; line-height: 1rem;}
+input[class='next_step']{background: #FF6700;color: #FFF;font-size: .8rem;box-shadow:0 0 2rem rgba(255,234,112,0.9);}
+@media only screen and (min-width: 320px) and (max-width: 320px) {
+input[type='tel'],
+input[type='button']{border:none; width:80%;height:1.8rem;border-radius:.1rem; text-align: center;}	
+}
+

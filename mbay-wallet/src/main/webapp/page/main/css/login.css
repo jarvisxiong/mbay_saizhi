@@ -1,0 +1,92 @@
+@charset "utf-8";
+html,body,.shake-form1 {
+	height: 100%;
+}
+.mb-tab {
+	padding: 1.6rem .4rem 0 .4rem;
+}
+.mb-tab>a {
+	display: block;
+	width: 100%;
+	height: 1.6rem;
+	text-align: center;
+	font-size: .6rem;
+	color: #656565;
+	border-bottom: .16rem solid #ECECEC;
+	line-height: 1.6rem;
+}
+.mb-tab>.active {
+	border-bottom: .16rem solid #FF6700;
+}
+.login-txts {
+	font-size:.7rem;
+}
+.logins-btns {
+	text-align: center;
+}
+.logins-btns>input {
+	height:1.6rem;
+	width:3.2rem;
+	border-radius: 2px;
+	background: #FF6700;
+	margin:.88rem .6rem .5rem;
+	color: #fff;
+	font-size:.7rem;
+}
+.voice {
+	display: inline;
+	float: right;
+	padding-right: .4rem;
+	font-size: .55rem;
+	padding-top: .3rem;
+	visibility: hidden;
+}
+#voiceCode a { 
+	color: #ff6700;
+}
+.forget {
+	float:left;
+	display: inline;
+	padding-left:.4rem;
+	font-size: .55rem;
+	padding-top: .3rem;
+}
+.code{
+	text-align: center;
+	padding-bottom: .8rem;
+}
+.code img {
+	width: 50%;
+	
+}
+.code .p1{
+	color: #fc9720;
+	font-size: .9rem;
+	margin: 0 0 .8rem 0;
+}
+.code .p2{
+	font-size:.6rem;
+    padding-top: .4rem;
+}
+.hide {
+	display: none;
+}
+.form-item:first-child {
+	border-bottom: 0;
+}
+.form-item-border {
+	border-top: 1px solid #999;
+}
+.loading {
+	text-align: center;
+	position: absolute;
+	right: .3rem;
+	top: .3rem;
+	height: 1.15rem;
+	background: #DCDCDC;
+	color: #A0A0A0;
+	line-height: 1.15rem;
+	border-radius: 1px;
+	font-size:.52rem;
+	z-index: 0;
+}

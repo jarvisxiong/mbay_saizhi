@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="CampaignRedeemCode">
+
+	<resultMap type="campaignRedeemCode" id="codeResult">
+		<id column="codeId" property="id" javaType="long" />
+		<result column="redeemCode" property="redeemCode" />
+		<result column="checkCode" property="checkCode" />
+		<result column="redeemTime" property="redeemTime" />
+
+		<association column="operatorId" property="operator"
+			foreignColumn="operatorId" javaType="storeOperator">
+			<id column="operatorId" property="id" javaType="long" />
+			<result column="operatorCellPhone" property="cellphone"
+				javaType="java.lang.String" />
+		</association>
+	</resultMap>
+
+	<insert id="createCampaignRedeemCode" parameterType="campaignRedeemCode">
+		INSERT INTO
+		o2o_campaign_redeem_code
+		(id,cellPhone,storeId,redeemStoreId,campaignId,redeemCode,checkCode,status,deleted,dateCreated,dateModified)
+		VALUES
+		(#{id},#{cellPhone},#{storeId},#{redeemStoreId},#{campaignId},#{redeemCode},#{checkCode},#{status},#{deleted},#{dateCreated},#{dateModified})
+	</insert>
+
+	<select id="findAllCampaignRedeemCode" parameterType='campaignRedeemCode'
+		resultMap="codeResult">
+		SELECT zoc.redeemCode,zoc.checkCode,zoc.redeemTime,zoc.id AS
+		codeId,so.id as operatorId,so.cellphone as operatorCellPhone FROM
+		(SELECT oc.* FROM
+		((SELECT * FROM
+		store_campaign_order where
+		type=2 and
+		status=3 and deleted=0) sco
+		LEFT
+		JOIN (SELECT * FROM
+		o2o_campaign_redeem_code WHERE status=2 and
+		deleted=0) oc
+		on
+		sco.redeemCode=oc.redeemCode) where
+		oc.redeemStoreId=#{redeemStoreId})zoc LEFT JOIN store_operator so
+		ON
+		so.id=zoc.operatorId
+	</select>
+
+
+	<select id="countCampaignRedeemCode" parameterType='campaignRedeemCode'
+		resultType="int">
+		SELECT count(sco.id) FROM
+		((SELECT * FROM
+		store_campaign_order where
+		type=2 and status=3 and deleted=0) sco
+		LEFT
+		JOIN (SELECT * FROM o2o_campaign_redeem_code WHERE status=2 and
+		deleted=0) oc
+		on
+		sco.redeemCode=oc.redeemCode) where
+		oc.redeemStoreId=#{redeemStoreId}
+	</select>
+
+
+
+	<select id="findCampaignRedeemCode" parameterType="map"
+		resultType="java.lang.String">
+		select redeemCode from
+		o2o_campaign_redeem_code where
+		campaignId=#{campaignId} and
+		cellPhone=#{cellPhone} and deleted=0
+	</select>
+	<select id="findRedeemCodeByCode" parameterType="string"
+		resultType="campaignRedeemCode">
+		select id,cellPhone,checkCode,campaignId,redeemCode,status
+		from
+		o2o_campaign_redeem_code where
+		redeemCode=#{code}
+	</select>
+
+	<update id="updateCode" parameterType="campaignRedeemCode">
+		update
+		o2o_campaign_redeem_code set
+		status=#{status},redeemStoreId=#{redeemStoreId},operatorId=#{operator.id}
+		,redeemTime=#{redeemTime},dateModified=#{dateModified}
+		where id=#{id}
+		and deleted=0
+	</update>
+	<select id="findAllRedeemDetail" parameterType="map"
+		resultType="o2oCampaignRedeenDetail">
+		select
+		`code`.redeemCode,`code`.userCellPhone,`code`.checkCode,`code`.`status`,s.number
+		as deliverStoreNumber,s2.number as redeemStoreNumber,so.cellphone as
+		operatorCellPhone,`code`.redeemTime as redeemDate,`code`.dateCreated
+		as deliverDate from
+		(SELECT
+		cellPhone as
+		userCellPhone,redeemCode,checkCode,operatorId,storeId,redeemStoreId,`status`,dateCreated,redeemTime
+		from o2o_campaign_redeem_code where campaignId=#{campaignId}) code
+		LEFT JOIN (SELECT * from store where userNumber=#{userNumber})s on
+		`code`.storeId=s.id
+		LEFT JOIN (SELECT * from store where
+		userNumber=#{userNumber}) s2 on
+		`code`.redeemStoreId=s2.id
+		LEFT JOIN
+		store_operator so ON `code`.operatorId=so.id ORDER BY deliverDate
+		desc;
+	</select>
+	<select id="countRedeemDetail" parameterType="map" resultType="int">
+		select count(*) from
+		(SELECT
+		cellPhone as
+		userCellPhone,redeemCode,checkCode,operatorId,storeId,redeemStoreId,`status`,dateCreated,redeemTime
+		from o2o_campaign_redeem_code where campaignId=#{campaignId}) code
+		LEFT JOIN (SELECT * from store where userNumber=#{userNumber})s on
+		`code`.storeId=s.id
+		LEFT JOIN (SELECT * from store where
+		userNumber=#{userNumber}) s2 on
+		`code`.redeemStoreId=s2.id
+		LEFT JOIN
+		store_operator so ON `code`.operatorId=so.id;
+	</select>
+
+	<sql id="RedeemCodeDetailWhere">
+		<if test="campaignId !=null">
+			AND campaignId=#{campaignId}
+		</if>
+		<if test="cellPhone !=null">
+			AND cellPhone=#{cellPhone}
+		</if>
+
+		<if test="startTime!=null">
+			AND dateCreated>= #{startTime}
+		</if>
+		<if test="endTime!=null">
+	   <![CDATA[AND  dateCreated<= #{endTime} ]]>
+		</if>
+	</sql>
+
+	<select id="findAllRedeemDetailByCondition" parameterType="map"
+		resultType="o2oCampaignRedeenDetail">
+		select
+		`code`.redeemCode,`code`.userCellPhone,`code`.checkCode,`code`.`status`,s.number
+		as deliverStoreNumber,s2.number as redeemStoreNumber,so.cellphone as
+		operatorCellPhone,`code`.redeemTime as redeemDate,`code`.dateCreated
+		as deliverDate from
+		(SELECT
+		cellPhone as
+		userCellPhone,redeemCode,checkCode,operatorId,storeId,redeemStoreId,`status`,dateCreated,redeemTime
+		from o2o_campaign_redeem_code
+		<trim prefix="where" prefixOverrides="AND |OR ">
+			<include refid="RedeemCodeDetailWhere" />
+		</trim>
+		) code
+		LEFT JOIN (SELECT * from store
+		where userNumber=#{userNumber})s
+		on
+		`code`.storeId=s.id
+		LEFT JOIN (SELECT
+		* from store where
+		userNumber=#{userNumber}) s2 on
+		`code`.redeemStoreId=s2.id
+		LEFT JOIN
+		store_operator so ON
+		`code`.operatorId=so.id ORDER BY deliverDate DESC;
+	</select>
+	<select id="countRedeemDetailByCondition" parameterType="map"
+		resultType="int">
+		select
+		count(*) from
+		(SELECT
+		cellPhone as
+		userCellPhone,redeemCode,checkCode,operatorId,storeId,redeemStoreId,`status`,dateCreated,redeemTime
+		from o2o_campaign_redeem_code
+		<trim prefix="where" prefixOverrides="AND |OR ">
+			<include refid="RedeemCodeDetailWhere" />
+		</trim>
+		) code
+		LEFT JOIN (SELECT * from store
+		where userNumber=#{userNumber})s
+		on
+		`code`.storeId=s.id
+		LEFT JOIN (SELECT
+		* from store where
+		userNumber=#{userNumber}) s2 on
+		`code`.redeemStoreId=s2.id
+		LEFT JOIN
+		store_operator so ON
+		`code`.operatorId=so.id;
+	</select>
+</mapper>

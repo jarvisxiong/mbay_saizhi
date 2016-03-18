@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="UserRemindPoint">
+	<resultMap type="userRemindPoint" id="userRemindPoint">
+		<result property="smsRemindPoint" column="sms_remind_point" />
+		<result property="mbayRemindPoint" column="mbay_remind_point" />
+		<result property="usernumber" column="usernumber" />
+		<result property="mbay_sent" column="mbay_sent" />
+		<result property="sms_sent" column="sms_sent" />
+	</resultMap>
+
+
+	<!-- 查询用户美贝提醒阀值 -->
+	<select id="findMbayRemindNum" parameterType="String"
+		resultType="java.lang.Integer">
+		select mbay_remind_point from user_remind_point where
+		usernumber =
+		#{userNumber}
+	</select>
+
+	<!--将用户的提醒设置持久化到数据库中，参数为用户提醒阀值封装类 -->
+	<insert id="createUserRemindPoint" parameterType="userRemindPoint">
+		INSERT INTO
+		user_remind_point
+		(usernumber,sms_remind_point,mbay_remind_point,sms_sent,mbay_sent)
+		VALUES(#{usernumber},#{smsRemindPoint},#{mbayRemindPoint},#{sms_sent},#{mbay_sent});
+	</insert>
+
+	<update id="updateUserRemindPoint" parameterType="Map">
+		update
+		user_remind_point set
+		sms_remind_point=#{remind.smsRemindPoint},
+		mbay_remind_point =
+		#{remind.mbayRemindPoint} where
+		usernumber
+		=
+		#{userNumber}
+	</update>
+
+
+
+	<!-- 查询用户美贝和短信提醒阀值 -->
+	<select id="findUserRemindPoint" parameterType="String"
+		resultMap="userRemindPoint">
+		select
+		usernumber,sms_remind_point,mbay_remind_point,sms_sent,mbay_sent from
+		user_remind_point
+		where
+		usernumber =
+		#{usernumber}
+	</select>
+
+	<!-- 查询用户美贝提醒阀值 -->
+	<select id="findMbayRemindpoint" parameterType="String"
+		resultType="java.lang.Integer">
+		select mbay_remind_point from user_remind_point where
+		usernumber =
+		#{userNumber}
+	</select>
+
+	<!-- 查询用户短信提醒阀值 -->
+	<select id="findSmsRemindNum" parameterType="String" resultType="java.lang.Integer">
+		select sms_remind_point from user_remind_point where
+		usernumber =
+		#{userNumber}
+	</select>
+
+	<!-- 更新用户是否发送美贝余额提醒值 -->
+	<update id="updateMbaySent" parameterType="Map">
+		update
+		user_remind_point set
+		mbay_sent = #{mbay_sent} where
+		usernumber
+		=
+		#{usernumber}
+	</update>
+
+	<!-- 更新用户是否发送短信余额提醒值 -->
+	<update id="updateSmsSent" parameterType="Map">
+		update
+		user_remind_point set
+		sms_sent = #{sms_sent} where
+		usernumber
+		=
+		#{usernumber}
+	</update>
+
+</mapper>
